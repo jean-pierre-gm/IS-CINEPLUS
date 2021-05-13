@@ -1,14 +1,89 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<h2>Movies</h2>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movies">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Director</th>
+    <th>Genre</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let movie of movies">
+    <td>{{ movie.id }}</td>
+    <td>{{ movie.movieName }}</td>
+    <td>{{ movie.director }}</td>
+    <td>{{ movie.genre.genreName }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<mat-divider></mat-divider>
+
+<h2>Genres</h2>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movies">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let genre of genres">
+    <td>{{ genre.id }}</td>
+    <td>{{ genre.genreName }}</td>
+    <td>{{ genre.description }}</td>
+  </tr>
+  </tbody>
+</table>
+<h2>Create Genre</h2>
+<mat-card>
+  <ng-form>
+    <p>
+    <mat-form-field>
+      <input [(ngModel)]="newGenre.genreName" [ngModelOptions]="{standalone: true}" matInput placeholder="Genre Name"/>
+    </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field>
+      <input [(ngModel)]="newGenre.description" [ngModelOptions]="{standalone: true}" matInput placeholder="Description"/>
+    </mat-form-field>
+    </p>
+  </ng-form>
+
+  <button mat-raised-button (click)="AddGenre()">Submit</button>
+</mat-card>
+<mat-divider></mat-divider>
+<h2>Create Movie</h2>
+<mat-card>
+  <ng-form>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.movieName" [ngModelOptions]="{standalone: true}" matInput placeholder="Movie Name"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.director" [ngModelOptions]="{standalone: true}" matInput placeholder="Director"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.duration" [ngModelOptions]="{standalone: true}" matInput placeholder="Duration in minutes" type="number"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.score" [ngModelOptions]="{standalone: true}" matInput placeholder="Score" type="number"/>
+      </mat-form-field>
+    </p>
+    <p class="mat-form-field-flex">
+      <mat-select>
+        <mat-option *ngFor="let genre of genres" (onSelectionChange)="setNewMovieGenre($event, genre)" value="{{genre}}">{{genre.genreName}}</mat-option>
+      </mat-select>
+    </p>
+  </ng-form>
+
+  <button mat-raised-button (click)="AddMovie()">Submit</button>
+</mat-card>

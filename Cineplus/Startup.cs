@@ -11,6 +11,8 @@ using Cineplus.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Cineplus {
 	public class Startup {
@@ -40,6 +42,13 @@ namespace Cineplus {
 			services.AddRazorPages();
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+
+			services.AddSwaggerGen(options => {
+				options.SwaggerDoc(name: "v1",
+					info: new OpenApiInfo() {Title = "Cineplus Service API", Version = "v1"});
+			});
+			
+			services.AddScoped(typeof(IRepository<>), typeof(SqlRepository<>));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +79,12 @@ namespace Cineplus {
 					name: "default",
 					pattern: "{controller}/{action=Index}/{id?}");
 				endpoints.MapRazorPages();
+			});
+			
+			app.UseSwagger();
+			app.UseSwaggerUI(c => {
+				c.SwaggerEndpoint("v1/swagger.json", "Cineplus Service API Version 1");
+				c.SupportedSubmitMethods(new [] {SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete});
 			});
 
 			app.UseSpa(spa => {

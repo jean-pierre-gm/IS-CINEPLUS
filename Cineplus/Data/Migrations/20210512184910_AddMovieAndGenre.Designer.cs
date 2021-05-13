@@ -3,14 +3,16 @@ using System;
 using Cineplus.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cineplus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210512184910_AddMovieAndGenre")]
+    partial class AddMovieAndGenre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,7 +84,7 @@ namespace Cineplus.Data.Migrations
 
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GenreId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -94,14 +96,14 @@ namespace Cineplus.Data.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("GenreId");
 
                     b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -122,100 +124,11 @@ namespace Cineplus.Data.Migrations
                     b.Property<double>("Score")
                         .HasColumnType("REAL");
 
-                    b.HasKey("Id");
+                    b.HasKey("MovieId");
 
                     b.HasIndex("GenreId");
 
                     b.ToTable("Movie");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Reproduction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TheaterId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("TheaterId");
-
-                    b.ToTable("Reproduction");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Seat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Column")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Row")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TheaterId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TheaterId");
-
-                    b.ToTable("Seat");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Theater", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Theater");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ReproductionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SeatId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReproductionId");
-
-                    b.HasIndex("SeatId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Ticket");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -464,61 +377,6 @@ namespace Cineplus.Data.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("Cineplus.Models.Reproduction", b =>
-                {
-                    b.HasOne("Cineplus.Models.Movie", "Movie")
-                        .WithMany("Reproductions")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cineplus.Models.Theater", "Theater")
-                        .WithMany("Reproductions")
-                        .HasForeignKey("TheaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("Theater");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Seat", b =>
-                {
-                    b.HasOne("Cineplus.Models.Theater", "Theater")
-                        .WithMany("Seats")
-                        .HasForeignKey("TheaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Theater");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Ticket", b =>
-                {
-                    b.HasOne("Cineplus.Models.Reproduction", "Reproduction")
-                        .WithMany("Tickets")
-                        .HasForeignKey("ReproductionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cineplus.Models.Seat", "Seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cineplus.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Reproduction");
-
-                    b.Navigation("Seat");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -573,23 +431,6 @@ namespace Cineplus.Data.Migrations
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
                 {
                     b.Navigation("Movies");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Movie", b =>
-                {
-                    b.Navigation("Reproductions");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Reproduction", b =>
-                {
-                    b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("Cineplus.Models.Theater", b =>
-                {
-                    b.Navigation("Reproductions");
-
-                    b.Navigation("Seats");
                 });
 #pragma warning restore 612, 618
         }

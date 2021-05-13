@@ -13,5 +13,20 @@ namespace Cineplus.Data {
 		public ApplicationDbContext(
 			DbContextOptions options,
 			IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions) { }
+
+		public DbSet<Genre> Genres;
+		public DbSet<Movie> Movies;
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder) {
+			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<Genre>()
+				.Property(genre => genre.GenreName)
+				.IsRequired()
+				.HasMaxLength(15);
+
+			modelBuilder.Entity<Movie>()
+				.Property(movie => movie.Score)
+				.HasConversion<double>();
+		}
 	}
 }
