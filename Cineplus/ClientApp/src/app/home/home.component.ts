@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Movie} from "../../models/movie";
 import {Genre} from "../../models/genre";
+import {Pagination} from "../../models/pagination";
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ export class HomeComponent {
   public newGenre: Genre = new Genre();
   public genres: Genre[];
   public newMovie: Movie = new Movie();
+  private moviesPagination: Pagination<Movie>;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     this.loadMovies()
@@ -19,8 +21,9 @@ export class HomeComponent {
   }
 
   loadMovies() {
-    this.http.get<Movie[]>(this.baseUrl + 'api/movie/').subscribe(movies => {
-      this.movies = movies;
+    this.http.get<Pagination<Movie>>(this.baseUrl + 'api/movie/').subscribe(movies => {
+      this.moviesPagination = movies;
+      this.movies = movies.result;
     }, error => console.log(error));
   }
 

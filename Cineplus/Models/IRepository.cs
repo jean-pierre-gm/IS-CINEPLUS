@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cineplus.Models {
 	public interface IRepository<T> {
-		T Get(int id);
-		ICollection<T> GetAll();
+		IQueryable<T> Data();
 		T Add(T entity);
 		T Update(T entity);
 		T Remove(int id);

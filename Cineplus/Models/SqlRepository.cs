@@ -14,19 +14,14 @@ namespace Cineplus.Models {
 			_context = context;
 			_entities = _context.Set<T>();
 		}
-		
-		
-		public T Get(int id) {
-			return _entities.FirstOrDefault(t => t.Id == id);
-		}
 
-		public ICollection<T> GetAll() {
-			return _entities.ToHashSet();
+		public IQueryable<T> Data() {
+			return _entities;
 		}
 
 		public T Add(T entity) {
 			if (entity == null) {
-				throw new ArgumentNullException("entity");
+				throw new ArgumentNullException(nameof(entity));
 			}
 			_entities.Add(entity);
 			_context.SaveChanges();
@@ -35,7 +30,7 @@ namespace Cineplus.Models {
 
 		public T Update(T entity) {
 			if (entity == null) {
-				throw new ArgumentNullException("entity");
+				throw new ArgumentNullException(nameof(entity));
 			}
 			_entities.Update(entity);
 			_context.SaveChanges();

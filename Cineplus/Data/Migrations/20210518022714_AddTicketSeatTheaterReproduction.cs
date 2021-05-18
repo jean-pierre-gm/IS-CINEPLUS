@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cineplus.Data.Migrations
 {
-    public partial class AddRepAddTheaterAddTicketAddSeat : Migration
+    public partial class AddTicketSeatTheaterReproduction : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,16 +85,15 @@ namespace Cineplus.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SeatId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId1 = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     ReproductionId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ticket", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ticket_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Ticket_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -138,9 +137,9 @@ namespace Cineplus.Data.Migrations
                 column: "SeatId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ticket_UserId1",
+                name: "IX_Ticket_UserId",
                 table: "Ticket",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

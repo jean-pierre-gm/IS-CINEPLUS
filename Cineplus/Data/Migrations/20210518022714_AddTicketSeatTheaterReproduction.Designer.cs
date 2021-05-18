@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cineplus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210512195749_AddRepAddTheaterAddTicketAddSeat")]
-    partial class AddRepAddTheaterAddTicketAddSeat
+    [Migration("20210518022714_AddTicketSeatTheaterReproduction")]
+    partial class AddTicketSeatTheaterReproduction
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,10 +203,7 @@ namespace Cineplus.Data.Migrations
                     b.Property<int>("SeatId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -215,7 +212,7 @@ namespace Cineplus.Data.Migrations
 
                     b.HasIndex("SeatId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
                 });
@@ -512,7 +509,7 @@ namespace Cineplus.Data.Migrations
 
                     b.HasOne("Cineplus.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Reproduction");
 

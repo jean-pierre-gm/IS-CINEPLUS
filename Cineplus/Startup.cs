@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Cineplus.Data;
 using Cineplus.Models;
+using Cineplus.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,6 +50,12 @@ namespace Cineplus {
 			});
 			
 			services.AddScoped(typeof(IRepository<>), typeof(SqlRepository<>));
+			services.AddScoped<IMovieService, MovieService>();
+			services.AddScoped<IGenreService, GenreService>();
+			services.AddScoped<IReproductionService, ReproductionService>();
+			services.AddScoped<ITheaterService, TheaterService>();
+			services.AddScoped<ISeatService, SeatService>();
+			services.AddScoped<ITicketService, TicketService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

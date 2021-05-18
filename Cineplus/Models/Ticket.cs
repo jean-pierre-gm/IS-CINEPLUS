@@ -4,7 +4,7 @@ namespace Cineplus.Models {
 		public int SeatId { get; set; }
 		public virtual Seat Seat { get; set; }
 
-		public int UserId { get; set; }
+		public string UserId { get; set; }
 		public virtual ApplicationUser User { get; set; }
 
 		public int ReproductionId { get; set; }
