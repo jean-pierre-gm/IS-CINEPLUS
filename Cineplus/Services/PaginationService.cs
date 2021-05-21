@@ -19,7 +19,7 @@ namespace Cineplus.Services {
 				CurrentPage = page,
 				OrderBy = orderBy,
 				OrderByDesc = orderByDesc,
-				TotalPages = (int) Math.Ceiling(query.Count() * 0.1 / pageSize)
+				TotalPages = (int) Math.Ceiling(query.Count() * 1.0 / pageSize)
 			};
 
 			int skip = (page - 1) * pageSize;
