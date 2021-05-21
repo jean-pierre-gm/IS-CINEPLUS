@@ -3,14 +3,16 @@ using System;
 using Cineplus.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cineplus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210521160458_SomeSeedData")]
+    partial class SomeSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,12 +106,6 @@ namespace Cineplus.Data.Migrations
                             Id = -1,
                             Description = "This movies try to make people laugh.",
                             GenreName = "Comedy"
-                        },
-                        new
-                        {
-                            Id = -2,
-                            Description = "Guns and guns",
-                            GenreName = "Action"
                         });
                 });
 
@@ -150,24 +146,6 @@ namespace Cineplus.Data.Migrations
                             Duration = 134,
                             GenreId = -1,
                             MovieName = "Los 3 de la loma",
-                            Score = 7.8000001907348633
-                        },
-                        new
-                        {
-                            Id = -2,
-                            Director = "Alfredo Jul",
-                            Duration = 113,
-                            GenreId = -1,
-                            MovieName = "Donde cayó la tiza",
-                            Score = 9.0
-                        },
-                        new
-                        {
-                            Id = -3,
-                            Director = "Alain Serdán",
-                            Duration = 130,
-                            GenreId = -2,
-                            MovieName = "Dos es mejor que uno",
                             Score = 0.0
                         });
                 });

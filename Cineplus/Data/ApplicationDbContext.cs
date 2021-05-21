@@ -19,6 +19,7 @@ namespace Cineplus.Data {
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);
+			
 			modelBuilder.Entity<Genre>()
 				.Property(genre => genre.GenreName)
 				.IsRequired()
@@ -27,6 +28,8 @@ namespace Cineplus.Data {
 			modelBuilder.Entity<Movie>()
 				.Property(movie => movie.Score)
 				.HasConversion<double>();
+			
+			modelBuilder.Seed();
 		}
 	}
 }
