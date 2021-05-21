@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Movie} from "../../models/movie";
 import {Genre} from "../../models/genre";
 import {Pagination} from "../../models/pagination";
+import {CineplusDataSource} from "../../models/cineplusDataSource";
+import {DataSourceConf} from "../../models/dataSourceConf";
 
 @Component({
   selector: 'app-home',
@@ -14,17 +16,16 @@ export class HomeComponent {
   public genres: Genre[];
   public newMovie: Movie = new Movie();
   private moviesPagination: Pagination<Movie>;
+  public movieDataSource: CineplusDataSource<Movie>;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.loadMovies()
+    let dataSourceConf: DataSourceConf = new DataSourceConf();
+    dataSourceConf.endPoint = baseUrl + 'api/movie'
+    let pagination: Pagination<Movie> = new Pagination();
+    pagination.pageSize = 2
+    this.movieDataSource = new CineplusDataSource<Movie>(http, dataSourceConf, pagination);
+    this.movieDataSource.orderBy('name')
     this.loadGenres()
-  }
-
-  loadMovies() {
-    this.http.get<Pagination<Movie>>(this.baseUrl + 'api/movie/').subscribe(movies => {
-      this.moviesPagination = movies;
-      this.movies = movies.result;
-    }, error => console.log(error));
   }
 
   loadGenres() {
@@ -58,7 +59,7 @@ export class HomeComponent {
     console.log(this.newMovie)
     this.http.post<Genre>(this.baseUrl + 'api/movie', this.newMovie).subscribe(movie => {
       this.newMovie = new Movie();
-      this.loadMovies();
+      this.movieDataSource.refresh()
     }, error => console.log(error))
   }
 

@@ -1,5 +1,5 @@
 <h2>Movies</h2>
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movies">
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieDataSource.result">
   <thead>
   <tr>
     <th>Id</th>
@@ -9,7 +9,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let movie of movies">
+  <tr *ngFor="let movie of movieDataSource.result">
     <td>{{ movie.id }}</td>
     <td>{{ movie.movieName }}</td>
     <td>{{ movie.director }}</td>
@@ -17,6 +17,9 @@
   </tr>
   </tbody>
 </table>
+
+<button mat-raised-button [disabled]="!movieDataSource.hasPrevious" (click)="movieDataSource.previousPage()">Previous</button>
+<button mat-raised-button [disabled]="!movieDataSource.hasNext"  (click)="movieDataSource.nextPage()">Next</button>
 
 <mat-divider></mat-divider>
 
