@@ -11,7 +11,7 @@ namespace Cineplus.Services {
 			int pageSize = 10) where T: DbEntity {
 
 			page = page < 1 ? 1 : page;
-			pageSize = pageSize < 1 ? 10 : page;
+			pageSize = pageSize < 1 ? 10 : pageSize;
 			
 			Pagination<T> pagination = new Pagination<T>() {
 				TotalItems = query.Count(),
