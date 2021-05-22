@@ -14,8 +14,9 @@ namespace Cineplus.Services {
 			return _repository.Data().FirstOrDefault(r => r.Id == id);
 		}
 
-		public IEnumerable<Reproduction> GetAllAtDay(DateTime dateTime) {
-			return _repository.Data().Where(reproduction => reproduction.StartTime.Date == dateTime.Date).AsEnumerable();
+		public Pagination<Reproduction> GetAllAtDay(DateTime dateTime) {
+			return PaginationService.GetPagination(
+				_repository.Data().Where(reproduction => reproduction.StartTime.Date == dateTime.Date));
 		}
 
 		public IEnumerable<Reproduction> GetAllOfMovie(int movieId) {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using Cineplus.Models;
 using Cineplus.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +27,24 @@ namespace Cineplus.Controllers {
 		}
 
 		[HttpGet("{date:datetime}")]
-		public ActionResult<IEnumerable<Reproduction>> GetReproductionsAtDate(DateTime date) {
-			return new ActionResult<IEnumerable<Reproduction>>(_reproductionService.GetAllAtDay(date));
+		public ActionResult<Pagination<Reproduction>> GetReproductionsAtDate(DateTime date)
+		{
+			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllAtDay(date));
+		}
+
+		[HttpPost]
+		public ActionResult<Reproduction> PostReproduction([FromBody] Reproduction reproduction)
+		{
+			_reproductionService.Add(reproduction);
+			return reproduction;
+		}
+
+		[HttpPost("{id:int}")]
+		public ActionResult<Reproduction> RemoveReproduction(int id)
+		{
+			Reproduction reproduction = _reproductionService.Get(id);
+			_reproductionService.Remove(id);
+			return reproduction;
 		}
 	}
 }
