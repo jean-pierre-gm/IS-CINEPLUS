@@ -18,6 +18,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatSelectModule} from "@angular/material/select";
+import {ApiTestComponent} from "./api-test/api-test.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatSelectModule} from "@angular/material/select";
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    ApiTestComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -36,6 +38,7 @@ import {MatSelectModule} from "@angular/material/select";
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'counter', component: CounterComponent},
       {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+      {path: 'api-test', component: ApiTestComponent}
     ]),
     BrowserAnimationsModule,
     MatCardModule,
