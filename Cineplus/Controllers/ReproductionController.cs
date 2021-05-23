@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Drawing.Printing;
 using Cineplus.Models;
 using Cineplus.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +12,11 @@ namespace Cineplus.Controllers {
 		}
 		
 		[HttpGet]
-		public ActionResult<IEnumerable<Reproduction>> Index([FromQuery] int? movieId) {
+		public ActionResult<Pagination<Reproduction>> Index([FromQuery] int? movieId, [FromQuery] Pagination<Reproduction> parameters) {
 			if (movieId == null) {
-				return new ActionResult<IEnumerable<Reproduction>>(_reproductionService.GetAll());
+				return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAll(parameters));
 			}
-			return new ActionResult<IEnumerable<Reproduction>>(_reproductionService.GetAllOfMovie(movieId.Value));
+			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllOfMovie(movieId.Value, parameters));
 		}
 
 		[HttpGet("{id:int}")]
@@ -27,9 +25,9 @@ namespace Cineplus.Controllers {
 		}
 
 		[HttpGet("{date:datetime}")]
-		public ActionResult<Pagination<Reproduction>> GetReproductionsAtDate(DateTime date)
+		public ActionResult<Pagination<Reproduction>> GetReproductionsAtDate(DateTime date, [FromQuery] Pagination<Reproduction> parameters)
 		{
-			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllAtDay(date));
+			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllAtDay(date, parameters));
 		}
 
 		[HttpPost]

@@ -14,13 +14,21 @@ namespace Cineplus.Services {
 			return _repository.Data().FirstOrDefault(r => r.Id == id);
 		}
 
-		public Pagination<Reproduction> GetAllAtDay(DateTime dateTime) {
+		public Pagination<Reproduction> GetAllAtDay(DateTime dateTime, Pagination<Reproduction> parameters) {
 			return PaginationService.GetPagination(
-				_repository.Data().Where(reproduction => reproduction.StartTime.Date == dateTime.Date));
+				_repository.Data().Where(reproduction => reproduction.StartTime.Date == dateTime.Date),
+				parameters.CurrentPage,
+				parameters.OrderBy,
+				parameters.OrderByDesc,
+				parameters.PageSize);
 		}
 
-		public IEnumerable<Reproduction> GetAllOfMovie(int movieId) {
-			return _repository.Data().Where(reproduction => reproduction.MovieId == movieId).AsEnumerable();
+		public Pagination<Reproduction> GetAllOfMovie(int movieId, Pagination<Reproduction> parameters) {
+			return PaginationService.GetPagination(_repository.Data().Where(reproduction => reproduction.MovieId == movieId),
+			parameters.CurrentPage,
+			parameters.OrderBy,
+			parameters.OrderByDesc,
+			parameters.PageSize);
 		}
 
 		public Reproduction Add(Reproduction entity) {
@@ -45,8 +53,12 @@ namespace Cineplus.Services {
 			return _repository.Remove(id);
 		}
 
-		public IEnumerable<Reproduction> GetAll() {
-			return _repository.Data().AsEnumerable();
+		public Pagination<Reproduction> GetAll(Pagination<Reproduction> parameters) {
+			return PaginationService.GetPagination(_repository.Data(),
+				parameters.CurrentPage,
+				parameters.OrderBy,
+				parameters.OrderByDesc,
+				parameters.PageSize);
 		}
 	}
 }
