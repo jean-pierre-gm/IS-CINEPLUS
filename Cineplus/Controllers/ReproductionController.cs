@@ -38,7 +38,7 @@ namespace Cineplus.Controllers {
 		}
 
 		[HttpPost("{id:int}")]
-		[Route("api/[controller]/delete")]
+		//[Route("api/[controller]/delete")]
 		public ActionResult<Reproduction> RemoveReproduction(int id)
 		{
 			Reproduction reproduction = _reproductionService.Get(id);

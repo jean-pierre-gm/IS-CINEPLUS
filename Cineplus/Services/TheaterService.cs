@@ -17,8 +17,13 @@ namespace Cineplus.Services {
 			return _repository.Data().AsEnumerable();
 		}
 
-		public Theater Add(Theater entity) {
-			return _repository.Add(entity);
+		public Theater Add(Theater entity)
+		{
+			Theater theater = Get(entity.Id);
+			if (theater is null)
+				return _repository.Add(entity);
+			else
+				return theater;
 		}
 
 		public Theater Update(Theater entity) {

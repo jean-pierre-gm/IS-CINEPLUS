@@ -5,7 +5,9 @@ namespace Cineplus.Models {
 	public class Theater: DbEntity {
 
 		[Required]
-		public int Capacity { get; set; }
+		public int Rows { get; set; }
+		[Required]
+		public int Columns { get; set; }
 
 		public virtual ICollection<Seat> Seats { get; set; }
 
