@@ -1,0 +1,92 @@
+<h2>Movies</h2>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieDataSource.result">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Director</th>
+    <th>Genre</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let movie of movieDataSource.result">
+    <td>{{ movie.id }}</td>
+    <td>{{ movie.movieName }}</td>
+    <td>{{ movie.director }}</td>
+    <td>{{ movie.genre.genreName }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<button mat-raised-button [disabled]="!movieDataSource.hasPrevious" (click)="movieDataSource.previousPage()">Previous</button>
+<button mat-raised-button [disabled]="!movieDataSource.hasNext"  (click)="movieDataSource.nextPage()">Next</button>
+
+<mat-divider></mat-divider>
+
+<h2>Genres</h2>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="genres">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let genre of genres">
+    <td>{{ genre.id }}</td>
+    <td>{{ genre.genreName }}</td>
+    <td>{{ genre.description }}</td>
+  </tr>
+  </tbody>
+</table>
+<h2>Create Genre</h2>
+<mat-card>
+  <ng-form>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newGenre.genreName" [ngModelOptions]="{standalone: true}" matInput placeholder="Genre Name"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newGenre.description" [ngModelOptions]="{standalone: true}" matInput placeholder="Description"/>
+      </mat-form-field>
+    </p>
+  </ng-form>
+
+  <button mat-raised-button (click)="AddGenre()">Submit</button>
+</mat-card>
+<mat-divider></mat-divider>
+<h2>Create Movie</h2>
+<mat-card>
+  <ng-form>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.movieName" [ngModelOptions]="{standalone: true}" matInput placeholder="Movie Name"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.director" [ngModelOptions]="{standalone: true}" matInput placeholder="Director"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.duration" [ngModelOptions]="{standalone: true}" matInput placeholder="Duration in minutes" type="number"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newMovie.score" [ngModelOptions]="{standalone: true}" matInput placeholder="Score" type="number"/>
+      </mat-form-field>
+    </p>
+    <p class="mat-form-field-flex">
+      <mat-select>
+        <mat-option *ngFor="let genre of genres" (onSelectionChange)="setNewMovieGenre($event, genre)" value="{{genre}}">{{genre.genreName}}</mat-option>
+      </mat-select>
+    </p>
+  </ng-form>
+
+  <button mat-raised-button (click)="AddMovie()">Submit</button>
+</mat-card>

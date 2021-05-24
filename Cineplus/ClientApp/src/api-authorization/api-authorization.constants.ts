@@ -41,7 +41,9 @@ let applicationPaths: ApplicationPathsType = {
   LoggedOutPathComponents: [],
   LogOutCallbackPathComponents: [],
   IdentityRegisterPath: 'Identity/Account/Register',
-  IdentityManagePath: 'Identity/Account/Manage'
+  IdentityManagePath: 'Identity/Account/Manage',
+  Forbidden: 'forbidden',
+  ForbiddenPathComponents: []
 };
 
 applicationPaths = {
@@ -52,7 +54,8 @@ applicationPaths = {
   ProfilePathComponents: applicationPaths.Profile.split('/'),
   LogOutPathComponents: applicationPaths.LogOut.split('/'),
   LoggedOutPathComponents: applicationPaths.LoggedOut.split('/'),
-  LogOutCallbackPathComponents: applicationPaths.LogOutCallback.split('/')
+  LogOutCallbackPathComponents: applicationPaths.LogOutCallback.split('/'),
+  ForbiddenPathComponents: applicationPaths.Forbidden.split('/')
 };
 
 interface ApplicationPathsType {
@@ -76,6 +79,8 @@ interface ApplicationPathsType {
   readonly LogOutCallbackPathComponents: string [];
   readonly IdentityRegisterPath: string;
   readonly IdentityManagePath: string;
+  readonly Forbidden: string;
+  readonly ForbiddenPathComponents: string[];
 }
 
 export const ApplicationPaths: ApplicationPathsType = applicationPaths;

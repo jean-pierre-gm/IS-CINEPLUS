@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Cineplus.Data;
 using Cineplus.Models;
 using Cineplus.Services;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,13 +35,16 @@ namespace Cineplus {
 			services.AddDatabaseDeveloperPageExceptionFilter();
 
 			services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
 			services.AddIdentityServer()
-				.AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+				.AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+				.AddProfileService<ProfileService>();
 
 			services.AddAuthentication()
 				.AddIdentityServerJwt();
+
 			services.AddControllersWithViews();
 			services.AddRazorPages();
 			// In production, the Angular files will be served from this directory
@@ -59,7 +65,11 @@ namespace Cineplus {
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+		public void Configure(
+			IApplicationBuilder app,
+			IWebHostEnvironment env,
+			UserManager<ApplicationUser> userManager,
+			RoleManager<IdentityRole> roleManager) {
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 				app.UseMigrationsEndPoint();
@@ -104,6 +114,8 @@ namespace Cineplus {
 					spa.UseAngularCliServer(npmScript: "start");
 				}
 			});
+			
+			IdentityExtensions.SeedIdentity(userManager, roleManager, Configuration);
 		}
 	}
 }
