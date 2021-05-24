@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Cineplus.Models {
 	public class ApplicationUser : IdentityUser {
-		public string[] Roles { get; set; }
+		
 	}
 }

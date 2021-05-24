@@ -42,6 +42,8 @@
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\api-test\api-test.component.css" />
         <Content Include="ClientApp\src\app\api-test\api-test.component.html" />
+        <Content Include="ClientApp\src\app\forbidden\forbidden.component.css" />
+        <Content Include="ClientApp\src\app\forbidden\forbidden.component.html" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>

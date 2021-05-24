@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthorizeService, IUser} from "../../api-authorization/authorize.service";
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+  public user: IUser;
+
+  constructor(authorizeService: AuthorizeService) {
+    authorizeService.getUser().subscribe(user => this.user = user);
+  }
+
   isExpanded = false;
 
   collapse() {

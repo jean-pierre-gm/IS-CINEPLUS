@@ -19,6 +19,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatSelectModule} from "@angular/material/select";
 import {ApiTestComponent} from "./api-test/api-test.component";
+import {ForbiddenComponent} from "./forbidden/forbidden.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {ApiTestComponent} from "./api-test/api-test.component";
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ApiTestComponent
+    ApiTestComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -38,7 +40,9 @@ import {ApiTestComponent} from "./api-test/api-test.component";
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'counter', component: CounterComponent},
       {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-      {path: 'api-test', component: ApiTestComponent}
+      {path: 'api-test', component: ApiTestComponent,
+        canActivate: [AuthorizeGuard], data: {permittedRoles:["Admin"]}},
+      {path: 'forbidden', component: ForbiddenComponent}
     ]),
     BrowserAnimationsModule,
     MatCardModule,
