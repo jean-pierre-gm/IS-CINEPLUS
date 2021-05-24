@@ -19,11 +19,15 @@ namespace Cineplus.Services {
 
 		public Theater Add(Theater entity)
 		{
-			Theater theater = Get(entity.Id);
-			if (theater is null)
-				return _repository.Add(entity);
-			else
-				return theater;
+			HashSet<Seat> set = new HashSet<Seat>();
+			for (int i = 1; i <= entity.Columns; i++)
+				for (int j = 1; j <= entity.Rows; j++)
+				{
+					Seat s = new Seat {Column = i, Row = j};
+					set.Add(s);
+				}
+			entity.Seats = set;
+			return _repository.Add(entity);
 		}
 
 		public Theater Update(Theater entity) {

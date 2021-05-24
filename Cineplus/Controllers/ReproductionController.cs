@@ -24,8 +24,9 @@ namespace Cineplus.Controllers {
 			return _reproductionService.Get(id);
 		}
 
-		[HttpGet("{date:datetime}")]
-		public ActionResult<Pagination<Reproduction>> GetReproductionsAtDate(DateTime date, [FromQuery] Pagination<Reproduction> parameters)
+		[HttpGet]
+		[Route("date")]
+		public ActionResult<Pagination<Reproduction>> GetReproductionsAtDate([FromQuery]DateTime date, [FromQuery] Pagination<Reproduction> parameters)
 		{
 			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllAtDay(date, parameters));
 		}
@@ -37,12 +38,18 @@ namespace Cineplus.Controllers {
 			return reproduction;
 		}
 
-		[HttpPost("{id:int}")]
-		//[Route("api/[controller]/delete")]
+		[HttpDelete("{id:int}")]
 		public ActionResult<Reproduction> RemoveReproduction(int id)
 		{
 			Reproduction reproduction = _reproductionService.Get(id);
 			_reproductionService.Remove(id);
+			return reproduction;
+		}
+
+		[HttpPut]
+		public ActionResult<Reproduction> UpdateReproduction([FromBody] Reproduction reproduction)
+		{
+			_reproductionService.Update(reproduction);
 			return reproduction;
 		}
 	}

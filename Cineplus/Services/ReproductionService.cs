@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cineplus.Services {
 	public class ReproductionService: IReproductionService {
@@ -11,12 +12,14 @@ namespace Cineplus.Services {
 		}
 
 		public Reproduction Get(int id) {
-			return _repository.Data().FirstOrDefault(r => r.Id == id);
+			return _repository.Data().Include(reproduction => reproduction.Movie)
+				.FirstOrDefault(r => r.Id == id);
 		}
 
 		public Pagination<Reproduction> GetAllAtDay(DateTime dateTime, Pagination<Reproduction> parameters) {
 			return PaginationService.GetPagination(
-				_repository.Data().Where(reproduction => reproduction.StartTime.Date == dateTime.Date),
+				_repository.Data().Include(reproduction => reproduction.Movie)
+					.Where(reproduction => reproduction.StartTime.Date == dateTime.Date),
 				parameters.CurrentPage,
 				parameters.OrderBy,
 				parameters.OrderByDesc,
@@ -24,11 +27,13 @@ namespace Cineplus.Services {
 		}
 
 		public Pagination<Reproduction> GetAllOfMovie(int movieId, Pagination<Reproduction> parameters) {
-			return PaginationService.GetPagination(_repository.Data().Where(reproduction => reproduction.MovieId == movieId),
-			parameters.CurrentPage,
-			parameters.OrderBy,
-			parameters.OrderByDesc,
-			parameters.PageSize);
+			return PaginationService.GetPagination(
+					_repository.Data().Include(reproduction => reproduction.Movie)
+						.Where(reproduction => reproduction.MovieId == movieId),
+				parameters.CurrentPage,
+				parameters.OrderBy,
+				parameters.OrderByDesc,
+				parameters.PageSize);
 		}
 
 		public Reproduction Add(Reproduction entity) {
@@ -54,7 +59,8 @@ namespace Cineplus.Services {
 		}
 
 		public Pagination<Reproduction> GetAll(Pagination<Reproduction> parameters) {
-			return PaginationService.GetPagination(_repository.Data(),
+			return PaginationService.GetPagination(
+				_repository.Data().Include(reproduction => reproduction.Movie),
 				parameters.CurrentPage,
 				parameters.OrderBy,
 				parameters.OrderByDesc,

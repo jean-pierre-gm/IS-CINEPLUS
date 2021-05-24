@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Cineplus.Services;
+using System.Text.Json.Serialization;
 
 namespace Cineplus.Models {
 	public class Movie: DbEntity {
@@ -19,6 +20,7 @@ namespace Cineplus.Models {
 		public int GenreId { get; set; }
 		public virtual Genre Genre { get; set; }
 		
+		[JsonIgnore]
 		public virtual ICollection<Reproduction> Reproductions { get; set; }
 
 		public Movie() {

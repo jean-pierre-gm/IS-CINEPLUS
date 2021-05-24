@@ -8,6 +8,7 @@ export class CineplusDataSource<T> {
   get result (): T[] { return this.currentPagination.result }
   get hasNext (): boolean { return this.currentPagination.currentPage < this.currentPagination.totalPages }
   get hasPrevious (): boolean { return this.currentPagination.currentPage > 1 }
+  get totalPages (): number { return this.currentPagination.totalPages }
 
   constructor(private httpClient: HttpClient,
               private conf: DataSourceConf,

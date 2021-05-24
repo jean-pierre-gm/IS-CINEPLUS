@@ -23,6 +23,9 @@ namespace Cineplus.Models {
 			if (entity == null) {
 				throw new ArgumentNullException(nameof(entity));
 			}
+			var check = _entities.FirstOrDefault(item => item.Id == entity.Id);
+			if (check is not null)
+				return check;
 			_entities.Add(entity);
 			_context.SaveChanges();
 			return entity;

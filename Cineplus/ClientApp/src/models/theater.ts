@@ -1,4 +1,5 @@
 export class Theater{
   id: number;
-  capacity: number;
+  rows: number;
+  columns: number;
 }
