@@ -9,7 +9,7 @@ import {AuthorizeService, IUser} from "../../api-authorization/authorize.service
 export class NavMenuComponent {
   public user: IUser;
 
-  constructor(authorizeService: AuthorizeService) {
+  constructor(public authorizeService: AuthorizeService) {
     authorizeService.getUser().subscribe(user => this.user = user);
   }
 

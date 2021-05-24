@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Cineplus.Controllers {
-	[Authorize(Roles = "Admin", AuthenticationSchemes = "Identity.Application")]
+	[Authorize]
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase {

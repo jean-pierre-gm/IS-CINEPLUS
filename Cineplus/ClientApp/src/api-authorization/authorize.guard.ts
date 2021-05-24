@@ -26,16 +26,9 @@ export class AuthorizeGuard implements CanActivate {
         }
       });
     } else {
-      let allowed = false
       let roles = next.data['permittedRoles'] as string[];
       if (roles) {
-        roles.forEach(role => {
-          if (user.role == role) {
-            allowed = true;
-            return false;
-          }
-        })
-        if (allowed) return true;
+        if (this.authorize.userInRoles(user, roles)) return true;
         this.router.navigate(ApplicationPaths.ForbiddenPathComponents)
       }
       return true;

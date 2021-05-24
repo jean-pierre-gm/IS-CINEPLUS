@@ -7,8 +7,14 @@ using System.Linq.Dynamic.Core;
 
 namespace Cineplus.Services {
 	public static class PaginationService {
+
+		public static Pagination<T> GetPagination<T>(IQueryable<T> query, Pagination<T> pagination) {
+			return GetPagination(query, pagination.CurrentPage, pagination.OrderBy, pagination.OrderByDesc,
+				pagination.PageSize);
+		}
+		
 		public static Pagination<T> GetPagination<T>(IQueryable<T> query, int page = 1, string orderBy = null, bool orderByDesc = false,
-			int pageSize = 10) where T: DbEntity {
+			int pageSize = 10) {
 
 			page = page < 1 ? 1 : page;
 			pageSize = pageSize < 1 ? 10 : pageSize;

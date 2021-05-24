@@ -1,0 +1,11 @@
+<div class="card mb-3" *ngFor="let role of roles">
+  <div class="card-header">
+    <fa-icon [icon]="faUser"></fa-icon> {{ role.name }}
+  </div>
+  <div class="card-body">
+    Id: {{ role.id }}
+  </div>
+</div>
+<footer>
+    <button mat-raised-button [routerLink]="['/role-users/']">Manage Users</button>
+</footer>

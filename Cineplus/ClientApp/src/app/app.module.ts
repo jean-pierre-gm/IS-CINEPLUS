@@ -20,6 +20,13 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatSelectModule} from "@angular/material/select";
 import {ApiTestComponent} from "./api-test/api-test.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
+import {RoleListComponent} from "./role/role-list/role-list.component";
+import {MatTableModule} from "@angular/material/table";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {MatListModule} from "@angular/material/list";
+import {RoleUsersComponent} from "./role/role-users/role-users.component";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
     CounterComponent,
     FetchDataComponent,
     ApiTestComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    RoleListComponent,
+    RoleUsersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -40,16 +49,35 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'counter', component: CounterComponent},
       {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-      {path: 'api-test', component: ApiTestComponent,
-        canActivate: [AuthorizeGuard], data: {permittedRoles:["Admin"]}},
-      {path: 'forbidden', component: ForbiddenComponent}
+      {
+        path: 'api-test', component: ApiTestComponent,
+        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+      },
+      {path: 'forbidden', component: ForbiddenComponent},
+      {
+        path: 'role-list',
+        component: RoleListComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'role-users',
+        component: RoleUsersComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      }
     ]),
     BrowserAnimationsModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    FontAwesomeModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
