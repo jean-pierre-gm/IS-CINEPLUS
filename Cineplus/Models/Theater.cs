@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Cineplus.Models {
 	public class Theater: DbEntity {
@@ -9,8 +10,10 @@ namespace Cineplus.Models {
 		[Required]
 		public int Columns { get; set; }
 
+		[JsonIgnore]
 		public virtual ICollection<Seat> Seats { get; set; }
-
+		
+		[JsonIgnore]
 		public virtual ICollection<Reproduction> Reproductions { get; set; }
 		
 		public Theater() {

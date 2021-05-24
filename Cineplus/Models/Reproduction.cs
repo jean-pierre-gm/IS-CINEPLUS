@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Cineplus.Models {
 	public class Reproduction: DbEntity {
@@ -12,6 +13,7 @@ namespace Cineplus.Models {
 		
 		public DateTime StartTime { get; set; }
 
+		[JsonIgnore]
 		public virtual ICollection<Ticket> Tickets { get; set; }
 
 		public Reproduction() {
