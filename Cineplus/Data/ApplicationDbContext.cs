@@ -16,6 +16,7 @@ namespace Cineplus.Data {
 
 		public DbSet<Genre> Genres;
 		public DbSet<Movie> Movies;
+		public DbSet<DateDiscount> DateDiscounts;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);
@@ -27,6 +28,10 @@ namespace Cineplus.Data {
 
 			modelBuilder.Entity<Movie>()
 				.Property(movie => movie.Score)
+				.HasConversion<double>();
+			
+			modelBuilder.Entity<DateDiscount>()
+				.Property(datediscount => datediscount.Discount)
 				.HasConversion<double>();
 			
 			modelBuilder.Seed();

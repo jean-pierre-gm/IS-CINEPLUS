@@ -56,6 +56,7 @@ namespace Cineplus {
 			services.AddScoped<ITheaterService, TheaterService>();
 			services.AddScoped<ISeatService, SeatService>();
 			services.AddScoped<ITicketService, TicketService>();
+			services.AddScoped<IDateDiscountService, DateDiscountService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
