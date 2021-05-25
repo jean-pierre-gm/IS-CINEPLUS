@@ -4,7 +4,7 @@ import {DataSourceConf} from "./dataSourceConf";
 
 export class CineplusDataSource<T> {
 
-  private currentPagination: Pagination<T> = new Pagination<T>()
+  public currentPagination: Pagination<T> = new Pagination<T>()
   get result (): T[] { return this.currentPagination.result }
   get hasNext (): boolean { return this.currentPagination.currentPage < this.currentPagination.totalPages }
   get hasPrevious (): boolean { return this.currentPagination.currentPage > 1 }
