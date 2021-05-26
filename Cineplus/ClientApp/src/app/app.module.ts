@@ -27,6 +27,7 @@ import {MatListModule} from "@angular/material/list";
 import {RoleUsersComponent} from "./role/role-users/role-users.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {DateDiscountComponent} from "./discounts/date-discount/date-discount.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ApiTestComponent,
     ForbiddenComponent,
     RoleListComponent,
-    RoleUsersComponent
+    RoleUsersComponent,
+    DateDiscountComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -63,6 +65,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
       {
         path: 'role-users',
         component: RoleUsersComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'date-discount',
+        component: DateDiscountComponent,
         canActivate: [AuthorizeGuard],
         data: {permittedRoles: ["Admin"]}
       }

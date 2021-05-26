@@ -8,21 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cineplus.Controllers {
     [Route("/api/[controller]")]
     public class DateDiscountController: Controller {
-        private IDateDiscountService _datediscountService;
+        private IDateDiscountService _dateDiscountService;
 		
-        public DateDiscountController(IDateDiscountService datediscountService) {
-            _datediscountService = datediscountService;
+        public DateDiscountController(IDateDiscountService dateDiscountService) {
+            _dateDiscountService = dateDiscountService;
         }
 		
         [HttpGet]
-        public ActionResult<IEnumerable<DateDiscount>> Index() {
-            return new ActionResult<IEnumerable<DateDiscount>>(_datediscountService.GetAll());
+        public ActionResult<Pagination<DateDiscount>> Index([FromQuery] Pagination<DateDiscount> parameters) {
+            return new ActionResult<Pagination<DateDiscount>>(_dateDiscountService.GetAll(parameters));
         }
 
         [HttpPost]
-        public ActionResult<DateDiscount> PostMovie([FromBody]DateDiscount datediscount) {
-            _datediscountService.Add(datediscount);
-            return new ActionResult<DateDiscount>(datediscount);
+        public ActionResult<DateDiscount> PostDateDiscount([FromBody]DateDiscount dateDiscount) {
+            _dateDiscountService.Add(dateDiscount);
+            return new ActionResult<DateDiscount>(dateDiscount);
         }
     }
 }

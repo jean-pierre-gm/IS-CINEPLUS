@@ -6,7 +6,7 @@ namespace Cineplus.Services
     public interface IDateDiscountService
     {
         DateDiscount Get(int id);
-        IEnumerable<DateDiscount> GetAll();
+        Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters);
         DateDiscount Add(DateDiscount entity);
         DateDiscount Update(DateDiscount entity);
         DateDiscount Remove(int id);

@@ -31,9 +31,13 @@
 
     <ItemGroup>
         <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+        <None Include="ClientApp\src\app\discounts\date-discount\date-discount-list.component.ts" />
+        <None Include="ClientApp\src\app\discounts\date-discount\date-discount.component.ts" />
         <None Include="ClientApp\src\app\role\role.module.ts" />
         <None Include="ClientApp\src\models\cineplusDataSource.ts" />
         <None Include="ClientApp\src\models\dataSourceConf.ts" />
+        <None Include="ClientApp\src\models\date-discount.ts" />
+        <None Include="ClientApp\src\models\datediscount.ts" />
         <None Include="ClientApp\src\models\genre.ts" />
         <None Include="ClientApp\src\models\movie.ts" />
         <None Include="ClientApp\src\models\pagination.ts" />
@@ -46,6 +50,8 @@
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\api-test\api-test.component.css" />
         <Content Include="ClientApp\src\app\api-test\api-test.component.html" />
+        <Content Include="ClientApp\src\app\discounts\date-discount\date-discount.component.css" />
+        <Content Include="ClientApp\src\app\discounts\date-discount\date-discount.component.html" />
         <Content Include="ClientApp\src\app\forbidden\forbidden.component.css" />
         <Content Include="ClientApp\src\app\forbidden\forbidden.component.html" />
         <Content Include="ClientApp\src\app\role\role-list\role-list.component.css" />
@@ -63,6 +69,9 @@
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="ClientApp\src\app\discounts\personal-discount" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
