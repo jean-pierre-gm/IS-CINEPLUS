@@ -1,0 +1,12 @@
+<div class="plane">
+  <ol class="cabin" *ngFor="let row of seats let i = index">
+    <li class="row row--{{i}}">
+      <ol class="seats" type="A" *ngFor="let seat of row let j = index">
+        <li class="seat">
+          <input type="checkbox" id="{{i}} {{j}}" />
+          <label for="{{i}} {{j}}"></label>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>

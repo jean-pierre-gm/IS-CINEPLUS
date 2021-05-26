@@ -1,0 +1,22 @@
+<h2>Movies</h2>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="reproductionData.result">
+  <thead>
+  <tr>
+    <th>Theater</th>
+    <th>Time</th>
+    <th>Seats available</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr routerLink= "/reserve" [queryParams]="{reproduction: reproduction.id}" *ngFor="let reproduction of reproductionData.result">
+    <td>{{ reproduction.theaterId }}</td>
+    <td>{{ reproduction.startTime }}</td>
+    <td>{{ 0 }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<button mat-raised-button [disabled]="!reproductionData.hasPrevious" (click)="reproductionData.previousPage()">Previous</button>
+<button mat-raised-button [disabled]="!reproductionData.hasNext"  (click)="reproductionData.nextPage()">Next</button>
+
+<mat-divider></mat-divider>

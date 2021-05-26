@@ -1,19 +1,20 @@
-<div id="reproductionCarousel" class="carousel slide" data-ride="carousel" *ngIf="reprData.result">
+<div id="reproductionCarousel" class="carousel slide full-width no-margin carousel-fade" data-ride="carousel" *ngIf="movieData.result">
 
   <div class="carousel-inner">
-    <img src="{{ getSlide() }}" class="d-block w-100" alt="slide" height="640px" width="360px">
+    <div class="carousel-item active" data-bs-interval="3000">
+      <img src="{{ getSlide() }}" class="d-block w-100" alt="..." height="640px" [routerLink]="['/reproduction']" [queryParams]="{movie: movieData.result[current].id}" >
+    </div>
     <div class="carousel-caption d-none d-md-block">
-      <h4>{{ getTitle() }}</h4>
-      <p>{{ getDate() }}</p>
+      <h3>{{ getTitle() }}</h3>
     </div>
   </div>
 
-  <button class="carousel-control-prev" type="button" data-bs-target="#reproductionCarousel" data-bs-slide="prev" (click)='getPrev()'>
+  <a class="carousel-control-prev" data-slide="prev" role="button" (click)='getPrev()'>
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#reproductionCarousel" data-bs-slide="next" (click)='getNext()' >
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" role="button" data-slide="next" (click)='getNext()' >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+    <span class="sr-only">Next</span>
+  </a>
 </div>

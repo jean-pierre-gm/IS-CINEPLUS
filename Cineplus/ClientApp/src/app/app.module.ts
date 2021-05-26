@@ -27,6 +27,8 @@ import {MatListModule} from "@angular/material/list";
 import {RoleUsersComponent} from "./role/role-users/role-users.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
+import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ApiTestComponent,
     ForbiddenComponent,
     RoleListComponent,
-    RoleUsersComponent
+    RoleUsersComponent,
+    SeatReservationComponent,
+    MovieReproductionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -65,6 +69,14 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         component: RoleUsersComponent,
         canActivate: [AuthorizeGuard],
         data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'reproduction',
+        component: MovieReproductionComponent
+      },
+      {
+        path: 'reserve',
+        component: SeatReservationComponent
       }
     ]),
     BrowserAnimationsModule,

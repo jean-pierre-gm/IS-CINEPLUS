@@ -21,6 +21,12 @@ namespace Cineplus.Controllers
             return new ActionResult<IEnumerable<Theater>>(_theaterService.GetAll());
         }
 
+        [HttpGet("{id:int}")]
+        public ActionResult<Theater> GetTheater(int id)
+        {
+            return new ActionResult<Theater>(_theaterService.Get(id));
+        }
+
         [HttpPost]
         public ActionResult<Theater> PostTheater([FromBody] Theater theater)
         {
