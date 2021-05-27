@@ -1,27 +1,35 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cineplus.Models {
-	public static class ModelBuilderExtensions {
-		public static void Seed(this ModelBuilder modelBuilder) {
+	public static class ModelBuilderExtensions
+	{
+		public static void Seed(this ModelBuilder modelBuilder)
+		{
 
-			var genres = new List<Genre>() {
-				new Genre() {
+			var genres = new List<Genre>()
+			{
+				new Genre()
+				{
 					Id = -1,
 					Description = "This movies try to make people laugh.",
 					GenreName = "Comedy"
 				},
-				new Genre() {
+				new Genre()
+				{
 					Id = -2,
 					GenreName = "Action",
 					Description = "Guns and guns"
 				}
 			};
-			
+
 			modelBuilder.Entity<Genre>().HasData(genres);
 
-			var movies = new List<Movie>() {
-				new Movie() {
+			var movies = new List<Movie>()
+			{
+				new Movie()
+				{
 					Id = -1,
 					MovieName = "Los 3 de la loma",
 					Director = "Pedro Pérez",
@@ -29,7 +37,8 @@ namespace Cineplus.Models {
 					Score = 7.8f,
 					GenreId = genres[0].Id
 				},
-				new Movie() {
+				new Movie()
+				{
 					Id = -2,
 					MovieName = "Donde cayó la tiza",
 					Director = "Alfredo Jul",
@@ -37,7 +46,8 @@ namespace Cineplus.Models {
 					Score = 9,
 					GenreId = genres[0].Id
 				},
-				new Movie() {
+				new Movie()
+				{
 					Id = -3,
 					MovieName = "Dos es mejor que uno",
 					Director = "Alain Serdán",
@@ -47,6 +57,89 @@ namespace Cineplus.Models {
 			};
 
 			modelBuilder.Entity<Movie>().HasData(movies);
+
+			var theaters = new List<Theater>()
+			{
+				new Theater()
+				{
+					Id = -1,
+					Columns = 10,
+					Rows = 15
+				},
+				new Theater()
+				{
+					Id = -2,
+					Columns = 10,
+					Rows = 10
+				},
+				new Theater()
+				{
+					Id = -3,
+					Columns = 5,
+					Rows = 5
+				}
+			};
+			modelBuilder.Entity<Theater>().HasData(theaters);
+
+			var seats = new List<Seat>();
+			int counter = -1;
+
+			foreach (var t in theaters)
+				for (int i = 0; i < t.Rows; i++)
+					for (int j = 0; j < t.Columns; j++)
+				{
+					seats.Add(new Seat()
+					{
+						Id = counter,
+						Column = j,
+						Row = i,
+						TheaterId = t.Id
+					});
+					counter--;
+				}
+
+			modelBuilder.Entity<Seat>().HasData(seats);
+
+			var reproductions = new List<Reproduction>()
+			{
+				new Reproduction()
+				{
+					Id = -1,
+					MovieId = -1,
+					StartTime = DateTime.Now,
+					TheaterId = -1
+				},
+				new Reproduction()
+				{
+					Id = -2,
+					MovieId = -1,
+					StartTime = DateTime.Now,
+					TheaterId = -1
+				},
+				new Reproduction()
+				{
+					Id = -3,
+					MovieId = -1,
+					StartTime = DateTime.Now,
+					TheaterId = -2
+				},
+				new Reproduction()
+				{
+					Id = -4,
+					MovieId = -1,
+					StartTime = DateTime.Now,
+					TheaterId = -3
+				},
+				new Reproduction()
+				{
+					Id = -5,
+					MovieId = -1,
+					StartTime = DateTime.Now,
+					TheaterId = -3
+				},
+			};
+			
+			modelBuilder.Entity<Reproduction>().HasData(reproductions);
 		}
 	}
 }
