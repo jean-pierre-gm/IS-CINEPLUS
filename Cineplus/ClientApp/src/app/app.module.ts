@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -30,6 +30,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSliderModule} from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -91,7 +92,9 @@ import {MatSortModule} from "@angular/material/sort";
         MatListModule,
         MatPaginatorModule,
         MatCheckboxModule,
-        MatSortModule
+        MatSortModule,
+        MatSliderModule,
+        ReactiveFormsModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

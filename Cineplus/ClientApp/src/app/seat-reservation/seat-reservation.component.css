@@ -8,7 +8,7 @@ html {
 
 .plane {
   margin: 20px auto;
-  max-width: 700px;
+  max-width: 900px;
 }
 
 
@@ -93,7 +93,7 @@ ol {
 }
 .seat label:hover {
   cursor: pointer;
-  box-shadow: 0 0 0px 2px #5C6AFF;
+  box-shadow: 0 0 0 2px #5C6AFF;
 }
 
 @-webkit-keyframes rubberBand {
@@ -159,4 +159,18 @@ ol {
 .rubberBand {
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
+}
+
+mat-slider {
+  width: 500px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
 }
