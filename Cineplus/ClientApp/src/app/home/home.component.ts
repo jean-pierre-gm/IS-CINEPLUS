@@ -4,6 +4,8 @@ import {Pagination} from "../../models/pagination";
 import {CineplusDataSource} from "../../models/cineplusDataSource";
 import {DataSourceConf} from "../../models/dataSourceConf";
 import {Movie} from "../../models/movie";
+import {OwlOptions} from "ngx-owl-carousel-o";
+import {faStar} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-home',
@@ -15,49 +17,51 @@ import {Movie} from "../../models/movie";
 export class HomeComponent {
 
   public movieData: CineplusDataSource<Movie>;
-  slides: string [] = ['./assets/titanic.jpg' ]
-  current = 0;
+  faStar = faStar
+
+  owlConfig: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    autoplay: true,
+    autoplayHoverPause: true,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true
+  }
+
+  pics = ['assets/pulp-fiction.jpg', 'assets/forrestgump.jpg', "assets/titanic.jpg", "assets/endgame.jpg"]
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     let movieSourceConf: DataSourceConf = new DataSourceConf();
     movieSourceConf.endPoint = baseUrl + 'api/movie';
     let moviePagination: Pagination<Movie> = new Pagination();
+    moviePagination.pageSize = 50;
     this.movieData = new CineplusDataSource<Movie>(http, movieSourceConf, moviePagination);
     this.movieData.refresh();
   }
 
-  getSlide() {
-    return this.slides[0];
+  parseDuration(duration: number) {
+    return Math.floor(duration / 60) + ":" + duration % 60
   }
 
-  getPrev() {
-    this.current--;
-    if(this.current === -1){
-      if(this.movieData.hasPrevious)
-        this.movieData.previousPage();
-      else
-        this.movieData.setPage(this.movieData.totalPages);
-      this.current = this.movieData.result.length - 1;
-    }
-    this.getSlide();
-  }
-
-  getNext() {
-    console.log(this.movieData.result)
-    this.current++;
-    if(this.current === this.movieData.result.length){
-      if(this.movieData.hasNext)
-        this.movieData.nextPage();
-      else
-        this.movieData.setPage(1);
-      this.current = 0;
-    }
-    console.log(this.movieData.result[this.current])
-    this.getSlide();
-  }
-
-  getTitle(){
-    console.log(this.movieData.result)
-    return this.movieData.result[this.current].movieName;
+  picsFromMovie(movie: Movie) {
+    return this.pics[Math.abs(movie.id) % this.pics.length]
   }
 }

@@ -10,3 +10,11 @@
 .no-margin{
   margin-top: -1rem;
 }
+
+.movie-borders {
+  border-style: inset;
+}
+
+mat-card-subtitle {
+  margin-bottom: 5px;
+}
