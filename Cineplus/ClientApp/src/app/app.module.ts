@@ -29,6 +29,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -44,53 +45,54 @@ import {MovieReproductionComponent} from "./movie-reproduction/movie-reproductio
     SeatReservationComponent,
     MovieReproductionComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
-      {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-      {
-        path: 'api-test', component: ApiTestComponent,
-        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
-      },
-      {path: 'forbidden', component: ForbiddenComponent},
-      {
-        path: 'role-list',
-        component: RoleListComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'role-users',
-        component: RoleUsersComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'reproduction',
-        component: MovieReproductionComponent
-      },
-      {
-        path: 'reserve',
-        component: SeatReservationComponent
-      }
-    ]),
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatTableModule,
-    FontAwesomeModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        ApiAuthorizationModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'counter', component: CounterComponent},
+            {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+            {
+                path: 'api-test', component: ApiTestComponent,
+                canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+            },
+            {path: 'forbidden', component: ForbiddenComponent},
+            {
+                path: 'role-list',
+                component: RoleListComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'role-users',
+                component: RoleUsersComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'reproduction',
+                component: MovieReproductionComponent
+            },
+            {
+                path: 'reserve',
+                component: SeatReservationComponent
+            }
+        ]),
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatTableModule,
+        FontAwesomeModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatCheckboxModule,
+        MatSortModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],

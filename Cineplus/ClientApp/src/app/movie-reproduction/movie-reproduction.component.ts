@@ -15,6 +15,7 @@ import {Movie} from "../../models/movie";
 export class MovieReproductionComponent implements OnInit {
 
   reproductionData: CineplusDataSource<Reproduction>
+  displayedColumns: string[] = ['theaterId', 'startTime', 'availSeats'];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
     let id: string = ""
@@ -30,4 +31,9 @@ export class MovieReproductionComponent implements OnInit {
   ngOnInit() {
   }
 
+  editPagination($event) {
+    console.log($event)
+    this.reproductionData.currentPagination.pageSize = $event.pageSize;
+    this.reproductionData.setPage($event.pageIndex + 1);
+  }
 }
