@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cineplus.Models {
@@ -140,6 +141,24 @@ namespace Cineplus.Models {
 			};
 			
 			modelBuilder.Entity<Reproduction>().HasData(reproductions);
+			Random rnd = new Random(2021);
+			var tickets = new List<Ticket>();
+			int id = -1;
+			foreach (var reproduction in reproductions)
+			{
+				foreach (var theaterSeat in seats.FindAll(s => s.TheaterId == reproduction.TheaterId) )
+				{
+					if (rnd.Next(0,101)<=60){
+					tickets.Add(new Ticket()
+					{
+						Id=id--,
+						ReproductionId = reproduction.Id,
+						SeatId = theaterSeat.Id
+					});
+					}
+				}
+			}
+			modelBuilder.Entity<Ticket>().HasData(tickets);
 		}
 	}
 }

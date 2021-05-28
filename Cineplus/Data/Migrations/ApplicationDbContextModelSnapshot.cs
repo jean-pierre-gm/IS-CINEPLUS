@@ -203,35 +203,35 @@ namespace Cineplus.Data.Migrations
                         {
                             Id = -1,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 27, 23, 18, 3, 124, DateTimeKind.Local).AddTicks(4161),
+                            StartTime = new DateTime(2021, 5, 28, 6, 31, 10, 843, DateTimeKind.Local).AddTicks(7245),
                             TheaterId = -1
                         },
                         new
                         {
                             Id = -2,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 27, 23, 18, 3, 128, DateTimeKind.Local).AddTicks(5735),
+                            StartTime = new DateTime(2021, 5, 28, 6, 31, 10, 847, DateTimeKind.Local).AddTicks(925),
                             TheaterId = -1
                         },
                         new
                         {
                             Id = -3,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 27, 23, 18, 3, 128, DateTimeKind.Local).AddTicks(5782),
+                            StartTime = new DateTime(2021, 5, 28, 6, 31, 10, 847, DateTimeKind.Local).AddTicks(1006),
                             TheaterId = -2
                         },
                         new
                         {
                             Id = -4,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 27, 23, 18, 3, 128, DateTimeKind.Local).AddTicks(5789),
+                            StartTime = new DateTime(2021, 5, 28, 6, 31, 10, 847, DateTimeKind.Local).AddTicks(1014),
                             TheaterId = -3
                         },
                         new
                         {
                             Id = -5,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 27, 23, 18, 3, 128, DateTimeKind.Local).AddTicks(5794),
+                            StartTime = new DateTime(2021, 5, 28, 6, 31, 10, 847, DateTimeKind.Local).AddTicks(1017),
                             TheaterId = -3
                         });
                 });
@@ -2246,6 +2246,1754 @@ namespace Cineplus.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            ReproductionId = -1,
+                            SeatId = -1
+                        },
+                        new
+                        {
+                            Id = -2,
+                            ReproductionId = -1,
+                            SeatId = -3
+                        },
+                        new
+                        {
+                            Id = -3,
+                            ReproductionId = -1,
+                            SeatId = -7
+                        },
+                        new
+                        {
+                            Id = -4,
+                            ReproductionId = -1,
+                            SeatId = -8
+                        },
+                        new
+                        {
+                            Id = -5,
+                            ReproductionId = -1,
+                            SeatId = -9
+                        },
+                        new
+                        {
+                            Id = -6,
+                            ReproductionId = -1,
+                            SeatId = -10
+                        },
+                        new
+                        {
+                            Id = -7,
+                            ReproductionId = -1,
+                            SeatId = -11
+                        },
+                        new
+                        {
+                            Id = -8,
+                            ReproductionId = -1,
+                            SeatId = -12
+                        },
+                        new
+                        {
+                            Id = -9,
+                            ReproductionId = -1,
+                            SeatId = -16
+                        },
+                        new
+                        {
+                            Id = -10,
+                            ReproductionId = -1,
+                            SeatId = -17
+                        },
+                        new
+                        {
+                            Id = -11,
+                            ReproductionId = -1,
+                            SeatId = -18
+                        },
+                        new
+                        {
+                            Id = -12,
+                            ReproductionId = -1,
+                            SeatId = -19
+                        },
+                        new
+                        {
+                            Id = -13,
+                            ReproductionId = -1,
+                            SeatId = -21
+                        },
+                        new
+                        {
+                            Id = -14,
+                            ReproductionId = -1,
+                            SeatId = -23
+                        },
+                        new
+                        {
+                            Id = -15,
+                            ReproductionId = -1,
+                            SeatId = -24
+                        },
+                        new
+                        {
+                            Id = -16,
+                            ReproductionId = -1,
+                            SeatId = -26
+                        },
+                        new
+                        {
+                            Id = -17,
+                            ReproductionId = -1,
+                            SeatId = -27
+                        },
+                        new
+                        {
+                            Id = -18,
+                            ReproductionId = -1,
+                            SeatId = -31
+                        },
+                        new
+                        {
+                            Id = -19,
+                            ReproductionId = -1,
+                            SeatId = -35
+                        },
+                        new
+                        {
+                            Id = -20,
+                            ReproductionId = -1,
+                            SeatId = -36
+                        },
+                        new
+                        {
+                            Id = -21,
+                            ReproductionId = -1,
+                            SeatId = -37
+                        },
+                        new
+                        {
+                            Id = -22,
+                            ReproductionId = -1,
+                            SeatId = -39
+                        },
+                        new
+                        {
+                            Id = -23,
+                            ReproductionId = -1,
+                            SeatId = -40
+                        },
+                        new
+                        {
+                            Id = -24,
+                            ReproductionId = -1,
+                            SeatId = -41
+                        },
+                        new
+                        {
+                            Id = -25,
+                            ReproductionId = -1,
+                            SeatId = -42
+                        },
+                        new
+                        {
+                            Id = -26,
+                            ReproductionId = -1,
+                            SeatId = -43
+                        },
+                        new
+                        {
+                            Id = -27,
+                            ReproductionId = -1,
+                            SeatId = -45
+                        },
+                        new
+                        {
+                            Id = -28,
+                            ReproductionId = -1,
+                            SeatId = -46
+                        },
+                        new
+                        {
+                            Id = -29,
+                            ReproductionId = -1,
+                            SeatId = -48
+                        },
+                        new
+                        {
+                            Id = -30,
+                            ReproductionId = -1,
+                            SeatId = -49
+                        },
+                        new
+                        {
+                            Id = -31,
+                            ReproductionId = -1,
+                            SeatId = -50
+                        },
+                        new
+                        {
+                            Id = -32,
+                            ReproductionId = -1,
+                            SeatId = -51
+                        },
+                        new
+                        {
+                            Id = -33,
+                            ReproductionId = -1,
+                            SeatId = -52
+                        },
+                        new
+                        {
+                            Id = -34,
+                            ReproductionId = -1,
+                            SeatId = -53
+                        },
+                        new
+                        {
+                            Id = -35,
+                            ReproductionId = -1,
+                            SeatId = -54
+                        },
+                        new
+                        {
+                            Id = -36,
+                            ReproductionId = -1,
+                            SeatId = -57
+                        },
+                        new
+                        {
+                            Id = -37,
+                            ReproductionId = -1,
+                            SeatId = -58
+                        },
+                        new
+                        {
+                            Id = -38,
+                            ReproductionId = -1,
+                            SeatId = -59
+                        },
+                        new
+                        {
+                            Id = -39,
+                            ReproductionId = -1,
+                            SeatId = -60
+                        },
+                        new
+                        {
+                            Id = -40,
+                            ReproductionId = -1,
+                            SeatId = -61
+                        },
+                        new
+                        {
+                            Id = -41,
+                            ReproductionId = -1,
+                            SeatId = -62
+                        },
+                        new
+                        {
+                            Id = -42,
+                            ReproductionId = -1,
+                            SeatId = -63
+                        },
+                        new
+                        {
+                            Id = -43,
+                            ReproductionId = -1,
+                            SeatId = -64
+                        },
+                        new
+                        {
+                            Id = -44,
+                            ReproductionId = -1,
+                            SeatId = -65
+                        },
+                        new
+                        {
+                            Id = -45,
+                            ReproductionId = -1,
+                            SeatId = -66
+                        },
+                        new
+                        {
+                            Id = -46,
+                            ReproductionId = -1,
+                            SeatId = -67
+                        },
+                        new
+                        {
+                            Id = -47,
+                            ReproductionId = -1,
+                            SeatId = -68
+                        },
+                        new
+                        {
+                            Id = -48,
+                            ReproductionId = -1,
+                            SeatId = -69
+                        },
+                        new
+                        {
+                            Id = -49,
+                            ReproductionId = -1,
+                            SeatId = -70
+                        },
+                        new
+                        {
+                            Id = -50,
+                            ReproductionId = -1,
+                            SeatId = -71
+                        },
+                        new
+                        {
+                            Id = -51,
+                            ReproductionId = -1,
+                            SeatId = -73
+                        },
+                        new
+                        {
+                            Id = -52,
+                            ReproductionId = -1,
+                            SeatId = -76
+                        },
+                        new
+                        {
+                            Id = -53,
+                            ReproductionId = -1,
+                            SeatId = -77
+                        },
+                        new
+                        {
+                            Id = -54,
+                            ReproductionId = -1,
+                            SeatId = -78
+                        },
+                        new
+                        {
+                            Id = -55,
+                            ReproductionId = -1,
+                            SeatId = -80
+                        },
+                        new
+                        {
+                            Id = -56,
+                            ReproductionId = -1,
+                            SeatId = -81
+                        },
+                        new
+                        {
+                            Id = -57,
+                            ReproductionId = -1,
+                            SeatId = -82
+                        },
+                        new
+                        {
+                            Id = -58,
+                            ReproductionId = -1,
+                            SeatId = -83
+                        },
+                        new
+                        {
+                            Id = -59,
+                            ReproductionId = -1,
+                            SeatId = -84
+                        },
+                        new
+                        {
+                            Id = -60,
+                            ReproductionId = -1,
+                            SeatId = -85
+                        },
+                        new
+                        {
+                            Id = -61,
+                            ReproductionId = -1,
+                            SeatId = -87
+                        },
+                        new
+                        {
+                            Id = -62,
+                            ReproductionId = -1,
+                            SeatId = -90
+                        },
+                        new
+                        {
+                            Id = -63,
+                            ReproductionId = -1,
+                            SeatId = -91
+                        },
+                        new
+                        {
+                            Id = -64,
+                            ReproductionId = -1,
+                            SeatId = -93
+                        },
+                        new
+                        {
+                            Id = -65,
+                            ReproductionId = -1,
+                            SeatId = -94
+                        },
+                        new
+                        {
+                            Id = -66,
+                            ReproductionId = -1,
+                            SeatId = -95
+                        },
+                        new
+                        {
+                            Id = -67,
+                            ReproductionId = -1,
+                            SeatId = -96
+                        },
+                        new
+                        {
+                            Id = -68,
+                            ReproductionId = -1,
+                            SeatId = -98
+                        },
+                        new
+                        {
+                            Id = -69,
+                            ReproductionId = -1,
+                            SeatId = -100
+                        },
+                        new
+                        {
+                            Id = -70,
+                            ReproductionId = -1,
+                            SeatId = -101
+                        },
+                        new
+                        {
+                            Id = -71,
+                            ReproductionId = -1,
+                            SeatId = -103
+                        },
+                        new
+                        {
+                            Id = -72,
+                            ReproductionId = -1,
+                            SeatId = -104
+                        },
+                        new
+                        {
+                            Id = -73,
+                            ReproductionId = -1,
+                            SeatId = -105
+                        },
+                        new
+                        {
+                            Id = -74,
+                            ReproductionId = -1,
+                            SeatId = -106
+                        },
+                        new
+                        {
+                            Id = -75,
+                            ReproductionId = -1,
+                            SeatId = -107
+                        },
+                        new
+                        {
+                            Id = -76,
+                            ReproductionId = -1,
+                            SeatId = -108
+                        },
+                        new
+                        {
+                            Id = -77,
+                            ReproductionId = -1,
+                            SeatId = -109
+                        },
+                        new
+                        {
+                            Id = -78,
+                            ReproductionId = -1,
+                            SeatId = -117
+                        },
+                        new
+                        {
+                            Id = -79,
+                            ReproductionId = -1,
+                            SeatId = -118
+                        },
+                        new
+                        {
+                            Id = -80,
+                            ReproductionId = -1,
+                            SeatId = -120
+                        },
+                        new
+                        {
+                            Id = -81,
+                            ReproductionId = -1,
+                            SeatId = -121
+                        },
+                        new
+                        {
+                            Id = -82,
+                            ReproductionId = -1,
+                            SeatId = -122
+                        },
+                        new
+                        {
+                            Id = -83,
+                            ReproductionId = -1,
+                            SeatId = -123
+                        },
+                        new
+                        {
+                            Id = -84,
+                            ReproductionId = -1,
+                            SeatId = -124
+                        },
+                        new
+                        {
+                            Id = -85,
+                            ReproductionId = -1,
+                            SeatId = -125
+                        },
+                        new
+                        {
+                            Id = -86,
+                            ReproductionId = -1,
+                            SeatId = -126
+                        },
+                        new
+                        {
+                            Id = -87,
+                            ReproductionId = -1,
+                            SeatId = -127
+                        },
+                        new
+                        {
+                            Id = -88,
+                            ReproductionId = -1,
+                            SeatId = -128
+                        },
+                        new
+                        {
+                            Id = -89,
+                            ReproductionId = -1,
+                            SeatId = -129
+                        },
+                        new
+                        {
+                            Id = -90,
+                            ReproductionId = -1,
+                            SeatId = -130
+                        },
+                        new
+                        {
+                            Id = -91,
+                            ReproductionId = -1,
+                            SeatId = -131
+                        },
+                        new
+                        {
+                            Id = -92,
+                            ReproductionId = -1,
+                            SeatId = -132
+                        },
+                        new
+                        {
+                            Id = -93,
+                            ReproductionId = -1,
+                            SeatId = -134
+                        },
+                        new
+                        {
+                            Id = -94,
+                            ReproductionId = -1,
+                            SeatId = -138
+                        },
+                        new
+                        {
+                            Id = -95,
+                            ReproductionId = -1,
+                            SeatId = -139
+                        },
+                        new
+                        {
+                            Id = -96,
+                            ReproductionId = -1,
+                            SeatId = -140
+                        },
+                        new
+                        {
+                            Id = -97,
+                            ReproductionId = -1,
+                            SeatId = -143
+                        },
+                        new
+                        {
+                            Id = -98,
+                            ReproductionId = -1,
+                            SeatId = -144
+                        },
+                        new
+                        {
+                            Id = -99,
+                            ReproductionId = -1,
+                            SeatId = -146
+                        },
+                        new
+                        {
+                            Id = -100,
+                            ReproductionId = -1,
+                            SeatId = -147
+                        },
+                        new
+                        {
+                            Id = -101,
+                            ReproductionId = -1,
+                            SeatId = -148
+                        },
+                        new
+                        {
+                            Id = -102,
+                            ReproductionId = -1,
+                            SeatId = -149
+                        },
+                        new
+                        {
+                            Id = -103,
+                            ReproductionId = -1,
+                            SeatId = -150
+                        },
+                        new
+                        {
+                            Id = -104,
+                            ReproductionId = -2,
+                            SeatId = -1
+                        },
+                        new
+                        {
+                            Id = -105,
+                            ReproductionId = -2,
+                            SeatId = -2
+                        },
+                        new
+                        {
+                            Id = -106,
+                            ReproductionId = -2,
+                            SeatId = -3
+                        },
+                        new
+                        {
+                            Id = -107,
+                            ReproductionId = -2,
+                            SeatId = -4
+                        },
+                        new
+                        {
+                            Id = -108,
+                            ReproductionId = -2,
+                            SeatId = -5
+                        },
+                        new
+                        {
+                            Id = -109,
+                            ReproductionId = -2,
+                            SeatId = -7
+                        },
+                        new
+                        {
+                            Id = -110,
+                            ReproductionId = -2,
+                            SeatId = -8
+                        },
+                        new
+                        {
+                            Id = -111,
+                            ReproductionId = -2,
+                            SeatId = -9
+                        },
+                        new
+                        {
+                            Id = -112,
+                            ReproductionId = -2,
+                            SeatId = -11
+                        },
+                        new
+                        {
+                            Id = -113,
+                            ReproductionId = -2,
+                            SeatId = -14
+                        },
+                        new
+                        {
+                            Id = -114,
+                            ReproductionId = -2,
+                            SeatId = -15
+                        },
+                        new
+                        {
+                            Id = -115,
+                            ReproductionId = -2,
+                            SeatId = -16
+                        },
+                        new
+                        {
+                            Id = -116,
+                            ReproductionId = -2,
+                            SeatId = -18
+                        },
+                        new
+                        {
+                            Id = -117,
+                            ReproductionId = -2,
+                            SeatId = -19
+                        },
+                        new
+                        {
+                            Id = -118,
+                            ReproductionId = -2,
+                            SeatId = -22
+                        },
+                        new
+                        {
+                            Id = -119,
+                            ReproductionId = -2,
+                            SeatId = -26
+                        },
+                        new
+                        {
+                            Id = -120,
+                            ReproductionId = -2,
+                            SeatId = -27
+                        },
+                        new
+                        {
+                            Id = -121,
+                            ReproductionId = -2,
+                            SeatId = -28
+                        },
+                        new
+                        {
+                            Id = -122,
+                            ReproductionId = -2,
+                            SeatId = -29
+                        },
+                        new
+                        {
+                            Id = -123,
+                            ReproductionId = -2,
+                            SeatId = -31
+                        },
+                        new
+                        {
+                            Id = -124,
+                            ReproductionId = -2,
+                            SeatId = -34
+                        },
+                        new
+                        {
+                            Id = -125,
+                            ReproductionId = -2,
+                            SeatId = -35
+                        },
+                        new
+                        {
+                            Id = -126,
+                            ReproductionId = -2,
+                            SeatId = -36
+                        },
+                        new
+                        {
+                            Id = -127,
+                            ReproductionId = -2,
+                            SeatId = -38
+                        },
+                        new
+                        {
+                            Id = -128,
+                            ReproductionId = -2,
+                            SeatId = -39
+                        },
+                        new
+                        {
+                            Id = -129,
+                            ReproductionId = -2,
+                            SeatId = -40
+                        },
+                        new
+                        {
+                            Id = -130,
+                            ReproductionId = -2,
+                            SeatId = -42
+                        },
+                        new
+                        {
+                            Id = -131,
+                            ReproductionId = -2,
+                            SeatId = -44
+                        },
+                        new
+                        {
+                            Id = -132,
+                            ReproductionId = -2,
+                            SeatId = -46
+                        },
+                        new
+                        {
+                            Id = -133,
+                            ReproductionId = -2,
+                            SeatId = -47
+                        },
+                        new
+                        {
+                            Id = -134,
+                            ReproductionId = -2,
+                            SeatId = -48
+                        },
+                        new
+                        {
+                            Id = -135,
+                            ReproductionId = -2,
+                            SeatId = -50
+                        },
+                        new
+                        {
+                            Id = -136,
+                            ReproductionId = -2,
+                            SeatId = -51
+                        },
+                        new
+                        {
+                            Id = -137,
+                            ReproductionId = -2,
+                            SeatId = -53
+                        },
+                        new
+                        {
+                            Id = -138,
+                            ReproductionId = -2,
+                            SeatId = -54
+                        },
+                        new
+                        {
+                            Id = -139,
+                            ReproductionId = -2,
+                            SeatId = -55
+                        },
+                        new
+                        {
+                            Id = -140,
+                            ReproductionId = -2,
+                            SeatId = -56
+                        },
+                        new
+                        {
+                            Id = -141,
+                            ReproductionId = -2,
+                            SeatId = -57
+                        },
+                        new
+                        {
+                            Id = -142,
+                            ReproductionId = -2,
+                            SeatId = -58
+                        },
+                        new
+                        {
+                            Id = -143,
+                            ReproductionId = -2,
+                            SeatId = -59
+                        },
+                        new
+                        {
+                            Id = -144,
+                            ReproductionId = -2,
+                            SeatId = -61
+                        },
+                        new
+                        {
+                            Id = -145,
+                            ReproductionId = -2,
+                            SeatId = -63
+                        },
+                        new
+                        {
+                            Id = -146,
+                            ReproductionId = -2,
+                            SeatId = -64
+                        },
+                        new
+                        {
+                            Id = -147,
+                            ReproductionId = -2,
+                            SeatId = -69
+                        },
+                        new
+                        {
+                            Id = -148,
+                            ReproductionId = -2,
+                            SeatId = -70
+                        },
+                        new
+                        {
+                            Id = -149,
+                            ReproductionId = -2,
+                            SeatId = -72
+                        },
+                        new
+                        {
+                            Id = -150,
+                            ReproductionId = -2,
+                            SeatId = -73
+                        },
+                        new
+                        {
+                            Id = -151,
+                            ReproductionId = -2,
+                            SeatId = -75
+                        },
+                        new
+                        {
+                            Id = -152,
+                            ReproductionId = -2,
+                            SeatId = -76
+                        },
+                        new
+                        {
+                            Id = -153,
+                            ReproductionId = -2,
+                            SeatId = -77
+                        },
+                        new
+                        {
+                            Id = -154,
+                            ReproductionId = -2,
+                            SeatId = -79
+                        },
+                        new
+                        {
+                            Id = -155,
+                            ReproductionId = -2,
+                            SeatId = -81
+                        },
+                        new
+                        {
+                            Id = -156,
+                            ReproductionId = -2,
+                            SeatId = -83
+                        },
+                        new
+                        {
+                            Id = -157,
+                            ReproductionId = -2,
+                            SeatId = -85
+                        },
+                        new
+                        {
+                            Id = -158,
+                            ReproductionId = -2,
+                            SeatId = -86
+                        },
+                        new
+                        {
+                            Id = -159,
+                            ReproductionId = -2,
+                            SeatId = -87
+                        },
+                        new
+                        {
+                            Id = -160,
+                            ReproductionId = -2,
+                            SeatId = -88
+                        },
+                        new
+                        {
+                            Id = -161,
+                            ReproductionId = -2,
+                            SeatId = -89
+                        },
+                        new
+                        {
+                            Id = -162,
+                            ReproductionId = -2,
+                            SeatId = -91
+                        },
+                        new
+                        {
+                            Id = -163,
+                            ReproductionId = -2,
+                            SeatId = -92
+                        },
+                        new
+                        {
+                            Id = -164,
+                            ReproductionId = -2,
+                            SeatId = -93
+                        },
+                        new
+                        {
+                            Id = -165,
+                            ReproductionId = -2,
+                            SeatId = -96
+                        },
+                        new
+                        {
+                            Id = -166,
+                            ReproductionId = -2,
+                            SeatId = -97
+                        },
+                        new
+                        {
+                            Id = -167,
+                            ReproductionId = -2,
+                            SeatId = -98
+                        },
+                        new
+                        {
+                            Id = -168,
+                            ReproductionId = -2,
+                            SeatId = -99
+                        },
+                        new
+                        {
+                            Id = -169,
+                            ReproductionId = -2,
+                            SeatId = -100
+                        },
+                        new
+                        {
+                            Id = -170,
+                            ReproductionId = -2,
+                            SeatId = -101
+                        },
+                        new
+                        {
+                            Id = -171,
+                            ReproductionId = -2,
+                            SeatId = -102
+                        },
+                        new
+                        {
+                            Id = -172,
+                            ReproductionId = -2,
+                            SeatId = -103
+                        },
+                        new
+                        {
+                            Id = -173,
+                            ReproductionId = -2,
+                            SeatId = -105
+                        },
+                        new
+                        {
+                            Id = -174,
+                            ReproductionId = -2,
+                            SeatId = -106
+                        },
+                        new
+                        {
+                            Id = -175,
+                            ReproductionId = -2,
+                            SeatId = -107
+                        },
+                        new
+                        {
+                            Id = -176,
+                            ReproductionId = -2,
+                            SeatId = -109
+                        },
+                        new
+                        {
+                            Id = -177,
+                            ReproductionId = -2,
+                            SeatId = -110
+                        },
+                        new
+                        {
+                            Id = -178,
+                            ReproductionId = -2,
+                            SeatId = -113
+                        },
+                        new
+                        {
+                            Id = -179,
+                            ReproductionId = -2,
+                            SeatId = -117
+                        },
+                        new
+                        {
+                            Id = -180,
+                            ReproductionId = -2,
+                            SeatId = -118
+                        },
+                        new
+                        {
+                            Id = -181,
+                            ReproductionId = -2,
+                            SeatId = -119
+                        },
+                        new
+                        {
+                            Id = -182,
+                            ReproductionId = -2,
+                            SeatId = -120
+                        },
+                        new
+                        {
+                            Id = -183,
+                            ReproductionId = -2,
+                            SeatId = -122
+                        },
+                        new
+                        {
+                            Id = -184,
+                            ReproductionId = -2,
+                            SeatId = -123
+                        },
+                        new
+                        {
+                            Id = -185,
+                            ReproductionId = -2,
+                            SeatId = -124
+                        },
+                        new
+                        {
+                            Id = -186,
+                            ReproductionId = -2,
+                            SeatId = -126
+                        },
+                        new
+                        {
+                            Id = -187,
+                            ReproductionId = -2,
+                            SeatId = -127
+                        },
+                        new
+                        {
+                            Id = -188,
+                            ReproductionId = -2,
+                            SeatId = -129
+                        },
+                        new
+                        {
+                            Id = -189,
+                            ReproductionId = -2,
+                            SeatId = -130
+                        },
+                        new
+                        {
+                            Id = -190,
+                            ReproductionId = -2,
+                            SeatId = -131
+                        },
+                        new
+                        {
+                            Id = -191,
+                            ReproductionId = -2,
+                            SeatId = -133
+                        },
+                        new
+                        {
+                            Id = -192,
+                            ReproductionId = -2,
+                            SeatId = -134
+                        },
+                        new
+                        {
+                            Id = -193,
+                            ReproductionId = -2,
+                            SeatId = -135
+                        },
+                        new
+                        {
+                            Id = -194,
+                            ReproductionId = -2,
+                            SeatId = -137
+                        },
+                        new
+                        {
+                            Id = -195,
+                            ReproductionId = -2,
+                            SeatId = -139
+                        },
+                        new
+                        {
+                            Id = -196,
+                            ReproductionId = -2,
+                            SeatId = -140
+                        },
+                        new
+                        {
+                            Id = -197,
+                            ReproductionId = -2,
+                            SeatId = -141
+                        },
+                        new
+                        {
+                            Id = -198,
+                            ReproductionId = -2,
+                            SeatId = -142
+                        },
+                        new
+                        {
+                            Id = -199,
+                            ReproductionId = -2,
+                            SeatId = -143
+                        },
+                        new
+                        {
+                            Id = -200,
+                            ReproductionId = -2,
+                            SeatId = -144
+                        },
+                        new
+                        {
+                            Id = -201,
+                            ReproductionId = -2,
+                            SeatId = -148
+                        },
+                        new
+                        {
+                            Id = -202,
+                            ReproductionId = -3,
+                            SeatId = -152
+                        },
+                        new
+                        {
+                            Id = -203,
+                            ReproductionId = -3,
+                            SeatId = -153
+                        },
+                        new
+                        {
+                            Id = -204,
+                            ReproductionId = -3,
+                            SeatId = -154
+                        },
+                        new
+                        {
+                            Id = -205,
+                            ReproductionId = -3,
+                            SeatId = -155
+                        },
+                        new
+                        {
+                            Id = -206,
+                            ReproductionId = -3,
+                            SeatId = -156
+                        },
+                        new
+                        {
+                            Id = -207,
+                            ReproductionId = -3,
+                            SeatId = -158
+                        },
+                        new
+                        {
+                            Id = -208,
+                            ReproductionId = -3,
+                            SeatId = -159
+                        },
+                        new
+                        {
+                            Id = -209,
+                            ReproductionId = -3,
+                            SeatId = -160
+                        },
+                        new
+                        {
+                            Id = -210,
+                            ReproductionId = -3,
+                            SeatId = -161
+                        },
+                        new
+                        {
+                            Id = -211,
+                            ReproductionId = -3,
+                            SeatId = -162
+                        },
+                        new
+                        {
+                            Id = -212,
+                            ReproductionId = -3,
+                            SeatId = -163
+                        },
+                        new
+                        {
+                            Id = -213,
+                            ReproductionId = -3,
+                            SeatId = -164
+                        },
+                        new
+                        {
+                            Id = -214,
+                            ReproductionId = -3,
+                            SeatId = -166
+                        },
+                        new
+                        {
+                            Id = -215,
+                            ReproductionId = -3,
+                            SeatId = -167
+                        },
+                        new
+                        {
+                            Id = -216,
+                            ReproductionId = -3,
+                            SeatId = -168
+                        },
+                        new
+                        {
+                            Id = -217,
+                            ReproductionId = -3,
+                            SeatId = -169
+                        },
+                        new
+                        {
+                            Id = -218,
+                            ReproductionId = -3,
+                            SeatId = -171
+                        },
+                        new
+                        {
+                            Id = -219,
+                            ReproductionId = -3,
+                            SeatId = -172
+                        },
+                        new
+                        {
+                            Id = -220,
+                            ReproductionId = -3,
+                            SeatId = -175
+                        },
+                        new
+                        {
+                            Id = -221,
+                            ReproductionId = -3,
+                            SeatId = -176
+                        },
+                        new
+                        {
+                            Id = -222,
+                            ReproductionId = -3,
+                            SeatId = -179
+                        },
+                        new
+                        {
+                            Id = -223,
+                            ReproductionId = -3,
+                            SeatId = -184
+                        },
+                        new
+                        {
+                            Id = -224,
+                            ReproductionId = -3,
+                            SeatId = -185
+                        },
+                        new
+                        {
+                            Id = -225,
+                            ReproductionId = -3,
+                            SeatId = -186
+                        },
+                        new
+                        {
+                            Id = -226,
+                            ReproductionId = -3,
+                            SeatId = -187
+                        },
+                        new
+                        {
+                            Id = -227,
+                            ReproductionId = -3,
+                            SeatId = -190
+                        },
+                        new
+                        {
+                            Id = -228,
+                            ReproductionId = -3,
+                            SeatId = -191
+                        },
+                        new
+                        {
+                            Id = -229,
+                            ReproductionId = -3,
+                            SeatId = -192
+                        },
+                        new
+                        {
+                            Id = -230,
+                            ReproductionId = -3,
+                            SeatId = -194
+                        },
+                        new
+                        {
+                            Id = -231,
+                            ReproductionId = -3,
+                            SeatId = -199
+                        },
+                        new
+                        {
+                            Id = -232,
+                            ReproductionId = -3,
+                            SeatId = -201
+                        },
+                        new
+                        {
+                            Id = -233,
+                            ReproductionId = -3,
+                            SeatId = -202
+                        },
+                        new
+                        {
+                            Id = -234,
+                            ReproductionId = -3,
+                            SeatId = -203
+                        },
+                        new
+                        {
+                            Id = -235,
+                            ReproductionId = -3,
+                            SeatId = -204
+                        },
+                        new
+                        {
+                            Id = -236,
+                            ReproductionId = -3,
+                            SeatId = -205
+                        },
+                        new
+                        {
+                            Id = -237,
+                            ReproductionId = -3,
+                            SeatId = -206
+                        },
+                        new
+                        {
+                            Id = -238,
+                            ReproductionId = -3,
+                            SeatId = -207
+                        },
+                        new
+                        {
+                            Id = -239,
+                            ReproductionId = -3,
+                            SeatId = -208
+                        },
+                        new
+                        {
+                            Id = -240,
+                            ReproductionId = -3,
+                            SeatId = -209
+                        },
+                        new
+                        {
+                            Id = -241,
+                            ReproductionId = -3,
+                            SeatId = -210
+                        },
+                        new
+                        {
+                            Id = -242,
+                            ReproductionId = -3,
+                            SeatId = -211
+                        },
+                        new
+                        {
+                            Id = -243,
+                            ReproductionId = -3,
+                            SeatId = -214
+                        },
+                        new
+                        {
+                            Id = -244,
+                            ReproductionId = -3,
+                            SeatId = -215
+                        },
+                        new
+                        {
+                            Id = -245,
+                            ReproductionId = -3,
+                            SeatId = -216
+                        },
+                        new
+                        {
+                            Id = -246,
+                            ReproductionId = -3,
+                            SeatId = -217
+                        },
+                        new
+                        {
+                            Id = -247,
+                            ReproductionId = -3,
+                            SeatId = -218
+                        },
+                        new
+                        {
+                            Id = -248,
+                            ReproductionId = -3,
+                            SeatId = -219
+                        },
+                        new
+                        {
+                            Id = -249,
+                            ReproductionId = -3,
+                            SeatId = -221
+                        },
+                        new
+                        {
+                            Id = -250,
+                            ReproductionId = -3,
+                            SeatId = -222
+                        },
+                        new
+                        {
+                            Id = -251,
+                            ReproductionId = -3,
+                            SeatId = -224
+                        },
+                        new
+                        {
+                            Id = -252,
+                            ReproductionId = -3,
+                            SeatId = -228
+                        },
+                        new
+                        {
+                            Id = -253,
+                            ReproductionId = -3,
+                            SeatId = -229
+                        },
+                        new
+                        {
+                            Id = -254,
+                            ReproductionId = -3,
+                            SeatId = -230
+                        },
+                        new
+                        {
+                            Id = -255,
+                            ReproductionId = -3,
+                            SeatId = -231
+                        },
+                        new
+                        {
+                            Id = -256,
+                            ReproductionId = -3,
+                            SeatId = -232
+                        },
+                        new
+                        {
+                            Id = -257,
+                            ReproductionId = -3,
+                            SeatId = -233
+                        },
+                        new
+                        {
+                            Id = -258,
+                            ReproductionId = -3,
+                            SeatId = -234
+                        },
+                        new
+                        {
+                            Id = -259,
+                            ReproductionId = -3,
+                            SeatId = -235
+                        },
+                        new
+                        {
+                            Id = -260,
+                            ReproductionId = -3,
+                            SeatId = -236
+                        },
+                        new
+                        {
+                            Id = -261,
+                            ReproductionId = -3,
+                            SeatId = -237
+                        },
+                        new
+                        {
+                            Id = -262,
+                            ReproductionId = -3,
+                            SeatId = -240
+                        },
+                        new
+                        {
+                            Id = -263,
+                            ReproductionId = -3,
+                            SeatId = -242
+                        },
+                        new
+                        {
+                            Id = -264,
+                            ReproductionId = -3,
+                            SeatId = -246
+                        },
+                        new
+                        {
+                            Id = -265,
+                            ReproductionId = -3,
+                            SeatId = -247
+                        },
+                        new
+                        {
+                            Id = -266,
+                            ReproductionId = -3,
+                            SeatId = -248
+                        },
+                        new
+                        {
+                            Id = -267,
+                            ReproductionId = -3,
+                            SeatId = -249
+                        },
+                        new
+                        {
+                            Id = -268,
+                            ReproductionId = -3,
+                            SeatId = -250
+                        },
+                        new
+                        {
+                            Id = -269,
+                            ReproductionId = -4,
+                            SeatId = -251
+                        },
+                        new
+                        {
+                            Id = -270,
+                            ReproductionId = -4,
+                            SeatId = -257
+                        },
+                        new
+                        {
+                            Id = -271,
+                            ReproductionId = -4,
+                            SeatId = -259
+                        },
+                        new
+                        {
+                            Id = -272,
+                            ReproductionId = -4,
+                            SeatId = -263
+                        },
+                        new
+                        {
+                            Id = -273,
+                            ReproductionId = -4,
+                            SeatId = -264
+                        },
+                        new
+                        {
+                            Id = -274,
+                            ReproductionId = -4,
+                            SeatId = -265
+                        },
+                        new
+                        {
+                            Id = -275,
+                            ReproductionId = -4,
+                            SeatId = -266
+                        },
+                        new
+                        {
+                            Id = -276,
+                            ReproductionId = -4,
+                            SeatId = -268
+                        },
+                        new
+                        {
+                            Id = -277,
+                            ReproductionId = -4,
+                            SeatId = -272
+                        },
+                        new
+                        {
+                            Id = -278,
+                            ReproductionId = -4,
+                            SeatId = -273
+                        },
+                        new
+                        {
+                            Id = -279,
+                            ReproductionId = -5,
+                            SeatId = -251
+                        },
+                        new
+                        {
+                            Id = -280,
+                            ReproductionId = -5,
+                            SeatId = -253
+                        },
+                        new
+                        {
+                            Id = -281,
+                            ReproductionId = -5,
+                            SeatId = -256
+                        },
+                        new
+                        {
+                            Id = -282,
+                            ReproductionId = -5,
+                            SeatId = -257
+                        },
+                        new
+                        {
+                            Id = -283,
+                            ReproductionId = -5,
+                            SeatId = -258
+                        },
+                        new
+                        {
+                            Id = -284,
+                            ReproductionId = -5,
+                            SeatId = -259
+                        },
+                        new
+                        {
+                            Id = -285,
+                            ReproductionId = -5,
+                            SeatId = -262
+                        },
+                        new
+                        {
+                            Id = -286,
+                            ReproductionId = -5,
+                            SeatId = -263
+                        },
+                        new
+                        {
+                            Id = -287,
+                            ReproductionId = -5,
+                            SeatId = -268
+                        },
+                        new
+                        {
+                            Id = -288,
+                            ReproductionId = -5,
+                            SeatId = -269
+                        },
+                        new
+                        {
+                            Id = -289,
+                            ReproductionId = -5,
+                            SeatId = -270
+                        },
+                        new
+                        {
+                            Id = -290,
+                            ReproductionId = -5,
+                            SeatId = -274
+                        },
+                        new
+                        {
+                            Id = -291,
+                            ReproductionId = -5,
+                            SeatId = -275
+                        });
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>

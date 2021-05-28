@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cineplus.Services {
 	public class TicketService: ITicketService {
@@ -14,11 +15,11 @@ namespace Cineplus.Services {
 		}
 
 		public IEnumerable<Ticket> GetAllFromReproduction(int reproductionId) {
-			return _repository.Data().Where(ticket => ticket.ReproductionId == reproductionId).AsEnumerable();
+			return _repository.Data().Include(ticket => ticket.Seat).Where(ticket => ticket.ReproductionId == reproductionId).AsEnumerable();
 		}
 
 		public IEnumerable<Ticket> GetAllTicketsForUserAtReproduction(string userId, int reproductionId) {
-			return _repository.Data()
+			return _repository.Data().Include(ticket => ticket.Seat)
 				.Where(ticket => ticket.ReproductionId == reproductionId && ticket.UserId == userId).AsEnumerable();
 		}
 
