@@ -15,6 +15,7 @@ import {Movie} from "../../models/movie";
 export class MovieReproductionComponent implements OnInit {
 
   reproductionData: CineplusDataSource<Reproduction>
+  movie: Movie
   displayedColumns: string[] = ['theaterId', 'startTime', 'availSeats'];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
@@ -26,6 +27,7 @@ export class MovieReproductionComponent implements OnInit {
     this.reproductionData = new CineplusDataSource<Reproduction>(http, reproductionSourceConf, reproductionPagination)
     this.reproductionData.httpParams = this.reproductionData.httpParams.set('movieId', id)
     this.reproductionData.refresh()
+    this.http.get<Movie>(baseUrl + 'api/movie/'  + id).subscribe(t => this.movie = t)
   }
 
   ngOnInit() {

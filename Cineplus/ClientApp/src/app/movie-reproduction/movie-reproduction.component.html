@@ -1,3 +1,17 @@
+<div class="container-md">
+  <h2>{{movie.movieName}} ({{movie.duration}} min)</h2>
+  <br>
+  <h5>Directed by: {{movie.director}}</h5>
+  <br>
+  <h5>Genre: {{movie.genre.genreName}}</h5>
+  <br>
+  <h5>Reviews: {{movie.score}}</h5>
+</div>
+
+<br><br>
+
+<h4> Playing </h4>
+
 <div class="mat-elevation-z8" *ngIf="reproductionData.result">
   <table mat-table [dataSource]="reproductionData.result" matSort>
 
