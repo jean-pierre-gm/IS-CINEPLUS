@@ -26,9 +26,7 @@
      <li class="row row--{{i}}">
        <ol class="seats" type="A" *ngFor="let seat of row let j = index">
          <li class="seat">
-           <div *ngIf="seat != 0; then thenBlock else elseBlock"></div>
-           <ng-template #thenBlock><input type="checkbox" id="{{seat}}"/></ng-template>
-           <ng-template #elseBlock><input type="checkbox" id="{{seat}}" disabled/></ng-template>
+           <input type="checkbox" id="{{seat}}" [disabled]="seat != 0"/>
 
            <label for="{{seat}}"></label>
          </li>
