@@ -26,9 +26,8 @@
      <li class="row row--{{i}}">
        <ol class="seats" type="A" *ngFor="let seat of row let j = index">
          <li class="seat">
-           <input type="checkbox" id="{{seat}}" [disabled]="seat != 0"/>
-
-           <label for="{{seat}}"></label>
+           <input type="checkbox" id="seat" [disabled]="seat == 0"/>
+           <label for="seat"></label>
          </li>
        </ol>
      </li>
