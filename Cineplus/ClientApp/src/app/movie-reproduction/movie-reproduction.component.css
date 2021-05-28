@@ -4,6 +4,9 @@ table {
   padding: 10px;
 }
 
+mat-grid-tile {
+  background: lightblue;
+}
 
 .mat-header-row{
   background: #f6f4f4;

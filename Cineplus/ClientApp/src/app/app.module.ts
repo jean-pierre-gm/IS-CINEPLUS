@@ -33,6 +33,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
 import {AddReproductionComponent} from "./add-reproduction/add-reproduction.component";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -49,63 +50,64 @@ import {AddReproductionComponent} from "./add-reproduction/add-reproduction.comp
     MovieReproductionComponent,
     AddReproductionComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
-      {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-      {
-        path: 'api-test', component: ApiTestComponent,
-        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
-      },
-      {path: 'forbidden', component: ForbiddenComponent},
-      {
-        path: 'role-list',
-        component: RoleListComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'role-users',
-        component: RoleUsersComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'reproduction',
-        component: MovieReproductionComponent
-      },
-      {
-        path: 'reserve',
-        component: SeatReservationComponent
-      },
-      {
-        path: 'reproduction/add',
-        component: AddReproductionComponent,
-      //  canActivate: [AuthorizeGuard],
-      //  data: {permittedRoles: ["Admin", "Manager"]}
-      }
-    ]),
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatTableModule,
-    FontAwesomeModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatCheckboxModule,
-    MatSortModule,
-    MatSliderModule,
-    ReactiveFormsModule,
-    CarouselModule
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        ApiAuthorizationModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'counter', component: CounterComponent},
+            {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+            {
+                path: 'api-test', component: ApiTestComponent,
+                canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+            },
+            {path: 'forbidden', component: ForbiddenComponent},
+            {
+                path: 'role-list',
+                component: RoleListComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'role-users',
+                component: RoleUsersComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'reproduction',
+                component: MovieReproductionComponent
+            },
+            {
+                path: 'reserve',
+                component: SeatReservationComponent
+            },
+            {
+                path: 'reproduction/add',
+                component: AddReproductionComponent,
+                //  canActivate: [AuthorizeGuard],
+                //  data: {permittedRoles: ["Admin", "Manager"]}
+            }
+        ]),
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatTableModule,
+        FontAwesomeModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatCheckboxModule,
+        MatSortModule,
+        MatSliderModule,
+        ReactiveFormsModule,
+        CarouselModule,
+        MatGridListModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
