@@ -23,8 +23,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class SeatReservationComponent implements OnInit {
   reproduction: Reproduction;
   theater: Theater;
-  seats: number[][];
-  tickets:Ticket[];
+  seats: string[][];
+  soldTickets: Ticket[];
   checked = [];
   ticketsFormControl = new FormControl('', [
     Validators.required,
@@ -34,27 +34,29 @@ export class SeatReservationComponent implements OnInit {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
     let id: string = ""
-    this.route.queryParams.subscribe(params => {id = params.reproduction})
-    this.http.get<Reproduction>(baseUrl + 'api/reproduction/'  + id).subscribe(
+    this.route.queryParams.subscribe(params => {
+      id = params.reproduction
+    })
+    this.http.get<Reproduction>(baseUrl + 'api/reproduction/' + id).subscribe(
       result => {
         this.reproduction = result
         this.http.get<Theater>(baseUrl + 'api/theater/' + this.reproduction.theaterId).subscribe(
           result => {
             this.theater = result
-            this.http.get<Ticket[]>(baseUrl + 'api/ticket/' + this.reproduction.id).subscribe(result =>{
-              this.tickets = result
+            this.http.get<Ticket[]>(baseUrl + 'api/ticket/' + this.reproduction.id).subscribe(result => {
+              this.soldTickets = result
 
-              this.ticketsFormControl.setValidators(Validators.compose([this.ticketsFormControl.validator , Validators.max(this.tickets.length)]))
+              this.ticketsFormControl.setValidators(Validators.compose([this.ticketsFormControl.validator, Validators.max(this.theater.columns * this.theater.rows - this.soldTickets.length)]))
               this.ticketsFormControl.updateValueAndValidity();
 
-              this.seats = Array<Array<number>>(Array<number>(this.theater.rows))
+              this.seats = Array<Array<string>>(Array<string>(this.theater.rows))
               for (let i: number = 0; i < this.theater.rows; i++) {
-                this.seats[i] = Array<number>(this.theater.columns)
+                this.seats[i] = Array<string>(this.theater.columns)
                 for (let j: number = 0; j < this.theater.columns; j++)
-                  this.seats[i][j] = 0
+                  this.seats[i][j] = `${i}:${j}`
               }
-              for (const ticket of this.tickets) {
-                this.seats[ticket.seat.row][ticket.seat.column] = ticket.id
+              for (const ticket of this.soldTickets) {
+                this.seats[ticket.seat.row][ticket.seat.column] = "0"
               }
             })
           })
@@ -70,26 +72,32 @@ export class SeatReservationComponent implements OnInit {
   }
 
 
-  onChange(){
-    let tmp:Ticket[] = [];
-    for (const checkedElement of this.checked) {
-      checkedElement.checked = false
-    }
-    this.checked = []
+  onChange() {
 
-    if (this.ticketsFormControl.value >= this.tickets.length)
+    if (this.ticketsFormControl.value < 0 || this.ticketsFormControl.value > this.theater.columns * this.theater.rows - this.soldTickets.length) {
+      for (const checkedElement of this.checked) {
+        checkedElement.checked = false
+      }
+      this.checked = []
       return
-
-    for (let j = 0; j < this.ticketsFormControl.value; j++) {
-      let i =Math.floor(Math.random() * (this.tickets.length-1));
-      let t:Ticket = this.tickets[i]
-      tmp.push(t)
-      this.tickets.splice(i,1)
-      let elm = <any>document.getElementById(t.id.toString())
-      elm.checked = true
-      this.checked.push(elm)
     }
-    this.tickets= this.tickets.concat(tmp)
+    let offset: number = this.ticketsFormControl.value - this.checked.length
+    let validSeats = Array.from(document.getElementById("seats").querySelectorAll("input")).filter(it => {
+      return it.id != "0"
+    })
+    if (offset > 0) {
+      for (let j = 0; j < offset; j++) {
+        let s = Math.floor(Math.random() * (validSeats.length - 1));
+        let elem = <any>validSeats.splice(s, 1)[0]
+        this.checked.push(elem)
+        elem.checked = true
+      }
+    } else if (offset < 0) {
+      for (let j = 0; j < Math.abs(offset); j++) {
+        let elem = this.checked.pop()
+        elem.checked = false
+      }
+    }
   }
 }
 

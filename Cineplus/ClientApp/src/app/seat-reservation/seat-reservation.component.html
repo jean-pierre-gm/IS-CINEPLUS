@@ -21,12 +21,12 @@
   </mat-form-field>
 </form>
 
-<div class="plane">
+<div class="plane" id="seats">
   <ol class="cabin" *ngFor="let row of seats let i = index">
      <li class="row row--{{i}}">
        <ol class="seats" type="A" *ngFor="let seat of row let j = index">
          <li class="seat">
-           <input type="checkbox" id="seat" [disabled]="seat == 0"/>
+           <input type="checkbox" [id]="seat" [disabled]="seat == '0'"/>
            <label for="seat"></label>
          </li>
        </ol>
