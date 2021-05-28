@@ -7,4 +7,5 @@ export class Movie {
   movieName: string;
   director: string;
   genre: Genre;
+  description: string;
 }
