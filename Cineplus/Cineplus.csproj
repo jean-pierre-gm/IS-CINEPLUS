@@ -46,6 +46,7 @@
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\api-test\api-test.component.css" />
         <Content Include="ClientApp\src\app\api-test\api-test.component.html" />
+        <Content Include="ClientApp\src\app\app.component.css" />
         <Content Include="ClientApp\src\app\forbidden\forbidden.component.css" />
         <Content Include="ClientApp\src\app\forbidden\forbidden.component.html" />
         <Content Include="ClientApp\src\app\role\role-list\role-list.component.css" />
