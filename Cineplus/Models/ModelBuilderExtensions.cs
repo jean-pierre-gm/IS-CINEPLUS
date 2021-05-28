@@ -108,35 +108,40 @@ namespace Cineplus.Models {
 					Id = -1,
 					MovieId = -1,
 					StartTime = DateTime.Now,
-					TheaterId = -1
+					TheaterId = -1,
+					Price = 10
 				},
 				new Reproduction()
 				{
 					Id = -2,
 					MovieId = -1,
 					StartTime = DateTime.Now,
-					TheaterId = -1
+					TheaterId = -1,
+					Price = 12
 				},
 				new Reproduction()
 				{
 					Id = -3,
 					MovieId = -1,
 					StartTime = DateTime.Now,
-					TheaterId = -2
+					TheaterId = -2,
+					Price = 9
 				},
 				new Reproduction()
 				{
 					Id = -4,
 					MovieId = -1,
 					StartTime = DateTime.Now,
-					TheaterId = -3
+					TheaterId = -3,
+					Price = 8
 				},
 				new Reproduction()
 				{
 					Id = -5,
 					MovieId = -1,
 					StartTime = DateTime.Now,
-					TheaterId = -3
+					TheaterId = -3,
+					Price = 14
 				},
 			};
 			
@@ -149,12 +154,14 @@ namespace Cineplus.Models {
 				foreach (var theaterSeat in seats.FindAll(s => s.TheaterId == reproduction.TheaterId) )
 				{
 					if (rnd.Next(0,101)<=60){
-					tickets.Add(new Ticket()
-					{
-						Id=id--,
-						ReproductionId = reproduction.Id,
-						SeatId = theaterSeat.Id
-					});
+						tickets.Add(new Ticket()
+						{
+							Id=id--,
+							ReproductionId = reproduction.Id,
+							SeatId = theaterSeat.Id,
+							Price = reproduction.Price,
+							Confirmed = true
+						});
 					}
 				}
 			}

@@ -11,6 +11,8 @@ namespace Cineplus.Models {
 		public int TheaterId { get; set; }
 		public virtual Theater Theater { get; set; }
 		
+		public double Price { get; set; }
+		
 		public DateTime StartTime { get; set; }
 
 		[JsonIgnore]

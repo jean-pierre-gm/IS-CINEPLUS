@@ -15,14 +15,14 @@
       <mat-form-field>
         <mat-label>Select the theater</mat-label>
         <mat-select>
-          <mat-option *ngFor="let theater of theaters" (onSelectionChange)="setNewReproductionTheater($event, theater)" value="{{theater}}">{{theater.id}}: {{theater.rows}}x{{theater.columns}}</mat-option>
+          <mat-option *ngFor="let theater of theaters" [formControl]="theaterFormControl" (onSelectionChange)="setNewReproductionTheater($event, theater)" value="{{theater}}">{{theater.id}}: {{theater.rows}}x{{theater.columns}}</mat-option>
         </mat-select>
       </mat-form-field>
     </p>
     <p>
       <mat-form-field floatLabel="always">
         <mat-label>Price</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="0">
+        <input matInput type="number" class="example-right-align" [formControl]="priceFormControl" placeholder="0">
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
