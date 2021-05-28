@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
@@ -23,6 +24,13 @@ namespace Cineplus.Controllers {
 		[HttpGet("{id:int}")]
 		public ActionResult<Movie> GetMovie(int id) {
 			return _movieService.Get(id);
+		}
+
+		[HttpGet]
+		[Route("all")]
+		public ActionResult<IEnumerable<Movie>> AllMovies()
+		{
+			return new ActionResult<IEnumerable<Movie>>(_movieService.GetAll());
 		}
 
 		[HttpPost]

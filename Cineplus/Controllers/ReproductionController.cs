@@ -34,8 +34,10 @@ namespace Cineplus.Controllers {
 		[HttpPost]
 		public ActionResult<Reproduction> PostReproduction([FromBody] Reproduction reproduction)
 		{
-			_reproductionService.Add(reproduction);
-			return reproduction;
+			reproduction = _reproductionService.Add(reproduction);
+			if(reproduction is not null)
+				return reproduction;
+			return BadRequest("Invalid start time");
 		}
 
 		[HttpDelete("{id:int}")]

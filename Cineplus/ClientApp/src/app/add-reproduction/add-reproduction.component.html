@@ -1,0 +1,35 @@
+<mat-divider></mat-divider>
+<h2>Create Movie</h2>
+<mat-card>
+  <ng-form>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newReproduction.id" matInput [formControl]="idFormControl" [errorStateMatcher]="matcher" placeholder="Id"/>
+        <mat-error *ngIf="idFormControl.hasError('required')">
+          Id of reproduction is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input [(ngModel)]="newReproduction.startTime" [formControl]="dateTimeFormControl" [errorStateMatcher]="matcher" type="datetime-local" matInput placeholder="Start time"/>
+        <mat-error *ngIf="dateTimeFormControl.hasError('required')">
+          Date and time of reproduction is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <p class="mat-form-field-flex">
+      <mat-select [formControl]="movieFormControl" [errorStateMatcher]="matcher" placeholder="Movie">
+        <mat-option *ngFor="let movie of movies" (onSelectionChange)="setNewReproductionMovie($event, movie)" value="{{movie}}">{{movie.movieName}}</mat-option>
+      </mat-select>
+    </p>
+    <p class="mat-form-field-flex">
+      <mat-select [formControl]="idFormControl" [errorStateMatcher]="matcher" placeholder="Theater">
+        <mat-option *ngFor="let theater of theaters" (onSelectionChange)="setNewReproductionTheater($event, theater)" value="{{theater}}">{{theater.id}}</mat-option>
+      </mat-select>
+    </p>
+  </ng-form>
+
+  <button mat-raised-button (click)="AddReproduction()">Submit</button>
+</mat-card>
+

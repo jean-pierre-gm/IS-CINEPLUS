@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
@@ -37,7 +38,19 @@ namespace Cineplus.Services {
 		}
 
 		public Reproduction Add(Reproduction entity) {
-			if (entity.Movie != null) {
+			bool mark = false;
+			if (entity.Movie != null)
+			{
+				mark = true;
+				int peek = _repository.Data().Include(
+						reproduction => reproduction.Movie)
+							.Count(reproduction => reproduction.TheaterId == entity.TheaterId &&
+							                       (reproduction.StartTime.AddMinutes(reproduction.Movie.Duration) > entity.StartTime &&
+												    entity.StartTime > reproduction.StartTime) || 
+							                       (reproduction.StartTime > entity.StartTime &&
+													entity.StartTime.AddMinutes(entity.Movie.Duration) > reproduction.StartTime));
+				if (peek != 0)
+					return null;
 				entity.MovieId = entity.Movie.Id;
 				entity.Movie = null;
 			}
@@ -46,7 +59,19 @@ namespace Cineplus.Services {
 				entity.TheaterId = entity.Theater.Id;
 				entity.Theater = null;
 			}
-			
+
+			if (!mark)
+			{
+				int check = _repository.Data().Include(
+						reproduction => reproduction.Movie)
+					.Count(reproduction => reproduction.TheaterId == entity.TheaterId &&
+					                       reproduction.StartTime.AddMinutes(reproduction.Movie.Duration) >
+					                       entity.StartTime &&
+					                       entity.StartTime > reproduction.StartTime);
+				if (check != 0)
+					return null;
+			}
+
 			return _repository.Add(entity);
 		}
 

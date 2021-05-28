@@ -24,6 +24,11 @@ namespace Cineplus.Services {
 			);
 		}
 
+		public IEnumerable<Movie> GetAll()
+		{
+			return _movieRepository.Data().AsEnumerable();
+		}
+
 		public Movie Add(Movie entity) {
 			if (entity.Genre != null) {
 				entity.GenreId = entity.Genre.Id;
