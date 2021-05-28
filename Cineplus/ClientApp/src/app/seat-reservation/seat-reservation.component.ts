@@ -73,7 +73,7 @@ export class SeatReservationComponent implements OnInit {
     let i =Math.floor(Math.random() * (this.tickets.length-1));
     let t:Ticket = this.tickets[i]
     let elm = document.getElementById(t.id.toString())
-    elm.checked = true
+    //elm.checked = true
     this.checked.push(elm)
   }
 
@@ -93,7 +93,7 @@ export class SeatReservationComponent implements OnInit {
       tmp.push(t)
       this.tickets.splice(i,1)
       let elm = document.getElementById(t.id.toString())
-      elm.checked = true
+      //elm.checked = true
       this.checked.push(elm)
     }
     this.tickets= this.tickets.concat(tmp)
