@@ -83,7 +83,7 @@ export class SeatReservationComponent implements OnInit {
     }
     let offset: number = this.ticketsFormControl.value - this.checked.length
     let validSeats = Array.from(document.getElementById("seats").querySelectorAll("input")).filter(it => {
-      return it.id != "0"
+      return it.id != "0" && it.checked == false
     })
     if (offset > 0) {
       for (let j = 0; j < offset; j++) {
