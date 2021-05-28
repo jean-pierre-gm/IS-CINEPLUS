@@ -69,13 +69,6 @@ export class SeatReservationComponent implements OnInit {
     return value;
   }
 
-  onLoad(){
-    let i =Math.floor(Math.random() * (this.tickets.length-1));
-    let t:Ticket = this.tickets[i]
-    let elm = <any>document.getElementById(t.id.toString())
-    elm.checked = true
-    this.checked.push(elm)
-  }
 
   onChange(){
     let tmp:Ticket[] = [];
