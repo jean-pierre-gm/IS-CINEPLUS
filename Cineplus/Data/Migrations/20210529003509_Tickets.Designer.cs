@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cineplus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210528182752_Forgotten")]
-    partial class Forgotten
+    [Migration("20210529003509_Tickets")]
+    partial class Tickets
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,6 +186,9 @@ namespace Cineplus.Data.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("TEXT");
 
@@ -205,35 +208,40 @@ namespace Cineplus.Data.Migrations
                         {
                             Id = -1,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 28, 14, 27, 51, 295, DateTimeKind.Local).AddTicks(9158),
+                            Price = 10.0,
+                            StartTime = new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -1
                         },
                         new
                         {
                             Id = -2,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 28, 14, 27, 51, 300, DateTimeKind.Local).AddTicks(9018),
+                            Price = 12.0,
+                            StartTime = new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -1
                         },
                         new
                         {
                             Id = -3,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 28, 14, 27, 51, 300, DateTimeKind.Local).AddTicks(9077),
+                            Price = 9.0,
+                            StartTime = new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -2
                         },
                         new
                         {
                             Id = -4,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 28, 14, 27, 51, 300, DateTimeKind.Local).AddTicks(9086),
+                            Price = 8.0,
+                            StartTime = new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -3
                         },
                         new
                         {
                             Id = -5,
                             MovieId = -1,
-                            StartTime = new DateTime(2021, 5, 28, 14, 27, 51, 300, DateTimeKind.Local).AddTicks(9092),
+                            Price = 14.0,
+                            StartTime = new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -3
                         });
                 });
@@ -2230,6 +2238,12 @@ namespace Cineplus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
                     b.Property<int>("ReproductionId")
                         .HasColumnType("INTEGER");
 
@@ -2253,1746 +2267,2328 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -1,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -1
                         },
                         new
                         {
                             Id = -2,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -3
                         },
                         new
                         {
                             Id = -3,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -7
                         },
                         new
                         {
                             Id = -4,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -8
                         },
                         new
                         {
                             Id = -5,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -9
                         },
                         new
                         {
                             Id = -6,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -10
                         },
                         new
                         {
                             Id = -7,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -11
                         },
                         new
                         {
                             Id = -8,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -12
                         },
                         new
                         {
                             Id = -9,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -16
                         },
                         new
                         {
                             Id = -10,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -17
                         },
                         new
                         {
                             Id = -11,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -18
                         },
                         new
                         {
                             Id = -12,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -19
                         },
                         new
                         {
                             Id = -13,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -21
                         },
                         new
                         {
                             Id = -14,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -23
                         },
                         new
                         {
                             Id = -15,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -24
                         },
                         new
                         {
                             Id = -16,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -26
                         },
                         new
                         {
                             Id = -17,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -27
                         },
                         new
                         {
                             Id = -18,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -31
                         },
                         new
                         {
                             Id = -19,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -35
                         },
                         new
                         {
                             Id = -20,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -36
                         },
                         new
                         {
                             Id = -21,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -37
                         },
                         new
                         {
                             Id = -22,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -39
                         },
                         new
                         {
                             Id = -23,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -40
                         },
                         new
                         {
                             Id = -24,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -41
                         },
                         new
                         {
                             Id = -25,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -42
                         },
                         new
                         {
                             Id = -26,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -43
                         },
                         new
                         {
                             Id = -27,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -45
                         },
                         new
                         {
                             Id = -28,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -46
                         },
                         new
                         {
                             Id = -29,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -48
                         },
                         new
                         {
                             Id = -30,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -49
                         },
                         new
                         {
                             Id = -31,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -50
                         },
                         new
                         {
                             Id = -32,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -51
                         },
                         new
                         {
                             Id = -33,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -52
                         },
                         new
                         {
                             Id = -34,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -53
                         },
                         new
                         {
                             Id = -35,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -54
                         },
                         new
                         {
                             Id = -36,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -57
                         },
                         new
                         {
                             Id = -37,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -58
                         },
                         new
                         {
                             Id = -38,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -59
                         },
                         new
                         {
                             Id = -39,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -60
                         },
                         new
                         {
                             Id = -40,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -61
                         },
                         new
                         {
                             Id = -41,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -62
                         },
                         new
                         {
                             Id = -42,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -63
                         },
                         new
                         {
                             Id = -43,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -64
                         },
                         new
                         {
                             Id = -44,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -65
                         },
                         new
                         {
                             Id = -45,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -66
                         },
                         new
                         {
                             Id = -46,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -67
                         },
                         new
                         {
                             Id = -47,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -68
                         },
                         new
                         {
                             Id = -48,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -69
                         },
                         new
                         {
                             Id = -49,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -70
                         },
                         new
                         {
                             Id = -50,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -71
                         },
                         new
                         {
                             Id = -51,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -73
                         },
                         new
                         {
                             Id = -52,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -76
                         },
                         new
                         {
                             Id = -53,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -77
                         },
                         new
                         {
                             Id = -54,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -78
                         },
                         new
                         {
                             Id = -55,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -80
                         },
                         new
                         {
                             Id = -56,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -81
                         },
                         new
                         {
                             Id = -57,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -82
                         },
                         new
                         {
                             Id = -58,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -83
                         },
                         new
                         {
                             Id = -59,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -84
                         },
                         new
                         {
                             Id = -60,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -85
                         },
                         new
                         {
                             Id = -61,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -87
                         },
                         new
                         {
                             Id = -62,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -90
                         },
                         new
                         {
                             Id = -63,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -91
                         },
                         new
                         {
                             Id = -64,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -93
                         },
                         new
                         {
                             Id = -65,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -94
                         },
                         new
                         {
                             Id = -66,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -95
                         },
                         new
                         {
                             Id = -67,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -96
                         },
                         new
                         {
                             Id = -68,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -98
                         },
                         new
                         {
                             Id = -69,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -100
                         },
                         new
                         {
                             Id = -70,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -101
                         },
                         new
                         {
                             Id = -71,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -103
                         },
                         new
                         {
                             Id = -72,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -104
                         },
                         new
                         {
                             Id = -73,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -105
                         },
                         new
                         {
                             Id = -74,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -106
                         },
                         new
                         {
                             Id = -75,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -107
                         },
                         new
                         {
                             Id = -76,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -108
                         },
                         new
                         {
                             Id = -77,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -109
                         },
                         new
                         {
                             Id = -78,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -117
                         },
                         new
                         {
                             Id = -79,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -118
                         },
                         new
                         {
                             Id = -80,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -120
                         },
                         new
                         {
                             Id = -81,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -121
                         },
                         new
                         {
                             Id = -82,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -122
                         },
                         new
                         {
                             Id = -83,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -123
                         },
                         new
                         {
                             Id = -84,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -124
                         },
                         new
                         {
                             Id = -85,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -125
                         },
                         new
                         {
                             Id = -86,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -126
                         },
                         new
                         {
                             Id = -87,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -127
                         },
                         new
                         {
                             Id = -88,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -128
                         },
                         new
                         {
                             Id = -89,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -129
                         },
                         new
                         {
                             Id = -90,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -130
                         },
                         new
                         {
                             Id = -91,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -131
                         },
                         new
                         {
                             Id = -92,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -132
                         },
                         new
                         {
                             Id = -93,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -134
                         },
                         new
                         {
                             Id = -94,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -138
                         },
                         new
                         {
                             Id = -95,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -139
                         },
                         new
                         {
                             Id = -96,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -140
                         },
                         new
                         {
                             Id = -97,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -143
                         },
                         new
                         {
                             Id = -98,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -144
                         },
                         new
                         {
                             Id = -99,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -146
                         },
                         new
                         {
                             Id = -100,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -147
                         },
                         new
                         {
                             Id = -101,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -148
                         },
                         new
                         {
                             Id = -102,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -149
                         },
                         new
                         {
                             Id = -103,
+                            Confirmed = true,
+                            Price = 10.0,
                             ReproductionId = -1,
                             SeatId = -150
                         },
                         new
                         {
                             Id = -104,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -1
                         },
                         new
                         {
                             Id = -105,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -2
                         },
                         new
                         {
                             Id = -106,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -3
                         },
                         new
                         {
                             Id = -107,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -4
                         },
                         new
                         {
                             Id = -108,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -5
                         },
                         new
                         {
                             Id = -109,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -7
                         },
                         new
                         {
                             Id = -110,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -8
                         },
                         new
                         {
                             Id = -111,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -9
                         },
                         new
                         {
                             Id = -112,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -11
                         },
                         new
                         {
                             Id = -113,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -14
                         },
                         new
                         {
                             Id = -114,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -15
                         },
                         new
                         {
                             Id = -115,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -16
                         },
                         new
                         {
                             Id = -116,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -18
                         },
                         new
                         {
                             Id = -117,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -19
                         },
                         new
                         {
                             Id = -118,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -22
                         },
                         new
                         {
                             Id = -119,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -26
                         },
                         new
                         {
                             Id = -120,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -27
                         },
                         new
                         {
                             Id = -121,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -28
                         },
                         new
                         {
                             Id = -122,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -29
                         },
                         new
                         {
                             Id = -123,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -31
                         },
                         new
                         {
                             Id = -124,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -34
                         },
                         new
                         {
                             Id = -125,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -35
                         },
                         new
                         {
                             Id = -126,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -36
                         },
                         new
                         {
                             Id = -127,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -38
                         },
                         new
                         {
                             Id = -128,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -39
                         },
                         new
                         {
                             Id = -129,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -40
                         },
                         new
                         {
                             Id = -130,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -42
                         },
                         new
                         {
                             Id = -131,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -44
                         },
                         new
                         {
                             Id = -132,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -46
                         },
                         new
                         {
                             Id = -133,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -47
                         },
                         new
                         {
                             Id = -134,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -48
                         },
                         new
                         {
                             Id = -135,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -50
                         },
                         new
                         {
                             Id = -136,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -51
                         },
                         new
                         {
                             Id = -137,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -53
                         },
                         new
                         {
                             Id = -138,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -54
                         },
                         new
                         {
                             Id = -139,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -55
                         },
                         new
                         {
                             Id = -140,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -56
                         },
                         new
                         {
                             Id = -141,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -57
                         },
                         new
                         {
                             Id = -142,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -58
                         },
                         new
                         {
                             Id = -143,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -59
                         },
                         new
                         {
                             Id = -144,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -61
                         },
                         new
                         {
                             Id = -145,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -63
                         },
                         new
                         {
                             Id = -146,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -64
                         },
                         new
                         {
                             Id = -147,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -69
                         },
                         new
                         {
                             Id = -148,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -70
                         },
                         new
                         {
                             Id = -149,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -72
                         },
                         new
                         {
                             Id = -150,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -73
                         },
                         new
                         {
                             Id = -151,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -75
                         },
                         new
                         {
                             Id = -152,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -76
                         },
                         new
                         {
                             Id = -153,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -77
                         },
                         new
                         {
                             Id = -154,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -79
                         },
                         new
                         {
                             Id = -155,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -81
                         },
                         new
                         {
                             Id = -156,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -83
                         },
                         new
                         {
                             Id = -157,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -85
                         },
                         new
                         {
                             Id = -158,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -86
                         },
                         new
                         {
                             Id = -159,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -87
                         },
                         new
                         {
                             Id = -160,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -88
                         },
                         new
                         {
                             Id = -161,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -89
                         },
                         new
                         {
                             Id = -162,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -91
                         },
                         new
                         {
                             Id = -163,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -92
                         },
                         new
                         {
                             Id = -164,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -93
                         },
                         new
                         {
                             Id = -165,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -96
                         },
                         new
                         {
                             Id = -166,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -97
                         },
                         new
                         {
                             Id = -167,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -98
                         },
                         new
                         {
                             Id = -168,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -99
                         },
                         new
                         {
                             Id = -169,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -100
                         },
                         new
                         {
                             Id = -170,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -101
                         },
                         new
                         {
                             Id = -171,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -102
                         },
                         new
                         {
                             Id = -172,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -103
                         },
                         new
                         {
                             Id = -173,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -105
                         },
                         new
                         {
                             Id = -174,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -106
                         },
                         new
                         {
                             Id = -175,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -107
                         },
                         new
                         {
                             Id = -176,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -109
                         },
                         new
                         {
                             Id = -177,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -110
                         },
                         new
                         {
                             Id = -178,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -113
                         },
                         new
                         {
                             Id = -179,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -117
                         },
                         new
                         {
                             Id = -180,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -118
                         },
                         new
                         {
                             Id = -181,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -119
                         },
                         new
                         {
                             Id = -182,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -120
                         },
                         new
                         {
                             Id = -183,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -122
                         },
                         new
                         {
                             Id = -184,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -123
                         },
                         new
                         {
                             Id = -185,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -124
                         },
                         new
                         {
                             Id = -186,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -126
                         },
                         new
                         {
                             Id = -187,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -127
                         },
                         new
                         {
                             Id = -188,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -129
                         },
                         new
                         {
                             Id = -189,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -130
                         },
                         new
                         {
                             Id = -190,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -131
                         },
                         new
                         {
                             Id = -191,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -133
                         },
                         new
                         {
                             Id = -192,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -134
                         },
                         new
                         {
                             Id = -193,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -135
                         },
                         new
                         {
                             Id = -194,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -137
                         },
                         new
                         {
                             Id = -195,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -139
                         },
                         new
                         {
                             Id = -196,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -140
                         },
                         new
                         {
                             Id = -197,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -141
                         },
                         new
                         {
                             Id = -198,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -142
                         },
                         new
                         {
                             Id = -199,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -143
                         },
                         new
                         {
                             Id = -200,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -144
                         },
                         new
                         {
                             Id = -201,
+                            Confirmed = true,
+                            Price = 12.0,
                             ReproductionId = -2,
                             SeatId = -148
                         },
                         new
                         {
                             Id = -202,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -152
                         },
                         new
                         {
                             Id = -203,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -153
                         },
                         new
                         {
                             Id = -204,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -154
                         },
                         new
                         {
                             Id = -205,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -155
                         },
                         new
                         {
                             Id = -206,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -156
                         },
                         new
                         {
                             Id = -207,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -158
                         },
                         new
                         {
                             Id = -208,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -159
                         },
                         new
                         {
                             Id = -209,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -160
                         },
                         new
                         {
                             Id = -210,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -161
                         },
                         new
                         {
                             Id = -211,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -162
                         },
                         new
                         {
                             Id = -212,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -163
                         },
                         new
                         {
                             Id = -213,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -164
                         },
                         new
                         {
                             Id = -214,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -166
                         },
                         new
                         {
                             Id = -215,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -167
                         },
                         new
                         {
                             Id = -216,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -168
                         },
                         new
                         {
                             Id = -217,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -169
                         },
                         new
                         {
                             Id = -218,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -171
                         },
                         new
                         {
                             Id = -219,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -172
                         },
                         new
                         {
                             Id = -220,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -175
                         },
                         new
                         {
                             Id = -221,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -176
                         },
                         new
                         {
                             Id = -222,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -179
                         },
                         new
                         {
                             Id = -223,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -184
                         },
                         new
                         {
                             Id = -224,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -185
                         },
                         new
                         {
                             Id = -225,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -186
                         },
                         new
                         {
                             Id = -226,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -187
                         },
                         new
                         {
                             Id = -227,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -190
                         },
                         new
                         {
                             Id = -228,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -191
                         },
                         new
                         {
                             Id = -229,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -192
                         },
                         new
                         {
                             Id = -230,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -194
                         },
                         new
                         {
                             Id = -231,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -199
                         },
                         new
                         {
                             Id = -232,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -201
                         },
                         new
                         {
                             Id = -233,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -202
                         },
                         new
                         {
                             Id = -234,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -203
                         },
                         new
                         {
                             Id = -235,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -204
                         },
                         new
                         {
                             Id = -236,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -205
                         },
                         new
                         {
                             Id = -237,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -206
                         },
                         new
                         {
                             Id = -238,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -207
                         },
                         new
                         {
                             Id = -239,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -208
                         },
                         new
                         {
                             Id = -240,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -209
                         },
                         new
                         {
                             Id = -241,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -210
                         },
                         new
                         {
                             Id = -242,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -211
                         },
                         new
                         {
                             Id = -243,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -214
                         },
                         new
                         {
                             Id = -244,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -215
                         },
                         new
                         {
                             Id = -245,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -216
                         },
                         new
                         {
                             Id = -246,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -217
                         },
                         new
                         {
                             Id = -247,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -218
                         },
                         new
                         {
                             Id = -248,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -219
                         },
                         new
                         {
                             Id = -249,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -221
                         },
                         new
                         {
                             Id = -250,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -222
                         },
                         new
                         {
                             Id = -251,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -224
                         },
                         new
                         {
                             Id = -252,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -228
                         },
                         new
                         {
                             Id = -253,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -229
                         },
                         new
                         {
                             Id = -254,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -230
                         },
                         new
                         {
                             Id = -255,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -231
                         },
                         new
                         {
                             Id = -256,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -232
                         },
                         new
                         {
                             Id = -257,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -233
                         },
                         new
                         {
                             Id = -258,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -234
                         },
                         new
                         {
                             Id = -259,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -235
                         },
                         new
                         {
                             Id = -260,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -236
                         },
                         new
                         {
                             Id = -261,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -237
                         },
                         new
                         {
                             Id = -262,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -240
                         },
                         new
                         {
                             Id = -263,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -242
                         },
                         new
                         {
                             Id = -264,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -246
                         },
                         new
                         {
                             Id = -265,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -247
                         },
                         new
                         {
                             Id = -266,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -248
                         },
                         new
                         {
                             Id = -267,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -249
                         },
                         new
                         {
                             Id = -268,
+                            Confirmed = true,
+                            Price = 9.0,
                             ReproductionId = -3,
                             SeatId = -250
                         },
                         new
                         {
                             Id = -269,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -251
                         },
                         new
                         {
                             Id = -270,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -257
                         },
                         new
                         {
                             Id = -271,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -259
                         },
                         new
                         {
                             Id = -272,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -263
                         },
                         new
                         {
                             Id = -273,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -264
                         },
                         new
                         {
                             Id = -274,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -265
                         },
                         new
                         {
                             Id = -275,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -266
                         },
                         new
                         {
                             Id = -276,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -268
                         },
                         new
                         {
                             Id = -277,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -272
                         },
                         new
                         {
                             Id = -278,
+                            Confirmed = true,
+                            Price = 8.0,
                             ReproductionId = -4,
                             SeatId = -273
                         },
                         new
                         {
                             Id = -279,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -251
                         },
                         new
                         {
                             Id = -280,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -253
                         },
                         new
                         {
                             Id = -281,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -256
                         },
                         new
                         {
                             Id = -282,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -257
                         },
                         new
                         {
                             Id = -283,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -258
                         },
                         new
                         {
                             Id = -284,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -259
                         },
                         new
                         {
                             Id = -285,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -262
                         },
                         new
                         {
                             Id = -286,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -263
                         },
                         new
                         {
                             Id = -287,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -268
                         },
                         new
                         {
                             Id = -288,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -269
                         },
                         new
                         {
                             Id = -289,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -270
                         },
                         new
                         {
                             Id = -290,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -274
                         },
                         new
                         {
                             Id = -291,
+                            Confirmed = true,
+                            Price = 14.0,
                             ReproductionId = -5,
                             SeatId = -275
                         });

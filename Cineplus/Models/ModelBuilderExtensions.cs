@@ -107,7 +107,7 @@ namespace Cineplus.Models {
 				{
 					Id = -1,
 					MovieId = -1,
-					StartTime = DateTime.Now,
+					StartTime = new DateTime(2021, 6, 6, 18, 0, 0),
 					TheaterId = -1,
 					Price = 10
 				},
@@ -115,7 +115,7 @@ namespace Cineplus.Models {
 				{
 					Id = -2,
 					MovieId = -1,
-					StartTime = DateTime.Now,
+					StartTime = new DateTime(2021, 6, 6, 22, 0, 0),
 					TheaterId = -1,
 					Price = 12
 				},
@@ -123,7 +123,7 @@ namespace Cineplus.Models {
 				{
 					Id = -3,
 					MovieId = -1,
-					StartTime = DateTime.Now,
+					StartTime = new DateTime(2021, 6, 6, 18, 0, 0),
 					TheaterId = -2,
 					Price = 9
 				},
@@ -131,7 +131,7 @@ namespace Cineplus.Models {
 				{
 					Id = -4,
 					MovieId = -1,
-					StartTime = DateTime.Now,
+					StartTime = new DateTime(2021, 6, 6, 18, 0, 0),
 					TheaterId = -3,
 					Price = 8
 				},
@@ -139,7 +139,7 @@ namespace Cineplus.Models {
 				{
 					Id = -5,
 					MovieId = -1,
-					StartTime = DateTime.Now,
+					StartTime = new DateTime(2021, 6, 6, 22, 0, 0),
 					TheaterId = -3,
 					Price = 14
 				},
