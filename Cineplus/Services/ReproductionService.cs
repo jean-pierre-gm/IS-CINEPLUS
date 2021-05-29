@@ -39,6 +39,12 @@ namespace Cineplus.Services {
 
 		public Reproduction Add(Reproduction entity) {
 			bool mark = false;
+			
+			if (entity.Theater != null) {
+				entity.TheaterId = entity.Theater.Id;
+				entity.Theater = null;
+			}
+			
 			if (entity.Movie != null)
 			{
 				mark = true;
@@ -53,11 +59,6 @@ namespace Cineplus.Services {
 					return null;
 				entity.MovieId = entity.Movie.Id;
 				entity.Movie = null;
-			}
-
-			if (entity.Theater != null) {
-				entity.TheaterId = entity.Theater.Id;
-				entity.Theater = null;
 			}
 
 			if (!mark)

@@ -7,4 +7,5 @@ export class Reproduction{
   theaterId: number;
   theater: Theater;
   startTime: Date;
+  price: number;
 }

@@ -32,8 +32,8 @@ import {MovieReproductionComponent} from "./movie-reproduction/movie-reproductio
 import {MatSortModule} from "@angular/material/sort";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
-import {AddReproductionComponent} from "./add-reproduction/add-reproduction.component";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -48,13 +48,13 @@ import {MatGridListModule} from "@angular/material/grid-list";
     RoleUsersComponent,
     SeatReservationComponent,
     MovieReproductionComponent,
-    AddReproductionComponent
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
         HttpClientModule,
         FormsModule,
         ApiAuthorizationModule,
+        MatSnackBarModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent, pathMatch: 'full'},
             {path: 'counter', component: CounterComponent},
@@ -83,12 +83,6 @@ import {MatGridListModule} from "@angular/material/grid-list";
             {
                 path: 'reserve',
                 component: SeatReservationComponent
-            },
-            {
-                path: 'reproduction/add',
-                component: AddReproductionComponent,
-                //  canActivate: [AuthorizeGuard],
-                //  data: {permittedRoles: ["Admin", "Manager"]}
             }
         ]),
         BrowserAnimationsModule,
