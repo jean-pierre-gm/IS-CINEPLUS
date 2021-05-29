@@ -20,7 +20,7 @@ export class MovieReproductionComponent implements OnInit {
 
   reproductionData: CineplusDataSource<Reproduction>
   movie: Movie
-  displayedColumns: string[] = ['theaterId', 'startTime', 'availSeats'];
+  displayedColumns: string[] = ['theaterId', 'startTime', 'price', 'availSeats'];
 
   dateTimeFormControl = new FormControl('', [Validators.required])
   priceFormControl = new FormControl('', [Validators.required, Validators.min(0)])
