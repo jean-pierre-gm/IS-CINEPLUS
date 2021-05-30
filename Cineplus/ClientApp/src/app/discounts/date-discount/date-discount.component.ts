@@ -6,7 +6,6 @@ import {ActivatedRoute} from "@angular/router";
 import {DataSourceConf} from "../../../models/dataSourceConf";
 import {isDate, isNumeric} from "rxjs/internal-compatibility";
 
-
 @Component({
   selector: 'app-date-discount',
   templateUrl: './date-discount.component.html',
@@ -15,9 +14,8 @@ import {isDate, isNumeric} from "rxjs/internal-compatibility";
 export class DateDiscountComponent implements OnInit, OnDestroy {
 
   discountsDataSource: CineplusDataSource<DateDiscount>;
-  displayedColumns: string[] = ['description', 'discount', 'date'];
-  displayedElements: string[] = ['description', 'discount', 'date', 'modify', 'delete']
   newDateDiscount : DateDiscount;
+  modify: boolean[];
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
@@ -28,6 +26,7 @@ export class DateDiscountComponent implements OnInit, OnDestroy {
     this.discountsDataSource = new CineplusDataSource<DateDiscount>(http, dsConf);
     this.discountsDataSource.refresh()
 
+    this.modify = new Array(100)
     this.newDateDiscount = new DateDiscount();
   }
 
@@ -41,6 +40,15 @@ export class DateDiscountComponent implements OnInit, OnDestroy {
 
   }
 
+  changeEnables(i) {
+    this.modify[i] = !this.modify[i];
+  }
+
+  resetNewDiscount()
+  {
+    this.newDateDiscount = new DateDiscount();
+  }
+
   addDiscount($event: MouseEvent) {
     console.log($event)
 
@@ -52,7 +60,25 @@ export class DateDiscountComponent implements OnInit, OnDestroy {
             this.discountsDataSource.refresh();
           }
         );
+
+      this.newDateDiscount = new DateDiscount();
     }
+  }
+
+  editDiscount($event: MouseEvent, discount, index) {
+    console.log($event)
+
+    if(discount.description != "" && isDate(new Date(discount.date)) &&
+      isNumeric(discount.discount))
+    {
+      this.http.post(this.baseUrl + 'api/datediscount', discount).toPromise()
+        .then(response => {
+            this.discountsDataSource.refresh();
+          }
+        );
+    }
+
+    this.changeEnables(index)
   }
 
   deleteDiscount($event: MouseEvent, dateDiscountId) {
@@ -65,47 +91,10 @@ export class DateDiscountComponent implements OnInit, OnDestroy {
       );
   }
 
-  enableModify($event: MouseEvent, elementId) {
-    let list = [document.getElementById('Ldescription' + elementId),
-                document.getElementById('Idescription' + elementId),
-                document.getElementById('Ldiscount' + elementId),
-                document.getElementById('Idiscount' + elementId),
-                document.getElementById('Ldate' + elementId),
-                document.getElementById('Idate' + elementId),
-                document.getElementById('M' + elementId),
-                document.getElementById('U' + elementId)]
-
-    for (let i = 0; i < 8; i++) {
-      list[i].hidden = !list[i].hidden;
-    }
-  }
-
-  editDiscount($event: MouseEvent, discount) {
-    console.log($event)
-
-    if(this.newDateDiscount.description != "" && isDate(new Date(this.newDateDiscount.date)) &&
-      isNumeric(this.newDateDiscount.discount))
-    {
-      this.http.post(this.baseUrl + 'api/datediscount', discount).toPromise()
-        .then(response => {
-            this.discountsDataSource.refresh();
-          }
-        );
-    }
-
-    this.enableModify($event, discount.id)
-  }
-
-  resetNewDiscount($event: MouseEvent)
-  {
-    console.log($event)
-    this.newDateDiscount = new DateDiscount();
-  }
-
   editPagination($event) {
     console.log($event)
     this.discountsDataSource.currentPagination.pageSize = $event.pageSize;
     this.discountsDataSource.setPage($event.pageIndex + 1);
+    this.modify = new Array(100)
   }
-
 }

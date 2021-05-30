@@ -30,6 +30,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DateDiscountComponent} from "./discounts/date-discount/date-discount.component";
 import {DiscountsComponent} from "./discounts/discounts.component";
 import {MatSortModule} from "@angular/material/sort";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -45,58 +47,60 @@ import {MatSortModule} from "@angular/material/sort";
     DateDiscountComponent,
     DiscountsComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
-      {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-      {
-        path: 'api-test', component: ApiTestComponent,
-        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
-      },
-      {path: 'forbidden', component: ForbiddenComponent},
-      {
-        path: 'role-list',
-        component: RoleListComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'role-users',
-        component: RoleUsersComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'discounts',
-        component: DiscountsComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'date-discount',
-        component: DateDiscountComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      }
-    ]),
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatTableModule,
-    FontAwesomeModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatCheckboxModule,
-    MatSortModule
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        ApiAuthorizationModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'counter', component: CounterComponent},
+            {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+            {
+                path: 'api-test', component: ApiTestComponent,
+                canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+            },
+            {path: 'forbidden', component: ForbiddenComponent},
+            {
+                path: 'role-list',
+                component: RoleListComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'role-users',
+                component: RoleUsersComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'discounts',
+                component: DiscountsComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'date-discount',
+                component: DateDiscountComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            }
+        ]),
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatTableModule,
+        FontAwesomeModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatCheckboxModule,
+        MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
