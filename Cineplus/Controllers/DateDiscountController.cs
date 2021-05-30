@@ -21,9 +21,8 @@ namespace Cineplus.Controllers {
 
         [HttpPost]
         public ActionResult<DateDiscount> PostDateDiscount([FromBody]DateDiscount dateDiscount) {
-            if(_dateDiscountService.Get(dateDiscount.Id) is null)
+            if(_dateDiscountService.Get(dateDiscount.Id, false) is null)
                 _dateDiscountService.Add(dateDiscount);
-
             else
                 _dateDiscountService.Update(dateDiscount);
 
