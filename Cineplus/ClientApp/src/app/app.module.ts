@@ -28,6 +28,8 @@ import {RoleUsersComponent} from "./role/role-users/role-users.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DateDiscountComponent} from "./discounts/date-discount/date-discount.component";
+import {DiscountsComponent} from "./discounts/discounts.component";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import {DateDiscountComponent} from "./discounts/date-discount/date-discount.com
     ForbiddenComponent,
     RoleListComponent,
     RoleUsersComponent,
-    DateDiscountComponent
+    DateDiscountComponent,
+    DiscountsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -69,6 +72,12 @@ import {DateDiscountComponent} from "./discounts/date-discount/date-discount.com
         data: {permittedRoles: ["Admin"]}
       },
       {
+        path: 'discounts',
+        component: DiscountsComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
         path: 'date-discount',
         component: DateDiscountComponent,
         canActivate: [AuthorizeGuard],
@@ -85,7 +94,8 @@ import {DateDiscountComponent} from "./discounts/date-discount/date-discount.com
     FontAwesomeModule,
     MatListModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

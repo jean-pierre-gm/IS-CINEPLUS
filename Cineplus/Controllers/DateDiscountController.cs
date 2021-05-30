@@ -21,8 +21,32 @@ namespace Cineplus.Controllers {
 
         [HttpPost]
         public ActionResult<DateDiscount> PostDateDiscount([FromBody]DateDiscount dateDiscount) {
-            _dateDiscountService.Add(dateDiscount);
+            if(_dateDiscountService.Get(dateDiscount.Id) is null)
+                _dateDiscountService.Add(dateDiscount);
+
+            else
+                _dateDiscountService.Update(dateDiscount);
+
             return new ActionResult<DateDiscount>(dateDiscount);
         }
+        
+        [HttpDelete]
+        public ActionResult<DateDiscount> DeleteDateDiscount([FromQuery]string id)
+        {
+            int Id;
+
+            if (id == null || !int.TryParse(id, out Id)) {
+                return NotFound();
+            }
+
+            var removed = _dateDiscountService.Remove(Id);
+
+            if (removed == null) {
+                return NotFound();
+            }
+
+            return removed;
+        }
+        
     }
 }
