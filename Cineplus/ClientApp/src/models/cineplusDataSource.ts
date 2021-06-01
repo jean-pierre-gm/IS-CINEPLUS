@@ -24,10 +24,9 @@ export class CineplusDataSource<T> {
 
   refresh() {
     this.redoParams();
-    console.log(this.httpParams.toString())
+    console.log('httpParams', this.httpParams.toString())
     this.httpClient.get<Pagination<T>>(this.conf.endPoint + '?' + this.httpParams.toString()).subscribe(result => {
       this.currentPagination = result;
-      console.log(result)
     }, error => console.log(error));
   }
 
