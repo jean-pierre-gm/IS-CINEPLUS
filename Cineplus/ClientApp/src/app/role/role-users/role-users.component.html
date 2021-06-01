@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. cine" #input>
+  <input matInput (keyup)="applyFilter(input.value)" placeholder="Ex. cine" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8" *ngIf="usersDataSource.result">
@@ -30,6 +30,7 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
                  [pageSize]="usersDataSource.currentPagination.pageSize"
                  [length]="usersDataSource.currentPagination.totalItems"
-                 [pageIndex]="usersDataSource.currentPagination.currentPage - 1" (page)="editPagination($event)">
+                 [pageIndex]="usersDataSource.currentPagination.currentPage - 1"
+                 (page)="editPagination($event)">
   </mat-paginator>
 </div>

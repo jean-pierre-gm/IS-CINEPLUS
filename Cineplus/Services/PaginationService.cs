@@ -10,7 +10,7 @@ namespace Cineplus.Services {
 
 		public static Pagination<T> GetPagination<T>(IQueryable<T> query, Pagination<T> pagination) {
 			return GetPagination(query, pagination.CurrentPage, pagination.OrderBy, pagination.OrderByDesc,
-				pagination.PageSize, pagination.FilerBy, pagination.FilerString);
+				pagination.PageSize, pagination.FilterBy, pagination.FilterString);
 		}
 		
 		public static Pagination<T> GetPagination<T>(IQueryable<T> query, int page = 1, string orderBy = null, bool orderByDesc = false,
@@ -25,7 +25,9 @@ namespace Cineplus.Services {
 				CurrentPage = page,
 				OrderBy = orderBy,
 				OrderByDesc = orderByDesc,
-				TotalPages = (int) Math.Ceiling(query.Count() * 1.0 / pageSize)
+				TotalPages = (int) Math.Ceiling(query.Count() * 1.0 / pageSize),
+				FilterBy = filterBy,
+				FilterString = filterString
 			};
 
 			int skip = (page - 1) * pageSize;
@@ -50,7 +52,7 @@ namespace Cineplus.Services {
 					props.FirstOrDefault(n => n.GetCustomAttribute<FilterAttribute>()?.FilterBy == filterBy);
 			
 				if (filterByProperty == null) {
-					throw new Exception($"Field: '{filterBy}' is not sortable");
+					throw new Exception($"Field: '{filterBy}' is not filterable");
 				}
 
 				query = query.Where(filterByProperty.Name + ".Contains(@0)", filterString);
