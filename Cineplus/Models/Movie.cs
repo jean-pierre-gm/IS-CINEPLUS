@@ -8,6 +8,7 @@ namespace Cineplus.Models {
 		[Required]
 		[StringLength(50)]
 		[Sortable(OrderBy = "name")]
+		[Filter(FilterBy = "name")]
 		public string MovieName { get; set; }
 		
 		public float Score { get; set; }

@@ -13,6 +13,10 @@ namespace Cineplus.Models {
 		public string OrderBy { get; set; }
 
 		public bool OrderByDesc { get; set; }
+		
+		public string FilerBy { get; set; }
+		
+		public string FilerString { get; set; }
 
 		public List<T> Result { get; set; }
 	}
