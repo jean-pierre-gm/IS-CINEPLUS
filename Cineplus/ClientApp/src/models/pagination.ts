@@ -5,5 +5,7 @@ export class Pagination<T> {
   orderBy: string;
   totalPages: number;
   orderByDesc: boolean;
+  filterBy: string;
+  filterString: string;
   result: T[];
 }

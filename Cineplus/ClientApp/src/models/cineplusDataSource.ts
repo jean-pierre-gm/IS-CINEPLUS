@@ -53,6 +53,12 @@ export class CineplusDataSource<T> {
     return this.refresh();
   }
 
+  filter(filterBy: string, filterString: string) {
+    this.currentPagination.filterBy = filterBy;
+    this.currentPagination.filterString = filterString;
+    return this.refresh();
+  }
+
   invertOrder() {
     this.currentPagination.orderByDesc = !this.currentPagination.orderByDesc;
     return this.refresh();
@@ -69,6 +75,10 @@ export class CineplusDataSource<T> {
     if (this.currentPagination.orderBy) {
       this.httpParams = this.httpParams.set(this.conf.orderByDescendingField, String(this.currentPagination.orderByDesc));
       this.httpParams = this.httpParams.set(this.conf.orderByField, this.currentPagination.orderBy);
+    }
+    if (this.currentPagination.filterBy) {
+      this.httpParams = this.httpParams.set(this.conf.filterByField, String(this.currentPagination.filterBy))
+      this.httpParams = this.httpParams.set(this.conf.filterStringField, String(this.currentPagination.filterString))
     }
   }
 
