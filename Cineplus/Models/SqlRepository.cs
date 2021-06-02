@@ -15,8 +15,8 @@ namespace Cineplus.Models {
 			_entities = _context.Set<T>();
 		}
 
-		public IQueryable<T> Data() {
-			return _entities;
+		public IQueryable<T> Data(bool tracked = true) {
+			return tracked ? _entities : _entities.AsNoTracking();
 		}
 
 		public T Add(T entity) {

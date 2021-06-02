@@ -10,11 +10,11 @@ namespace Cineplus.Services {
 
 		public static Pagination<T> GetPagination<T>(IQueryable<T> query, Pagination<T> pagination) {
 			return GetPagination(query, pagination.CurrentPage, pagination.OrderBy, pagination.OrderByDesc,
-				pagination.PageSize);
+				pagination.PageSize, pagination.FilterBy, pagination.FilterString);
 		}
 		
 		public static Pagination<T> GetPagination<T>(IQueryable<T> query, int page = 1, string orderBy = null, bool orderByDesc = false,
-			int pageSize = 10) {
+			int pageSize = 10, string filterBy = null, string filterString = "") {
 
 			page = page < 1 ? 1 : page;
 			pageSize = pageSize < 1 ? 10 : pageSize;
@@ -25,31 +25,40 @@ namespace Cineplus.Services {
 				CurrentPage = page,
 				OrderBy = orderBy,
 				OrderByDesc = orderByDesc,
-				TotalPages = (int) Math.Ceiling(query.Count() * 1.0 / pageSize)
+				TotalPages = (int) Math.Ceiling(query.Count() * 1.0 / pageSize),
+				FilterBy = filterBy,
+				FilterString = filterString
 			};
 
 			int skip = (page - 1) * pageSize;
 			var props = typeof(T).GetProperties();
 
-			if (orderBy == null) {
-				pagination.Result = query.Skip(skip)
-					.Take(pageSize)
-					.ToList();
-				
-				return pagination;
+			if (orderBy != null) {
+
+				var orderByProperty =
+					props.FirstOrDefault(n => n.GetCustomAttribute<SortableAttribute>()?.OrderBy == orderBy);
+
+				if (orderByProperty == null) {
+					throw new Exception($"Field: '{orderBy}' is not sortable");
+				}
+
+				var orderStr = orderByDesc ? "descending" : "ascending";
+
+				query = query.OrderBy($"{orderByProperty.Name} {orderStr}");
 			}
+
+			if (!string.IsNullOrEmpty(filterBy) && !string.IsNullOrEmpty(filterString)) {
+				var filterByProperty =
+					props.FirstOrDefault(n => n.GetCustomAttribute<FilterAttribute>()?.FilterBy == filterBy);
 			
-			var orderByProperty =
-				props.FirstOrDefault(n => n.GetCustomAttribute<SortableAttribute>()?.OrderBy == orderBy);
+				if (filterByProperty == null) {
+					throw new Exception($"Field: '{filterBy}' is not filterable");
+				}
 
-			if (orderByProperty == null) {
-				throw new Exception($"Field: '{orderBy}' is not sortable");
+				query = query.Where(filterByProperty.Name + ".Contains(@0)", filterString);
 			}
-
-			var orderStr = orderByDesc ? "descending" : "ascending";
 
 			pagination.Result = query
-				.OrderBy($"{orderByProperty.Name} {orderStr}")
 				.Skip(skip)
 				.Take(pageSize)
 				.ToList();

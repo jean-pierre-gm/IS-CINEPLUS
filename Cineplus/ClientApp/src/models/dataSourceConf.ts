@@ -6,4 +6,6 @@ export class DataSourceConf {
   totalItems: string = 'totalItems';
   orderByField: string = 'orderBy';
   orderByDescendingField: string = 'orderByDesc';
+  filterByField: string = 'filterBy';
+  filterStringField: string = 'filterString';
 }

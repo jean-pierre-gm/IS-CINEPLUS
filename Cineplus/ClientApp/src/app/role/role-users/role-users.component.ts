@@ -44,10 +44,6 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  applyFilter($event: KeyboardEvent) {
-
-  }
-
   editUserRole($event: MatCheckboxChange, roleName, userId) {
     let httpParams = new HttpParams().set('userId', userId);
     this.http.post(this.baseUrl + 'api/role/' + roleName + '?' + httpParams.toString(), {}).toPromise()
@@ -61,5 +57,13 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
     console.log($event)
     this.usersDataSource.currentPagination.pageSize = $event.pageSize;
     this.usersDataSource.setPage($event.pageIndex + 1);
+  }
+
+  applyFilter(input: string) {
+    if (input !== '') {
+      this.usersDataSource.filter('username', input);
+    } else {
+      this.usersDataSource.undoFilters();
+    }
   }
 }

@@ -25,7 +25,7 @@ export class CineplusDataSource<T> {
 
   refresh() {
     this.redoParams();
-    console.log(this.httpParams.toString())
+    console.log('httpParams', this.httpParams.toString())
     this.httpClient.get<Pagination<T>>(this.conf.endPoint + '?' + this.httpParams.toString()).subscribe(result => {
       this.currentPagination = result;
     }, error => console.log(error));
@@ -54,6 +54,22 @@ export class CineplusDataSource<T> {
     return this.refresh();
   }
 
+  filter(filterBy: string, filterString: string) {
+    this.currentPagination.filterBy = filterBy;
+    this.currentPagination.filterString = filterString;
+    return this.refresh();
+  }
+
+  undoFilters() {
+    this.currentPagination.filterBy = null;
+    this.currentPagination.filterString = null;
+    return this.refresh();
+  }
+
+  undoOrder() {
+    this.currentPagination.orderBy = null;
+  }
+
   invertOrder() {
     this.currentPagination.orderByDesc = !this.currentPagination.orderByDesc;
     return this.refresh();
@@ -70,6 +86,16 @@ export class CineplusDataSource<T> {
     if (this.currentPagination.orderBy) {
       this.httpParams = this.httpParams.set(this.conf.orderByDescendingField, String(this.currentPagination.orderByDesc));
       this.httpParams = this.httpParams.set(this.conf.orderByField, this.currentPagination.orderBy);
+    } else {
+      this.httpParams = this.httpParams.delete(this.conf.orderByField);
+      this.httpParams = this.httpParams.delete(this.conf.orderByDescendingField);
+    }
+    if (this.currentPagination.filterBy) {
+      this.httpParams = this.httpParams.set(this.conf.filterByField, String(this.currentPagination.filterBy))
+      this.httpParams = this.httpParams.set(this.conf.filterStringField, String(this.currentPagination.filterString))
+    } else {
+      this.httpParams = this.httpParams.delete(this.conf.filterByField);
+      this.httpParams = this.httpParams.delete(this.conf.filterStringField);
     }
   }
 
