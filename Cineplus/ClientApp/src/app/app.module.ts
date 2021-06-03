@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -27,6 +27,14 @@ import {MatListModule} from "@angular/material/list";
 import {RoleUsersComponent} from "./role/role-users/role-users.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {ManageComponent} from "./manage/manage.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {ManageMoviesComponent} from "./manage/manage-movies/manage-movies.component";
+import {CreateMovieComponent} from "./manage/manage-movies/create-movie/create-movie.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -38,7 +46,10 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ApiTestComponent,
     ForbiddenComponent,
     RoleListComponent,
-    RoleUsersComponent
+    RoleUsersComponent,
+    ManageComponent,
+    ManageMoviesComponent,
+    CreateMovieComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -65,6 +76,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         component: RoleUsersComponent,
         canActivate: [AuthorizeGuard],
         data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'manage',
+        component: ManageComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Manager", "Admin"]}
       }
     ]),
     BrowserAnimationsModule,
@@ -77,11 +94,18 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     FontAwesomeModule,
     MatListModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CreateMovieComponent]
 })
 export class AppModule { }

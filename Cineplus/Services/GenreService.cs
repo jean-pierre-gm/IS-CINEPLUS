@@ -13,8 +13,8 @@ namespace Cineplus.Services {
 			return _repository.Data().FirstOrDefault(genre => genre.Id == id);
 		}
 
-		public IEnumerable<Genre> GetAll() {
-			return _repository.Data().AsEnumerable();
+		public Pagination<Genre> GetAll(Pagination<Genre> pagination) {
+			return PaginationService.GetPagination(_repository.Data(), pagination);
 		}
 
 		public Genre Add(Genre entity) {

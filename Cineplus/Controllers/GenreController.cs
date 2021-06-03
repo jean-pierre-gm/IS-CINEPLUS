@@ -15,8 +15,8 @@ namespace Cineplus.Controllers {
 		}
 		
 		[HttpGet]
-		public ActionResult<IEnumerable<Genre>> Index() {
-			return new ActionResult<IEnumerable<Genre>>(_genreService.GetAll());
+		public ActionResult<Pagination<Genre>> Index([FromQuery] Pagination<Genre> pagination) {
+			return new ActionResult<Pagination<Genre>>(_genreService.GetAll(pagination));
 		}
 
 		[HttpPost]

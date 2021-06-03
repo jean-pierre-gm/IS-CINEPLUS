@@ -12,8 +12,10 @@ namespace Cineplus.Models {
 		[StringLength(50)]
 		public string MovieName { get; set; }
 
+		[Sortable(OrderBy = "score")]
 		public float Score { get; set; }
 
+		[Sortable(OrderBy = "duration")]
 		public int Duration { get; set; }
 
 		public string Director { get; set; }

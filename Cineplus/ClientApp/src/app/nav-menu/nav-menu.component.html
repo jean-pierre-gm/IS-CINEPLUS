@@ -28,13 +28,13 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']"
-              *ngIf="authorizeService.userInRoles(user,['Admin', 'Manager'])">
-            <a class="nav-link text-dark" [routerLink]="['/api-test']"
-            >Api Test</a
+              *ngIf="user && authorizeService.userInRoles(user,['Admin', 'Manager'])">
+            <a class="nav-link text-dark" [routerLink]="['/manage']"
+            >Manage</a
             >
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']"
-              *ngIf="authorizeService.userInRoles(user,['Admin'])">
+              *ngIf="user && authorizeService.userInRoles(user,['Admin'])">
             <a class="nav-link text-dark" [routerLink]="['/role-list']"
             >Roles</a
             >
