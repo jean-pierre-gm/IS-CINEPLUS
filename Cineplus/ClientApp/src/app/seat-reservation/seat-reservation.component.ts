@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {Reproduction} from "../../models/reproduction";
@@ -6,6 +6,31 @@ import {Theater} from "../../models/theater";
 import {Ticket} from "../../models/ticket";
 import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {ErrorStateMatcher} from "@angular/material/core";
+import {MatTableDataSource} from '@angular/material/table';
+
+
+class TicketReserve{
+  constructor(originalPrice:string,finalPrice:string,discount:string,col:number,row:number,htmlSeat:HTMLInputElement) {
+    this.originalPrice = originalPrice
+    this.finalPrice=finalPrice
+    this.discount=discount;
+    this.col=col;
+    this.row=row;
+    this.htmlSeat=htmlSeat;
+  }
+
+  originalPrice:string;
+  finalPrice:string;
+  discount:string;
+  col:number;
+  row:number;
+  htmlSeat:HTMLInputElement;
+
+  getSerializable(){
+    return {"col":this.col,"row":this.row}
+  }
+
+}
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,12 +45,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './seat-reservation.component.html',
   styleUrls: ['./seat-reservation.component.css']
 })
-export class SeatReservationComponent implements OnInit {
+export class SeatReservationComponent implements AfterViewChecked {
+
   reproduction: Reproduction;
   theater: Theater;
   seats: string[][];
   soldTickets: Ticket[];
-  checked = [];
+  marked : TicketReserve[] = [];
+  displayedColumns: string[] = ['seat', 'originalPrice', 'discount','finalPrice'];
+  dataSource = new MatTableDataSource<any>([]);
   ticketsFormControl = new FormControl('', [
     Validators.required,
     Validators.min(1),
@@ -64,24 +92,45 @@ export class SeatReservationComponent implements OnInit {
       , error => console.log(error))
   }
 
-  ngOnInit() {
+
+  ngAfterViewChecked(): void {
   }
 
-  formatLabel(value: number) {
-    return value;
+
+  submit() {
+    let id: string = ""
+    this.route.queryParams.subscribe(params => {
+      id = params.reproduction
+    })
+    let form = {"id":id,seats:[]};
+    for (const ticketReserve of this.marked) {
+      form.seats.push(ticketReserve.getSerializable())
+    }
+    this.http.post(this.baseUrl + 'api/ticket/' + id, form).subscribe();
   }
 
+  seatClick(event) {
+    let elem = event.target
+    if (elem.checked) {
+      let ij= elem.id.split(":").map(Number)
+      this.marked.push(new TicketReserve("0","0","0",ij[0],ij[1],elem))
+    } else {
+      this.marked.splice(this.marked.findIndex((element, index, array)=>element.htmlSeat ==elem), 1)
+    }
+    this.ticketsFormControl.setValue(this.marked.length > 0 ? this.marked.length : "")
+    this.dataSource.data = this.marked
+  }
 
   onChange() {
 
-    if (this.ticketsFormControl.value < 0 || this.ticketsFormControl.value > this.theater.columns * this.theater.rows - this.soldTickets.length) {
-      for (const checkedElement of this.checked) {
-        checkedElement.checked = false
+    if (isNaN(this.ticketsFormControl.value) || this.ticketsFormControl.value < 0 || this.ticketsFormControl.value > this.theater.columns * this.theater.rows - this.soldTickets.length) {
+      for (const ticketReserve of this.marked) {
+        ticketReserve.htmlSeat.checked = false
       }
-      this.checked = []
+      this.marked = []
       return
     }
-    let offset: number = this.ticketsFormControl.value - this.checked.length
+    let offset: number = this.ticketsFormControl.value - this.marked.length
     let validSeats = Array.from(document.getElementById("seats").querySelectorAll("input")).filter(it => {
       return it.id != "0" && it.checked == false
     })
@@ -89,15 +138,17 @@ export class SeatReservationComponent implements OnInit {
       for (let j = 0; j < offset; j++) {
         let s = Math.floor(Math.random() * (validSeats.length - 1));
         let elem = <any>validSeats.splice(s, 1)[0]
-        this.checked.push(elem)
+        let ij= elem.id.split(":").map(Number)
+        this.marked.push(new TicketReserve("0","0","0",ij[0],ij[1],elem))
         elem.checked = true
       }
     } else if (offset < 0) {
       for (let j = 0; j < Math.abs(offset); j++) {
-        let elem = this.checked.pop()
-        elem.checked = false
+        let elem = this.marked.pop()
+        elem.htmlSeat.checked = false
       }
     }
+    this.dataSource.data = this.marked
   }
 }
 
