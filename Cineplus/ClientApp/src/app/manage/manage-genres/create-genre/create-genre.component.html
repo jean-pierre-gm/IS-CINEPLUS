@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="standard">
+    <mat-label>Genre Name</mat-label>
+    <input [formControl]="nameControl" matInput [(ngModel)]="data.genre.genreName">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Description</mat-label>
+    <textarea [formControl]="descriptionControl" matInput type="text" [(ngModel)]="data.genre.description"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button type="submit" (click)="onSubmitClick()" cdkFocusInitial>{{edit ? 'Edit' : 'Create'}}</button>
+</div>

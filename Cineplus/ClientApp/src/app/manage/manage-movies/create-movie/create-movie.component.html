@@ -29,6 +29,6 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button class="no-focus-outline" (click)="onNoClick()">No Thanks</button>
-  <button mat-button class="no-focus-outline" type="submit" (click)="onSubmitClick()" cdkFocusInitial>{{edit ? 'Edit' : 'Create'}}</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button type="submit" (click)="onSubmitClick()" cdkFocusInitial>{{edit ? 'Edit' : 'Create'}}</button>
 </div>

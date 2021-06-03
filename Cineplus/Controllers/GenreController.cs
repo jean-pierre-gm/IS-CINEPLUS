@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
 using Cineplus.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cineplus.Controllers {
@@ -21,8 +22,16 @@ namespace Cineplus.Controllers {
 
 		[HttpPost]
 		public ActionResult<Genre> PostMovie([FromBody]Genre genre) {
-			_genreService.Add(genre);
-			return new ActionResult<Genre>(genre);
+			return new ActionResult<Genre>(_genreService.Add(genre));
+		}
+		
+		[Authorize(Roles = "Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
+		[HttpPut("{id:int}")]
+		public ActionResult<Genre> PutMovie(int id, [FromBody] Genre genre) {
+			if (id != genre.Id) {
+				return BadRequest();
+			}
+			return _genreService.Update(genre);
 		}
 	}
 }

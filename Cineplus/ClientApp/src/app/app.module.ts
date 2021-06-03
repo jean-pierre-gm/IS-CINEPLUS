@@ -35,6 +35,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSortModule} from "@angular/material/sort";
+import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.component";
+import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {MatSortModule} from "@angular/material/sort";
     RoleUsersComponent,
     ManageComponent,
     ManageMoviesComponent,
-    CreateMovieComponent
+    CreateMovieComponent,
+    ManageGenresComponent,
+    CreateGenreComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -106,6 +110,6 @@ import {MatSortModule} from "@angular/material/sort";
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateMovieComponent]
+  entryComponents: [CreateMovieComponent, CreateGenreComponent]
 })
 export class AppModule { }
