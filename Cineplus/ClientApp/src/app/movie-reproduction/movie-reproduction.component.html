@@ -11,7 +11,7 @@
         <h5>Reviews: {{movie.score}}</h5>
       </div>
     </div>
-    <div class="col-sm">
+    <div class="col-sm"  *ngIf="authorizeService.userInRoles(user,['Admin', 'Manager'])">
       <div class="float-right">
         <mat-card class="mb-3 mt-3">
           <ng-form>

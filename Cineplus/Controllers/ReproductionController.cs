@@ -1,6 +1,7 @@
 using System;
 using Cineplus.Models;
 using Cineplus.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cineplus.Controllers {
@@ -32,6 +33,7 @@ namespace Cineplus.Controllers {
 		}
 
 		[HttpPost]
+		[Authorize(Roles="Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
 		public ActionResult<Reproduction> PostReproduction([FromBody] Reproduction reproduction)
 		{
 			reproduction = _reproductionService.Add(reproduction);

@@ -10,6 +10,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {Theater} from "../../models/theater";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MyErrorStateMatcher} from "../seat-reservation/seat-reservation.component";
+import {AuthorizeService, IUser} from "../../api-authorization/authorize.service";
 
 @Component({
   selector: 'app-movie-reproduction',
@@ -17,6 +18,8 @@ import {MyErrorStateMatcher} from "../seat-reservation/seat-reservation.componen
   styleUrls: ['./movie-reproduction.component.css']
 })
 export class MovieReproductionComponent implements OnInit {
+
+  public user: IUser;
 
   reproductionData: CineplusDataSource<Reproduction>
   movie: Movie
@@ -31,7 +34,9 @@ export class MovieReproductionComponent implements OnInit {
   public newReproduction: Reproduction = new Reproduction();
   public theaters: Theater[];
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar, @Inject('BASE_URL') private baseUrl: string,
+              private route: ActivatedRoute, public authorizeService: AuthorizeService) {
+    authorizeService.getUser().subscribe(user => this.user = user);
     let id: string = ""
     this.route.queryParams.subscribe(params => {id = params.movie})
     let reproductionSourceConf: DataSourceConf = new DataSourceConf()
