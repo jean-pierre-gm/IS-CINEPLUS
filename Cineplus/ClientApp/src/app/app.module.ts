@@ -37,6 +37,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSortModule} from "@angular/material/sort";
 import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.component";
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
+import {ClientProfileComponent} from "./client-profile/client-profile.component";
+import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-g
     ManageMoviesComponent,
     CreateMovieComponent,
     ManageGenresComponent,
-    CreateGenreComponent
+    CreateGenreComponent,
+    ClientProfileComponent,
+    BecomeAssociateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -86,7 +90,12 @@ import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-g
         component: ManageComponent,
         canActivate: [AuthorizeGuard],
         data: {permittedRoles: ["Manager", "Admin"]}
-      }
+      },
+      {
+        path: 'client-profile',
+        component: ClientProfileComponent,
+        canActivate: [AuthorizeGuard]
+      },
     ]),
     BrowserAnimationsModule,
     MatCardModule,
@@ -110,6 +119,6 @@ import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-g
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateMovieComponent, CreateGenreComponent]
+  entryComponents: [CreateMovieComponent, CreateGenreComponent, BecomeAssociateComponent]
 })
 export class AppModule { }

@@ -18,6 +18,8 @@ namespace Cineplus.Models {
 		[NotMapped]
 		public IList<string> Roles { get; set; }
 
+		public Associate Associate { get; set; }
+
 		public ApplicationUser() {
 			this.Roles = new List<string>();
 		}
