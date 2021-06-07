@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm" *ngIf="movie">
       <div class="container-md">
         <h2>{{movie.movieName}} ({{movie.duration}} min)</h2>
         <br>

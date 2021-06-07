@@ -38,15 +38,19 @@ export class MovieReproductionComponent implements OnInit {
               private route: ActivatedRoute, public authorizeService: AuthorizeService) {
     authorizeService.getUser().subscribe(user => this.user = user);
     let id: string = ""
-    this.route.queryParams.subscribe(params => {id = params.movie})
-    let reproductionSourceConf: DataSourceConf = new DataSourceConf()
-    reproductionSourceConf.endPoint = baseUrl + 'api/reproduction'
-    let reproductionPagination: Pagination<Reproduction> = new Pagination()
-    this.reproductionData = new CineplusDataSource<Reproduction>(http, reproductionSourceConf, reproductionPagination)
-    this.reproductionData.httpParams = this.reproductionData.httpParams.set('movieId', id)
-    this.reproductionData.refresh()
-    this.http.get<Movie>(baseUrl + 'api/movie/'  + id).subscribe(t => this.movie = t)
-    this.http.get<Theater[]>(this.baseUrl + 'api/theater').subscribe(theaters => this.theaters = theaters)
+    this.route.queryParams.subscribe(params =>
+    {
+      id = params.movie
+      let reproductionSourceConf: DataSourceConf = new DataSourceConf()
+      reproductionSourceConf.endPoint = baseUrl + 'api/reproduction'
+      let reproductionPagination: Pagination<Reproduction> = new Pagination()
+      this.reproductionData = new CineplusDataSource<Reproduction>(http, reproductionSourceConf, reproductionPagination)
+      this.reproductionData.httpParams = this.reproductionData.httpParams.set('movieId', id)
+      this.reproductionData.refresh()
+      this.http.get<Movie>(baseUrl + 'api/movie/'  + id).subscribe(t => this.movie = t)
+      this.http.get<Theater[]>(this.baseUrl + 'api/theater').subscribe(theaters => this.theaters = theaters)
+    })
+
   }
 
   ngOnInit() {

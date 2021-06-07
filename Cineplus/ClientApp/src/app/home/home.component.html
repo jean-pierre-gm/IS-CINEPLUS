@@ -1,4 +1,4 @@
-<owl-carousel-o [options]="owlConfig">
+<owl-carousel-o [options]="owlConfig" *ngIf="movieData.result">
 
   <ng-container *ngFor="let movie of movieData.result.concat(movieData.result)">
     <ng-template carouselSlide>
