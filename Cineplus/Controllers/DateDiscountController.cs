@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
 using Cineplus.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cineplus.Controllers {
@@ -15,18 +16,23 @@ namespace Cineplus.Controllers {
         }
 		
         [HttpGet]
-        public ActionResult<Pagination<DateDiscount>> Index([FromQuery] Pagination<DateDiscount> parameters) {
-            return new ActionResult<Pagination<DateDiscount>>(_dateDiscountService.GetAll(parameters));
+        public ActionResult<Pagination<DateDiscount>> Index([FromQuery] Pagination<DateDiscount> parameters, 
+            [FromQuery] bool admitDisabledDiscounts) {
+            return new ActionResult<Pagination<DateDiscount>>(_dateDiscountService.GetAll(parameters, 
+                admitDisabledDiscounts));
         }
         
-        [HttpPut]
-        public ActionResult<DateDiscount> PutDateDiscount([FromBody]DateDiscount dateDiscount) {
+        [Authorize(Roles = "Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
+        [HttpPut("{id:int}")]
+        public ActionResult<DateDiscount> PutDateDiscount(int id, [FromBody]DateDiscount dateDiscount) {
+            if (id != dateDiscount.Id) {
+                return BadRequest();
+            }
+            
             if(_dateDiscountService.Get(dateDiscount.Id, false) is null)
                 return NotFound();
             
-            _dateDiscountService.Update(dateDiscount);
-
-            return new ActionResult<DateDiscount>(dateDiscount);
+            return _dateDiscountService.Update(dateDiscount);
         }
 
         [HttpPost]

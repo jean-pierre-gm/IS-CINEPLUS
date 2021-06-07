@@ -6,7 +6,7 @@ namespace Cineplus.Services
     public interface IDateDiscountService
     {
         DateDiscount Get(int id, bool tracked = true);
-        Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters);
+        Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters, bool admitDisabledDiscounts);
         DateDiscount Add(DateDiscount entity);
         DateDiscount Update(DateDiscount entity);
     }

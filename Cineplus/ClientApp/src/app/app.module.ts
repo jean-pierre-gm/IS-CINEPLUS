@@ -43,6 +43,8 @@ import {DateDiscountComponent} from "./discounts/date-discount/date-discount.com
 import {DiscountsComponent} from "./discounts/discounts.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage-dateDiscounts.component";
+import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import {MatNativeDateModule} from "@angular/material/core";
     ManageGenresComponent,
     CreateGenreComponent,
     ClientProfileComponent,
-    BecomeAssociateComponent
+    BecomeAssociateComponent,
+    ManageDateDiscountsComponent,
+    CreateDateDiscountComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -139,6 +143,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateMovieComponent, CreateGenreComponent, BecomeAssociateComponent]
+  entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
+    BecomeAssociateComponent]
 })
 export class AppModule { }

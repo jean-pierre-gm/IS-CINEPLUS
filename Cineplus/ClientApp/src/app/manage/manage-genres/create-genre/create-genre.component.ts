@@ -30,6 +30,7 @@ export class CreateGenreComponent implements OnInit {
     private httpClient: HttpClient,
     public dialogRef: MatDialogRef<CreateGenreComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {genre: Genre, edit: boolean}) {
+    console.log(this.data)
   }
 
   onNoClick(): void {

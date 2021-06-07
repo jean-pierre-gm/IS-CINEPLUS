@@ -18,10 +18,12 @@ namespace Cineplus.Services
             return _dateDiscountRepository.Data(tracked).FirstOrDefault(dateDiscount => dateDiscount.Id == id);
         }
 
-        public Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters)
+        public Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters, bool admitDisabledDiscounts)
         {
             return PaginationService.GetPagination(
-                _dateDiscountRepository.Data().AsQueryable(),
+                (admitDisabledDiscounts) ?
+                _dateDiscountRepository.Data().AsQueryable() :
+                _dateDiscountRepository.Data().Where(discount => discount.Enable).AsQueryable(),
                 parameters.CurrentPage,
                 parameters.OrderBy,
                 parameters.OrderByDesc,

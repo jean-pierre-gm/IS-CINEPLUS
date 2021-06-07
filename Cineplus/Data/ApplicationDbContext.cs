@@ -38,6 +38,10 @@ namespace Cineplus.Data {
 				.Property(datediscount => datediscount.Discount)
 				.HasConversion<double>();
 			
+			modelBuilder.Entity<DateDiscount>()
+				.Property(datediscount => datediscount.Enable)
+				.HasConversion<bool>();
+
 			modelBuilder.Seed();
 		}
 	}
