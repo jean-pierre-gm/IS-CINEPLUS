@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CineplusDataSource} from "../../models/cineplusDataSource";
 import {Reproduction} from "../../models/reproduction";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {DataSourceConf} from "../../models/dataSourceConf";
 import {Pagination} from "../../models/pagination";
@@ -44,9 +44,8 @@ export class MovieReproductionComponent implements OnInit {
       let reproductionSourceConf: DataSourceConf = new DataSourceConf()
       reproductionSourceConf.endPoint = baseUrl + 'api/reproduction'
       let reproductionPagination: Pagination<Reproduction> = new Pagination()
-      this.reproductionData = new CineplusDataSource<Reproduction>(http, reproductionSourceConf, reproductionPagination)
-      this.reproductionData.httpParams = this.reproductionData.httpParams.set('movieId', id)
-      this.reproductionData.refresh()
+      this.reproductionData = new CineplusDataSource<Reproduction>(http, reproductionSourceConf,
+        reproductionPagination, (new HttpParams()).set("movieId", id))
       this.http.get<Movie>(baseUrl + 'api/movie/'  + id).subscribe(t => this.movie = t)
       this.http.get<Theater[]>(this.baseUrl + 'api/theater').subscribe(theaters => this.theaters = theaters)
     })
