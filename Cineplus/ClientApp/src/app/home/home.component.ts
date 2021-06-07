@@ -58,7 +58,9 @@ export class HomeComponent {
   }
 
   parseDuration(duration: number) {
-    return Math.floor(duration / 60) + ":" + duration % 60
+    if(duration % 60 >= 10)
+      return Math.floor(duration / 60) + ":" + duration % 60
+    return Math.floor(duration / 60) + ":0" + duration % 60
   }
 
   picsFromMovie(movie: Movie) {
