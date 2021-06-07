@@ -38,9 +38,9 @@ namespace Cineplus.Controllers {
 
 		[HttpGet]
 		[Route("all")]
-		public ActionResult<IEnumerable<Movie>> AllMovies()
+		public ActionResult<Pagination<Movie>> AllMovies([FromQuery] Pagination<Movie> parameters)
 		{
-			return new ActionResult<IEnumerable<Movie>>(_movieService.GetAll());
+			return new ActionResult<Pagination<Movie>>(_movieService.GetAll(parameters));
 		}
 
 		

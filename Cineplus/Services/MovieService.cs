@@ -20,9 +20,9 @@ namespace Cineplus.Services {
 			);
 		}
 
-		public IEnumerable<Movie> GetAll()
+		public Pagination<Movie> GetAll(Pagination<Movie> parameters)
 		{
-			return _movieRepository.Data().AsEnumerable();
+			return PaginationService.GetPagination(_movieRepository.Data(), parameters);
 		}
 
 		public Movie Add(Movie entity) {

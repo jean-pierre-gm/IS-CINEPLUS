@@ -6,7 +6,7 @@ namespace Cineplus.Services {
 	public interface IMovieService {
 		Movie Get(int id);
 		Pagination<Movie> GetAllWithGenre(Pagination<Movie> parameters);
-		IEnumerable<Movie> GetAll();
+		Pagination<Movie> GetAll(Pagination<Movie> parameters);
 		Movie Add(Movie entity);
 		Movie Update(Movie entity);
 		Movie Remove(int id);
