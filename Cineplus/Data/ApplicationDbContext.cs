@@ -28,6 +28,10 @@ namespace Cineplus.Data {
 			modelBuilder.Entity<Movie>()
 				.Property(movie => movie.Score)
 				.HasConversion<double>();
+
+			modelBuilder.Entity<Associate>()
+				.Property(associate => associate.Points)
+				.HasDefaultValue(0);
 			
 			modelBuilder.Seed();
 		}
