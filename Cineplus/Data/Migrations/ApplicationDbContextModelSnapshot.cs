@@ -205,7 +205,8 @@ namespace Cineplus.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
