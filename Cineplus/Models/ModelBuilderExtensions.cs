@@ -28,6 +28,18 @@ namespace Cineplus.Models {
 					Id = -3,
 					GenreName = "Drama",
 					Description = "Making drama"
+				},
+				new Genre()
+				{
+					Id = -4,
+					GenreName = "Science Fiction",
+					Description = "All made up"
+				},
+				new Genre()
+				{
+					Id = -5,
+					GenreName = "Crime",
+					Description = "Doing ilegal stuff"
 				}
 			};
 
@@ -89,6 +101,117 @@ namespace Cineplus.Models {
 					              "police ranks. But both sides soon discover there's a mole among them.",
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg"
+				},
+				new Movie()
+				{
+					Id = -5,
+					MovieName = "The Hunger Games: Mockingjay - Part 1 ",
+					Director = "Francis Lawrence",
+					Duration = 123,
+					Score = 6.8f,
+					Description = "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion " +
+					              "against the autocratic Capitol.",
+					GenreId = genres[3].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg"
+				},
+				new Movie()
+				{
+					Id = -6,
+					MovieName = "La La Land",
+					Director = "Damien Chazelle",
+					Duration = 129,
+					Score = 7.9f,
+					Description = "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian," +
+					              " a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success " +
+					              "mounts they are faced with decisions that begin to fray the fragile fabric of their love " +
+					              "affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
+					GenreId = genres[2].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
+				},
+				new Movie()
+				{
+					Id = -7,
+					MovieName = "Cruella",
+					Director = "Craig Gillespie",
+					Duration = 134,
+					Score = 8.7f,
+					Description = "In 1970s London amidst the punk rock revolution, a young grifter named Estella is " +
+					              "determined to make a name for herself with her designs. She befriends a pair of young " +
+					              "thieves who appreciate her appetite for mischief, and together they are able to build a " +
+					              "life for themselves on the London streets. One day, Estella’s flair for fashion catches " +
+					              "the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and " +
+					              "terrifyingly haute. But their relationship sets in motion a course of events and " +
+					              "revelations that will cause Estella to embrace her wicked side and become the raucous," +
+					              " fashionable and revenge-bent Cruella.",
+					GenreId = genres[0].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg"
+				},
+				new Movie()
+				{
+					Id = -8,
+					MovieName = "The Shawshank Redemption",
+					Director = "Frank Darabont",
+					Duration = 144,
+					Score = 8.7f,
+					Description = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker " +
+					              "Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting " +
+					              "skills to work for an amoral warden. During his long stretch in prison, Dufresne comes " +
+					              "to be admired by the other inmates -- including an older prisoner named Red -- for his " +
+					              "integrity and unquenchable sense of hope.",
+					GenreId = genres[2].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+				},
+				new Movie()
+				{
+					Id = -9,
+					MovieName = "The Godfather",
+					Director = "Francis Ford Coppola",
+					Duration = 175,
+					Score = 8.7f,
+					Description = "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. " +
+					              "When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, " +
+					              "his youngest son, Michael steps in to take care of the would-be killers, launching a campaign " +
+					              "of bloody revenge.",
+					GenreId = genres[2].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+				},
+				new Movie()
+				{
+					Id = -10,
+					MovieName = "Your Name.",
+					Director = "Makoto Shinkai",
+					Duration = 104,
+					Score = 8.6f,
+					Description = "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, " +
+					              "they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre " +
+					              "occurrence continues to happen randomly, and the two must adjust their lives around each other.",
+					GenreId = genres[2].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg"
+				},
+				new Movie()
+				{
+					Id = -11,
+					MovieName = "Pulp Fiction",
+					Director = "Makoto Shinkai",
+					Duration = 154,
+					Score = 8.6f,
+					Description = "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a" +
+					              " washed-up boxer converge in this sprawling, comedic crime caper. Their adventures " +
+					              "unfurl in three stories that ingeniously trip back and forth in time.",
+					GenreId = genres[4].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
+				},
+				new Movie()
+				{
+					Id = -12,
+					MovieName = "John Wick",
+					Director = "Chad Stahelski",
+					Duration = 101,
+					Score = 7.3f,
+					Description = "Ex-hitman John Wick comes out of retirement to track down the gangsters that " +
+					              "took everything from him.",
+					GenreId = genres[1].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"
 				}
 			};
 

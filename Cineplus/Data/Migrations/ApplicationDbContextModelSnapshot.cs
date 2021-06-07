@@ -80,50 +80,6 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Cineplus.Models.Associate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("Code")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Points")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Associate");
-                });
-
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -154,6 +110,12 @@ namespace Cineplus.Data.Migrations
                             Id = -2,
                             Description = "Guns and guns",
                             GenreName = "Action"
+                        },
+                        new
+                        {
+                            Id = -3,
+                            Description = "Making drama",
+                            GenreName = "Drama"
                         });
                 });
 
@@ -175,6 +137,9 @@ namespace Cineplus.Data.Migrations
                     b.Property<int>("GenreId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("MovieName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -193,29 +158,46 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -1,
-                            Director = "Pedro Pérez",
-                            Duration = 134,
-                            GenreId = -1,
-                            MovieName = "Los 3 de la loma",
-                            Score = 7.8000001907348633
+                            Description = "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
+                            Director = "Robert Zemeckis",
+                            Duration = 142,
+                            GenreId = -3,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg",
+                            MovieName = "Forrest Gump",
+                            Score = 8.8000001907348633
                         },
                         new
                         {
                             Id = -2,
-                            Director = "Alfredo Jul",
-                            Duration = 113,
-                            GenreId = -1,
-                            MovieName = "Donde cayó la tiza",
-                            Score = 9.0
+                            Description = "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.",
+                            Director = "Steven Spielberg",
+                            Duration = 127,
+                            GenreId = -2,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg",
+                            MovieName = "Indiana Jones and the Last Crusade",
+                            Score = 7.8000001907348633
                         },
                         new
                         {
                             Id = -3,
-                            Director = "Alain Serdán",
-                            Duration = 130,
+                            Description = "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
+                            Director = "Joss Whedon",
+                            Duration = 143,
                             GenreId = -2,
-                            MovieName = "Dos es mejor que uno",
-                            Score = 0.0
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+                            MovieName = "The Avengers",
+                            Score = 7.6999998092651367
+                        },
+                        new
+                        {
+                            Id = -4,
+                            Description = "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.",
+                            Director = "Martin Scorsese",
+                            Duration = 149,
+                            GenreId = -3,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg",
+                            MovieName = "The Departed",
+                            Score = 8.1999998092651367
                         });
                 });
 
@@ -4871,17 +4853,6 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Cineplus.Models.Associate", b =>
-                {
-                    b.HasOne("Cineplus.Models.ApplicationUser", "User")
-                        .WithOne("Associate")
-                        .HasForeignKey("Cineplus.Models.Associate", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Cineplus.Models.Movie", b =>
                 {
                     b.HasOne("Cineplus.Models.Genre", "Genre")
@@ -4997,11 +4968,6 @@ namespace Cineplus.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Associate");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
