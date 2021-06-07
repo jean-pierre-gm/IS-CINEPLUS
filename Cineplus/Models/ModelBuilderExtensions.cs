@@ -8,6 +8,22 @@ namespace Cineplus.Models {
 	{
 		public static void Seed(this ModelBuilder modelBuilder)
 		{
+			
+			var displaySettings = new List<DisplaySettings>()
+			{
+				new DisplaySettings()
+				{
+					Id = -1,
+					Name = "Best Reviews",
+					Active = false
+				},
+				new DisplaySettings()
+				{
+					Id = -2,
+					Name = "Manual",
+					Active = true
+				}
+			};
 
 			var genres = new List<Genre>()
 			{
@@ -58,7 +74,8 @@ namespace Cineplus.Models {
 					Duration = 142,
 					Score = 8.8f,
 					GenreId = genres[2].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -72,7 +89,8 @@ namespace Cineplus.Models {
 					Duration = 127,
 					Score = 7.8f,
 					GenreId = genres[1].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -86,7 +104,8 @@ namespace Cineplus.Models {
 					              " a daring recruitment effort begins!",
 					Score = 7.7f,
 					GenreId = genres[1].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -100,7 +119,8 @@ namespace Cineplus.Models {
 					              "undercover cop curries favor with the mob kingpin, a career criminal rises through the " +
 					              "police ranks. But both sides soon discover there's a mole among them.",
 					GenreId = genres[2].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -112,7 +132,8 @@ namespace Cineplus.Models {
 					Description = "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion " +
 					              "against the autocratic Capitol.",
 					GenreId = genres[3].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -126,7 +147,8 @@ namespace Cineplus.Models {
 					              "mounts they are faced with decisions that begin to fray the fragile fabric of their love " +
 					              "affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
 					GenreId = genres[2].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -144,7 +166,8 @@ namespace Cineplus.Models {
 					              "revelations that will cause Estella to embrace her wicked side and become the raucous," +
 					              " fashionable and revenge-bent Cruella.",
 					GenreId = genres[0].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -159,7 +182,8 @@ namespace Cineplus.Models {
 					              "to be admired by the other inmates -- including an older prisoner named Red -- for his " +
 					              "integrity and unquenchable sense of hope.",
 					GenreId = genres[2].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -173,7 +197,8 @@ namespace Cineplus.Models {
 					              "his youngest son, Michael steps in to take care of the would-be killers, launching a campaign " +
 					              "of bloody revenge.",
 					GenreId = genres[2].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -186,7 +211,8 @@ namespace Cineplus.Models {
 					              "they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre " +
 					              "occurrence continues to happen randomly, and the two must adjust their lives around each other.",
 					GenreId = genres[2].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg",
+					Display = true
 				},
 				new Movie()
 				{
@@ -199,7 +225,8 @@ namespace Cineplus.Models {
 					              " washed-up boxer converge in this sprawling, comedic crime caper. Their adventures " +
 					              "unfurl in three stories that ingeniously trip back and forth in time.",
 					GenreId = genres[4].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+					Display = false
 				},
 				new Movie()
 				{
@@ -211,7 +238,8 @@ namespace Cineplus.Models {
 					Description = "Ex-hitman John Wick comes out of retirement to track down the gangsters that " +
 					              "took everything from him.",
 					GenreId = genres[1].Id,
-					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
+					Display = false
 				}
 			};
 

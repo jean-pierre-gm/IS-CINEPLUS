@@ -24,10 +24,12 @@ namespace Cineplus.Models {
 		public string Description { get; set; }
 		
 		public string ImageUrl { get; set; }
+		
+		public bool Display { get; set; }
 
 		public int GenreId { get; set; }
 		public virtual Genre Genre { get; set; }
-		
+
 		[JsonIgnore]
 		public virtual ICollection<Reproduction> Reproductions { get; set; }
 

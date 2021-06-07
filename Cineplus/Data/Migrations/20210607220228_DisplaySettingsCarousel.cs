@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cineplus.Data.Migrations
 {
-    public partial class UpsEfAndMigrations : Migration
+    public partial class DisplaySettingsCarousel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,13 @@ namespace Cineplus.Data.Migrations
                 type: "TEXT",
                 nullable: true);
 
+            migrationBuilder.AddColumn<bool>(
+                name: "Display",
+                table: "Movie",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: false);
+
             migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
                 table: "Movie",
@@ -71,25 +78,25 @@ namespace Cineplus.Data.Migrations
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -3,
-                columns: new[] { "Description", "Director", "Duration", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!", "Joss Whedon", 143, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "The Avengers", 7.6999998092651367 });
+                columns: new[] { "Description", "Director", "Display", "Duration", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!", "Joss Whedon", true, 143, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "The Avengers", 7.6999998092651367 });
 
             migrationBuilder.UpdateData(
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -2,
-                columns: new[] { "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.", "Steven Spielberg", 127, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg", "Indiana Jones and the Last Crusade", 7.8000001907348633 });
+                columns: new[] { "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.", "Steven Spielberg", true, 127, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg", "Indiana Jones and the Last Crusade", 7.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -7, "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.", "Craig Gillespie", 134, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg", "Cruella", 8.6999998092651367 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -7, "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.", "Craig Gillespie", true, 134, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg", "Cruella", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -12, "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.", "Chad Stahelski", 101, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "John Wick", 7.3000001907348633 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -12, "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.", "Chad Stahelski", false, 101, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "John Wick", 7.3000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Theater",
@@ -110,43 +117,43 @@ namespace Cineplus.Data.Migrations
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -1,
-                columns: new[] { "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.", "Robert Zemeckis", 142, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg", "Forrest Gump", 8.8000001907348633 });
+                columns: new[] { "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.", "Robert Zemeckis", true, 142, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg", "Forrest Gump", 8.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -4, "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.", "Martin Scorsese", 149, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg", "The Departed", 8.1999998092651367 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -4, "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.", "Martin Scorsese", true, 149, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg", "The Departed", 8.1999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -6, "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.", "Damien Chazelle", 129, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg", "La La Land", 7.9000000953674316 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -6, "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.", "Damien Chazelle", true, 129, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg", "La La Land", 7.9000000953674316 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -8, "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.", "Frank Darabont", 144, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", 8.6999998092651367 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -8, "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.", "Frank Darabont", true, 144, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -9, "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.", "Francis Ford Coppola", 175, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", "The Godfather", 8.6999998092651367 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -9, "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.", "Francis Ford Coppola", true, 175, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", "The Godfather", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -10, "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.", "Makoto Shinkai", 104, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg", "Your Name.", 8.6000003814697266 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -10, "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.", "Makoto Shinkai", true, 104, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg", "Your Name.", 8.6000003814697266 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -5, "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.", "Francis Lawrence", 123, -4, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg", "The Hunger Games: Mockingjay - Part 1 ", 6.8000001907348633 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -5, "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.", "Francis Lawrence", true, 123, -4, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg", "The Hunger Games: Mockingjay - Part 1 ", 6.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -11, "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "Makoto Shinkai", 154, -5, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", "Pulp Fiction", 8.6000003814697266 });
+                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -11, "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "Makoto Shinkai", false, 154, -5, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", "Pulp Fiction", 8.6000003814697266 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
@@ -5954,6 +5961,10 @@ namespace Cineplus.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Description",
+                table: "Movie");
+
+            migrationBuilder.DropColumn(
+                name: "Display",
                 table: "Movie");
 
             migrationBuilder.DropColumn(
