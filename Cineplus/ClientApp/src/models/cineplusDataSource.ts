@@ -20,12 +20,14 @@ export class CineplusDataSource<T> {
     this.currentPagination.currentPage = 1;
     this.currentPagination.pageSize = (pagination && pagination.pageSize) ? pagination.pageSize : 10;
     this.currentPagination.orderByDesc = false;
+
+    this.refresh();
   }
 
   refresh() {
     this.redoParams();
-    console.log(this.httpParams.toString())
-    this.httpClient.get<Pagination<T>>(this.conf.endPoint + '?' + this.httpParams.toString()).subscribe(result => {
+    console.log('httpParams', this.httpParams.toString())
+    return this.httpClient.get<Pagination<T>>(this.conf.endPoint + '?' + this.httpParams.toString()).subscribe(result => {
       this.currentPagination = result;
     }, error => console.log(error));
   }
@@ -48,9 +50,27 @@ export class CineplusDataSource<T> {
     return this.setPage(page);
   }
 
-  orderBy(value: string) {
+  orderBy(value: string, reverse = false) {
     this.currentPagination.orderBy = value;
+    this.currentPagination.orderByDesc = reverse;
     return this.refresh();
+  }
+
+  filter(filterBy: string, filterString: string) {
+    this.currentPagination.filterBy = filterBy;
+    this.currentPagination.filterString = filterString;
+    return this.refresh();
+  }
+
+  undoFilters() {
+    this.currentPagination.filterBy = null;
+    this.currentPagination.filterString = null;
+    return this.refresh();
+  }
+
+  undoOrder() {
+    this.currentPagination.orderBy = null;
+    return this.refresh()
   }
 
   invertOrder() {
@@ -69,6 +89,16 @@ export class CineplusDataSource<T> {
     if (this.currentPagination.orderBy) {
       this.httpParams = this.httpParams.set(this.conf.orderByDescendingField, String(this.currentPagination.orderByDesc));
       this.httpParams = this.httpParams.set(this.conf.orderByField, this.currentPagination.orderBy);
+    } else {
+      this.httpParams = this.httpParams.delete(this.conf.orderByField);
+      this.httpParams = this.httpParams.delete(this.conf.orderByDescendingField);
+    }
+    if (this.currentPagination.filterBy) {
+      this.httpParams = this.httpParams.set(this.conf.filterByField, String(this.currentPagination.filterBy))
+      this.httpParams = this.httpParams.set(this.conf.filterStringField, String(this.currentPagination.filterString))
+    } else {
+      this.httpParams = this.httpParams.delete(this.conf.filterByField);
+      this.httpParams = this.httpParams.delete(this.conf.filterStringField);
     }
   }
 

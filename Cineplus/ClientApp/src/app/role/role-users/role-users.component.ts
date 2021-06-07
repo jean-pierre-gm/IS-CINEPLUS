@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 import {Role} from "../../../models/role";
 import {Pagination} from "../../../models/pagination";
-import {IUser} from "../../../api-authorization/authorize.service";
+import {AuthorizeService, IUser} from "../../../api-authorization/authorize.service";
 import {User} from "../../../models/user";
 import {UserWithRoles} from "../../../models/userWithRoles";
 import {CineplusDataSource} from "../../../models/cineplusDataSource";
@@ -17,6 +17,7 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 })
 export class RoleUsersComponent implements OnInit, OnDestroy {
 
+  user: IUser;
   roles: Role[];
   usersDataSource: CineplusDataSource<UserWithRoles>;
   get roleColumns(): string[] { return this.roles.map(r => r.name) }
@@ -24,28 +25,25 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
-              private route: ActivatedRoute
+              private authService: AuthorizeService
   ) {
-
-    this.http.get<Role[]>(baseUrl + 'api/role/').subscribe(roles => {
-      this.roles = roles;
-    })
-
-    let dsConf = new DataSourceConf();
-    dsConf.endPoint = baseUrl + 'api/user'
-    this.usersDataSource = new CineplusDataSource<UserWithRoles>(http, dsConf);
-    this.usersDataSource.refresh()
 
   }
 
   ngOnInit() {
+    this.authService.getUser().subscribe(user => this.user = user);
+
+    this.http.get<Role[]>(this.baseUrl + 'api/role/').subscribe(roles => {
+      this.roles = roles;
+    })
+
+    let dsConf = new DataSourceConf();
+    dsConf.endPoint = this.baseUrl + 'api/user'
+    this.usersDataSource = new CineplusDataSource<UserWithRoles>(this.http, dsConf);
+    this.usersDataSource.refresh()
   }
 
   ngOnDestroy() {
-  }
-
-  applyFilter($event: KeyboardEvent) {
-
   }
 
   editUserRole($event: MatCheckboxChange, roleName, userId) {
@@ -61,5 +59,13 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
     console.log($event)
     this.usersDataSource.currentPagination.pageSize = $event.pageSize;
     this.usersDataSource.setPage($event.pageIndex + 1);
+  }
+
+  applyFilter(input: string) {
+    if (input !== '') {
+      this.usersDataSource.filter('username', input);
+    } else {
+      this.usersDataSource.undoFilters();
+    }
   }
 }

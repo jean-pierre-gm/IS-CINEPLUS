@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -27,9 +27,20 @@ import {MatListModule} from "@angular/material/list";
 import {RoleUsersComponent} from "./role/role-users/role-users.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {ManageComponent} from "./manage/manage.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {ManageMoviesComponent} from "./manage/manage-movies/manage-movies.component";
+import {CreateMovieComponent} from "./manage/manage-movies/create-movie/create-movie.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSortModule} from "@angular/material/sort";
+import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.component";
+import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
+import {ClientProfileComponent} from "./client-profile/client-profile.component";
+import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
 import {DateDiscountComponent} from "./discounts/date-discount/date-discount.component";
 import {DiscountsComponent} from "./discounts/discounts.component";
-import {MatSortModule} from "@angular/material/sort";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 
@@ -45,65 +56,89 @@ import {MatNativeDateModule} from "@angular/material/core";
     RoleListComponent,
     RoleUsersComponent,
     DateDiscountComponent,
-    DiscountsComponent
+    DiscountsComponent,
+    ManageComponent,
+    ManageMoviesComponent,
+    CreateMovieComponent,
+    ManageGenresComponent,
+    CreateGenreComponent,
+    ClientProfileComponent,
+    BecomeAssociateComponent
   ],
-    imports: [
-        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-        HttpClientModule,
-        FormsModule,
-        ApiAuthorizationModule,
-        RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'},
-            {path: 'counter', component: CounterComponent},
-            {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-            {
-                path: 'api-test', component: ApiTestComponent,
-                canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
-            },
-            {path: 'forbidden', component: ForbiddenComponent},
-            {
-                path: 'role-list',
-                component: RoleListComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Admin"]}
-            },
-            {
-                path: 'role-users',
-                component: RoleUsersComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Admin"]}
-            },
-            {
-                path: 'discounts',
-                component: DiscountsComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Admin"]}
-            },
-            {
-                path: 'date-discount',
-                component: DateDiscountComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Admin"]}
-            }
-        ]),
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatSelectModule,
-        MatTableModule,
-        FontAwesomeModule,
-        MatListModule,
-        MatPaginatorModule,
-        MatCheckboxModule,
-        MatSortModule,
-        MatDatepickerModule,
-        MatNativeDateModule
-    ],
+  imports: [
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    HttpClientModule,
+    FormsModule,
+    ApiAuthorizationModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'counter', component: CounterComponent},
+      {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+      {
+        path: 'api-test', component: ApiTestComponent,
+        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+      },
+      {path: 'forbidden', component: ForbiddenComponent},
+      {
+        path: 'role-list',
+        component: RoleListComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'role-users',
+        component: RoleUsersComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'discounts',
+        component: DiscountsComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'date-discount',
+        component: DateDiscountComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'manage',
+        component: ManageComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Manager", "Admin"]}
+      },
+      {
+        path: 'client-profile',
+        component: ClientProfileComponent,
+        canActivate: [AuthorizeGuard]
+      },
+    ]),
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatTableModule,
+    FontAwesomeModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CreateMovieComponent, CreateGenreComponent, BecomeAssociateComponent]
 })
 export class AppModule { }

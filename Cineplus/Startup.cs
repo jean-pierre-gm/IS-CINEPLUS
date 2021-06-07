@@ -45,6 +45,7 @@ namespace Cineplus {
 			services.AddAuthentication()
 				.AddIdentityServerJwt();
 
+			services.AddHttpContextAccessor();
 			services.AddControllersWithViews();
 			services.AddRazorPages();
 			// In production, the Angular files will be served from this directory
@@ -63,6 +64,8 @@ namespace Cineplus {
 			services.AddScoped<ISeatService, SeatService>();
 			services.AddScoped<ITicketService, TicketService>();
 			services.AddScoped<IDateDiscountService, DateDiscountService>();
+			services.AddScoped<IAssociateService, AssociateService>();
+			services.AddScoped<IUserService, UserService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

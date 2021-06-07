@@ -1,0 +1,34 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="standard">
+    <mat-label>Movie Name</mat-label>
+    <input [formControl]="nameControl" matInput [(ngModel)]="data.movie.movieName">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Director</mat-label>
+    <input [formControl]="directorControl" matInput [(ngModel)]="data.movie.director">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Duration (in minutes)</mat-label>
+    <input [formControl]="durationControl" matInput type="number" [(ngModel)]="data.movie.duration">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Score [0-10]</mat-label>
+    <input [formControl]="scoreControl" matInput type="number" step="0.1" [(ngModel)]="data.movie.score">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Genre</mat-label>
+    <input type="text"
+           matInput
+           [formControl]="autocompleteControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let genre of genreDataSource.result" [value]="genre.genreName">
+        {{genre.genreName}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button type="submit" (click)="onSubmitClick()" cdkFocusInitial>{{edit ? 'Edit' : 'Create'}}</button>
+</div>

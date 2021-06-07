@@ -16,11 +16,7 @@ namespace Cineplus.Services {
 
 		public Pagination<Movie> GetAllWithGenre(Pagination<Movie> parameters) {
 			return PaginationService.GetPagination(
-				_movieRepository.Data().Include(movie => movie.Genre),
-				parameters.CurrentPage,
-				parameters.OrderBy,
-				parameters.OrderByDesc,
-				parameters.PageSize
+				_movieRepository.Data().Include(movie => movie.Genre), parameters
 			);
 		}
 

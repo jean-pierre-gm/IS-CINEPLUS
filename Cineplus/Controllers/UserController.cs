@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Cineplus.Models;
 using Cineplus.Services;
@@ -17,7 +19,7 @@ namespace Cineplus.Controllers {
 
 		[HttpGet]
 		public async Task<ActionResult<Pagination<ApplicationUser>>> GetUsers([FromQuery] Pagination<ApplicationUser> pagination) {
-			var page = PaginationService.GetPagination(_userManager.Users, pagination);
+			var page = PaginationService.GetPagination((IQueryable<ApplicationUser>)_userManager.Users, pagination);
 			foreach (var applicationUser in page.Result) {
 				applicationUser.Roles = await _userManager.GetRolesAsync(applicationUser);
 			}

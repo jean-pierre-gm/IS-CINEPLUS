@@ -1,17 +1,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Cineplus.Services;
 
 namespace Cineplus.Models {
 	public class Movie: DbEntity {
 
 		[Required]
-		[StringLength(50)]
 		[Sortable(OrderBy = "name")]
+		[Filter(FilterBy = "name")]
+		[StringLength(50)]
 		public string MovieName { get; set; }
-		
+
+		[Sortable(OrderBy = "score")]
 		public float Score { get; set; }
 
+		[Sortable(OrderBy = "duration")]
 		public int Duration { get; set; }
 
 		public string Director { get; set; }

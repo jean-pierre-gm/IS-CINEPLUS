@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Cineplus</a>
+      <a class="navbar-brand" [routerLink]="['/']">Cine+</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -28,13 +28,13 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']"
-              *ngIf="authorizeService.userInRoles(user,['Admin', 'Manager'])">
-            <a class="nav-link text-dark" [routerLink]="['/api-test']"
-            >Api Test</a
+              *ngIf="user && authorizeService.userInRoles(user,['Admin', 'Manager'])">
+            <a class="nav-link text-dark" [routerLink]="['/manage']"
+            >Manage</a
             >
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']"
-              *ngIf="authorizeService.userInRoles(user,['Admin'])">
+              *ngIf="user && authorizeService.userInRoles(user,['Admin'])">
             <a class="nav-link text-dark" [routerLink]="['/role-list']"
             >Roles</a
             >

@@ -1,0 +1,25 @@
+<div mat-dialog-title>
+  <p>Please fill out this fields to become an associate.</p>
+</div>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard">
+    <mat-label>First Name</mat-label>
+    <input [formControl]="nameControl" matInput [(ngModel)]="associate.name">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Last Name</mat-label>
+    <input [formControl]="lastNameControl" matInput [(ngModel)]="associate.lastName">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Address</mat-label>
+    <input [formControl]="addressControl" matInput [(ngModel)]="associate.address">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Phone Number</mat-label>
+    <input [formControl]="phoneControl" matInput type="text" [(ngModel)]="associate.phoneNumber">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button type="submit" (click)="onSubmitClick()" cdkFocusInitial>Submit</button>
+</div>

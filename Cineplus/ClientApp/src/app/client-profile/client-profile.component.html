@@ -1,0 +1,38 @@
+<mat-tab-group mat-align-tabs="start" dynamicHeight>
+  <mat-tab label="Purchase History">Content 1</mat-tab>
+  <mat-tab label="Associate">
+    <div *ngIf="!associate">
+      <p class="h4">You are not an associate of our cinema yet!</p>
+      <p class="h5">What are you waiting for?</p>
+      <p>For associates we have a system of points that will let you watch movies for FREE!</p>
+      <button mat-raised-button color="primary" (click)="openDialog()">Become an Associate Now!</button>
+    </div>
+    <div *ngIf="associate">
+      <mat-form-field appearance="standard">
+        <mat-label>Associate Points</mat-label>
+        <input matInput disabled [value]="associate.points.toString()">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Associate Code</mat-label>
+        <input matInput disabled [value]="associate.code">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Name</mat-label>
+        <input disabled matInput [value]="associate.name">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Last Name</mat-label>
+        <input disabled matInput [value]="associate.lastName">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Address</mat-label>
+        <input matInput [value]="associate.address">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Phone Number</mat-label>
+        <input matInput [value]="associate.phoneNumber">
+      </mat-form-field>
+      <button *ngIf="edit">Edit</button>
+    </div>
+  </mat-tab>
+</mat-tab-group>

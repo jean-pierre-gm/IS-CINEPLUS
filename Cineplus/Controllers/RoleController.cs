@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cineplus.Controllers {
-	// [Authorize(Roles = "Admin", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
+	[Authorize(Roles = "Admin", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
 	[Route("/api/[controller]")]
 	public class RoleController : Controller {
 		

@@ -100,6 +100,50 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("DateDiscount");
                 });
 
+            modelBuilder.Entity("Cineplus.Models.Associate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Points")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Associate");
+                });
+
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -513,6 +557,17 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Cineplus.Models.Associate", b =>
+                {
+                    b.HasOne("Cineplus.Models.ApplicationUser", "User")
+                        .WithOne("Associate")
+                        .HasForeignKey("Cineplus.Models.Associate", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Cineplus.Models.Movie", b =>
                 {
                     b.HasOne("Cineplus.Models.Genre", "Genre")
@@ -628,6 +683,11 @@ namespace Cineplus.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Associate");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Genre", b =>

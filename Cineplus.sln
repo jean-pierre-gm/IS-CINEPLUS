@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cineplus", "Cineplus\Cineplus.csproj", "{5433448A-C567-40E1-9C74-2D75B7AD7B78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineplusTest", "CineplusTest\CineplusTest.csproj", "{890BDF16-F3A2-4EF7-8316-5750B5F24AFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5433448A-C567-40E1-9C74-2D75B7AD7B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5433448A-C567-40E1-9C74-2D75B7AD7B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5433448A-C567-40E1-9C74-2D75B7AD7B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890BDF16-F3A2-4EF7-8316-5750B5F24AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890BDF16-F3A2-4EF7-8316-5750B5F24AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890BDF16-F3A2-4EF7-8316-5750B5F24AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890BDF16-F3A2-4EF7-8316-5750B5F24AFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
