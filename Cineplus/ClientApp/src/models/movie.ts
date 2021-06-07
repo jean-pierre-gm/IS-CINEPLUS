@@ -8,4 +8,5 @@ export class Movie {
   director: string;
   genre: Genre;
   description: string;
+  imageUrl: string;
 }

@@ -62,6 +62,8 @@ export class HomeComponent {
   }
 
   picsFromMovie(movie: Movie) {
-    return this.pics[Math.abs(movie.id) % this.pics.length]
+    if(movie.imageUrl)
+      return movie.imageUrl
+    return "assets/no_image.jpg"
   }
 }

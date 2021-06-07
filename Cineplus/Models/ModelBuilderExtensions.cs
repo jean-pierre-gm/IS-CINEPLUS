@@ -22,6 +22,12 @@ namespace Cineplus.Models {
 					Id = -2,
 					GenreName = "Action",
 					Description = "Guns and guns"
+				},
+				new Genre()
+				{
+					Id = -3,
+					GenreName = "Drama",
+					Description = "Making drama"
 				}
 			};
 
@@ -32,28 +38,57 @@ namespace Cineplus.Models {
 				new Movie()
 				{
 					Id = -1,
-					MovieName = "Los 3 de la loma",
-					Director = "Pedro Pérez",
-					Duration = 134,
-					Score = 7.8f,
-					GenreId = genres[0].Id
+					MovieName = "Forrest Gump",
+					Director = "Robert Zemeckis",
+					Description = "A man with a low IQ has accomplished great things in his life and been present during " +
+					              "significant historic events—in each case, far exceeding what anyone imagined he could" +
+					              " do. But despite all he has achieved, his one true love eludes him.",
+					Duration = 142,
+					Score = 8.8f,
+					GenreId = genres[2].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg"
 				},
 				new Movie()
 				{
 					Id = -2,
-					MovieName = "Donde cayó la tiza",
-					Director = "Alfredo Jul",
-					Duration = 113,
-					Score = 9,
-					GenreId = genres[0].Id
+					MovieName = "Indiana Jones and the Last Crusade",
+					Director = "Steven Spielberg",
+					Description = "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, " +
+					              "eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider" +
+					              " to follow in his father's footsteps and stop the Nazis from recovering the power of " +
+					              "eternal life.",
+					Duration = 127,
+					Score = 7.8f,
+					GenreId = genres[1].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg"
 				},
 				new Movie()
 				{
 					Id = -3,
-					MovieName = "Dos es mejor que uno",
-					Director = "Alain Serdán",
-					Duration = 130,
-					GenreId = genres[1].Id
+					MovieName = "The Avengers",
+					Director = "Joss Whedon",
+					Duration = 143,
+					Description = "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, " +
+					              "director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself" +
+					              " in need of a team to pull the world back from the brink of disaster. Spanning the globe," +
+					              " a daring recruitment effort begins!",
+					Score = 7.7f,
+					GenreId = genres[1].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
+				},
+				new Movie()
+				{
+					Id = -4,
+					MovieName = "The Departed",
+					Director = "Martin Scorsese",
+					Duration = 149,
+					Score = 8.2f,
+					Description = "To take down South Boston's Irish Mafia, the police send in one of their own to " +
+					              "infiltrate the underworld, not realizing the syndicate has done likewise. While an " +
+					              "undercover cop curries favor with the mob kingpin, a career criminal rises through the " +
+					              "police ranks. But both sides soon discover there's a mole among them.",
+					GenreId = genres[2].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg"
 				}
 			};
 
