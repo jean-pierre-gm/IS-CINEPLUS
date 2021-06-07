@@ -80,6 +80,51 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Cineplus.Models.Associate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Points")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Associate");
+                });
+
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -116,6 +161,18 @@ namespace Cineplus.Data.Migrations
                             Id = -3,
                             Description = "Making drama",
                             GenreName = "Drama"
+                        },
+                        new
+                        {
+                            Id = -4,
+                            Description = "All made up",
+                            GenreName = "Science Fiction"
+                        },
+                        new
+                        {
+                            Id = -5,
+                            Description = "Doing ilegal stuff",
+                            GenreName = "Crime"
                         });
                 });
 
@@ -198,6 +255,94 @@ namespace Cineplus.Data.Migrations
                             ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg",
                             MovieName = "The Departed",
                             Score = 8.1999998092651367
+                        },
+                        new
+                        {
+                            Id = -5,
+                            Description = "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.",
+                            Director = "Francis Lawrence",
+                            Duration = 123,
+                            GenreId = -4,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
+                            MovieName = "The Hunger Games: Mockingjay - Part 1 ",
+                            Score = 6.8000001907348633
+                        },
+                        new
+                        {
+                            Id = -6,
+                            Description = "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
+                            Director = "Damien Chazelle",
+                            Duration = 129,
+                            GenreId = -3,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+                            MovieName = "La La Land",
+                            Score = 7.9000000953674316
+                        },
+                        new
+                        {
+                            Id = -7,
+                            Description = "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.",
+                            Director = "Craig Gillespie",
+                            Duration = 134,
+                            GenreId = -1,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg",
+                            MovieName = "Cruella",
+                            Score = 8.6999998092651367
+                        },
+                        new
+                        {
+                            Id = -8,
+                            Description = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
+                            Director = "Frank Darabont",
+                            Duration = 144,
+                            GenreId = -3,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+                            MovieName = "The Shawshank Redemption",
+                            Score = 8.6999998092651367
+                        },
+                        new
+                        {
+                            Id = -9,
+                            Description = "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+                            Director = "Francis Ford Coppola",
+                            Duration = 175,
+                            GenreId = -3,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+                            MovieName = "The Godfather",
+                            Score = 8.6999998092651367
+                        },
+                        new
+                        {
+                            Id = -10,
+                            Description = "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.",
+                            Director = "Makoto Shinkai",
+                            Duration = 104,
+                            GenreId = -3,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg",
+                            MovieName = "Your Name.",
+                            Score = 8.6000003814697266
+                        },
+                        new
+                        {
+                            Id = -11,
+                            Description = "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.",
+                            Director = "Makoto Shinkai",
+                            Duration = 154,
+                            GenreId = -5,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+                            MovieName = "Pulp Fiction",
+                            Score = 8.6000003814697266
+                        },
+                        new
+                        {
+                            Id = -12,
+                            Description = "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.",
+                            Director = "Chad Stahelski",
+                            Duration = 101,
+                            GenreId = -2,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
+                            MovieName = "John Wick",
+                            Score = 7.3000001907348633
                         });
                 });
 
@@ -205,8 +350,7 @@ namespace Cineplus.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(0);
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
@@ -4854,6 +4998,17 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Cineplus.Models.Associate", b =>
+                {
+                    b.HasOne("Cineplus.Models.ApplicationUser", "User")
+                        .WithOne("Associate")
+                        .HasForeignKey("Cineplus.Models.Associate", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Cineplus.Models.Movie", b =>
                 {
                     b.HasOne("Cineplus.Models.Genre", "Genre")
@@ -4969,6 +5124,11 @@ namespace Cineplus.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Associate");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
