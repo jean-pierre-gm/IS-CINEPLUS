@@ -17,8 +17,6 @@ namespace Cineplus.Models {
 		[JsonIgnore]
 		public ApplicationUser User { get; set; }
 		
-		[DefaultValue(0)]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Points { get; set; }
 		
 		[Required]
