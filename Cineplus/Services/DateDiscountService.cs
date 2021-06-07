@@ -37,10 +37,5 @@ namespace Cineplus.Services
         {
             return _dateDiscountRepository.Update(entity);
         }
-
-        public DateDiscount Remove(int id)
-        {
-            return _dateDiscountRepository.Remove(id);
-        }
     }
 }

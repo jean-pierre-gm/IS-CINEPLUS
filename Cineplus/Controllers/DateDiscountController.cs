@@ -18,34 +18,26 @@ namespace Cineplus.Controllers {
         public ActionResult<Pagination<DateDiscount>> Index([FromQuery] Pagination<DateDiscount> parameters) {
             return new ActionResult<Pagination<DateDiscount>>(_dateDiscountService.GetAll(parameters));
         }
-
-        [HttpPost]
-        public ActionResult<DateDiscount> PostDateDiscount([FromBody]DateDiscount dateDiscount) {
+        
+        [HttpPut]
+        public ActionResult<DateDiscount> PutDateDiscount([FromBody]DateDiscount dateDiscount) {
             if(_dateDiscountService.Get(dateDiscount.Id, false) is null)
-                _dateDiscountService.Add(dateDiscount);
-            else
-                _dateDiscountService.Update(dateDiscount);
+                return NotFound();
+            
+            _dateDiscountService.Update(dateDiscount);
 
             return new ActionResult<DateDiscount>(dateDiscount);
         }
-        
-        [HttpDelete]
-        public ActionResult<DateDiscount> DeleteDateDiscount([FromQuery]string id)
+
+        [HttpPost]
+        public ActionResult<DateDiscount> PostDateDiscount([FromBody] DateDiscount dateDiscount)
         {
-            int Id;
+            if (_dateDiscountService.Get(dateDiscount.Id, false) is not null)
+                return BadRequest();
 
-            if (id == null || !int.TryParse(id, out Id)) {
-                return NotFound();
-            }
+            _dateDiscountService.Add(dateDiscount);
 
-            var removed = _dateDiscountService.Remove(Id);
-
-            if (removed == null) {
-                return NotFound();
-            }
-
-            return removed;
+            return new ActionResult<DateDiscount>(dateDiscount);
         }
-        
     }
 }

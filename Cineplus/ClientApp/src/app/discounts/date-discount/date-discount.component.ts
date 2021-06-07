@@ -1,5 +1,5 @@
 ﻿import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {DateDiscount} from "../../../models/dateDiscount";
 import {CineplusDataSource} from "../../../models/cineplusDataSource";
 import {ActivatedRoute} from "@angular/router";
@@ -81,10 +81,12 @@ export class DateDiscountComponent implements OnInit, OnDestroy {
     this.changeEnables(index)
   }
 
-  deleteDiscount($event: MouseEvent, dateDiscountId) {
+  deleteDiscount($event: MouseEvent, discount) {
     console.log($event)
-    let httpParams = new HttpParams().set('id', dateDiscountId);
-    this.http.delete(this.baseUrl + 'api/datediscount' + '?' + httpParams.toString(), {}).toPromise()
+
+    discount.enabled = !discount.enable;
+
+    this.http.post(this.baseUrl + 'api/datediscount', discount).toPromise()
       .then(response => {
           this.discountsDataSource.refresh();
         }

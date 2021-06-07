@@ -9,6 +9,5 @@ namespace Cineplus.Services
         Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters);
         DateDiscount Add(DateDiscount entity);
         DateDiscount Update(DateDiscount entity);
-        DateDiscount Remove(int id);
     }
 }
