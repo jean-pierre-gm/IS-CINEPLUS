@@ -21,12 +21,14 @@ export class CineplusDataSource<T> {
     this.currentPagination.currentPage = 1;
     this.currentPagination.pageSize = (pagination && pagination.pageSize) ? pagination.pageSize : 10;
     this.currentPagination.orderByDesc = false;
+
+    this.refresh();
   }
 
   refresh() {
     this.redoParams();
     console.log('httpParams', this.httpParams.toString())
-    this.httpClient.get<Pagination<T>>(this.conf.endPoint + '?' + this.httpParams.toString()).subscribe(result => {
+    return this.httpClient.get<Pagination<T>>(this.conf.endPoint + '?' + this.httpParams.toString()).subscribe(result => {
       this.currentPagination = result;
     }, error => console.log(error));
   }
@@ -49,8 +51,9 @@ export class CineplusDataSource<T> {
     return this.setPage(page);
   }
 
-  orderBy(value: string) {
+  orderBy(value: string, reverse = false) {
     this.currentPagination.orderBy = value;
+    this.currentPagination.orderByDesc = reverse;
     return this.refresh();
   }
 
@@ -68,6 +71,7 @@ export class CineplusDataSource<T> {
 
   undoOrder() {
     this.currentPagination.orderBy = null;
+    return this.refresh()
   }
 
   invertOrder() {

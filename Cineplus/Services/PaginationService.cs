@@ -18,17 +18,6 @@ namespace Cineplus.Services {
 
 			page = page < 1 ? 1 : page;
 			pageSize = pageSize < 1 ? 10 : pageSize;
-			
-			Pagination<T> pagination = new Pagination<T>() {
-				TotalItems = query.Count(),
-				PageSize = pageSize,
-				CurrentPage = page,
-				OrderBy = orderBy,
-				OrderByDesc = orderByDesc,
-				TotalPages = (int) Math.Ceiling(query.Count() * 1.0 / pageSize),
-				FilterBy = filterBy,
-				FilterString = filterString
-			};
 
 			int skip = (page - 1) * pageSize;
 			var props = typeof(T).GetProperties();
@@ -57,6 +46,19 @@ namespace Cineplus.Services {
 
 				query = query.Where(filterByProperty.Name + ".Contains(@0)", filterString);
 			}
+
+			var totalItems = query.Count();
+			
+			Pagination<T> pagination = new Pagination<T>() {
+				TotalItems = totalItems,
+				PageSize = pageSize,
+				CurrentPage = page,
+				OrderBy = orderBy,
+				OrderByDesc = orderByDesc,
+				TotalPages = (int) Math.Ceiling(totalItems * 1.0 / pageSize),
+				FilterBy = filterBy,
+				FilterString = filterString
+			};
 
 			pagination.Result = query
 				.Skip(skip)
