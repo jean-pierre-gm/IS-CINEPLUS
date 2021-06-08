@@ -18,12 +18,8 @@ namespace Cineplus.Services {
 
 		private void _purge()
 		{
-			var timedOut = _ticketRepository.Data().Where(ticket => !ticket.Confirmed).AsEnumerable().Where(ticket =>(DateTime.Now-ticket.ReserveTime) >= TimeSpan.FromMinutes(10));
-			 
-			foreach (var ticket in timedOut)
-			{
-				_ticketRepository.Remove(ticket.Id);
-			}
+			var dateTimeout = DateTime.Now.AddMinutes(-10);
+			_ticketRepository.RemoveRange(ticket => !ticket.Confirmed && ticket.ReserveTime <= dateTimeout);
 		}
 
 		public IEnumerable<Ticket> MakeReserveForUser(List<Ticket> toReserve,ApplicationUser user)

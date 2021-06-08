@@ -40,6 +40,17 @@ namespace Cineplus.Models {
 			return entity;
 		}
 
+		public IEnumerable<T> RemoveRange(Func<T,bool> query)
+		{
+			var entities = _entities.Where(query).AsEnumerable();
+			if (entities.Any()){
+				_entities.RemoveRange(entities);
+				_context.SaveChanges();
+			}
+			return entities;
+
+		}
+		
 		public T Remove(int id) {
 			var entity = _entities.FirstOrDefault(t => t.Id == id);
 			if (entity != null) {

@@ -86,7 +86,11 @@
 </div>
 
 <div *ngIf="unpaid.data.length > 0">
-<mat-label>Unpaid Tickets</mat-label>
+  <div>
+    <mat-label>Unpaid Tickets</mat-label>
+    <br><br>
+  </div>
+
 <table  mat-table
        [dataSource]="unpaid" multiTemplateDataRows
        class="mat-elevation-z8">
@@ -114,7 +118,9 @@
   <tr mat-header-row *matHeaderRowDef="selectedColumnsToDisplay; sticky: true"></tr>
   <tr mat-row routerLink="/reserve" [queryParams]="{reproduction: row['id']}" *matRowDef="let row; columns: selectedColumnsToDisplay;"></tr>
 </table>
+
   <ng-container>
-  <button *ngIf="unpaid.data.length > 0" mat-stroked-button color="primary" (click)="submit()">Pay</button>
+    <br><br>
+  <button *ngIf="unpaid.data.length > 0" mat-stroked-button color="primary"  style="width: 20%" (click)="submit()">Pay</button>
   </ng-container>
 </div>
