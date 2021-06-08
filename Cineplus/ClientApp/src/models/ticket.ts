@@ -1,9 +1,7 @@
 ﻿import {Seat} from "./seat";
+import {Reproduction} from "./reproduction";
 
 export class Ticket{
-  seatId: number;
-  id: number;
-  userId:string;
   seat:Seat;
   reproductionId: number;
 

@@ -4,69 +4,83 @@
 
 <div class="d-flex">
   <div class="p-4">
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Tickets</mat-label>
-      <input type="number" matInput [formControl]="ticketsFormControl" [errorStateMatcher]="matcher"
-             (input)="onChange()">
-      <mat-hint></mat-hint>
-      <mat-error *ngIf="ticketsFormControl.hasError('required')">
-        Number of tickets is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="ticketsFormControl.hasError('min')">
-        Minimum number of tickets is 1
-      </mat-error>
-      <mat-error *ngIf="ticketsFormControl.hasError('max')">
-        More tickets than seats available
-      </mat-error>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Tickets</mat-label>
+        <input type="number" matInput [formControl]="ticketsFormControl" [errorStateMatcher]="matcher"
+               (input)="onChange()">
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="ticketsFormControl.hasError('required')">
+          Number of tickets is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="ticketsFormControl.hasError('min')">
+          Minimum number of tickets is 1
+        </mat-error>
+        <mat-error *ngIf="ticketsFormControl.hasError('max')">
+          More tickets than seats available
+        </mat-error>
 
-    </mat-form-field>
-  </form>
+      </mat-form-field>
+    </form>
 
-  <div class="plane" id="seats">
-    <ol class="cabin" *ngFor="let row of seats let i = index">
-      <li class="row row--{{i}}">
-        <ol class="seats" type="A" *ngFor="let seat of row let j = index">
-          <li class="seat">
-            <input type="checkbox" [id]="seat" [disabled]="seat == '0'" (click)="seatClick($event)"/>
-            <label [for]="seat"></label>
-          </li>
-        </ol>
-      </li>
-    </ol>
-  </div>
+    <div class="plane" id="seats">
+      <ol class="cabin" *ngFor="let row of seats let i = index">
+        <li class="row row--{{i}}">
+          <ol class="seats" type="A" *ngFor="let seat of row let j = index">
+            <li class="seat">
+              <input type="checkbox" [id]="seat" [disabled]="seat == '0'" (click)="seatClick($event)"/>
+              <label [for]="seat"></label>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
 
-<button *ngIf="marked.length > 0" mat-stroked-button color="accent" (click)="submit()">Reserve Now!</button>
+    <button *ngIf="marked.length > 0" mat-stroked-button color="accent" (click)="submit()">Reserve Now!</button>
   </div>
 
   <div class="p-5 flex-fill">
+    <table *ngIf="marked.length > 0" mat-table
+           [dataSource]="dataSource" multiTemplateDataRows
+           class="mat-elevation-z8">
+      <ng-container matColumnDef="seat">
+        <th mat-header-cell *matHeaderCellDef>Seat</th>
+        <td mat-cell *matCellDef="let element">
+          <span>{{'Seat number ' + element.seat.column + ' in row ' + element.seat.row + "."}}</span></td>
+      </ng-container>
 
-    <div class="mat-elevation-z8 mb-5" *ngIf="marked.length > 0">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="originalPrice">
+        <th mat-header-cell *matHeaderCellDef>Original Price</th>
+        <td mat-cell *matCellDef="let element"><span>{{element.originalPrice}} </span></td>
+      </ng-container>
 
-        <ng-container matColumnDef="seat">
-          <th mat-header-cell *matHeaderCellDef>Seat</th>
-          <td mat-cell *matCellDef="let element"><span>{{'Seat number ' +element.col +' in row ' +element.row +"."}}</span></td>
-        </ng-container>
+      <ng-container matColumnDef="discount">
+        <th mat-header-cell *matHeaderCellDef>Discount</th>
+        <td mat-cell *matCellDef="let element"><span>{{element.discount}} </span></td>
+      </ng-container>
 
-        <ng-container matColumnDef="originalPrice">
-          <th mat-header-cell *matHeaderCellDef>Original Price</th>
-          <td mat-cell *matCellDef="let element"><span>{{element.originalPrice}} </span></td>
-        </ng-container>
+      <ng-container matColumnDef="finalPrice">
+        <th mat-header-cell *matHeaderCellDef>Final Price</th>
+        <td mat-cell *matCellDef="let element"><span>{{element.finalPrice}}</span></td>
+      </ng-container>
 
-        <ng-container matColumnDef="discount">
-          <th mat-header-cell *matHeaderCellDef>Discount</th>
-          <td mat-cell *matCellDef="let element"><span>{{element.discount}} </span></td>
-        </ng-container>
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="example-element-detail"
+               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div class="example-element-description"> All discount checkboxes here </div>
+          </div>
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="finalPrice">
-          <th mat-header-cell *matHeaderCellDef>Final Price</th>
-          <td mat-cell *matCellDef="let element"><span>{{element.finalPrice}}</span></td>
-        </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+          class="example-element-row"
+          [class.example-expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
   </div>
 </div>
