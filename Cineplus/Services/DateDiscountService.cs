@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
 
@@ -16,6 +17,12 @@ namespace Cineplus.Services
         public DateDiscount Get(int id, bool tracked = true)
         {
             return _dateDiscountRepository.Data(tracked).FirstOrDefault(dateDiscount => dateDiscount.Id == id);
+        }
+        
+        public DateDiscount GetforDate(DateTime date, bool tracked = true)
+        {
+            return _dateDiscountRepository.Data().FirstOrDefault(dateDiscount => 
+                dateDiscount.Date.Day == date.Day && dateDiscount.Date.Month == date.Month);
         }
 
         public Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters, bool admitDisabledDiscounts)

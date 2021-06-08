@@ -14,6 +14,7 @@ namespace Cineplus.Models {
         [Column(TypeName="ntext")]
         public string Description { get; set; }
 
+        [Sortable(OrderBy = "discount")]
         public double Discount { get; set; }
 
         public bool Enable { get; set; } = true;
