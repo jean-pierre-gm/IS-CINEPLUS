@@ -11,7 +11,7 @@ namespace Cineplus.Models {
 
         public DateTime Date { get; set; }
         
-        public float Discount { get; set; }
+        public double Discount { get; set; }
 
         public bool Enable { get; set; } = true;
     }

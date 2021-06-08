@@ -14,7 +14,7 @@ namespace Cineplus.Models {
         [Column(TypeName="ntext")]
         public string Description { get; set; }
 
-        public float Discount { get; set; }
+        public double Discount { get; set; }
 
         public bool Enable { get; set; } = true;
     }
