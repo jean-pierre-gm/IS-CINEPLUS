@@ -40,15 +40,14 @@ namespace Cineplus.Models {
 			return entity;
 		}
 
-		public IEnumerable<T> RemoveRange(Func<T,bool> query)
-		{
-			var entities = _entities.Where(query).AsEnumerable();
-			if (entities.Any()){
-				_entities.RemoveRange(entities);
-				_context.SaveChanges();
+		public IEnumerable<T> RemoveRange(IQueryable<T> query) {
+			_entities.RemoveRange(query);
+			try {
+				_context.SaveChanges();	
+			} catch (DbUpdateConcurrencyException exception) {
+				
 			}
-			return entities;
-
+			return query;
 		}
 		
 		public T Remove(int id) {

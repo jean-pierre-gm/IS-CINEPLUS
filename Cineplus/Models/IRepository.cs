@@ -8,6 +8,6 @@ namespace Cineplus.Models {
 		T Add(T entity);
 		T Update(T entity);
 		T Remove(int id);
-		IEnumerable<T> RemoveRange(Func<T, bool> query);
+		IEnumerable<T> RemoveRange(IQueryable<T> query);
 	}
 }
