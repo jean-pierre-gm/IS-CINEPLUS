@@ -18,7 +18,8 @@ namespace Cineplus.Services {
 
 		private void _purge()
 		{
-			var timedOut = _ticketRepository.Data().Where(ticket => ticket.Confirmed==false).AsEnumerable().Where(ticket =>(ticket.ReserveTime-DateTime.Now) >= TimeSpan.FromMinutes(10));
+			var timedOut = _ticketRepository.Data().Where(ticket => !ticket.Confirmed).AsEnumerable().Where(ticket =>(DateTime.Now-ticket.ReserveTime) >= TimeSpan.FromMinutes(10));
+			 
 			foreach (var ticket in timedOut)
 			{
 				_ticketRepository.Remove(ticket.Id);
@@ -32,7 +33,7 @@ namespace Cineplus.Services {
 			
 			//chekcuser
 			
-			if (!toReserve.Any()) return reserved;
+			if (user== null || !toReserve.Any()) return reserved;
 			
 			foreach (var ticket in toReserve)
 			{
@@ -63,21 +64,19 @@ namespace Cineplus.Services {
 			return reserved;
 		}
 		
-		public Ticket Get(int id)
-		{
-			_purge();
-			return _ticketRepository.Data().FirstOrDefault(ticket => ticket.Id == id);
-		}
-
 		public IEnumerable<Ticket> GetAllFromReproduction(int reproductionId) {
 			_purge();
 			return _ticketRepository.Data().Include(ticket => ticket.Seat).Where(ticket => ticket.ReproductionId == reproductionId).AsEnumerable();
 		}
 
-		public IEnumerable<Ticket> GetAllTicketsForUserAtReproduction(string userId, int reproductionId) {
+		public IEnumerable<Ticket> GetAllTicketsForUserAtReproduction(ApplicationUser user, int reproductionId) {
 			_purge();
+			if (user == null)
+			{
+				return new Ticket[0];
+			}
 			return _ticketRepository.Data().Include(ticket => ticket.Seat)
-				.Where(ticket => ticket.ReproductionId == reproductionId && ticket.UserId == userId).AsEnumerable();
+				.Where(ticket => ticket.ReproductionId == reproductionId && ticket.UserId == user.Id).AsEnumerable();
 		}
 	}
 }

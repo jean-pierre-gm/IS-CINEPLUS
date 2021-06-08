@@ -30,9 +30,11 @@ namespace Cineplus.Controllers
             public ActionResult<IEnumerable<Ticket>> GetSoldTicketsFromReproduction(int id) {
                 return  new  ActionResult<IEnumerable<Ticket>>(_ticketService.GetAllFromReproduction(id));
             }
-
-            public ActionResult<IEnumerable<Ticket>> GetTicketsFromReproductionAndUser(int id,string uid) {
-                return  new  ActionResult<IEnumerable<Ticket>>(_ticketService.GetAllTicketsForUserAtReproduction(uid,id));
+            [HttpGet("{id:int}/user")]
+            public ActionResult<IEnumerable<Ticket>> GetTicketsFromReproductionAndUser(int id) {
+                var user = _userService.GetCurrentUser();
+                user.Wait();
+                return  new  ActionResult<IEnumerable<Ticket>>(_ticketService.GetAllTicketsForUserAtReproduction(user.Result,id));
             }
         }
 }
