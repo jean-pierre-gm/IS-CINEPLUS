@@ -30,11 +30,7 @@ namespace Cineplus.Services
             return PaginationService.GetPagination(
                 (admitDisabledDiscounts) ?
                 _dateDiscountRepository.Data().AsQueryable() :
-                _dateDiscountRepository.Data().Where(discount => discount.Enable).AsQueryable(),
-                parameters.CurrentPage,
-                parameters.OrderBy,
-                parameters.OrderByDesc,
-                parameters.PageSize);
+                _dateDiscountRepository.Data().Where(discount => discount.Enable).AsQueryable(), parameters);
         }
 
         public DateDiscount Add(DateDiscount entity)

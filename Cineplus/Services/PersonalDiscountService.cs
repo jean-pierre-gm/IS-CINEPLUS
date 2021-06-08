@@ -19,16 +19,11 @@ namespace Cineplus.Services
                 FirstOrDefault(personalDiscount => personalDiscount.Id == id);
         }
 
-        public Pagination<PersonalDiscount> GetAll(Pagination<PersonalDiscount> parameters, bool admitDisabledDiscounts)
-        {
+        public Pagination<PersonalDiscount> GetAll(Pagination<PersonalDiscount> parameters, bool admitDisabledDiscounts) {
             return PaginationService.GetPagination(
-                (admitDisabledDiscounts) ?
-                _personalDiscountRepository.Data().AsQueryable() :
-                _personalDiscountRepository.Data().Where(discount => discount.Enable).AsQueryable(),
-                parameters.CurrentPage,
-                parameters.OrderBy,
-                parameters.OrderByDesc,
-                parameters.PageSize);
+                (admitDisabledDiscounts)
+                    ? _personalDiscountRepository.Data().AsQueryable()
+                    : _personalDiscountRepository.Data().Where(discount => discount.Enable).AsQueryable(), parameters);
         }
 
         public PersonalDiscount Add(PersonalDiscount entity)
