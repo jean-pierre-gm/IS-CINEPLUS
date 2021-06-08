@@ -8,7 +8,7 @@ table {
 }
 
 td, th {
-  width: 22%;
+  width: 25%;
 }
 
 .edit-button {
@@ -18,16 +18,15 @@ td, th {
   padding: 0 12px;
 }
 
-.mat-raised-button
-{
-  font-size: 100%;
+.add-button#plus {
+  font-size: 160%;
   margin: 8px 25px 8px 8px;
   background-color: forestgreen;
 }
 
-.add-button {
-  font-size: 160%;
-  margin: 8px 25px 8px 8px;
+.add-button#eye {
+  font-size: 100%;
+  margin: 8px 180px 8px 8px;
   background-color: forestgreen;
 }
 

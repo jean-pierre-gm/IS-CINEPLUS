@@ -71,19 +71,19 @@ namespace Cineplus.Models {
 			var personalDiscounts = new List<PersonalDiscount>() {
 				new PersonalDiscount() {
 					Id = -1,
-					Name = "FEU",
+					PersonalName = "FEU",
 					Description = "Descuento para los integrantes de la FEU",
 					Discount = 10,
 				},
 				new PersonalDiscount() {
 					Id = -2,
-					Name = "Discapacitados",
+					PersonalName = "Discapacitados",
 					Description = "Descuento para los discapacitados",
 					Discount = 10,
 				},
 				new PersonalDiscount() {
 					Id = -3,
-					Name = "Personal",
+					PersonalName = "Personal",
 					Description = "Descuento para los trabajadores del centro",
 					Discount = 50,
 				},

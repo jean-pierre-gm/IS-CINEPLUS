@@ -9,7 +9,7 @@ namespace Cineplus.Models {
 
         [Filter(FilterBy = "name")]
         [Sortable(OrderBy = "name")]
-        public string Name { get; set; }
+        public string PersonalName { get; set; }
         
         [Column(TypeName="ntext")]
         public string Description { get; set; }

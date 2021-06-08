@@ -21,7 +21,7 @@ export class ManageDateDiscountsComponent implements OnInit {
   dateDiscountsDataSource: CineplusDataSource<DateDiscount>;
   propColumns: string[] = ["description", "discount", "date"]
   sortColumns: boolean[] = [false, true, true]
-  get displayedColumns(): string[] { return this.propColumns.concat(["Actions", "Disable"])}
+  get displayedColumns(): string[] { return this.propColumns.concat(["Disable", "Actions"])}
   showDisableds: boolean;
 
   formatDate = formatDate

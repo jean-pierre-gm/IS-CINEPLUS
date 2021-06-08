@@ -44,7 +44,7 @@ namespace Cineplus.Data {
 				.HasConversion<bool>();
 			
 			modelBuilder.Entity<PersonalDiscount>()
-				.Property(personaldiscount => personaldiscount.Name)
+				.Property(personaldiscount => personaldiscount.PersonalName)
 				.IsRequired()
 				.HasMaxLength(15);
 			

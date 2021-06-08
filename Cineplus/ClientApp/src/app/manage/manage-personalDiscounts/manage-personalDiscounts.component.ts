@@ -20,8 +20,8 @@ export class ManagePersonalDiscountsComponent implements OnInit {
 
   personalDiscountsDataSource: CineplusDataSource<PersonalDiscount>;
   propColumns: string[] = ["name", "discount", "description"]
-  sortColumns: boolean[] = [true, true, false]
-  get displayedColumns(): string[] { return this.propColumns.concat(["Actions", "Disable"])}
+  sortColumns: boolean[] = [true, false, true]
+  get displayedColumns(): string[] { return this.propColumns.concat(["Disable", "Actions"])}
   showDisableds: boolean;
 
   faEdit = faEdit
