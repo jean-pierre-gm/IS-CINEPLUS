@@ -3,13 +3,13 @@
   <input matInput (keyup)="applyFilter(input.value)" placeholder="Ex. cine" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8" *ngIf="dateDiscountsDataSource.result">
-  <table mat-table [dataSource]="dateDiscountsDataSource.result" matSort (matSortChange)="sortTable($event)">
+<div class="mat-elevation-z8" *ngIf="personalDiscountsDataSource.result">
+  <table mat-table [dataSource]="personalDiscountsDataSource.result" matSort (matSortChange)="sortTable($event)">
 
     <ng-container *ngFor="let disCol of propColumns; let colIndex = index" matColumnDef="{{disCol}}">
       <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!sortColumns[colIndex]">{{disCol | titlecase}}</th>
       <td mat-cell *matCellDef="let element">
-        {{disCol == 'date' ? formatDate(element.date, "dd/MM/yyyy", "en_US") : element[disCol]}}
+        {{element[disCol]}}
       </td>
     </ng-container>
 
@@ -53,9 +53,9 @@
     </button>
     <span class="float-right spacer"></span>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
-                   [pageSize]="dateDiscountsDataSource.currentPagination.pageSize"
-                   [length]="dateDiscountsDataSource.currentPagination.totalItems"
-                   [pageIndex]="dateDiscountsDataSource.currentPagination.currentPage - 1"
+                   [pageSize]="personalDiscountsDataSource.currentPagination.pageSize"
+                   [length]="personalDiscountsDataSource.currentPagination.totalItems"
+                   [pageIndex]="personalDiscountsDataSource.currentPagination.currentPage - 1"
                    (page)="editPagination($event)">
     </mat-paginator>
   </mat-toolbar-row>

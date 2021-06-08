@@ -110,7 +110,8 @@ namespace Cineplus.Data.Migrations
 
                     b.Property<int>("Points")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -122,6 +123,29 @@ namespace Cineplus.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Associate");
+                });
+
+            modelBuilder.Entity("Cineplus.Models.DateDiscount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("REAL");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DateDiscount");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
@@ -214,6 +238,29 @@ namespace Cineplus.Data.Migrations
                             MovieName = "Dos es mejor que uno",
                             Score = 0.0
                         });
+                });
+
+            modelBuilder.Entity("Cineplus.Models.PersonalDiscount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("REAL");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PersonalDiscount");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Reproduction", b =>

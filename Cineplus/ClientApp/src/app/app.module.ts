@@ -45,6 +45,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage-dateDiscounts.component";
 import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
+import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscounts/manage-personalDiscounts.component";
+import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-
     ClientProfileComponent,
     BecomeAssociateComponent,
     ManageDateDiscountsComponent,
-    CreateDateDiscountComponent
+    CreateDateDiscountComponent,
+    ManagePersonalDiscountsComponent,
+    CreatePersonalDiscountComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -144,6 +148,6 @@ import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
-    BecomeAssociateComponent]
+    CreatePersonalDiscountComponent, BecomeAssociateComponent]
 })
 export class AppModule { }

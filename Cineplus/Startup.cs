@@ -64,6 +64,7 @@ namespace Cineplus {
 			services.AddScoped<ISeatService, SeatService>();
 			services.AddScoped<ITicketService, TicketService>();
 			services.AddScoped<IDateDiscountService, DateDiscountService>();
+			services.AddScoped<IPersonalDiscountService, PersonalDiscountService>();
 			services.AddScoped<IAssociateService, AssociateService>();
 			services.AddScoped<IUserService, UserService>();
 		}

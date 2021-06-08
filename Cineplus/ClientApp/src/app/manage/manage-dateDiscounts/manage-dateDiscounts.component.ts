@@ -2,12 +2,12 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {CineplusDataSource} from "../../../models/cineplusDataSource";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {DataSourceConf} from "../../../models/dataSourceConf";
-import {faEdit, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faPlus, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
-import {Pagination} from "../../../models/pagination";
 import {Sort} from "@angular/material/sort";
 import {DateDiscount} from "../../../models/dateDiscount";
 import {CreateDateDiscountComponent} from "./create-dateDiscount/create-dateDiscount.component";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-manage-dateDiscounts',
@@ -21,10 +21,15 @@ export class ManageDateDiscountsComponent implements OnInit {
   dateDiscountsDataSource: CineplusDataSource<DateDiscount>;
   propColumns: string[] = ["description", "discount", "date"]
   sortColumns: boolean[] = [false, true, true]
-  get displayedColumns(): string[] { return this.propColumns.concat("Actions")}
+  get displayedColumns(): string[] { return this.propColumns.concat(["Actions", "Disable"])}
+  showDisableds: boolean;
+
+  formatDate = formatDate
 
   faEdit = faEdit
   faPlus = faPlus
+  faEye = faEye
+  faEyeSlash = faEyeSlash
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
@@ -33,13 +38,32 @@ export class ManageDateDiscountsComponent implements OnInit {
 
     let dsConf = new DataSourceConf();
     dsConf.endPoint = baseUrl + 'api/datediscount'
-    let httpParams = new HttpParams().set('admitDisabledDiscounts', 'false');
-    this.dateDiscountsDataSource = new CineplusDataSource<DateDiscount>(http, dsConf, null, httpParams);
+    this.dateDiscountsDataSource = new CineplusDataSource<DateDiscount>(http, dsConf);
     this.dateDiscountsDataSource.refresh()
-
+    this.showDisableds = false;
   }
 
   ngOnInit() {
+  }
+
+  admitDisabled()
+  {
+    this.dateDiscountsDataSource.httpParams =
+      this.dateDiscountsDataSource.httpParams.set('admitDisabledDiscounts',
+        this.showDisableds ? 'false' : 'true')
+    this.showDisableds = !this.showDisableds;
+    this.dateDiscountsDataSource.refresh();
+  }
+
+  changeEnable(dateDiscount) {
+    dateDiscount.enable = !dateDiscount.enable;
+
+    this.http.put(this.baseUrl + 'api/datediscount/' + dateDiscount.id,
+      dateDiscount).toPromise()
+      .then(response => {
+          this.dateDiscountsDataSource.refresh();
+        }
+      );
   }
 
   editPagination($event) {

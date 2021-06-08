@@ -38,12 +38,7 @@ namespace Cineplus.Controllers {
         [HttpPost]
         public ActionResult<DateDiscount> PostDateDiscount([FromBody] DateDiscount dateDiscount)
         {
-            if (_dateDiscountService.Get(dateDiscount.Id, false) is not null)
-                return BadRequest();
-
-            _dateDiscountService.Add(dateDiscount);
-
-            return new ActionResult<DateDiscount>(dateDiscount);
+            return _dateDiscountService.Add(dateDiscount);
         }
     }
 }
