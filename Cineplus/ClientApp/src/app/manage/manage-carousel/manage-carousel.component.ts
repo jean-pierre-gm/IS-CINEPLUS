@@ -77,8 +77,8 @@ export class ManageCarouselComponent implements OnInit {
     }
   }
 
-  select($event, element){
-    if($event.checked){
+  select(element){
+    if(!this.isActive(element)){
       if(this.manual.data.length == 10){
         this._snackBar.open("Only 10 movies can be displayed", "", {'duration': 2000})
         this.manual = new MatTableDataSource<Movie>(this.manual.data)

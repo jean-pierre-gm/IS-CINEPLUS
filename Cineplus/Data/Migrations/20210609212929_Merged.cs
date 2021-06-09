@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cineplus.Data.Migrations
 {
-    public partial class Current : Migration
+    public partial class Merged : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
