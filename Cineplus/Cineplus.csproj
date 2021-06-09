@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest"/>
         <None Include="ClientApp\src\app\discounts\date-discount\date-discount-list.component.ts" />
         <None Include="ClientApp\src\app\discounts\date-discount\date-discount.component.ts" />
         <None Include="ClientApp\src\app\discounts\date-discount\discounts.component.ts" />
@@ -48,6 +48,7 @@
         <None Include="ClientApp\src\models\Role.ts" />
         <None Include="ClientApp\src\models\User.ts" />
         <None Include="ClientApp\src\models\userWithRoles.ts" />
+        <None Remove="ClientApp\src\app\discounts\**" />
     </ItemGroup>
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
@@ -80,6 +81,7 @@
         <Content Include="ClientApp\src\app\role\role-users\role-users.component.html" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <Content Remove="ClientApp\src\app\discounts\**" />
     </ItemGroup>
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Login.cshtml" />
@@ -91,7 +93,10 @@
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="ClientApp\src\app\discounts\personal-discount" />
+      <Compile Remove="ClientApp\src\app\discounts\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="ClientApp\src\app\discounts\**" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
