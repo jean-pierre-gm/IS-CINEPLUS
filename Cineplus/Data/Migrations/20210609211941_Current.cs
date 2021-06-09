@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cineplus.Data.Migrations
 {
-    public partial class DisplaySettingsCarousel : Migration
+    public partial class Current : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,11 +20,25 @@ namespace Cineplus.Data.Migrations
                 defaultValue: false);
 
             migrationBuilder.AddColumn<double>(
+                name: "PointsPrice",
+                table: "Ticket",
+                type: "REAL",
+                nullable: false,
+                defaultValue: 0.0);
+
+            migrationBuilder.AddColumn<double>(
                 name: "Price",
                 table: "Ticket",
                 type: "REAL",
                 nullable: false,
                 defaultValue: 0.0);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "ReserveTime",
+                table: "Ticket",
+                type: "TEXT",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<int>(
                 name: "Columns",
@@ -46,18 +60,33 @@ namespace Cineplus.Data.Migrations
                 type: "TEXT",
                 nullable: true);
 
-            migrationBuilder.AddColumn<bool>(
+            migrationBuilder.AddColumn<DateTime>(
                 name: "Display",
                 table: "Movie",
-                type: "INTEGER",
+                type: "TEXT",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
                 table: "Movie",
                 type: "TEXT",
                 nullable: true);
+
+            migrationBuilder.CreateTable(
+                name: "Settings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Settings", x => x.Id);
+                });
 
             migrationBuilder.InsertData(
                 table: "Genre",
@@ -79,24 +108,44 @@ namespace Cineplus.Data.Migrations
                 keyColumn: "Id",
                 keyValue: -3,
                 columns: new[] { "Description", "Director", "Display", "Duration", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!", "Joss Whedon", true, 143, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "The Avengers", 7.6999998092651367 });
+                values: new object[] { "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!", "Joss Whedon", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 143, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "The Avengers", 7.6999998092651367 });
 
             migrationBuilder.UpdateData(
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -2,
                 columns: new[] { "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.", "Steven Spielberg", true, 127, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg", "Indiana Jones and the Last Crusade", 7.8000001907348633 });
+                values: new object[] { "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.", "Steven Spielberg", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 127, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg", "Indiana Jones and the Last Crusade", 7.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -7, "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.", "Craig Gillespie", true, 134, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg", "Cruella", 8.6999998092651367 });
+                values: new object[] { -7, "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.", "Craig Gillespie", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 134, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg", "Cruella", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -12, "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.", "Chad Stahelski", false, 101, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "John Wick", 7.3000001907348633 });
+                values: new object[] { -12, "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.", "Chad Stahelski", new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 101, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "John Wick", 7.3000001907348633 });
+
+            migrationBuilder.InsertData(
+                table: "Settings",
+                columns: new[] { "Id", "Active", "Name", "Type" },
+                values: new object[] { -1, false, "Best Reviews", "Display" });
+
+            migrationBuilder.InsertData(
+                table: "Settings",
+                columns: new[] { "Id", "Active", "Name", "Type" },
+                values: new object[] { -2, true, "Manual", "Display" });
+
+            migrationBuilder.InsertData(
+                table: "Settings",
+                columns: new[] { "Id", "Active", "Name", "Type" },
+                values: new object[] { -3, false, "Random", "Display" });
+
+            migrationBuilder.InsertData(
+                table: "Settings",
+                columns: new[] { "Id", "Active", "Name", "Type" },
+                values: new object[] { -4, false, "Most seen", "Display" });
 
             migrationBuilder.InsertData(
                 table: "Theater",
@@ -118,42 +167,42 @@ namespace Cineplus.Data.Migrations
                 keyColumn: "Id",
                 keyValue: -1,
                 columns: new[] { "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.", "Robert Zemeckis", true, 142, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg", "Forrest Gump", 8.8000001907348633 });
+                values: new object[] { "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.", "Robert Zemeckis", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 142, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg", "Forrest Gump", 8.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -4, "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.", "Martin Scorsese", true, 149, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg", "The Departed", 8.1999998092651367 });
+                values: new object[] { -4, "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.", "Martin Scorsese", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 149, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg", "The Departed", 8.1999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -6, "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.", "Damien Chazelle", true, 129, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg", "La La Land", 7.9000000953674316 });
+                values: new object[] { -6, "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.", "Damien Chazelle", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 129, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg", "La La Land", 7.9000000953674316 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -8, "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.", "Frank Darabont", true, 144, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", 8.6999998092651367 });
+                values: new object[] { -8, "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.", "Frank Darabont", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 144, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -9, "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.", "Francis Ford Coppola", true, 175, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", "The Godfather", 8.6999998092651367 });
+                values: new object[] { -9, "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.", "Francis Ford Coppola", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 175, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", "The Godfather", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -10, "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.", "Makoto Shinkai", true, 104, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg", "Your Name.", 8.6000003814697266 });
+                values: new object[] { -10, "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.", "Makoto Shinkai", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 104, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg", "Your Name.", 8.6000003814697266 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -5, "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.", "Francis Lawrence", true, 123, -4, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg", "The Hunger Games: Mockingjay - Part 1 ", 6.8000001907348633 });
+                values: new object[] { -5, "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.", "Francis Lawrence", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 123, -4, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg", "The Hunger Games: Mockingjay - Part 1 ", 6.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
                 columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -11, "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "Makoto Shinkai", false, 154, -5, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", "Pulp Fiction", 8.6000003814697266 });
+                values: new object[] { -11, "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "Makoto Shinkai", new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 154, -5, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", "Pulp Fiction", 8.6000003814697266 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
@@ -1557,1462 +1606,1465 @@ namespace Cineplus.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -1, true, 10.0, -1, -1, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -1, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -1, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -101, true, 10.0, -1, -148, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -101, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -148, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -100, true, 10.0, -1, -147, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -100, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -147, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -99, true, 10.0, -1, -146, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -99, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -146, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -200, true, 12.0, -2, -144, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -200, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -144, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -98, true, 10.0, -1, -144, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -98, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -144, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -199, true, 12.0, -2, -143, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -199, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -143, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -201, true, 12.0, -2, -148, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -201, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -148, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -97, true, 10.0, -1, -143, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -97, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -143, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -197, true, 12.0, -2, -141, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -197, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -141, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -196, true, 12.0, -2, -140, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -196, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -140, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -96, true, 10.0, -1, -140, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -96, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -140, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -195, true, 12.0, -2, -139, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -195, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -139, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -95, true, 10.0, -1, -139, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -95, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -139, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -94, true, 10.0, -1, -138, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -94, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -138, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -198, true, 12.0, -2, -142, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -198, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -142, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -194, true, 12.0, -2, -137, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -194, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -137, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -102, true, 10.0, -1, -149, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -102, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -149, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -202, true, 9.0, -3, -152, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -202, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -152, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -216, true, 9.0, -3, -168, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -216, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -168, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -215, true, 9.0, -3, -167, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -215, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -167, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -214, true, 9.0, -3, -166, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -214, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -166, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -213, true, 9.0, -3, -164, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -213, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -164, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -212, true, 9.0, -3, -163, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -212, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -163, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -211, true, 9.0, -3, -162, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -211, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -162, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -103, true, 10.0, -1, -150, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -103, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -150, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -210, true, 9.0, -3, -161, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -210, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -161, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -208, true, 9.0, -3, -159, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -208, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -159, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -207, true, 9.0, -3, -158, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -207, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -158, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -206, true, 9.0, -3, -156, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -206, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -156, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -205, true, 9.0, -3, -155, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -205, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -155, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -204, true, 9.0, -3, -154, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -204, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -154, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -203, true, 9.0, -3, -153, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -203, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -153, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -209, true, 9.0, -3, -160, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -209, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -160, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -193, true, 12.0, -2, -135, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -193, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -135, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -192, true, 12.0, -2, -134, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -192, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -134, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -93, true, 10.0, -1, -134, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -93, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -134, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -82, true, 10.0, -1, -122, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -82, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -122, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -81, true, 10.0, -1, -121, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -81, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -121, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -182, true, 12.0, -2, -120, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -182, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -120, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -80, true, 10.0, -1, -120, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -80, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -120, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -181, true, 12.0, -2, -119, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -181, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -119, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -180, true, 12.0, -2, -118, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -180, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -118, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -183, true, 12.0, -2, -122, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -183, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -122, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -79, true, 10.0, -1, -118, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -79, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -118, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -78, true, 10.0, -1, -117, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -78, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -117, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -178, true, 12.0, -2, -113, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -178, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -113, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -177, true, 12.0, -2, -110, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -177, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -110, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -176, true, 12.0, -2, -109, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -176, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -109, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -77, true, 10.0, -1, -109, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -77, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -109, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -76, true, 10.0, -1, -108, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -76, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -108, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -179, true, 12.0, -2, -117, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -179, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -117, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -83, true, 10.0, -1, -123, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -83, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -123, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -184, true, 12.0, -2, -123, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -184, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -123, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -84, true, 10.0, -1, -124, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -84, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -124, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -191, true, 12.0, -2, -133, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -191, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -133, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -92, true, 10.0, -1, -132, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -92, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -132, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -190, true, 12.0, -2, -131, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -190, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -131, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -91, true, 10.0, -1, -131, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -91, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -131, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -189, true, 12.0, -2, -130, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -189, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -130, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -90, true, 10.0, -1, -130, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -90, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -130, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -188, true, 12.0, -2, -129, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -188, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -129, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -89, true, 10.0, -1, -129, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -89, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -129, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -88, true, 10.0, -1, -128, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -88, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -128, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -187, true, 12.0, -2, -127, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -187, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -127, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -87, true, 10.0, -1, -127, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -87, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -127, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -186, true, 12.0, -2, -126, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -186, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -126, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -86, true, 10.0, -1, -126, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -86, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -126, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -85, true, 10.0, -1, -125, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -85, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -125, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -185, true, 12.0, -2, -124, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -185, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -124, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -217, true, 9.0, -3, -169, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -217, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -169, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -175, true, 12.0, -2, -107, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -175, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -107, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -218, true, 9.0, -3, -171, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -218, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -171, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -220, true, 9.0, -3, -175, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -220, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -175, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -280, true, 14.0, -5, -253, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -280, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -253, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -279, true, 14.0, -5, -251, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -279, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -251, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -269, true, 8.0, -4, -251, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -269, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -251, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -268, true, 9.0, -3, -250, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -268, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -250, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -267, true, 9.0, -3, -249, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -267, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -249, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -266, true, 9.0, -3, -248, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -266, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -248, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -281, true, 14.0, -5, -256, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -281, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -256, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -265, true, 9.0, -3, -247, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -265, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -247, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -263, true, 9.0, -3, -242, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -263, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -242, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -262, true, 9.0, -3, -240, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -262, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -240, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -261, true, 9.0, -3, -237, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -261, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -237, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -260, true, 9.0, -3, -236, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -260, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -236, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -259, true, 9.0, -3, -235, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -259, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -235, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -258, true, 9.0, -3, -234, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -258, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -234, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -264, true, 9.0, -3, -246, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -264, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -246, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -257, true, 9.0, -3, -233, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -257, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -233, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -270, true, 8.0, -4, -257, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -270, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -257, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -283, true, 14.0, -5, -258, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -283, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -258, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -278, true, 8.0, -4, -273, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -278, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -273, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -277, true, 8.0, -4, -272, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -277, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -272, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -289, true, 14.0, -5, -270, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -289, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -270, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -288, true, 14.0, -5, -269, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -288, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -269, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -287, true, 14.0, -5, -268, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -287, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -268, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -276, true, 8.0, -4, -268, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -276, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -268, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -282, true, 14.0, -5, -257, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -282, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -257, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -275, true, 8.0, -4, -266, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -275, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -266, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -273, true, 8.0, -4, -264, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -273, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -264, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -286, true, 14.0, -5, -263, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -286, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -263, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -272, true, 8.0, -4, -263, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -272, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -263, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -285, true, 14.0, -5, -262, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -285, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -262, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -284, true, 14.0, -5, -259, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -284, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -259, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -271, true, 8.0, -4, -259, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -271, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -259, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -274, true, 8.0, -4, -265, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -274, true, 0.0, 8.0, -4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -265, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -256, true, 9.0, -3, -232, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -256, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -232, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -255, true, 9.0, -3, -231, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -255, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -231, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -254, true, 9.0, -3, -230, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -254, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -230, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -234, true, 9.0, -3, -203, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -234, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -203, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -233, true, 9.0, -3, -202, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -233, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -202, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -232, true, 9.0, -3, -201, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -232, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -201, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -231, true, 9.0, -3, -199, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -231, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -199, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -230, true, 9.0, -3, -194, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -230, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -194, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -229, true, 9.0, -3, -192, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -229, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -192, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -235, true, 9.0, -3, -204, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -235, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -204, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -228, true, 9.0, -3, -191, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -228, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -191, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -226, true, 9.0, -3, -187, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -226, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -187, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -225, true, 9.0, -3, -186, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -225, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -186, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -224, true, 9.0, -3, -185, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -224, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -185, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -223, true, 9.0, -3, -184, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -223, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -184, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -222, true, 9.0, -3, -179, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -222, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -179, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -221, true, 9.0, -3, -176, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -221, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -176, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -227, true, 9.0, -3, -190, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -227, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -190, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -236, true, 9.0, -3, -205, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -236, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -205, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -237, true, 9.0, -3, -206, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -237, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -206, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -238, true, 9.0, -3, -207, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -238, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -207, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -253, true, 9.0, -3, -229, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -253, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -229, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -252, true, 9.0, -3, -228, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -252, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -228, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -251, true, 9.0, -3, -224, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -251, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -224, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -250, true, 9.0, -3, -222, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -250, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -222, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -249, true, 9.0, -3, -221, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -249, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -221, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -248, true, 9.0, -3, -219, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -248, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -219, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -247, true, 9.0, -3, -218, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -247, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -218, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -246, true, 9.0, -3, -217, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -246, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -217, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -245, true, 9.0, -3, -216, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -245, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -216, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -244, true, 9.0, -3, -215, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -244, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -215, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -243, true, 9.0, -3, -214, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -243, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -214, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -242, true, 9.0, -3, -211, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -242, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -211, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -241, true, 9.0, -3, -210, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -241, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -210, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -240, true, 9.0, -3, -209, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -240, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -209, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -239, true, 9.0, -3, -208, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -239, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -208, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -219, true, 9.0, -3, -172, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -219, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -172, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -290, true, 14.0, -5, -274, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -290, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -274, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -75, true, 10.0, -1, -107, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -75, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -107, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -74, true, 10.0, -1, -106, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -74, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -106, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -130, true, 12.0, -2, -42, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -130, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -42, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -25, true, 10.0, -1, -42, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -25, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -42, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -24, true, 10.0, -1, -41, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -24, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -41, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -129, true, 12.0, -2, -40, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -129, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -40, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -23, true, 10.0, -1, -40, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -23, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -40, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -128, true, 12.0, -2, -39, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -128, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -39, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -26, true, 10.0, -1, -43, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -26, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -43, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -22, true, 10.0, -1, -39, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -22, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -39, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -21, true, 10.0, -1, -37, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -21, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -37, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -126, true, 12.0, -2, -36, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -126, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -36, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -20, true, 10.0, -1, -36, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -20, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -36, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -125, true, 12.0, -2, -35, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -125, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -35, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -19, true, 10.0, -1, -35, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -19, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -35, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -124, true, 12.0, -2, -34, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -124, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -34, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -127, true, 12.0, -2, -38, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -127, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -38, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -123, true, 12.0, -2, -31, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -123, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -31, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -131, true, 12.0, -2, -44, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -131, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -44, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -28, true, 10.0, -1, -46, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -28, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -46, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -138, true, 12.0, -2, -54, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -138, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -54, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -35, true, 10.0, -1, -54, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -35, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -54, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -137, true, 12.0, -2, -53, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -137, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -53, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -34, true, 10.0, -1, -53, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -34, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -53, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -33, true, 10.0, -1, -52, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -33, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -52, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -136, true, 12.0, -2, -51, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -136, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -51, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -27, true, 10.0, -1, -45, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -27, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -45, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -32, true, 10.0, -1, -51, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -32, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -51, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -31, true, 10.0, -1, -50, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -31, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -50, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -30, true, 10.0, -1, -49, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -30, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -49, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -134, true, 12.0, -2, -48, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -134, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -48, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -29, true, 10.0, -1, -48, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -29, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -48, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -133, true, 12.0, -2, -47, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -133, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -47, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -132, true, 12.0, -2, -46, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -132, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -46, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -135, true, 12.0, -2, -50, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -135, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -50, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -18, true, 10.0, -1, -31, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -18, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -31, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -122, true, 12.0, -2, -29, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -122, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -29, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -121, true, 12.0, -2, -28, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -121, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -28, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -7, true, 10.0, -1, -11, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -7, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -11, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -6, true, 10.0, -1, -10, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -6, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -10, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -111, true, 12.0, -2, -9, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -111, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -9, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -5, true, 10.0, -1, -9, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -5, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -9, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -110, true, 12.0, -2, -8, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -110, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -8, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -4, true, 10.0, -1, -8, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -4, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -8, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -112, true, 12.0, -2, -11, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -112, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -11, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -109, true, 12.0, -2, -7, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -109, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -7, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -108, true, 12.0, -2, -5, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -108, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -5, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -107, true, 12.0, -2, -4, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -107, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -4, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -106, true, 12.0, -2, -3, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -106, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -3, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -2, true, 10.0, -1, -3, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -2, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -3, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -105, true, 12.0, -2, -2, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -105, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -2, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -104, true, 12.0, -2, -1, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -104, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -1, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -3, true, 10.0, -1, -7, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -3, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -7, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -8, true, 10.0, -1, -12, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -8, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -12, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -113, true, 12.0, -2, -14, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -113, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -14, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -114, true, 12.0, -2, -15, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -114, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -15, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -120, true, 12.0, -2, -27, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -120, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -27, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -17, true, 10.0, -1, -27, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -17, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -27, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -119, true, 12.0, -2, -26, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -119, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -26, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -16, true, 10.0, -1, -26, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -16, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -26, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -15, true, 10.0, -1, -24, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -15, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -24, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -14, true, 10.0, -1, -23, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -14, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -23, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -118, true, 12.0, -2, -22, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -118, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -22, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -13, true, 10.0, -1, -21, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -13, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -21, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -117, true, 12.0, -2, -19, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -117, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -19, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -12, true, 10.0, -1, -19, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -12, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -19, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -116, true, 12.0, -2, -18, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -116, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -18, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -11, true, 10.0, -1, -18, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -11, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -18, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -10, true, 10.0, -1, -17, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -10, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -17, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -115, true, 12.0, -2, -16, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -115, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -16, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -9, true, 10.0, -1, -16, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -9, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -16, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -139, true, 12.0, -2, -55, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -139, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -55, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -174, true, 12.0, -2, -106, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -174, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -106, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -140, true, 12.0, -2, -56, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -140, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -56, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -141, true, 12.0, -2, -57, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -141, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -57, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -164, true, 12.0, -2, -93, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -164, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -93, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -64, true, 10.0, -1, -93, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -64, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -93, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -163, true, 12.0, -2, -92, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -163, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -92, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -162, true, 12.0, -2, -91, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -162, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -91, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -63, true, 10.0, -1, -91, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -63, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -91, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -62, true, 10.0, -1, -90, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -62, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -90, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -65, true, 10.0, -1, -94, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -65, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -94, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -161, true, 12.0, -2, -89, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -161, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -89, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -159, true, 12.0, -2, -87, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -159, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -87, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -61, true, 10.0, -1, -87, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -61, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -87, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -158, true, 12.0, -2, -86, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -158, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -86, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -157, true, 12.0, -2, -85, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -157, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -85, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -60, true, 10.0, -1, -85, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -60, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -85, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -59, true, 10.0, -1, -84, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -59, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -84, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -160, true, 12.0, -2, -88, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -160, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -88, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -156, true, 12.0, -2, -83, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -156, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -83, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -66, true, 10.0, -1, -95, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -66, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -95, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -165, true, 12.0, -2, -96, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -165, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -96, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -173, true, 12.0, -2, -105, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -173, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -105, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -73, true, 10.0, -1, -105, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -73, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -105, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -72, true, 10.0, -1, -104, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -72, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -104, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -172, true, 12.0, -2, -103, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -172, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -103, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -71, true, 10.0, -1, -103, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -71, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -103, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -171, true, 12.0, -2, -102, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -171, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -102, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -67, true, 10.0, -1, -96, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -67, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -96, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -170, true, 12.0, -2, -101, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -170, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -101, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -169, true, 12.0, -2, -100, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -169, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -100, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -69, true, 10.0, -1, -100, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -69, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -100, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -168, true, 12.0, -2, -99, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -168, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -99, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -167, true, 12.0, -2, -98, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -167, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -98, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -68, true, 10.0, -1, -98, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -68, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -98, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -166, true, 12.0, -2, -97, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -166, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -97, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -70, true, 10.0, -1, -101, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -70, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -101, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -58, true, 10.0, -1, -83, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -58, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -83, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -57, true, 10.0, -1, -82, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -57, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -82, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -155, true, 12.0, -2, -81, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -155, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -81, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -45, true, 10.0, -1, -66, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -45, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -66, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -44, true, 10.0, -1, -65, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -44, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -65, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -146, true, 12.0, -2, -64, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -146, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -64, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -43, true, 10.0, -1, -64, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -43, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -64, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -145, true, 12.0, -2, -63, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -145, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -63, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -42, true, 10.0, -1, -63, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -42, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -63, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -46, true, 10.0, -1, -67, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -46, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -67, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -41, true, 10.0, -1, -62, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -41, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -62, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -40, true, 10.0, -1, -61, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -40, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -61, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -39, true, 10.0, -1, -60, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -39, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -60, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -143, true, 12.0, -2, -59, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -143, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -59, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -38, true, 10.0, -1, -59, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -38, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -59, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -142, true, 12.0, -2, -58, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -142, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -58, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -37, true, 10.0, -1, -58, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -37, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -58, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -144, true, 12.0, -2, -61, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -144, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -61, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -47, true, 10.0, -1, -68, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -47, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -68, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -48, true, 10.0, -1, -69, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -48, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -69, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -147, true, 12.0, -2, -69, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -147, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -69, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -56, true, 10.0, -1, -81, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -56, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -81, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -55, true, 10.0, -1, -80, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -55, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -80, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -154, true, 12.0, -2, -79, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -154, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -79, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -54, true, 10.0, -1, -78, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -54, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -78, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -153, true, 12.0, -2, -77, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -153, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -77, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -53, true, 10.0, -1, -77, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -53, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -77, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -152, true, 12.0, -2, -76, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -152, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -76, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -52, true, 10.0, -1, -76, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -52, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -76, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -151, true, 12.0, -2, -75, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -151, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -75, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -150, true, 12.0, -2, -73, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -150, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -73, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -51, true, 10.0, -1, -73, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -51, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -73, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -149, true, 12.0, -2, -72, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -149, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -72, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -50, true, 10.0, -1, -71, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -50, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -71, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -148, true, 12.0, -2, -70, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -148, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -70, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -49, true, 10.0, -1, -70, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -49, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -70, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -36, true, 10.0, -1, -57, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -36, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -57, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "Price", "ReproductionId", "SeatId", "UserId" },
-                values: new object[] { -291, true, 14.0, -5, -275, null });
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -291, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -275, null });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Settings");
+
             migrationBuilder.DeleteData(
                 table: "Movie",
                 keyColumn: "Id",
@@ -5948,7 +6000,15 @@ namespace Cineplus.Data.Migrations
                 table: "Ticket");
 
             migrationBuilder.DropColumn(
+                name: "PointsPrice",
+                table: "Ticket");
+
+            migrationBuilder.DropColumn(
                 name: "Price",
+                table: "Ticket");
+
+            migrationBuilder.DropColumn(
+                name: "ReserveTime",
                 table: "Ticket");
 
             migrationBuilder.DropColumn(
