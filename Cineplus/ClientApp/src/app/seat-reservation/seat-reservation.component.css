@@ -175,36 +175,34 @@ mat-slider {
   width: 100%;
 }
 
-
 table {
   width: 100%;
   background: #f6f4f4;
+}
+
+
+.example-element-description {
   padding: 10px;
 }
 
-mat-grid-tile {
-  background: lightblue;
+tr.example-detail-row {
+  height: 0;
+  background: white;
 }
 
-.mat-header-row{
-  background: #f6f4f4;
-}
-.mat-row  {
-  padding: 100px;
-}
-.mat-row span{
-  position: relative;
-}
-.mat-row td {
-  height: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: none;
-  position: relative;
-  z-index: 1;
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  background-color: white;
 }
 
-.mat-row td::before {
+.example-element-row td {
+  position: relative;
+}
+
+
+
+.example-element-row td::before {
   content: '';
   width: 100%;
   position: absolute;
@@ -213,30 +211,13 @@ mat-grid-tile {
   top: 0;
   bottom: 0;
   margin: auto;
-  border-bottom: 1px solid lightgray;
   border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
-
-.mat-row td:first-child:before td:last-child:after {
-  border-left: 2px solid lightgray;
-}
-
-.mat-row:hover td::before {
+.example-element-row:hover td::before {
   cursor: pointer;
   border-color: gray;
 }
 
-.custom-host :host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
 
-.example-right-align {
-  text-align: right;
-}
-
-input.example-right-align {
-  -moz-appearance: textfield;
-}

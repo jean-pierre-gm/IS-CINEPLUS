@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using Cineplus.Models;
 
-namespace Cineplus.Services {
-	public interface ITicketService {
-		Ticket Get(int id);
-		IEnumerable<Ticket> GetAllFromReproduction(int reproductionId);
-		IEnumerable<Ticket> GetAllTicketsForUserAtReproduction(string userId, int reproductionId);
-		Ticket Add(Ticket entity);
-		Ticket Update(Ticket entity);
-		Ticket Remove(int id);
-	}
+namespace Cineplus.Services
+{
+    public interface ITicketService
+    {
+        IEnumerable<Ticket> MakeReserveForUser(List<Ticket> toReserve, ApplicationUser user);
+        IEnumerable<Ticket> GetAllFromReproduction(int reproductionId);
+        IEnumerable<Ticket> GetAllTicketsForUserAtReproduction(ApplicationUser user, int reproductionId);
+    }
 }

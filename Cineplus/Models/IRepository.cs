@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,5 +8,6 @@ namespace Cineplus.Models {
 		T Add(T entity);
 		T Update(T entity);
 		T Remove(int id);
+		IEnumerable<T> RemoveRange(IQueryable<T> query);
 	}
 }
