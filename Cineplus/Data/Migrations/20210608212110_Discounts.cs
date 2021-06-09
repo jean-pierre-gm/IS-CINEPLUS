@@ -7,15 +7,6 @@ namespace Cineplus.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<int>(
-                name: "Points",
-                table: "Associate",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "INTEGER");
-
             migrationBuilder.CreateTable(
                 name: "DateDiscount",
                 columns: table => new
@@ -86,15 +77,6 @@ namespace Cineplus.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "PersonalDiscount");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Points",
-                table: "Associate",
-                type: "INTEGER",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "INTEGER",
-                oldDefaultValue: 0);
         }
     }
 }
