@@ -44,7 +44,8 @@ namespace Cineplus.Controllers {
             
             return _dateDiscountService.Update(dateDiscount);
         }
-
+        
+        [Authorize(Roles = "Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
         [HttpPost]
         public ActionResult<DateDiscount> PostDateDiscount([FromBody] DateDiscount dateDiscount)
         {

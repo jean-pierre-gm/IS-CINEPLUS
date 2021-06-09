@@ -34,7 +34,8 @@ namespace Cineplus.Controllers {
             
             return _personalDiscountService.Update(personalDiscount);
         }
-
+        
+        [Authorize(Roles = "Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
         [HttpPost]
         public ActionResult<PersonalDiscount> PostPersonalDiscount([FromBody] PersonalDiscount personalDiscount)
         {
