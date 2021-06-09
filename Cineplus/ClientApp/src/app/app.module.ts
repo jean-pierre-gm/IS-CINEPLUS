@@ -47,6 +47,12 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ManageCarouselComponent} from "./manage/manage-carousel/manage-carousel.component";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage-dateDiscounts.component";
+import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
+import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscounts/manage-personalDiscounts.component";
+import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
 
 @NgModule({
   declarations: [
@@ -68,6 +74,10 @@ import {MatRadioModule} from "@angular/material/radio";
     CreateGenreComponent,
     ClientProfileComponent,
     BecomeAssociateComponent,
+    ManageDateDiscountsComponent,
+    CreateDateDiscountComponent,
+    ManagePersonalDiscountsComponent,
+    CreatePersonalDiscountComponent,
     ManageCarouselComponent
   ],
     imports: [
@@ -137,12 +147,15 @@ import {MatRadioModule} from "@angular/material/radio";
         CarouselModule,
         MatGridListModule,
         MatSliderModule,
-        MatRadioModule
+        MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateMovieComponent, CreateGenreComponent, BecomeAssociateComponent]
+  entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
+    CreatePersonalDiscountComponent, BecomeAssociateComponent]
 })
 export class AppModule { }

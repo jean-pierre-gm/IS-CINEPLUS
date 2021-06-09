@@ -260,6 +260,48 @@ namespace Cineplus.Models {
 					Display = new DateTime(2021, 6, 4, 15, 0, 0),
 				}
 			};
+			
+			var dateDiscounts = new List<DateDiscount>() {
+				new DateDiscount() {
+					Id = -1,
+					Description = "Descuento del dia del trabajador",
+					Discount = 10,
+					Date = new DateTime(2021, 5, 1)
+				},
+				new DateDiscount() {
+					Id = -2,
+					Description = "Descuento del dia de la lengua española",
+					Discount = 10,
+					Date = new DateTime(2021, 2, 10)
+				},
+				new DateDiscount() {
+					Id = -3,
+					Description = "Descuento del dia del No",
+					Discount = 10,
+					Date = new DateTime(2021, 10, 28)
+				},
+			};
+			
+			var personalDiscounts = new List<PersonalDiscount>() {
+				new PersonalDiscount() {
+					Id = -1,
+					PersonalName = "FEU",
+					Description = "Descuento para los integrantes de la FEU",
+					Discount = 10,
+				},
+				new PersonalDiscount() {
+					Id = -2,
+					PersonalName = "Discapacitados",
+					Description = "Descuento para los discapacitados",
+					Discount = 10,
+				},
+				new PersonalDiscount() {
+					Id = -3,
+					PersonalName = "Personal",
+					Description = "Descuento para los trabajadores del centro",
+					Discount = 50,
+				},
+			};
 
 			modelBuilder.Entity<Movie>().HasData(movies);
 
@@ -370,6 +412,8 @@ namespace Cineplus.Models {
 				}
 			}
 			modelBuilder.Entity<Ticket>().HasData(tickets);
+			modelBuilder.Entity<DateDiscount>().HasData(dateDiscounts);
+			modelBuilder.Entity<PersonalDiscount>().HasData(personalDiscounts);
 		}
 	}
 }

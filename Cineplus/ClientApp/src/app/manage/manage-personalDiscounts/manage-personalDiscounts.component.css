@@ -1,0 +1,47 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.edit-button {
+  color: forestgreen;
+  min-width: unset;
+  border-radius: 24px;
+  padding: 0 12px;
+}
+
+.add-button#plus {
+  font-size: 160%;
+  margin: 8px 25px 8px 8px;
+  background-color: forestgreen;
+}
+
+.add-button#eye {
+  font-size: 100%;
+  margin: 8px 180px 8px 8px;
+  background-color: forestgreen;
+}
+
+::ng-deep .mat-button-wrapper {
+  padding: unset !important;
+  display: inline-block;
+  line-height: unset !important;
+}
+
+.spacer {
+  width: 100px;
+  min-width: 100px;
+}
+
+::ng-deep .mat-paginator-container {
+  justify-content: center !important;
+  min-height: unset !important;
+}

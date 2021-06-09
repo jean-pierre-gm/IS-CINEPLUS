@@ -30,11 +30,18 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest"/>
+        <None Include="ClientApp\src\app\discounts\date-discount\date-discount-list.component.ts" />
+        <None Include="ClientApp\src\app\discounts\date-discount\date-discount.component.ts" />
+        <None Include="ClientApp\src\app\discounts\date-discount\discounts.component.ts" />
+        <None Include="ClientApp\src\app\discounts\discounts.component.ts" />
         <None Include="ClientApp\src\app\role\role.module.ts" />
         <None Include="ClientApp\src\models\associate.ts" />
         <None Include="ClientApp\src\models\cineplusDataSource.ts" />
         <None Include="ClientApp\src\models\dataSourceConf.ts" />
+        <None Include="ClientApp\src\models\date-discount.ts" />
+        <None Include="ClientApp\src\models\datediscount.ts" />
+        <None Include="ClientApp\src\models\dateDiscount.ts" />
         <None Include="ClientApp\src\models\genre.ts" />
         <None Include="ClientApp\src\models\movie.ts" />
         <None Include="ClientApp\src\models\pagination.ts" />
@@ -42,6 +49,7 @@
         <None Include="ClientApp\src\models\User.ts" />
         <None Include="ClientApp\src\models\userWithRoles.ts" />
         <None Remove="ClientApp\src\app\add-reproduction\**" />
+        <None Remove="ClientApp\src\app\discounts\**" />
     </ItemGroup>
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
@@ -53,6 +61,10 @@
         <Content Include="ClientApp\src\app\client-profile\become-associate\become-associate.component.html" />
         <Content Include="ClientApp\src\app\client-profile\client-profile.component.css" />
         <Content Include="ClientApp\src\app\client-profile\client-profile.component.html" />
+        <Content Include="ClientApp\src\app\discounts\date-discount\date-discount.component.css" />
+        <Content Include="ClientApp\src\app\discounts\date-discount\date-discount.component.html" />
+        <Content Include="ClientApp\src\app\discounts\discounts.component.css" />
+        <Content Include="ClientApp\src\app\discounts\discounts.component.html" />
         <Content Include="ClientApp\src\app\forbidden\forbidden.component.css" />
         <Content Include="ClientApp\src\app\forbidden\forbidden.component.html" />
         <Content Include="ClientApp\src\app\manage\manage-genres\create-genre\create-genre.component.css" />
@@ -71,6 +83,7 @@
         <Content Include="ClientApp\src\app\role\role-users\role-users.component.html" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <Content Remove="ClientApp\src\app\discounts\**" />
         <Content Remove="ClientApp\src\app\add-reproduction\**" />
     </ItemGroup>
     <ItemGroup>
@@ -81,6 +94,12 @@
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="ClientApp\src\app\discounts\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="ClientApp\src\app\discounts\**" />
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="ClientApp\src\app\add-reproduction\**" />

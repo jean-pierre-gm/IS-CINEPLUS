@@ -125,6 +125,55 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("Associate");
                 });
 
+            modelBuilder.Entity("Cineplus.Models.DateDiscount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("REAL");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DateDiscount");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            Date = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Descuento del dia del trabajador",
+                            Discount = 10.0,
+                            Enable = true
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Date = new DateTime(2021, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Descuento del dia de la lengua española",
+                            Discount = 10.0,
+                            Enable = true
+                        },
+                        new
+                        {
+                            Id = -3,
+                            Date = new DateTime(2021, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Descuento del dia del No",
+                            Discount = 10.0,
+                            Enable = true
+                        });
+                });
+
             modelBuilder.Entity("Cineplus.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -358,6 +407,57 @@ namespace Cineplus.Data.Migrations
                             ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
                             MovieName = "John Wick",
                             Score = 7.3000001907348633
+                        });
+                });
+
+            modelBuilder.Entity("Cineplus.Models.PersonalDiscount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("REAL");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PersonalName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PersonalDiscount");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            Description = "Descuento para los integrantes de la FEU",
+                            Discount = 10.0,
+                            Enable = true,
+                            PersonalName = "FEU"
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Description = "Descuento para los discapacitados",
+                            Discount = 10.0,
+                            Enable = true,
+                            PersonalName = "Discapacitados"
+                        },
+                        new
+                        {
+                            Id = -3,
+                            Description = "Descuento para los trabajadores del centro",
+                            Discount = 50.0,
+                            Enable = true,
+                            PersonalName = "Personal"
                         });
                 });
 

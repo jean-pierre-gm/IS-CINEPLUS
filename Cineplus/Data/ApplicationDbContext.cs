@@ -16,7 +16,9 @@ namespace Cineplus.Data {
 
 		public DbSet<Genre> Genres;
 		public DbSet<Movie> Movies;
-
+		public DbSet<DateDiscount> DateDiscounts;
+		public DbSet<PersonalDiscount> PersonalDiscounts;
+		
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);
 			
@@ -36,6 +38,27 @@ namespace Cineplus.Data {
 				.Property(settings => settings.Name)
 				.IsRequired();
 			
+			modelBuilder.Entity<DateDiscount>()
+				.Property(datediscount => datediscount.Discount)
+				.HasConversion<double>();
+			
+			modelBuilder.Entity<DateDiscount>()
+				.Property(datediscount => datediscount.Enable)
+				.HasConversion<bool>();
+			
+			modelBuilder.Entity<PersonalDiscount>()
+				.Property(personaldiscount => personaldiscount.PersonalName)
+				.IsRequired()
+				.HasMaxLength(15);
+			
+			modelBuilder.Entity<PersonalDiscount>()
+				.Property(personaldiscount => personaldiscount.Discount)
+				.HasConversion<double>();
+			
+			modelBuilder.Entity<PersonalDiscount>()
+				.Property(personaldiscount => personaldiscount.Enable)
+				.HasConversion<bool>();
+
 			modelBuilder.Seed();
 		}
 	}
