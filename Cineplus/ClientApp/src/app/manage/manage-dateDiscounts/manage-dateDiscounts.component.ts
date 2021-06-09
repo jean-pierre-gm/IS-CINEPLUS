@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CineplusDataSource} from "../../../models/cineplusDataSource";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {DataSourceConf} from "../../../models/dataSourceConf";
 import {faEdit, faPlus, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
@@ -61,6 +61,7 @@ export class ManageDateDiscountsComponent implements OnInit {
     this.http.put(this.baseUrl + 'api/datediscount/' + dateDiscount.id,
       dateDiscount).toPromise()
       .then(response => {
+          console.log(response);
           this.dateDiscountsDataSource.refresh();
         }
       );
@@ -70,14 +71,6 @@ export class ManageDateDiscountsComponent implements OnInit {
     console.log($event)
     this.dateDiscountsDataSource.currentPagination.pageSize = $event.pageSize;
     this.dateDiscountsDataSource.setPage($event.pageIndex + 1);
-  }
-
-  applyFilter(input: string) {
-    if (input !== '') {
-      this.dateDiscountsDataSource.filter('date', input);
-    } else {
-      this.dateDiscountsDataSource.undoFilters();
-    }
   }
 
   openDialog(element: DateDiscount): void {
@@ -103,10 +96,12 @@ export class ManageDateDiscountsComponent implements OnInit {
         if (edit) {
           this.http.put('api/datediscount/' + this.dateDiscount.id,
             this.dateDiscount).subscribe(dateDiscount => {
+            console.log(dateDiscount);
             this.dateDiscountsDataSource.refresh();
           });
         } else {
           this.http.post('api/datediscount', this.dateDiscount).subscribe(dateDiscount => {
+            console.log(dateDiscount);
             this.dateDiscountsDataSource.refresh();
           });
         }

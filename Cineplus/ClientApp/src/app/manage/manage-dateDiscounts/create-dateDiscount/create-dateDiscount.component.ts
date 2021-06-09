@@ -1,12 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CineplusDataSource} from "../../../../models/cineplusDataSource";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {DataSourceConf} from "../../../../models/dataSourceConf";
-import {AbstractControl, Form, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
-import {Pagination} from "../../../../models/pagination";
+import {HttpClient} from "@angular/common/http";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {DateDiscount} from "../../../../models/dateDiscount";
-import {isDate, isNumeric} from "rxjs/internal-compatibility";
+import {isDate} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-create-dateDiscount',
@@ -18,6 +15,8 @@ export class CreateDateDiscountComponent implements OnInit {
   public edit = this.data.edit
   public dateDiscount = this.data.dateDiscount
   public validDate = true
+
+  minDate = new Date();
 
   public descriptionControl: FormControl = new FormControl('',
     [Validators.required]);
@@ -36,6 +35,8 @@ export class CreateDateDiscountComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateDateDiscountComponent>,
     @Inject('BASE_URL') private baseUrl: string,
     @Inject(MAT_DIALOG_DATA) public data: {dateDiscount: DateDiscount, edit: boolean}) {
+    this.minDate.setDate(1);
+    this.minDate.setMonth(0);
   }
 
   onNoClick(): void {
@@ -55,12 +56,15 @@ export class CreateDateDiscountComponent implements OnInit {
         if(isDate(value)) {
           if (!this.edit) {
             let date = new Date(value);
-            this.httpClient.get(this.baseUrl + 'api/datediscount/' + date.getDate() + '-' + (date.getMonth() + 1), {}).toPromise()
-              .then(response => {
+            this.httpClient.get(this.baseUrl + 'api/datediscount/' + date.getDate() + '-'
+              + (date.getMonth() + 1) + '-' + date.getFullYear(), {}).toPromise()
+              .then(_ => {
                   this.validDate = false;
+                  this.dateControl.updateValueAndValidity();
                 },
-                error => {
+                  _ => {
                   this.validDate = true;
+                  this.dateControl.updateValueAndValidity();
                 });
           }
         }
@@ -78,7 +82,7 @@ export class CreateDateDiscountComponent implements OnInit {
 
   dateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      return this.validDate ? null : {'This date is already taked': {value: control.value}};
+      return this.validDate ? null : {'This date is already taken': {value: control.value}};
     };
   }
 }

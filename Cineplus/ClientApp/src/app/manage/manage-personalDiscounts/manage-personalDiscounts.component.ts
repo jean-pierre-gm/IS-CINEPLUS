@@ -1,11 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CineplusDataSource} from "../../../models/cineplusDataSource";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {DataSourceConf} from "../../../models/dataSourceConf";
 import {faEdit, faPlus, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
 import {Sort} from "@angular/material/sort";
-import {DateDiscount} from "../../../models/dateDiscount";
 import {PersonalDiscount} from "../../../models/personalDiscount";
 import {CreatePersonalDiscountComponent} from "./create-personalDiscount/create-personalDiscount.component";
 
@@ -59,6 +58,7 @@ export class ManagePersonalDiscountsComponent implements OnInit {
     this.http.put(this.baseUrl + 'api/personaldiscount/' + personalDiscount.id,
       personalDiscount).toPromise()
       .then(response => {
+          console.log(response);
           this.personalDiscountsDataSource.refresh();
         }
       );
@@ -101,10 +101,12 @@ export class ManagePersonalDiscountsComponent implements OnInit {
         if (edit) {
           this.http.put('api/personaldiscount/' + this.personalDiscount.id,
             this.personalDiscount).subscribe(dateDiscount => {
+              console.log(dateDiscount);
             this.personalDiscountsDataSource.refresh();
           });
         } else {
           this.http.post('api/personaldiscount', this.personalDiscount).subscribe(dateDiscount => {
+            console.log(dateDiscount);
             this.personalDiscountsDataSource.refresh();
           });
         }

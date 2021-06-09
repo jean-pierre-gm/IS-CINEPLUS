@@ -1,13 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CineplusDataSource} from "../../../../models/cineplusDataSource";
 import {HttpClient} from "@angular/common/http";
 import {PersonalDiscount} from "../../../../models/personalDiscount";
-import {DataSourceConf} from "../../../../models/dataSourceConf";
-import {AbstractControl, Form, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
-import {Pagination} from "../../../../models/pagination";
-import {DateDiscount} from "../../../../models/dateDiscount";
-import {isDate, isNumeric} from "rxjs/internal-compatibility";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+
 
 @Component({
   selector: 'app-create-personalDiscount',

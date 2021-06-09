@@ -19,10 +19,11 @@ namespace Cineplus.Services
             return _dateDiscountRepository.Data(tracked).FirstOrDefault(dateDiscount => dateDiscount.Id == id);
         }
         
-        public DateDiscount GetforDate(int day, int month, bool tracked = true)
+        public DateDiscount GetforDate(int day, int month, int year, bool tracked = true)
         {
-            return _dateDiscountRepository.Data().FirstOrDefault(dateDiscount => 
-                dateDiscount.Date.Day == day && dateDiscount.Date.Month == month);
+            return _dateDiscountRepository.Data(tracked).FirstOrDefault(dateDiscount => 
+                dateDiscount.Date.Day == day && dateDiscount.Date.Month == month &&
+                dateDiscount.Date.Year == year);
         }
 
         public Pagination<DateDiscount> GetAll(Pagination<DateDiscount> parameters, bool admitDisabledDiscounts)

@@ -22,9 +22,9 @@ namespace Cineplus.Controllers {
                 admitDisabledDiscounts));
         }
         
-        [HttpGet("{day:int}-{month:int}")]
-        public ActionResult<DateDiscount> GetforDate(int day, int month) {
-            var getDate = _dateDiscountService.GetforDate(day, month);
+        [HttpGet("{day:int}-{month:int}-{year:int}")]
+        public ActionResult<DateDiscount> GetforDate(int day, int month, int year) {
+            var getDate = _dateDiscountService.GetforDate(day, month, year);
 
             if (getDate is null)
                 return NotFound();
@@ -48,8 +48,8 @@ namespace Cineplus.Controllers {
         [HttpPost]
         public ActionResult<DateDiscount> PostDateDiscount([FromBody] DateDiscount dateDiscount)
         {
-            if(_dateDiscountService.GetforDate(dateDiscount.Date.Day, dateDiscount.Date.Month,
-                false) is not null)
+            if(_dateDiscountService.GetforDate(dateDiscount.Date.Day, dateDiscount.Date.Month, 
+                dateDiscount.Date.Year, false) is not null)
                 return BadRequest();
             
             return _dateDiscountService.Add(dateDiscount);

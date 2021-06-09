@@ -39,8 +39,6 @@ import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.compon
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 import {ClientProfileComponent} from "./client-profile/client-profile.component";
 import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
-import {DateDiscountComponent} from "./discounts/date-discount/date-discount.component";
-import {DiscountsComponent} from "./discounts/discounts.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage-dateDiscounts.component";
@@ -59,8 +57,6 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
     ForbiddenComponent,
     RoleListComponent,
     RoleUsersComponent,
-    DateDiscountComponent,
-    DiscountsComponent,
     ManageComponent,
     ManageMoviesComponent,
     CreateMovieComponent,
@@ -96,18 +92,6 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
       {
         path: 'role-users',
         component: RoleUsersComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'discounts',
-        component: DiscountsComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'date-discount',
-        component: DateDiscountComponent,
         canActivate: [AuthorizeGuard],
         data: {permittedRoles: ["Admin"]}
       },

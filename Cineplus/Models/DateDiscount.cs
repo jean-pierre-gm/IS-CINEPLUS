@@ -9,8 +9,7 @@ namespace Cineplus.Models {
 
         [Column(TypeName="ntext")] 
         public string Description { get; set; }
-
-        [Sortable(OrderBy = "date")]
+        
         public DateTime Date { get; set; }
         
         [Sortable(OrderBy = "discount")]
