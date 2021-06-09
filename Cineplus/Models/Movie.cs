@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,7 +26,7 @@ namespace Cineplus.Models {
 		
 		public string ImageUrl { get; set; }
 		
-		public bool Display { get; set; }
+		public DateTime Display { get; set; }
 
 		public int GenreId { get; set; }
 		public virtual Genre Genre { get; set; }

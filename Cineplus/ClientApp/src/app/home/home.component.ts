@@ -50,7 +50,7 @@ export class HomeComponent {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     let movieSourceConf: DataSourceConf = new DataSourceConf();
-    movieSourceConf.endPoint = baseUrl + 'api/movie';
+    movieSourceConf.endPoint = baseUrl + 'api/movie/display';
     let moviePagination: Pagination<Movie> = new Pagination();
     moviePagination.pageSize = 50;
     this.movieData = new CineplusDataSource<Movie>(http, movieSourceConf, moviePagination);

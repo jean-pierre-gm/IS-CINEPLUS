@@ -37,11 +37,18 @@ namespace Cineplus.Controllers {
 		}
 
 		[HttpGet]
-		[Route("all")]
-		public ActionResult<Pagination<Movie>> AllMovies([FromQuery] Pagination<Movie> parameters)
+		[Route("display")]
+		public ActionResult<Pagination<Movie>> PaginationDisplayMovies([FromQuery] Pagination<Movie> parameters)
 		{
-			return new ActionResult<Pagination<Movie>>(_movieService.GetAll(parameters));
+			return new ActionResult<Pagination<Movie>>(_movieService.GetPaginationDisplay(parameters));
 		}
+		
+		[HttpGet]
+        [Route("display/all")]
+        public ActionResult<IEnumerable<Movie>> AllDisplayMovies([FromQuery]string name)
+        {
+        	return new ActionResult<IEnumerable<Movie>>(_movieService.GetAllDisplay(name));
+        }
 
 		
 		[Authorize(Roles = "Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]

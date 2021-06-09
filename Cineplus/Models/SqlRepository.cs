@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Data;
@@ -57,6 +58,18 @@ namespace Cineplus.Models {
 				_context.SaveChanges();
 			}
 			return entity;
+		}
+
+		public IEnumerable<T> UpdateAll(IEnumerable<T> entities)
+		{
+			var dbEntities = entities.ToList();
+			foreach (var entity in dbEntities)
+			{
+				_entities.Update(entity);
+			}
+
+			_context.SaveChanges();
+			return dbEntities;
 		}
 	}
 }

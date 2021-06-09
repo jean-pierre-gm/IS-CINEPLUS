@@ -57,6 +57,7 @@ namespace Cineplus {
 			});
 			
 			services.AddScoped(typeof(IRepository<>), typeof(SqlRepository<>));
+			services.AddScoped<ISettingsService, SettingsService>();
 			services.AddScoped<IMovieService, MovieService>();
 			services.AddScoped<IGenreService, GenreService>();
 			services.AddScoped<IReproductionService, ReproductionService>();

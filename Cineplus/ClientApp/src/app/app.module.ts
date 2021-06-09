@@ -45,6 +45,8 @@ import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ManageCarouselComponent} from "./manage/manage-carousel/manage-carousel.component";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -65,76 +67,78 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ManageGenresComponent,
     CreateGenreComponent,
     ClientProfileComponent,
-    BecomeAssociateComponent
+    BecomeAssociateComponent,
+    ManageCarouselComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    MatSnackBarModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
-      {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-      {
-        path: 'api-test', component: ApiTestComponent,
-        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
-      },
-      {path: 'forbidden', component: ForbiddenComponent},
-      {
-        path: 'role-list',
-        component: RoleListComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'role-users',
-        component: RoleUsersComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Admin"]}
-      },
-      {
-        path: 'reproduction',
-        component: MovieReproductionComponent
-      },
-      {
-        path: 'reserve',
-        component: SeatReservationComponent
-      },
-      {
-        path: 'manage',
-        component: ManageComponent,
-        canActivate: [AuthorizeGuard],
-        data: {permittedRoles: ["Manager", "Admin"]}
-      },
-      {
-        path: 'client-profile',
-        component: ClientProfileComponent,
-        canActivate: [AuthorizeGuard]
-      },
-    ]),
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatTableModule,
-    FontAwesomeModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatCheckboxModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatToolbarModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatSortModule,
-    CarouselModule,
-    MatGridListModule,
-    MatSliderModule
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        ApiAuthorizationModule,
+        MatSnackBarModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'counter', component: CounterComponent},
+            {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+            {
+                path: 'api-test', component: ApiTestComponent,
+                canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+            },
+            {path: 'forbidden', component: ForbiddenComponent},
+            {
+                path: 'role-list',
+                component: RoleListComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'role-users',
+                component: RoleUsersComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Admin"]}
+            },
+            {
+                path: 'reproduction',
+                component: MovieReproductionComponent
+            },
+            {
+                path: 'reserve',
+                component: SeatReservationComponent
+            },
+            {
+                path: 'manage',
+                component: ManageComponent,
+                canActivate: [AuthorizeGuard],
+                data: {permittedRoles: ["Manager", "Admin"]}
+            },
+            {
+                path: 'client-profile',
+                component: ClientProfileComponent,
+                canActivate: [AuthorizeGuard]
+            },
+        ]),
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatTableModule,
+        FontAwesomeModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatCheckboxModule,
+        MatTabsModule,
+        MatDialogModule,
+        MatToolbarModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatSortModule,
+        CarouselModule,
+        MatGridListModule,
+        MatSliderModule,
+        MatRadioModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],

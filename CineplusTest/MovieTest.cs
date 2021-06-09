@@ -1,17 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Cineplus.Controllers;
 using Cineplus.Data;
 using Cineplus.Models;
 using Cineplus.Services;
-using IdentityModel;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Xunit;
-using Moq;
 
 namespace CineplusTest {
 	public class MovieTest {
@@ -61,7 +54,9 @@ namespace CineplusTest {
 				new ApplicationDbContext(options,
 					Options.Create(new OperationalStoreOptions()))) {
 				var movieRepo = new SqlRepository<Movie>(context);
-				var movieService = new MovieService(movieRepo);
+				var displayRepo = new SqlRepository<Settings>(context);
+				var displayService = new SettingsService(displayRepo);
+				var movieService = new MovieService(movieRepo, displayService);
 				Pagination<Movie> moviePagination = movieService.GetAllWithGenre(new Pagination<Movie>());
 				
 				Assert.Equal(2, moviePagination.Result.Count);
@@ -88,7 +83,9 @@ namespace CineplusTest {
 				new ApplicationDbContext(options,
 					Options.Create(new OperationalStoreOptions()))) {
 				var movieRepo = new SqlRepository<Movie>(context);
-				var movieService = new MovieService(movieRepo);
+				var displayRepo = new SqlRepository<Settings>(context);
+				var displayService = new SettingsService(displayRepo);
+				var movieService = new MovieService(movieRepo, displayService);
 				Pagination<Movie> moviePagination = movieService.GetAllWithGenre(new Pagination<Movie>());
 				
 				Assert.All(moviePagination.Result, movie => Assert.NotNull(movie.Genre));
@@ -115,7 +112,9 @@ namespace CineplusTest {
 				new ApplicationDbContext(options,
 					Options.Create(new OperationalStoreOptions()))) {
 				var movieRepo = new SqlRepository<Movie>(context);
-				var movieService = new MovieService(movieRepo);
+				var displayRepo = new SqlRepository<Settings>(context);
+				var displayService = new SettingsService(displayRepo);
+				var movieService = new MovieService(movieRepo, displayService);
 
 				var movie = new Movie() {
 					Id = 0,

@@ -9,21 +9,39 @@ namespace Cineplus.Models {
 		public static void Seed(this ModelBuilder modelBuilder)
 		{
 			
-			var displaySettings = new List<DisplaySettings>()
+			var settings = new List<Settings>()
 			{
-				new DisplaySettings()
+				new Settings()
 				{
 					Id = -1,
 					Name = "Best Reviews",
-					Active = false
+					Active = false,
+					Type = "Display"
 				},
-				new DisplaySettings()
+				new Settings()
 				{
 					Id = -2,
 					Name = "Manual",
-					Active = true
+					Active = true,
+					Type = "Display"
+				},
+				new Settings()
+				{
+					Id = -3,
+					Name = "Random",
+					Active = false,
+					Type = "Display"
+				},
+				new Settings()
+				{
+					Id = -4,
+					Name = "Most seen",
+					Active = false,
+					Type = "Display"
 				}
 			};
+			
+			modelBuilder.Entity<Settings>().HasData(settings);
 
 			var genres = new List<Genre>()
 			{
@@ -75,7 +93,7 @@ namespace Cineplus.Models {
 					Score = 8.8f,
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -90,7 +108,7 @@ namespace Cineplus.Models {
 					Score = 7.8f,
 					GenreId = genres[1].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -105,7 +123,7 @@ namespace Cineplus.Models {
 					Score = 7.7f,
 					GenreId = genres[1].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -120,7 +138,7 @@ namespace Cineplus.Models {
 					              "police ranks. But both sides soon discover there's a mole among them.",
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -133,7 +151,7 @@ namespace Cineplus.Models {
 					              "against the autocratic Capitol.",
 					GenreId = genres[3].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -148,7 +166,7 @@ namespace Cineplus.Models {
 					              "affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -167,7 +185,7 @@ namespace Cineplus.Models {
 					              " fashionable and revenge-bent Cruella.",
 					GenreId = genres[0].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -183,7 +201,7 @@ namespace Cineplus.Models {
 					              "integrity and unquenchable sense of hope.",
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -198,7 +216,7 @@ namespace Cineplus.Models {
 					              "of bloody revenge.",
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -212,7 +230,7 @@ namespace Cineplus.Models {
 					              "occurrence continues to happen randomly, and the two must adjust their lives around each other.",
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg",
-					Display = true
+					Display = new DateTime(2021, 6, 6, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -226,7 +244,7 @@ namespace Cineplus.Models {
 					              "unfurl in three stories that ingeniously trip back and forth in time.",
 					GenreId = genres[4].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
-					Display = false
+					Display = new DateTime(2021, 6, 4, 15, 0, 0),
 				},
 				new Movie()
 				{
@@ -239,7 +257,7 @@ namespace Cineplus.Models {
 					              "took everything from him.",
 					GenreId = genres[1].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
-					Display = false
+					Display = new DateTime(2021, 6, 4, 15, 0, 0),
 				}
 			};
 

@@ -32,6 +32,9 @@ namespace Cineplus.Data {
 			modelBuilder.Entity<Associate>()
 				.Property(associate => associate.Points)
 				.HasDefaultValue(0);
+			modelBuilder.Entity<Settings>()
+				.Property(settings => settings.Name)
+				.IsRequired();
 			
 			modelBuilder.Seed();
 		}
