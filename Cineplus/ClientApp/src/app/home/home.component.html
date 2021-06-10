@@ -12,7 +12,8 @@
               {{ movie.director }} <fa-icon [icon]="faStar"></fa-icon> {{movie.score}}
             </mat-card-subtitle>
           </mat-card-header>
-          <img class="mb-3 movie-borders" src="{{ picsFromMovie(movie) }}" alt="No image available">
+          <img [src]="movie.imageUrl" (load)="movie['loaded'] = true" [hidden]="!movie['loaded']"  alt=""/>
+          <img src="assets/placeholder.png" [hidden]="movie['loaded']" alt="">
           <mat-card-content>{{ movie.genre.genreName }} - {{parseDuration(movie.duration)}}</mat-card-content>
           <mat-divider></mat-divider>
           <mat-card-actions>
