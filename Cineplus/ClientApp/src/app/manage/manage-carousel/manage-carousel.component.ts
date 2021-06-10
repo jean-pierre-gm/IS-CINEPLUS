@@ -60,12 +60,15 @@ export class ManageCarouselComponent implements OnInit {
   }
 
   submit(){
-    if(this.selected.name != "Manual") {
-      this.http.put(this.baseUrl + "api/settings/display", this.selected).subscribe()
-      this._snackBar.open("Carousel settings changed", "", {'duration': 2000})
+    this.http.put(this.baseUrl + "api/settings/display", this.selected).subscribe()
+    if(this.selected.name == "Manual"){
+      if(this.manual.data.length != 10){
+        this._snackBar.open("You need to put 10 movies in the carousel", "", {'duration':2000})
+        return
+      }
+      this.http.put(this.baseUrl + "api/movie/display/manual", this.manual.data).subscribe();
     }
-    else
-      return
+    this._snackBar.open("Carousel settings changed", "", {'duration': 2000})
   }
 
   sortTable($event: Sort) {

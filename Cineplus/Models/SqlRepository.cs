@@ -62,14 +62,13 @@ namespace Cineplus.Models {
 
 		public IEnumerable<T> UpdateAll(IEnumerable<T> entities)
 		{
-			var dbEntities = entities.ToList();
-			foreach (var entity in dbEntities)
+			foreach (var entity in entities)
 			{
 				_entities.Update(entity);
 			}
 
 			_context.SaveChanges();
-			return dbEntities;
+			return entities;
 		}
 	}
 }
