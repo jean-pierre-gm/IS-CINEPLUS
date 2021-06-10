@@ -55,6 +55,7 @@ import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscount
 import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -154,6 +155,7 @@ import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
         MatDatepickerModule,
         MatNativeDateModule,
         MatExpansionModule,
+        MatProgressBarModule,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
