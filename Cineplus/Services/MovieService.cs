@@ -50,18 +50,12 @@ namespace Cineplus.Services {
 			return null;
 		}
 
-		public Pagination<Movie> GetPaginationDisplay(Pagination<Movie> parameters)
-		{
-			Settings active = _settingsService.GetActiveDisplay();
-			IQueryable<Movie> query = GetDisplay(active.Name);
-			return PaginationService.GetPagination(query, parameters);
-		}
-
-		public IEnumerable<Movie> GetAllDisplay(string name)
+		public Pagination<Movie> GetPaginationDisplay(string name, Pagination<Movie> parameters)
 		{
 			if(name == "" || name is null)
 				name = _settingsService.GetActiveDisplay().Name;
-			return GetDisplay(name).AsEnumerable();
+			IQueryable<Movie> query = GetDisplay(name);
+			return PaginationService.GetPagination(query, parameters);
 		}
 
 		public IEnumerable<Movie> SetManualDisplay(IEnumerable<Movie> movies)

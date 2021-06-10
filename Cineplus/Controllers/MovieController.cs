@@ -40,14 +40,14 @@ namespace Cineplus.Controllers {
 		[Route("display")]
 		public ActionResult<Pagination<Movie>> PaginationDisplayMovies([FromQuery] Pagination<Movie> parameters)
 		{
-			return new ActionResult<Pagination<Movie>>(_movieService.GetPaginationDisplay(parameters));
+			return new ActionResult<Pagination<Movie>>(_movieService.GetPaginationDisplay("", parameters));
 		}
 		
 		[HttpGet]
-        [Route("display/all")]
-        public ActionResult<IEnumerable<Movie>> AllDisplayMovies([FromQuery]string name)
+        [Route("display/{name}")]
+        public ActionResult<Pagination<Movie>> AllDisplayMovies(string name, [FromQuery] Pagination<Movie> parameters)
         {
-        	return new ActionResult<IEnumerable<Movie>>(_movieService.GetAllDisplay(name));
+        	return new ActionResult<Pagination<Movie>>(_movieService.GetPaginationDisplay(name, parameters));
         }
 
         [HttpPut]
