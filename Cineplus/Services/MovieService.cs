@@ -8,9 +8,11 @@ namespace Cineplus.Services {
 	public class MovieService: IMovieService {
 		private IRepository<Movie> _movieRepository;
 		private ISettingsService _settingsService;
-		public MovieService(IRepository<Movie> movieRepository, ISettingsService settingsService) {
+		private ITicketService _ticketService;
+		public MovieService(IRepository<Movie> movieRepository, ISettingsService settingsService, ITicketService ticketService) {
 			_movieRepository = movieRepository;
 			_settingsService = settingsService;
+			_ticketService = ticketService;
 		}
 
 		public Movie Get(int id) {
@@ -27,13 +29,23 @@ namespace Cineplus.Services {
 		{
 			IQueryable<Movie> data = _movieRepository.Data().Include(movie => movie.Genre);
 			if(name == "Best Reviews")
-				return data.OrderByDescending(movie => movie.Score).Take(10);
+				return data.OrderByDescending(movie => movie.Score);
 			if (name == "Manual")
-				return data.OrderByDescending(movie => movie.Display).Take(10);
-			if (name == "Random")
-				return data.OrderBy(movie => new Random().NextDouble()).Take(10);
-			if (name == "Most seen")
-				return null;
+				return data.OrderByDescending(movie => movie.Display);
+			if (name == "Random") {
+				return data.OrderBy(movie => new Guid());
+			}
+			if (name == "Most seen") {
+				var movieIds = _ticketService.GetMovieIdWithTicketsCount();
+				
+				var sortedMoviesByCount = data
+					.Join(movieIds, movie => movie.Id, arg => arg.Key, (m, j) => new {movie = m, count = j.Count})
+					.OrderByDescending(m => m.count)
+					.Select(m => m.movie);
+
+				return sortedMoviesByCount
+					.Concat(data.Where(movie => !movieIds.Select(arg => arg.Key).Contains(movie.Id)));
+			}
 			return null;
 		}
 

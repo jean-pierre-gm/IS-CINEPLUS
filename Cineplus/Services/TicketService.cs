@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Cineplus.Services {
 	public class TicketService: ITicketService {
@@ -73,6 +74,14 @@ namespace Cineplus.Services {
 			}
 			return _ticketRepository.Data().Include(ticket => ticket.Seat)
 				.Where(ticket => ticket.ReproductionId == reproductionId && ticket.UserId == user.Id).AsEnumerable();
+		}
+
+		public IQueryable<GroupByCount> GetMovieIdWithTicketsCount() {
+			_purge();
+			return _ticketRepository.Data()
+				.Include(t => t.Reproduction)
+				.GroupBy(t => t.Reproduction.MovieId)
+				.Select(g => new GroupByCount() {Key = g.Key, Count = g.Count()});
 		}
 	}
 }

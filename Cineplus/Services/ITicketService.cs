@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cineplus.Models;
 
 namespace Cineplus.Services
@@ -8,5 +9,6 @@ namespace Cineplus.Services
         IEnumerable<Ticket> MakeReserveForUser(List<Ticket> toReserve, ApplicationUser user);
         IEnumerable<Ticket> GetAllFromReproduction(int reproductionId);
         IEnumerable<Ticket> GetAllTicketsForUserAtReproduction(ApplicationUser user, int reproductionId);
+        IQueryable<GroupByCount> GetMovieIdWithTicketsCount();
     }
 }

@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="app.db" CopyToOutputDirectory="PreserveNewest"/>
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" />
         <None Include="ClientApp\src\app\discounts\date-discount\date-discount-list.component.ts" />
         <None Include="ClientApp\src\app\discounts\date-discount\date-discount.component.ts" />
         <None Include="ClientApp\src\app\discounts\date-discount\discounts.component.ts" />
