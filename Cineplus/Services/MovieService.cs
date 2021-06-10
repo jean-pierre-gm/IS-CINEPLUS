@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
@@ -48,7 +49,23 @@ namespace Cineplus.Services {
 		{
 			if(name == "" || name is null)
 				name = _settingsService.GetActiveDisplay().Name;
-			return GetDisplay(name);
+			return GetDisplay(name).AsEnumerable();
+		}
+
+		public IEnumerable<Movie> SetManualDisplay(IEnumerable<Movie> movies)
+		{
+			DateTime now = DateTime.Now;
+			var moviesList = new List<Movie>(movies);
+
+			for (int i = 0; i < moviesList.Count; i++)
+			{
+				moviesList[i].Display = now;
+				moviesList[i].Genre = null;
+			}
+
+			_movieRepository.UpdateAll(moviesList);
+			
+			return moviesList;
 		}
 
 		public Movie Add(Movie entity) {

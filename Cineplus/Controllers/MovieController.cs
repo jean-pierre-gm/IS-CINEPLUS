@@ -50,6 +50,13 @@ namespace Cineplus.Controllers {
         	return new ActionResult<IEnumerable<Movie>>(_movieService.GetAllDisplay(name));
         }
 
+        [HttpPut]
+        [Route("display/manual")]
+        public ActionResult<IEnumerable<Movie>> UpdateManualDisplay([FromBody]IEnumerable<Movie> movies)
+        {
+	        return new ActionResult<IEnumerable<Movie>>(_movieService.SetManualDisplay(movies));
+        }
+
 		
 		[Authorize(Roles = "Admin,Manager", AuthenticationSchemes = IdentityExtensions.AuthenticationScheme)]
 		[HttpPost]
