@@ -25,3 +25,16 @@
   </ng-container>
 
 </owl-carousel-o>
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      All movies
+    </mat-panel-title>
+    <mat-panel-description>
+      {{panelOpenState ? 'Hide all movies.' : 'Show all movies.'}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-list-movies></app-list-movies>
+</mat-expansion-panel>

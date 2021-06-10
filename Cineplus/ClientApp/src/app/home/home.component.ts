@@ -45,15 +45,12 @@ export class HomeComponent {
     },
     nav: true
   }
-
-  pics = ['assets/pulp-fiction.jpg', 'assets/forrestgump.jpg', "assets/titanic.jpg", "assets/endgame.jpg"]
+  panelOpenState: boolean;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     let movieSourceConf: DataSourceConf = new DataSourceConf();
     movieSourceConf.endPoint = baseUrl + 'api/movie/display';
-    let moviePagination: Pagination<Movie> = new Pagination();
-    moviePagination.pageSize = 50;
-    this.movieData = new CineplusDataSource<Movie>(http, movieSourceConf, moviePagination);
+    this.movieData = new CineplusDataSource<Movie>(http, movieSourceConf);
     this.movieData.refresh();
   }
 

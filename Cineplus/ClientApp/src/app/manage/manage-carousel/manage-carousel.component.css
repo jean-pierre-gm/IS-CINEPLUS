@@ -11,3 +11,15 @@
 table{
   width: 100%;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+td, th {
+  width: 22%;
+}
+
+.second-table {
+  width: 80%;
+}

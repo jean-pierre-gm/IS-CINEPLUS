@@ -1,21 +1,17 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {CineplusDataSource} from "../../../models/cineplusDataSource";
 import {Movie} from "../../../models/movie";
+import {CineplusDataSource} from "../../../models/cineplusDataSource";
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
-import {DataSourceConf} from "../../../models/dataSourceConf";
-import {faEdit, faPlus, faPlusCircle, faPlusSquare} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateMovieComponent} from "./create-movie/create-movie.component";
-import {Pagination} from "../../../models/pagination";
-import {Genre} from "../../../models/genre";
+import {DataSourceConf} from "../../../models/dataSourceConf";
+import {CreateMovieComponent} from "../../manage/manage-movies/create-movie/create-movie.component";
 import {Sort} from "@angular/material/sort";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
-  selector: 'app-manage-movies',
-  templateUrl: './manage-movies.component.html',
-  styleUrls: ['./manage-movies.component.css'],
+  selector: 'app-list-movies',
+  templateUrl: './list-movies.component.html',
+  styleUrls: ['./list-movies.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -24,19 +20,13 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ]),
   ],
 })
-export class ManageMoviesComponent implements OnInit {
-
-  movie: Movie;
-
+export class ListMoviesComponent implements OnInit {
   expandedElement: Movie | null;
 
   movieDataSource: CineplusDataSource<Movie>;
   propColumns: string[] = ["name", "director", "genre", "duration", "score"]
   sortColumns: boolean[] = [true, false, false, false, true]
   get displayedColumns(): string[] { return this.propColumns.concat("Actions")}
-
-  faEdit = faEdit
-  faPlus = faPlus
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
@@ -67,39 +57,6 @@ export class ManageMoviesComponent implements OnInit {
     }
   }
 
-  openDialog(element: Movie): void {
-    let edit: boolean = true
-    if (!element) {
-      element = new Movie();
-      edit = false;
-    } else {
-      element = { ...element }
-    }
-
-    const dialogRef = this.dialog.open(CreateMovieComponent, {
-      width: '350px',
-      data: {movie: element, edit: edit}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) {
-        console.log('The dialog was closed with cancel button');
-      } else {
-        console.log('The dialog was closed with ok button');
-        this.movie = result;
-        if (edit) {
-          this.http.put('api/movie/' + this.movie.id, this.movie).subscribe(movie => {
-            this.movieDataSource.refresh();
-          });
-        } else {
-          this.http.post('api/movie', this.movie).subscribe(movie => {
-            this.movieDataSource.refresh();
-          });
-        }
-      }
-    });
-  }
-
   sortTable($event: Sort) {
     this.movieDataSource.currentPagination.currentPage = 1;
     if ($event.active == "" || !$event.active || $event.direction == "") {
@@ -108,4 +65,5 @@ export class ManageMoviesComponent implements OnInit {
       this.movieDataSource.orderBy($event.active, $event.direction == "asc");
     }
   }
+
 }

@@ -12,3 +12,7 @@ mat-form-field {
   width: 150%;
   padding-right: 100%;
 }
+
+.mat-tab-group {
+  width: 100%;
+}

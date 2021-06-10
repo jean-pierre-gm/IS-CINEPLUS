@@ -53,6 +53,8 @@ import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage
 import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
 import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscounts/manage-personalDiscounts.component";
 import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
     CreateDateDiscountComponent,
     ManagePersonalDiscountsComponent,
     CreatePersonalDiscountComponent,
-    ManageCarouselComponent
+    ManageCarouselComponent,
+    ListMoviesComponent
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -150,6 +153,7 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
         MatRadioModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatExpansionModule,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
