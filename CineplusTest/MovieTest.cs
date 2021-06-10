@@ -4,6 +4,7 @@ using Cineplus.Services;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Moq;
 using Xunit;
 
 namespace CineplusTest {
@@ -56,7 +57,7 @@ namespace CineplusTest {
 				var movieRepo = new SqlRepository<Movie>(context);
 				var displayRepo = new SqlRepository<Settings>(context);
 				var displayService = new SettingsService(displayRepo);
-				var movieService = new MovieService(movieRepo, displayService);
+				var movieService = new MovieService(movieRepo, displayService, null);
 				Pagination<Movie> moviePagination = movieService.GetAllWithGenre(new Pagination<Movie>());
 				
 				Assert.Equal(2, moviePagination.Result.Count);
@@ -85,7 +86,7 @@ namespace CineplusTest {
 				var movieRepo = new SqlRepository<Movie>(context);
 				var displayRepo = new SqlRepository<Settings>(context);
 				var displayService = new SettingsService(displayRepo);
-				var movieService = new MovieService(movieRepo, displayService);
+				var movieService = new MovieService(movieRepo, displayService, null);
 				Pagination<Movie> moviePagination = movieService.GetAllWithGenre(new Pagination<Movie>());
 				
 				Assert.All(moviePagination.Result, movie => Assert.NotNull(movie.Genre));
@@ -114,7 +115,7 @@ namespace CineplusTest {
 				var movieRepo = new SqlRepository<Movie>(context);
 				var displayRepo = new SqlRepository<Settings>(context);
 				var displayService = new SettingsService(displayRepo);
-				var movieService = new MovieService(movieRepo, displayService);
+				var movieService = new MovieService(movieRepo, displayService, null);
 
 				var movie = new Movie() {
 					Id = 0,
