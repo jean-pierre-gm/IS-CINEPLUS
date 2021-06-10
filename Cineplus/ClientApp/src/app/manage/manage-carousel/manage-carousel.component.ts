@@ -37,8 +37,11 @@ export class ManageCarouselComponent implements OnInit {
           if(this.settings[i].active)
             this.selected = this.settings[i]
       })
-    this.http.get<Movie[]>(baseUrl + "api/movie/display/all?name=Manual")
-      .subscribe(response => this.manual = new MatTableDataSource<Movie>(response))
+    this.http.get<Pagination<Movie>>(baseUrl + "api/movie/display/Manual?pageSize=10")
+      .subscribe(response => {
+        this.manual = new MatTableDataSource<Movie>(response.result)
+        console.log(this.manual)
+      })
 
     let allMovieSourceConf: DataSourceConf = new DataSourceConf();
     allMovieSourceConf.endPoint = baseUrl + 'api/movie'
