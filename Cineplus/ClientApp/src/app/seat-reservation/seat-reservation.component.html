@@ -35,12 +35,14 @@
         </li>
       </ol>
     </div>
-
+    <div style="height: 40px">
     <button *ngIf="selected.length > 0" mat-stroked-button color="accent" (click)="submit()">Reserve Now!</button>
+    </div>
   </div>
 
-  <div class="p-5 flex-fill">
-    <table *ngIf="selected.length > 0" mat-table
+  <div class="p-5 flex-fill" *ngIf="selected.length > 0">
+    <h4>Selected Seats</h4>
+    <table  mat-table
            [dataSource]="selectedDataSource" multiTemplateDataRows
            class="mat-elevation-z8">
       <ng-container matColumnDef="seat">
@@ -86,11 +88,8 @@
 </div>
 
 <div *ngIf="unpaid.data.length > 0">
-  <div>
-    <mat-label>Unpaid Tickets</mat-label>
-    <br><br>
-  </div>
-
+  <h4>Unpaid Tickets</h4>
+  <br>
 <table  mat-table
        [dataSource]="unpaid" multiTemplateDataRows
        class="mat-elevation-z8">

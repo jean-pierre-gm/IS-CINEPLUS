@@ -9,11 +9,13 @@ namespace Cineplus.Controllers
     [Route("/api/[controller]")]
     public class SeatController
     {
-        private ISeatService _seatService;
+        private readonly ISeatService _seatService;
+        private readonly ITicketService _ticketService;
 
-        public SeatController(ISeatService seatService)
+        public SeatController(ISeatService seatService, ITicketService ticketService)
         {
             _seatService = seatService;
+            _ticketService = ticketService;
         }
 
         [HttpGet("{id:int}")]
@@ -21,5 +23,12 @@ namespace Cineplus.Controllers
         {
             return new ActionResult<IEnumerable<Seat>>(_seatService.GetAllFromTheater(id));
         }
+        
+        [HttpGet("reserved/{rid:int}")]
+        public ActionResult<IEnumerable<Seat>> GetSoldSeatsFromReproduction(int rid)
+        {
+            return new ActionResult<IEnumerable<Seat>>(_ticketService.GetAllReservedSeatsForReproduction(rid));
+        }
+
     }
 }

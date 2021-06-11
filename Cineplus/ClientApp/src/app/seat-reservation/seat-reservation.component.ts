@@ -9,6 +9,11 @@ import {ErrorStateMatcher} from "@angular/material/core";
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Seat} from "../../models/seat";
+import {DateDiscount} from "../../models/dateDiscount";
+import {PersonalDiscount} from "../../models/personalDiscount";
+import {DataSourceConf} from "../../models/dataSourceConf";
+import {CineplusDataSource} from "../../models/cineplusDataSource";
+import {Pagination} from "../../models/pagination";
 
 class TicketReserve {
   constructor(finalPrice: string, discount: any[] = [], row: number, col: number, htmlSeat: HTMLInputElement) {
@@ -64,13 +69,15 @@ export class SeatReservationComponent implements AfterViewChecked {
   reproduction: Reproduction;
   theater: Theater;
   seats: string[][];
-  soldTickets: Ticket[];
+  soldSeats: Seat[];
   selected: TicketReserve[] = [];
   selectedDataSource = new MatTableDataSource<any>([]);
   selectedColumnsToDisplay: string[] = ['seat', 'originalPrice', 'discount', 'finalPrice'];
   selectedExpandedElement: TicketReserve | null;
+  dateDiscounts: DateDiscount[];
+  personalDiscounts: PersonalDiscount[];
 
-  unpaid= new MatTableDataSource<any>([]);
+  unpaid = new MatTableDataSource<any>([]);
 
   ticketsFormControl = new FormControl('', [
     Validators.required,
@@ -83,7 +90,7 @@ export class SeatReservationComponent implements AfterViewChecked {
     this.route.queryParams.subscribe(params => {
       id = params.reproduction
     })
-     this.http.get<Reproduction>(baseUrl + 'api/reproduction/' + id).subscribe(
+    this.http.get<Reproduction>(baseUrl + 'api/reproduction/' + id).subscribe(
       result => {
         this.reproduction = result
         TicketReserve.staticReprod = this.reproduction
@@ -93,6 +100,7 @@ export class SeatReservationComponent implements AfterViewChecked {
             this.theater = result
             this.fetchSoldTicketsnUpdateSeats()
             this.fetchUnpaid()
+            this.fetchTodayDiscounts()
           })
       }
       , error => console.log(error))
@@ -102,37 +110,55 @@ export class SeatReservationComponent implements AfterViewChecked {
   ngAfterViewChecked(): void {
   }
 
-  fetchSoldTicketsnUpdateSeats(){
+  fetchSoldTicketsnUpdateSeats() {
 
-    this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/' + this.reproduction.id).subscribe(result => {
-      this.soldTickets = result
+    this.http.get<Seat[]>(this.baseUrl + 'api/seat/reserved/' + this.reproduction.id).subscribe(result => {
+      this.soldSeats = result
 
 
-    this.ticketsFormControl.setValidators(Validators.compose([this.ticketsFormControl.validator, Validators.max(this.theater.columns * this.theater.rows - this.soldTickets.length)]))
-    this.ticketsFormControl.updateValueAndValidity();
+      this.ticketsFormControl.setValidators(Validators.compose([this.ticketsFormControl.validator, Validators.max(this.theater.columns * this.theater.rows - this.soldSeats.length)]))
+      this.ticketsFormControl.updateValueAndValidity();
 
-    this.seats = Array<Array<string>>(Array<string>(this.theater.rows))
-    for (let i: number = 0; i < this.theater.rows; i++) {
-      this.seats[i] = Array<string>(this.theater.columns)
-      for (let j: number = 0; j < this.theater.columns; j++)
-        this.seats[i][j] = `${i}:${j}`
-    }
-    for (const ticket of this.soldTickets) {
-      this.seats[ticket.seat.row][ticket.seat.column] = "0"
-    }
+      this.seats = Array<Array<string>>(Array<string>(this.theater.rows))
+      for (let i: number = 0; i < this.theater.rows; i++) {
+        this.seats[i] = Array<string>(this.theater.columns)
+        for (let j: number = 0; j < this.theater.columns; j++)
+          this.seats[i][j] = `${i}:${j}`
+      }
+      for (const soldSeat of this.soldSeats) {
+        this.seats[soldSeat.row][soldSeat.column] = "0"
+      }
     })
   }
 
-  fetchUnpaid(){
-    this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/' + this.reproduction.id+'/user').subscribe(result => {
+  fetchTodayDiscounts() {
+    this.dateDiscounts = []
+    this.personalDiscounts = []
+    let reprDate: Date = new Date(this.reproduction.startTime)
+    this.http.get<DateDiscount>(this.baseUrl + 'api/datediscount/' + `${reprDate.getDate()}-${reprDate.getMonth()}-${reprDate.getFullYear()}`).subscribe(result => {
+      this.dateDiscounts.push(result)
+    }, error => console.log(error))
+
+    this.http.get<Pagination<PersonalDiscount>>(this.baseUrl +'api/personaldiscount'+ "?pageSize=50&currentPage=1").subscribe(result => {
+      if(result.result){
+      this.personalDiscounts = result.result
+      }
+    }, error => console.log(error));
+
+
+  }
+
+
+  fetchUnpaid() {
+    this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/reserved/' + this.reproduction.id).subscribe(result => {
 
       let un = []
       for (const ticket of result) {
-       un.push( new TicketReserve("0", ["0"], ticket.seat.row,ticket.seat.column , null))
+        un.push(new TicketReserve("0", ["0"], ticket.seat.row, ticket.seat.column, null))
       }
       this.unpaid.data = un
     })
-    }
+  }
 
   submit() {
     let id: string = ""
@@ -142,11 +168,11 @@ export class SeatReservationComponent implements AfterViewChecked {
     this.http.post<Ticket[]>(this.baseUrl + 'api/ticket/', this.selected.map((ticketReserve) => {
       return ticketReserve.getAsTicket()
     })).subscribe(result => {
-        this.fetchSoldTicketsnUpdateSeats()
-        this.fetchUnpaid()
-        this.selected = []
-        this.ticketsFormControl.reset()
-    },error => console.log(error));
+      this.fetchSoldTicketsnUpdateSeats()
+      this.fetchUnpaid()
+      this.selected = []
+      this.ticketsFormControl.reset()
+    }, error => console.log(error));
   }
 
   seatClick(event) {
@@ -163,7 +189,7 @@ export class SeatReservationComponent implements AfterViewChecked {
 
   onChange() {
 
-    if (isNaN(this.ticketsFormControl.value) || this.ticketsFormControl.value < 0 || this.ticketsFormControl.value > this.theater.columns * this.theater.rows - this.soldTickets.length) {
+    if (isNaN(this.ticketsFormControl.value) || this.ticketsFormControl.value < 0 || this.ticketsFormControl.value > this.theater.columns * this.theater.rows - this.soldSeats.length) {
       for (const ticketReserve of this.selected) {
         ticketReserve.htmlSeat.checked = false
       }
