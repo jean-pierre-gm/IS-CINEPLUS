@@ -1,4 +1,22 @@
-<div class="container" *ngIf="movies && movies.result">
+<mat-form-field class="w-100">
+  <mat-label>Select an option for filtering</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let option of filterByOptions" (onSelectionChange)="setSearch($event, option)" value="{{option}}">{{option}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+<mat-form-field class="w-100" *ngIf="activeOption">
+  <mat-label>Select a time frame</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let option of filterTimeOptions" (onSelectionChange)="setTimeSearch($event, option)" value="{{option}}">{{option}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+<div class="container" *ngIf="movies && movies.result && activeOption == 'Movie' && activeTimeOption">
   <h4>Movies</h4>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="movies.result">
