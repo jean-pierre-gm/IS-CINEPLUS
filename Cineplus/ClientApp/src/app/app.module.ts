@@ -56,6 +56,8 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
 import {ManageStatisticsComponent} from "./manage/manage-statistics/manage-statistics.component";
 import {ChartsModule, ThemeService} from "ng2-charts";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ManageStatisticsMoviesComponent} from "./manage/manage-statistics/manage-statistics-movies/manage-statistics-movies.component";
+import {ManageStatisticsDirectorsComponent} from "./manage/manage-statistics/manage-statistics-directors/manage-statistics-directors.component";
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     CreatePersonalDiscountComponent,
     ManageCarouselComponent,
     ManageStatisticsComponent,
+    ManageStatisticsMoviesComponent,
+    ManageStatisticsDirectorsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

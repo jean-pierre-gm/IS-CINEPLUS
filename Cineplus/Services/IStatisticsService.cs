@@ -9,5 +9,10 @@ namespace Cineplus.Services
         Pagination<GroupByDate> MovieSeenMonths(int id, Pagination<GroupByDate> parameters);
 
         Pagination<GroupByDate> MovieSeenYears(int id, Pagination<GroupByDate> parameters);
+        
+        Pagination<GroupByDate> DirectorSeenDays(string name, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> DirectorSeenMonths(string name, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> DirectorSeenYears(string name, Pagination<GroupByDate> parameters);
+        Pagination<string> GetDirectors(Pagination<string> parameters);
     }
 }
