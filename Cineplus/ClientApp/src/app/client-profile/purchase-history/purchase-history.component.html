@@ -1,8 +1,9 @@
-﻿<!-- div class="mat-elevation-z8" *ngIf="orderDataSource.result">
-  <table mat-table [dataSource]="orderDataSource.result" -->
+﻿<button mat-raised-button (click)="log(orderDataSource.result)">
+  CACA
+</button>
 
-<div class="mat-elevation-z8" *ngIf="falseorderDataSource">
-  <table mat-table [dataSource]="falseorderDataSource">
+<div class="mat-elevation-z8" *ngIf="orderDataSource.result">
+  <table mat-table [dataSource]="orderDataSource.result">
 
     <ng-container matColumnDef="Orders">
       <th mat-header-cell *matHeaderCellDef>Orders</th>
@@ -11,16 +12,38 @@
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              All movies
+              {{element[0].reproduction.startTime}}
             </mat-panel-title>
             <mat-panel-description>
               {{panelOpenState ? 'Hide all tickets.' : 'Show all tickets.'}}
             </mat-panel-description>
-            <button mat-raised-button>
+            <button mat-raised-button (click)="log(element[0])">
               Cancel
             </button>
           </mat-expansion-panel-header>
-          <app-list-movies></app-list-movies>
+          <div class="mat-elevation-z8" *ngIf="element">
+            <table mat-table [dataSource]="element">
+
+              <ng-container *ngFor="let disCol of propColumns; let colIndex = index" matColumnDef="{{disCol}}">
+                <th mat-header-cell *matHeaderCellDef>{{disCol | titlecase}}</th>
+                <td mat-cell *matCellDef="let i = index">
+                    {{element[i][disCol]}}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>
+                  A
+                </th>
+                <td mat-cell *matCellDef="let i = index">
+                  {{element[i]["price"] == 0 ? element[i]["points"] : element[i]["price"]}}
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="allColumns"></tr>
+              <tr mat-row *matRowDef="let element; columns: allColumns;"></tr>
+            </table>
+          </div>
         </mat-expansion-panel>
       </td>
     </ng-container>
@@ -31,12 +54,12 @@
 
   <mat-toolbar-row>
     <span class="float-right spacer"></span>
-    <!-- mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
                    [pageSize]="orderDataSource.currentPagination.pageSize"
                    [length]="orderDataSource.currentPagination.totalItems"
                    [pageIndex]="orderDataSource.currentPagination.currentPage - 1"
                    (page)="editPagination($event)">
-    </mat-paginator -->
+    </mat-paginator>
   </mat-toolbar-row>
 </div>
 

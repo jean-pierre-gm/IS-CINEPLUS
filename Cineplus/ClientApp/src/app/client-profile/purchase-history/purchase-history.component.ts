@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {DataSourceConf} from "../../../models/dataSourceConf";
 import {MatDialog} from "@angular/material/dialog";
 import {Ticket} from "../../../models/ticket";
-import {Order} from "../../../models/order";
 
 @Component({
   selector: 'app-purchase-history',
@@ -13,10 +12,10 @@ import {Order} from "../../../models/order";
 })
 export class PurchaseHistoryComponent implements OnInit {
 
-  orderDataSource: CineplusDataSource<Order>;
+  orderDataSource: CineplusDataSource<Ticket[][]>;
+  propColumns: string[] = ['movie', 'teather', 'seat']
+  allColumns: string[] = this.propColumns.concat('price')
   panelOpenState: boolean;
-
-  falseorderDataSource: Order[];
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
@@ -25,10 +24,8 @@ export class PurchaseHistoryComponent implements OnInit {
 
     let dsConf = new DataSourceConf();
     dsConf.endPoint = baseUrl + 'api/ticket/order'
-    //this.orderDataSource = new CineplusDataSource<Order>(http, dsConf);
-    //this.orderDataSource.refresh()
-
-    this.falseorderDataSource = [new Order(), new Order(), new Order()]
+    this.orderDataSource = new CineplusDataSource<Ticket[][]>(http, dsConf);
+    this.orderDataSource.refresh()
   }
 
   ngOnInit() {
@@ -38,5 +35,11 @@ export class PurchaseHistoryComponent implements OnInit {
     console.log($event)
     this.orderDataSource.currentPagination.pageSize = $event.pageSize;
     this.orderDataSource.setPage($event.pageIndex + 1);
+  }
+
+  log(element)
+  {
+    console.log("LOG")
+    console.log(element)
   }
 }
