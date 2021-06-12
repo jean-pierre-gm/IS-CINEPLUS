@@ -57,7 +57,7 @@ namespace Cineplus.Services
         public Pagination<IGrouping<Guid, Ticket>> PaginatedOrders(Pagination<IGrouping<Guid, Ticket>> parameters,
             ApplicationUser user)
         {
-            var query = _ticketRepository.Data().Include(tick => tick.Reproduction)
+            var query = _ticketRepository.Data().Include(tick => tick.Reproduction).Include(tick => tick.Seat).Include(tick => tick.Reproduction.Movie)
                 .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty).AsEnumerable()
                 .GroupBy(ticket => ticket.OrderId).AsQueryable();
             return PaginationService.GetPagination(query, parameters);
