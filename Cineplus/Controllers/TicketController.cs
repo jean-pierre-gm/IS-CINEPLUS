@@ -43,7 +43,7 @@ namespace Cineplus.Controllers
                 _ticketService.PaginatedOrders(parameters, user.Result));
         }
 
-        [HttpDelete("order/cancel/{order:guid}")]
+        [HttpDelete("order/{order:guid}")]
         public ActionResult CancelOrder(Guid order)
         {
             var user = _userService.GetCurrentUser();
