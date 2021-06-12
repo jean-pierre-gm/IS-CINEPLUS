@@ -58,8 +58,8 @@ namespace Cineplus.Services
             ApplicationUser user)
         {
             var query = _ticketRepository.Data().Include(tick => tick.Reproduction)
-                .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty)
-                .GroupBy(ticket => ticket.OrderId);
+                .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty).AsEnumerable()
+                .GroupBy(ticket => ticket.OrderId).AsQueryable();
             return PaginationService.GetPagination(query, parameters);
         }
 
