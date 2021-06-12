@@ -98,6 +98,7 @@
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="ClientApp\src\app\discounts\**" />
+      <Compile Remove="Controllers\OrderController.cs" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="ClientApp\src\app\discounts\**" />

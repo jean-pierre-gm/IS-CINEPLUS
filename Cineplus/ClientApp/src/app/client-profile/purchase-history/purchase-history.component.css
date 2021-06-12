@@ -1,0 +1,34 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-raised-button {
+  margin: 8px 25px 8px 8px;
+  background-color: #9c1400;
+  color: white;
+}
+
+mat-panel-title
+{
+  margin: 15px 1px 1px 1px;
+}
+
+mat-panel-description
+{
+  margin: 15px 1px 1px 120px;
+}
+
+.spacer {
+  width: 100px;
+  min-width: 100px;
+}
+
+::ng-deep .mat-paginator-container {
+  justify-content: center !important;
+  min-height: unset !important;
+}

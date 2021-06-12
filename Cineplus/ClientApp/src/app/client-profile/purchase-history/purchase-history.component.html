@@ -1,0 +1,42 @@
+﻿<!-- div class="mat-elevation-z8" *ngIf="orderDataSource.result">
+  <table mat-table [dataSource]="orderDataSource.result" -->
+
+<div class="mat-elevation-z8" *ngIf="falseorderDataSource">
+  <table mat-table [dataSource]="falseorderDataSource">
+
+    <ng-container matColumnDef="Orders">
+      <th mat-header-cell *matHeaderCellDef>Orders</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              All movies
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Hide all tickets.' : 'Show all tickets.'}}
+            </mat-panel-description>
+            <button mat-raised-button>
+              Cancel
+            </button>
+          </mat-expansion-panel-header>
+          <app-list-movies></app-list-movies>
+        </mat-expansion-panel>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['Orders']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['Orders'];"></tr>
+  </table>
+
+  <mat-toolbar-row>
+    <span class="float-right spacer"></span>
+    <!-- mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   [pageSize]="orderDataSource.currentPagination.pageSize"
+                   [length]="orderDataSource.currentPagination.totalItems"
+                   [pageIndex]="orderDataSource.currentPagination.currentPage - 1"
+                   (page)="editPagination($event)">
+    </mat-paginator -->
+  </mat-toolbar-row>
+</div>
+

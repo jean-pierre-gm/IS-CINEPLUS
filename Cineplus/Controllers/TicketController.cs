@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cineplus.Models;
 using Cineplus.Services;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cineplus.Controllers
@@ -32,7 +33,6 @@ namespace Cineplus.Controllers
         }
         
         
-        
         [HttpGet("order")]
         public ActionResult<Pagination<IGrouping<Guid, Ticket>>> GetOrders(
             [FromQuery] Pagination<IGrouping<Guid, Ticket>> parameters)
@@ -42,6 +42,7 @@ namespace Cineplus.Controllers
             return new ActionResult<Pagination<IGrouping<Guid, Ticket>>>(
                 _ticketService.PaginatedOrders(parameters, user.Result));
         }
+        
 
         [HttpDelete("order/cancel/{order:guid}")]
         public ActionResult CancelOrder(Guid order)

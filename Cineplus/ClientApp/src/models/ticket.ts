@@ -3,6 +3,5 @@ import {Reproduction} from "./reproduction";
 
 export class Ticket{
   seat:Seat;
-  reproductionId: number;
-
+  reproduction: Reproduction;
 }

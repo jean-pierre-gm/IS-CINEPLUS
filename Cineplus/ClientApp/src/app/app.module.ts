@@ -56,6 +56,7 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purchase-history.component";
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ManagePersonalDiscountsComponent,
     CreatePersonalDiscountComponent,
     ManageCarouselComponent,
-    ListMoviesComponent
+    ListMoviesComponent,
+    PurchaseHistoryComponent
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
