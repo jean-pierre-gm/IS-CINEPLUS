@@ -7,6 +7,26 @@
 
 <br>
 
-<app-manage-statistics-movies *ngIf="activeOption=='Movie'"></app-manage-statistics-movies>
+<app-manage-statistics-general *ngIf="activeOption=='Movie'"
+                               getAllEndpoint="api/movie"
+                               getCountEndpoint="api/statistics"
+                               name="movieName" text="Movies">
+</app-manage-statistics-general>
 
-<app-manage-statistics-directors *ngIf="activeOption=='Director'"></app-manage-statistics-directors>
+<app-manage-statistics-general *ngIf="activeOption=='Director'"
+                               getAllEndpoint="api/statistics/directors"
+                               getCountEndpoint="api/statistics/directors"
+                               name="" text="Directors">
+</app-manage-statistics-general>
+
+<app-manage-statistics-general *ngIf="activeOption=='Genre'"
+                               getAllEndpoint="api/genre"
+                               getCountEndpoint="api/statistics/genres"
+                               name="genreName" text="Genres">
+</app-manage-statistics-general>
+
+<app-manage-statistics-general *ngIf="activeOption=='Actor'"
+                               getAllEndpoint="api/actor"
+                               getCountEndpoint="api/statistics/actors"
+                               name="actorName" text="Actors">
+</app-manage-statistics-general>

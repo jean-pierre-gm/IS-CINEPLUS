@@ -40,7 +40,6 @@ export class ManageCarouselComponent implements OnInit {
     this.http.get<Pagination<Movie>>(baseUrl + "api/movie/display/Manual?pageSize=10")
       .subscribe(response => {
         this.manual = new MatTableDataSource<Movie>(response.result)
-        console.log(this.manual)
       })
 
     let allMovieSourceConf: DataSourceConf = new DataSourceConf();

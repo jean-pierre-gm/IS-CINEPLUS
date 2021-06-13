@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {GroupByDate} from "../../../../models/groupByDate";
 import {CineplusDataSource} from "../../../../models/cineplusDataSource";
 import {HttpClient} from "@angular/common/http";
@@ -10,44 +10,54 @@ import {ChartDataSets, ChartOptions} from "chart.js";
 import {Color, Label} from "ng2-charts";
 
 @Component({
-  selector: 'app-manage-statistics-directors',
-  templateUrl: './manage-statistics-directors.component.html',
-  styleUrls: ['./manage-statistics-directors.component.css']
+  selector: 'app-manage-statistics-general',
+  templateUrl: './manage-statistics-general.component.html',
+  styleUrls: ['./manage-statistics-general.component.css']
 })
-export class ManageStatisticsDirectorsComponent implements OnInit {
+export class ManageStatisticsGeneralComponent implements OnInit {
+
 
   data: GroupByDate[]
-  currentDirector: string
+  current: any
   displayedColumns = ["Name"]
 
   filterTimeOptions = ["Last 30 days", "Last 12 months", "Last 5 years"]
   activeTimeOption: string
 
-  directors: CineplusDataSource<string>
+  dataSource: CineplusDataSource<any>
+
+  @Input()
+  getAllEndpoint: string
+  @Input()
+  getCountEndpoint: string
+  @Input()
+  name: string
+  @Input()
+  text: string
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    let directorSourceConf: DataSourceConf = new DataSourceConf();
-    directorSourceConf.endPoint = this.baseUrl + 'api/statistics/directors'
-    let directorPagination: Pagination<string> = new Pagination();
-    directorPagination.pageSize = 5;
-    this.directors = new CineplusDataSource<string>(this.http, directorSourceConf, directorPagination);
-    this.directors.refresh()
   }
 
   ngOnInit() {
+    let dataSourceConf: DataSourceConf = new DataSourceConf();
+    dataSourceConf.endPoint = this.baseUrl + this.getAllEndpoint
+    let dataPagination: Pagination<any> = new Pagination();
+    dataPagination.pageSize = 5;
+    this.dataSource = new CineplusDataSource<any>(this.http, dataSourceConf, dataPagination);
+    this.dataSource.refresh()
   }
 
   editPagination($event) {
-    this.directors.currentPagination.pageSize = $event.pageSize;
-    this.directors.setPage($event.pageIndex + 1);
+    this.dataSource.currentPagination.pageSize = $event.pageSize;
+    this.dataSource.setPage($event.pageIndex + 1);
   }
 
   setTimeSearch($event: MatOptionSelectionChange, option){
     if(!$event.source.selected)
       return
     this.activeTimeOption = option
-    if(this.currentDirector)
-      this.buildGraph(this.currentDirector)
+    if(this.current)
+      this.buildGraph(this.current)
   }
 
   formatNumber(num: number){
@@ -57,11 +67,12 @@ export class ManageStatisticsDirectorsComponent implements OnInit {
       return num.toString()
   }
 
-  buildGraph(director: string){
-    this.currentDirector = director
+  buildGraph(current: any){
+    this.current = current
     if(this.activeTimeOption == this.filterTimeOptions[0]) {
-      this.http.get<Pagination<GroupByDate>>(this.baseUrl + "api/statistics/directors/day/" + director + "?PageSize=30").subscribe(
+      this.http.get<Pagination<GroupByDate>>(this.baseUrl + this.getCountEndpoint + "/day/" + this.getCurrentId() + "?PageSize=30").subscribe(
         response => {
+          console.log(response)
           this.data = response.result
           this.lineChartData.pop()
           this.lineChartLabels = []
@@ -84,12 +95,12 @@ export class ManageStatisticsDirectorsComponent implements OnInit {
             }
             date = date.add(1, 'days')
           }
-          this.lineChartData.push({data: array, label: director})
+          this.lineChartData.push({data: array, label: this.getName(this.current)})
         }
       )
     }
     if(this.activeTimeOption == this.filterTimeOptions[1]) {
-      this.http.get<Pagination<GroupByDate>>(this.baseUrl + "api/statistics/directors/month/" + director + "?PageSize=12").subscribe(
+      this.http.get<Pagination<GroupByDate>>(this.baseUrl + this.getCountEndpoint + "/month/" + this.getCurrentId() + "?PageSize=12").subscribe(
         response => {
           this.data = response.result
           this.lineChartData.pop()
@@ -112,15 +123,15 @@ export class ManageStatisticsDirectorsComponent implements OnInit {
             }
             date = date.add(1, 'months')
           }
-          this.lineChartData.push({data: array, label: director})
+          this.lineChartData.push({data: array, label: this.getName(this.current)})
         }
       )
     }
     if(this.activeTimeOption == this.filterTimeOptions[2]) {
-      this.http.get<Pagination<GroupByDate>>(this.baseUrl + "api/statistics/directors/year/" + director + "?PageSize=5").subscribe(
+      this.http.get<Pagination<GroupByDate>>(this.baseUrl + this.getCountEndpoint + "/year/" + this.getCurrentId() + "?PageSize=5").subscribe(
         response => {
           this.data = response.result
-          this.lineChartData.pop()
+          this.lineChartData = []
           this.lineChartLabels = []
           let date = moment().subtract(4, 'years')
           let array = Array<number>()
@@ -139,7 +150,7 @@ export class ManageStatisticsDirectorsComponent implements OnInit {
             }
             date = date.add(1, 'years')
           }
-          this.lineChartData.push({data: array, label: director})
+          this.lineChartData.push({data: array, label: this.getName(this.current)})
         }
       )
     }
@@ -172,5 +183,17 @@ export class ManageStatisticsDirectorsComponent implements OnInit {
   lineChartType = 'line';
 
   lineChartPlugins = [];
+
+  getName(element){
+    if(!this.name || this.name == "")
+      return element
+    return element[this.name]
+  }
+
+  getCurrentId(){
+    if(!this.name || this.name == "")
+      return this.current
+    return this.current['id']
+  }
 
 }

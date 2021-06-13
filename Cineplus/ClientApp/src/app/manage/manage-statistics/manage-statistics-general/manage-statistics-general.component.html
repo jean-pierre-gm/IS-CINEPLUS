@@ -7,15 +7,15 @@
 
 <br>
 
-<div class="container" *ngIf="movies && movies.result && activeTimeOption">
-  <h4>Movies</h4>
+<div class="container" *ngIf="dataSource && dataSource.result && activeTimeOption">
+  <h4>{{text}}</h4>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="movies.result">
+    <table mat-table [dataSource]="dataSource.result">
 
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element" (click)="buildGraph(element)">
-          {{element['movieName']}}
+          {{getName(element)}}
         </td>
       </ng-container>
 
@@ -23,9 +23,9 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-toolbar-row>
-      <mat-paginator [pageSize]="movies.currentPagination.pageSize"
-                     [length]="movies.currentPagination.totalItems"
-                     [pageIndex]="movies.currentPagination.currentPage - 1"
+      <mat-paginator [pageSize]="dataSource.currentPagination.pageSize"
+                     [length]="dataSource.currentPagination.totalItems"
+                     [pageIndex]="dataSource.currentPagination.currentPage - 1"
                      (page)="editPagination($event)">
       </mat-paginator>
     </mat-toolbar-row>

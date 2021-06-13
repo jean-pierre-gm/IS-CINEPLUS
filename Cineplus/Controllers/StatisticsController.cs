@@ -62,5 +62,47 @@ namespace Cineplus.Controllers
         {
             return new ActionResult<Pagination<GroupByDate>>(_statisticsService.DirectorSeenYears(name, parameters));
         }
+
+        [HttpGet]
+        [Route("genres/day/{id:int}")]
+        public ActionResult<Pagination<GroupByDate>> GenreSeenDays(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.GenreSeenDays(id, parameters));
+        }
+
+        [HttpGet]
+        [Route("genres/month/{id:int}")]
+        public ActionResult<Pagination<GroupByDate>> GenreSeenMonths(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.GenreSeenMonths(id, parameters));
+        }
+
+        [HttpGet]
+        [Route("genres/year/{id:int}")]
+        public ActionResult<Pagination<GroupByDate>> GenreSeenYears(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.GenreSeenYears(id, parameters));
+        }
+        
+        [HttpGet]
+        [Route("actors/day/{id:int}")]
+        public ActionResult<Pagination<GroupByDate>> ActorsSeenDays(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.ActorsSeenDays(id, parameters));
+        }
+
+        [HttpGet]
+        [Route("actors/month/{id:int}")]
+        public ActionResult<Pagination<GroupByDate>> ActorsSeenMonths(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.ActorsSeenMonths(id, parameters));
+        }
+
+        [HttpGet]
+        [Route("actors/year/{id:int}")]
+        public ActionResult<Pagination<GroupByDate>> ActorsSeenYears(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.ActorsSeenYears(id, parameters));
+        }
     }
 }

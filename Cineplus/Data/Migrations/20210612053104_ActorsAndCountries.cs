@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cineplus.Data.Migrations
 {
-    public partial class Merged : Migration
+    public partial class ActorsAndCountries : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,6 +55,12 @@ namespace Cineplus.Data.Migrations
                 defaultValue: 0.0);
 
             migrationBuilder.AddColumn<string>(
+                name: "Country",
+                table: "Movie",
+                type: "TEXT",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
                 name: "Description",
                 table: "Movie",
                 type: "TEXT",
@@ -74,6 +80,19 @@ namespace Cineplus.Data.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
+                name: "Actor",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ActorName = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actor", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Settings",
                 columns: table => new
                 {
@@ -88,10 +107,161 @@ namespace Cineplus.Data.Migrations
                     table.PrimaryKey("PK_Settings", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ActorMovie",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ActorId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MovieId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActorMovie", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActorMovie_Actor_ActorId",
+                        column: x => x.ActorId,
+                        principalTable: "Actor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActorMovie_Movie_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movie",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -1, "Tom Hanks" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -25, "Vladimir Cruz" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -24, "Jorge Perugorría" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -23, "Michael Nyqvist" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -22, "Keanu Reeves" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -21, "Samuel L. Jackson" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -19, "Mone Kamishiraishi" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -18, "Ryunosuke Kamiki" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -17, "Marlon Brando" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -16, "Al Pacino" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -15, "Morgan Freeman" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -14, "Tim Robbins" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -20, "John Travolta" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -12, "Emma Stone" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -11, "Ryan Gosling" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -10, "Josh Hutcherson" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -9, "Jennifer Lawrence" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -8, "Leonardo DiCaprio" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -7, "Jack Nicholson" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -6, "Chris Evans" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -5, "Robert Downey Jr." });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -4, "Sean Connery" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -3, "Harrison Ford" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -2, "Robin Wright" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "ActorName" },
+                values: new object[] { -13, "Emma Thompson" });
+
             migrationBuilder.InsertData(
                 table: "Genre",
                 columns: new[] { "Id", "Description", "GenreName" },
-                values: new object[] { -3, "Making drama", "Drama" });
+                values: new object[] { -5, "Doing ilegal stuff", "Crime" });
 
             migrationBuilder.InsertData(
                 table: "Genre",
@@ -101,31 +271,36 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Genre",
                 columns: new[] { "Id", "Description", "GenreName" },
-                values: new object[] { -5, "Doing ilegal stuff", "Crime" });
+                values: new object[] { -3, "Making drama", "Drama" });
 
             migrationBuilder.UpdateData(
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -3,
-                columns: new[] { "Description", "Director", "Display", "Duration", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!", "Joss Whedon", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 143, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "The Avengers", 7.6999998092651367 });
+                columns: new[] { "Country", "Description", "Director", "Display", "Duration", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { "US", "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!", "Joss Whedon", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 143, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "The Avengers", 7.6999998092651367 });
 
             migrationBuilder.UpdateData(
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -2,
-                columns: new[] { "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.", "Steven Spielberg", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 127, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg", "Indiana Jones and the Last Crusade", 7.8000001907348633 });
+                columns: new[] { "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { "US", "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.", "Steven Spielberg", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 127, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg", "Indiana Jones and the Last Crusade", 7.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -7, "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.", "Craig Gillespie", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 134, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg", "Cruella", 8.6999998092651367 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -7, "US", "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.", "Craig Gillespie", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 134, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg", "Cruella", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -12, "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.", "Chad Stahelski", new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 101, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "John Wick", 7.3000001907348633 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -12, "US", "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.", "Chad Stahelski", new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 101, -2, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "John Wick", 7.3000001907348633 });
+
+            migrationBuilder.InsertData(
+                table: "Movie",
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -13, "CU", "Havana, Cuba, 1979. Flamboyantly gay artist Diego (Jorge Perugorría) attempts to seduce the straight and strait-laced David, an idealistic young communist, and fails dismally. But David conspires to become friends with Diego so he can monitor the artist's subversive life for the state. As Diego and David discuss politics, individuality and personal expression in Castro's Cuba, a genuine friendship develops between the two. But can it last? Strawberry and Chocolate became an instant hit when it was released, and has become a classic of Cuban cinema due to its charming and authentic exploration of a connection between two people under historical circumstances that seem levelled against them.", "Tomás Gutiérrez Alea", new DateTime(2021, 5, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 108, -1, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tMwUsu080E4kS4rkHPffy1ugvaJ.jpg", "Strawberry and Chocolate", 7.3000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Settings",
@@ -162,47 +337,112 @@ namespace Cineplus.Data.Migrations
                 columns: new[] { "Id", "Columns", "Rows" },
                 values: new object[] { -3, 5, 5 });
 
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -1, -1, -1 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -2, -2, -1 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -3, -3, -2 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -4, -4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -5, -5, -3 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -6, -6, -3 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -26, -25, -13 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -25, -24, -13 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -24, -23, -12 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -23, -22, -12 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -14, -13, -7 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -13, -12, -7 });
+
             migrationBuilder.UpdateData(
                 table: "Movie",
                 keyColumn: "Id",
                 keyValue: -1,
-                columns: new[] { "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.", "Robert Zemeckis", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 142, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg", "Forrest Gump", 8.8000001907348633 });
+                columns: new[] { "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { "US", "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.", "Robert Zemeckis", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 142, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg", "Forrest Gump", 8.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -4, "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.", "Martin Scorsese", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 149, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg", "The Departed", 8.1999998092651367 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -10, "JP", "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.", "Makoto Shinkai", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 104, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg", "Your Name.", 8.6000003814697266 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -6, "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.", "Damien Chazelle", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 129, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg", "La La Land", 7.9000000953674316 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -5, "US", "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.", "Francis Lawrence", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 123, -4, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg", "The Hunger Games: Mockingjay - Part 1", 6.8000001907348633 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -8, "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.", "Frank Darabont", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 144, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", 8.6999998092651367 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -9, "US", "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.", "Francis Ford Coppola", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 175, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", "The Godfather", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -9, "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.", "Francis Ford Coppola", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 175, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", "The Godfather", 8.6999998092651367 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -8, "US", "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.", "Frank Darabont", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 144, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", 8.6999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -10, "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.", "Makoto Shinkai", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 104, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg", "Your Name.", 8.6000003814697266 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -6, "US", "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.", "Damien Chazelle", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 129, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg", "La La Land", 7.9000000953674316 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -5, "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.", "Francis Lawrence", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 123, -4, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg", "The Hunger Games: Mockingjay - Part 1 ", 6.8000001907348633 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -4, "US", "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.", "Martin Scorsese", new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), 149, -3, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg", "The Departed", 8.1999998092651367 });
 
             migrationBuilder.InsertData(
                 table: "Movie",
-                columns: new[] { "Id", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
-                values: new object[] { -11, "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "Makoto Shinkai", new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 154, -5, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", "Pulp Fiction", 8.6000003814697266 });
+                columns: new[] { "Id", "Country", "Description", "Director", "Display", "Duration", "GenreId", "ImageUrl", "MovieName", "Score" },
+                values: new object[] { -11, "US", "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "Makoto Shinkai", new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified), 154, -5, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", "Pulp Fiction", 8.6000003814697266 });
+
+            migrationBuilder.InsertData(
+                table: "Reproduction",
+                columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
+                values: new object[] { -4, -1, 8.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -3 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
@@ -212,12 +452,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -1, -1, 10.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -1 });
+                values: new object[] { -5, -1, 14.0, new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified), -3 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -5, -1, 14.0, new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified), -3 });
+                values: new object[] { -1, -1, 10.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -1 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
@@ -225,9 +465,14 @@ namespace Cineplus.Data.Migrations
                 values: new object[] { -2, -1, 12.0, new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified), -1 });
 
             migrationBuilder.InsertData(
-                table: "Reproduction",
-                columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -4, -1, 8.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -3 });
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -142, 1, 14, -1 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -187, 6, 3, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -247,12 +492,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -183, 2, 3, -2 });
+                values: new object[] { -188, 7, 3, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -178, 7, 2, -2 });
+                values: new object[] { -183, 2, 3, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -272,7 +517,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -187, 6, 3, -2 });
+                values: new object[] { -178, 7, 2, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -287,57 +532,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -175, 4, 2, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
                 values: new object[] { -182, 1, 3, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -188, 7, 3, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -193, 2, 4, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -190, 9, 3, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -204, 3, 5, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -203, 2, 5, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -202, 1, 5, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -201, 0, 5, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -200, 9, 4, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -199, 8, 4, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -347,32 +542,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -198, 7, 4, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -196, 5, 4, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -195, 4, 4, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -194, 3, 4, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -174, 3, 2, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -192, 1, 4, -2 });
+                values: new object[] { -190, 9, 3, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -382,32 +552,87 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -192, 1, 4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -193, 2, 4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -194, 3, 4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -195, 4, 4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -196, 5, 4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
                 values: new object[] { -197, 6, 4, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -173, 2, 2, -2 });
+                values: new object[] { -198, 7, 4, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -167, 6, 1, -2 });
+                values: new object[] { -199, 8, 4, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -171, 0, 2, -2 });
+                values: new object[] { -200, 9, 4, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -201, 0, 5, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -202, 1, 5, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -203, 2, 5, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -204, 3, 5, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -175, 4, 2, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -174, 3, 2, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -172, 1, 2, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
                 values: new object[] { -141, 0, 14, -1 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -142, 1, 14, -1 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -472,22 +697,22 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -172, 1, 2, -2 });
-
-            migrationBuilder.InsertData(
-                table: "Seat",
-                columns: new[] { "Id", "Column", "Row", "TheaterId" },
                 values: new object[] { -155, 4, 0, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -157, 6, 0, -2 });
+                values: new object[] { -156, 5, 0, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -158, 7, 0, -2 });
+                values: new object[] { -173, 2, 2, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -157, 6, 0, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -512,6 +737,11 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -205, 4, 5, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
                 values: new object[] { -163, 2, 1, -2 });
 
             migrationBuilder.InsertData(
@@ -532,7 +762,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -205, 4, 5, -2 });
+                values: new object[] { -167, 6, 1, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -552,7 +782,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -156, 5, 0, -2 });
+                values: new object[] { -171, 0, 2, -2 });
+
+            migrationBuilder.InsertData(
+                table: "Seat",
+                columns: new[] { "Id", "Column", "Row", "TheaterId" },
+                values: new object[] { -158, 7, 0, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -562,7 +797,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -212, 1, 6, -2 });
+                values: new object[] { -218, 7, 6, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -757,7 +992,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -140, 9, 13, -1 });
+                values: new object[] { -212, 1, 6, -2 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -787,7 +1022,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -218, 7, 6, -2 });
+                values: new object[] { -140, 9, 13, -1 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -907,7 +1142,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -134, 3, 13, -1 });
+                values: new object[] { -128, 7, 12, -1 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -1362,7 +1597,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -274, 3, 4, -3 });
+                values: new object[] { -134, 3, 13, -1 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -1392,7 +1627,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Seat",
                 columns: new[] { "Id", "Column", "Row", "TheaterId" },
-                values: new object[] { -128, 7, 12, -1 });
+                values: new object[] { -274, 3, 4, -3 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
@@ -1605,9 +1840,79 @@ namespace Cineplus.Data.Migrations
                 values: new object[] { -275, 4, 4, -3 });
 
             migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -7, -7, -4 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -22, -21, -11 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -21, -20, -11 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -10, -10, -5 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -20, -19, -10 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -19, -18, -10 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -18, -17, -9 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -9, -9, -5 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -16, -15, -8 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -15, -14, -8 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -12, -12, -6 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -11, -11, -6 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -8, -8, -4 });
+
+            migrationBuilder.InsertData(
+                table: "ActorMovie",
+                columns: new[] { "Id", "ActorId", "MovieId" },
+                values: new object[] { -17, -16, -9 });
+
+            migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -1, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -1, null });
+                values: new object[] { -199, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -143, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1637,17 +1942,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -199, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -143, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -201, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -148, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -97, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -143, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -94, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -138, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1677,7 +1977,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -94, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -138, null });
+                values: new object[] { -201, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -148, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1687,12 +1987,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -194, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -137, null });
+                values: new object[] { -102, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -149, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -102, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -149, null });
+                values: new object[] { -207, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -158, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1747,7 +2047,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -207, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -158, null });
+                values: new object[] { -194, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -137, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1782,7 +2082,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -192, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -134, null });
+                values: new object[] { -189, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -130, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1902,7 +2202,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -189, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -130, null });
+                values: new object[] { -217, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -169, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -1957,17 +2257,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -217, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -169, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -175, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -107, null });
+                values: new object[] { -192, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -134, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -218, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -171, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -225, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -186, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2202,7 +2502,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -225, true, 0.0, 9.0, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -186, null });
+                values: new object[] { -175, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -107, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2327,22 +2627,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -290, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -274, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -75, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -107, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -74, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -106, null });
+                values: new object[] { -71, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -103, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -130, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -42, null });
+                values: new object[] { -74, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -106, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2372,17 +2667,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -26, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -43, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -22, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -39, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -21, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -37, null });
+                values: new object[] { -130, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -42, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -127, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -38, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2412,27 +2707,27 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -127, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -38, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -123, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -31, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -131, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -44, null });
+                values: new object[] { -21, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -37, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -28, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -46, null });
+                values: new object[] { -18, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -31, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -138, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -54, null });
+                values: new object[] { -26, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -43, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -27, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -45, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2462,17 +2757,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -27, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -45, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -32, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -51, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -31, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -50, null });
+                values: new object[] { -131, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -44, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -135, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -50, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2502,12 +2797,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -135, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -50, null });
+                values: new object[] { -28, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -46, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -18, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -31, null });
+                values: new object[] { -31, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -50, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2522,7 +2817,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -7, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -11, null });
+                values: new object[] { -120, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -27, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2552,17 +2847,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -112, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -11, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -109, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -7, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -108, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -5, null });
+                values: new object[] { -7, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -11, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -3, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -7, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2592,7 +2887,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -3, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -7, null });
+                values: new object[] { -1, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -1, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -108, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -5, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -112, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -11, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2603,16 +2908,6 @@ namespace Cineplus.Data.Migrations
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -113, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -14, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -114, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -15, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -120, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -27, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2687,12 +2982,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -139, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -55, null });
+                values: new object[] { -114, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -15, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -174, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -106, null });
+                values: new object[] { -138, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -54, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -139, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -55, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2702,12 +3002,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -141, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -57, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -164, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -93, null });
+                values: new object[] { -36, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -57, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2737,17 +3032,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -65, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -94, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -161, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -89, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -159, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -87, null });
+                values: new object[] { -164, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -93, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -160, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -88, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2777,12 +3072,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -160, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -88, null });
+                values: new object[] { -156, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -83, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -156, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -83, null });
+                values: new object[] { -159, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -87, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -65, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -94, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2792,7 +3092,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -165, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -96, null });
+                values: new object[] { -67, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -96, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2817,7 +3117,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -71, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -103, null });
+                values: new object[] { -290, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -274, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2827,12 +3127,12 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -67, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -96, null });
+                values: new object[] { -170, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -101, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -170, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -101, null });
+                values: new object[] { -70, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -101, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2867,7 +3167,7 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -70, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -101, null });
+                values: new object[] { -165, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -96, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2877,17 +3177,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -174, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -106, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -57, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -82, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -155, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -81, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -45, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -66, null });
+                values: new object[] { -56, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -81, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2917,17 +3217,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -46, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -67, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -41, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -62, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -40, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -61, null });
+                values: new object[] { -45, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -66, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -144, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -61, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2957,7 +3257,17 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -144, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -61, null });
+                values: new object[] { -141, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -57, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -40, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -61, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -46, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -67, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -2968,16 +3278,6 @@ namespace Cineplus.Data.Migrations
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -48, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -69, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -147, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -69, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -56, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -81, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
@@ -3052,63 +3352,39 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
-                values: new object[] { -36, true, 0.0, 10.0, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -57, null });
+                values: new object[] { -147, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -69, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
+                values: new object[] { -155, true, 0.0, 12.0, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -81, null });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Confirmed", "PointsPrice", "Price", "ReproductionId", "ReserveTime", "SeatId", "UserId" },
                 values: new object[] { -291, true, 0.0, 14.0, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), -275, null });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActorMovie_ActorId",
+                table: "ActorMovie",
+                column: "ActorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActorMovie_MovieId",
+                table: "ActorMovie",
+                column: "MovieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActorMovie");
+
+            migrationBuilder.DropTable(
                 name: "Settings");
 
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -12);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -11);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -10);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -9);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -8);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -7);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -6);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -5);
-
-            migrationBuilder.DeleteData(
-                table: "Movie",
-                keyColumn: "Id",
-                keyValue: -4);
+            migrationBuilder.DropTable(
+                name: "Actor");
 
             migrationBuilder.DeleteData(
                 table: "Seat",
@@ -4841,19 +5117,54 @@ namespace Cineplus.Data.Migrations
                 keyValue: -1);
 
             migrationBuilder.DeleteData(
-                table: "Genre",
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -13);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -12);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -11);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -10);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -9);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -8);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -7);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
+                keyColumn: "Id",
+                keyValue: -6);
+
+            migrationBuilder.DeleteData(
+                table: "Movie",
                 keyColumn: "Id",
                 keyValue: -5);
 
             migrationBuilder.DeleteData(
-                table: "Genre",
+                table: "Movie",
                 keyColumn: "Id",
                 keyValue: -4);
-
-            migrationBuilder.DeleteData(
-                table: "Genre",
-                keyColumn: "Id",
-                keyValue: -3);
 
             migrationBuilder.DeleteData(
                 table: "Reproduction",
@@ -5981,6 +6292,21 @@ namespace Cineplus.Data.Migrations
                 keyValue: -1);
 
             migrationBuilder.DeleteData(
+                table: "Genre",
+                keyColumn: "Id",
+                keyValue: -5);
+
+            migrationBuilder.DeleteData(
+                table: "Genre",
+                keyColumn: "Id",
+                keyValue: -4);
+
+            migrationBuilder.DeleteData(
+                table: "Genre",
+                keyColumn: "Id",
+                keyValue: -3);
+
+            migrationBuilder.DeleteData(
                 table: "Theater",
                 keyColumn: "Id",
                 keyValue: -3);
@@ -6018,6 +6344,10 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "Price",
                 table: "Reproduction");
+
+            migrationBuilder.DropColumn(
+                name: "Country",
+                table: "Movie");
 
             migrationBuilder.DropColumn(
                 name: "Description",

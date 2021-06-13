@@ -80,8 +80,7 @@ namespace Cineplus.Models {
 
 			var movies = new List<Movie>()
 			{
-				new Movie()
-				{
+				new Movie() {
 					Id = -1,
 					MovieName = "Forrest Gump",
 					Director = "Robert Zemeckis",
@@ -93,9 +92,9 @@ namespace Cineplus.Models {
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -2,
 					MovieName = "Indiana Jones and the Last Crusade",
 					Director = "Steven Spielberg",
@@ -108,9 +107,9 @@ namespace Cineplus.Models {
 					GenreId = genres[1].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/osKZUgKRUK1jwYMdsmlevK7zZIY.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -3,
 					MovieName = "The Avengers",
 					Director = "Joss Whedon",
@@ -123,9 +122,9 @@ namespace Cineplus.Models {
 					GenreId = genres[1].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -4,
 					MovieName = "The Departed",
 					Director = "Martin Scorsese",
@@ -138,11 +137,11 @@ namespace Cineplus.Models {
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kWWAt2FMRbqLFFy8o5R4Zr8cMAb.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -5,
-					MovieName = "The Hunger Games: Mockingjay - Part 1 ",
+					MovieName = "The Hunger Games: Mockingjay - Part 1",
 					Director = "Francis Lawrence",
 					Duration = 123,
 					Score = 6.8f,
@@ -151,9 +150,9 @@ namespace Cineplus.Models {
 					GenreId = genres[3].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -6,
 					MovieName = "La La Land",
 					Director = "Damien Chazelle",
@@ -166,9 +165,9 @@ namespace Cineplus.Models {
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -7,
 					MovieName = "Cruella",
 					Director = "Craig Gillespie",
@@ -185,9 +184,9 @@ namespace Cineplus.Models {
 					GenreId = genres[0].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0knvX7rlwTyZSKj8H5NiARb45.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -8,
 					MovieName = "The Shawshank Redemption",
 					Director = "Frank Darabont",
@@ -201,9 +200,9 @@ namespace Cineplus.Models {
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -9,
 					MovieName = "The Godfather",
 					Director = "Francis Ford Coppola",
@@ -216,9 +215,9 @@ namespace Cineplus.Models {
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -10,
 					MovieName = "Your Name.",
 					Director = "Makoto Shinkai",
@@ -230,9 +229,9 @@ namespace Cineplus.Models {
 					GenreId = genres[2].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q719jXXEzOoYaps6babgKnONONX.jpg",
 					Display = new DateTime(2021, 6, 6, 15, 0, 0),
+					Country = "JP"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -11,
 					MovieName = "Pulp Fiction",
 					Director = "Makoto Shinkai",
@@ -244,9 +243,9 @@ namespace Cineplus.Models {
 					GenreId = genres[4].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
 					Display = new DateTime(2021, 6, 4, 15, 0, 0),
+					Country = "US"
 				},
-				new Movie()
-				{
+				new Movie() {
 					Id = -12,
 					MovieName = "John Wick",
 					Director = "Chad Stahelski",
@@ -257,8 +256,92 @@ namespace Cineplus.Models {
 					GenreId = genres[1].Id,
 					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
 					Display = new DateTime(2021, 6, 4, 15, 0, 0),
+					Country = "US"
+				},
+				new Movie()
+				{
+					Id = -13,
+					MovieName = "Strawberry and Chocolate",
+					Director = "Tomás Gutiérrez Alea",
+					Duration = 108,
+					Score = 7.3f,
+					Description = "Havana, Cuba, 1979. Flamboyantly gay artist Diego (Jorge Perugorría) attempts to seduce the " +
+					              "straight and strait-laced David, an idealistic young communist, and fails dismally. But " +
+					              "David conspires to become friends with Diego so he can monitor the artist's subversive " +
+					              "life for the state. As Diego and David discuss politics, individuality and personal " +
+					              "expression in Castro's Cuba, a genuine friendship develops between the two. But can " +
+					              "it last? Strawberry and Chocolate became an instant hit when it was released, and has " +
+					              "become a classic of Cuban cinema due to its charming and authentic exploration of a " +
+					              "connection between two people under historical circumstances that seem levelled against them.",
+					GenreId = genres[0].Id,
+					ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tMwUsu080E4kS4rkHPffy1ugvaJ.jpg",
+					Display = new DateTime(2021, 5, 4, 15, 0, 0),
+					Country = "CU"
 				}
 			};
+			
+			var actors = new List<Actor>()
+			{
+				new Actor() { Id = -1, ActorName = "Tom Hanks"},
+				new Actor() { Id = -2, ActorName = "Robin Wright"},
+				new Actor() { Id = -3, ActorName = "Harrison Ford"},
+				new Actor(){ Id = -4, ActorName = "Sean Connery"},
+				new Actor() { Id = -5, ActorName = "Robert Downey Jr."},
+				new Actor() { Id = -6, ActorName = "Chris Evans"},
+				new Actor() { Id = -7, ActorName = "Jack Nicholson"},
+				new Actor() { Id = -8, ActorName = "Leonardo DiCaprio"},
+				new Actor() { Id = -9, ActorName = "Jennifer Lawrence"},
+				new Actor() { Id = -10, ActorName = "Josh Hutcherson"},
+				new Actor() { Id = -11, ActorName = "Ryan Gosling"},
+				new Actor() { Id = -12, ActorName = "Emma Stone"},
+				new Actor() { Id = -13, ActorName = "Emma Thompson"},
+				new Actor() { Id = -14, ActorName = "Tim Robbins"},
+				new Actor() { Id = -15, ActorName = "Morgan Freeman"},
+				new Actor() { Id = -16, ActorName = "Al Pacino"},
+				new Actor() { Id = -17, ActorName = "Marlon Brando"},
+				new Actor() { Id = -18, ActorName = "Ryunosuke Kamiki"},
+				new Actor() { Id = -19, ActorName = "Mone Kamishiraishi"},
+				new Actor() { Id = -20, ActorName = "John Travolta"},
+				new Actor() { Id = -21, ActorName = "Samuel L. Jackson"},
+				new Actor() { Id = -22, ActorName = "Keanu Reeves"},
+				new Actor() { Id = -23, ActorName = "Michael Nyqvist"},
+				new Actor() { Id = -24, ActorName = "Jorge Perugorría"},
+				new Actor() { Id = -25, ActorName = "Vladimir Cruz"}
+			};
+
+			modelBuilder.Entity<Actor>().HasData(actors);
+
+			var actorMovies = new List<ActorMovie>()
+			{
+				new ActorMovie() {Id = -1, ActorId = actors[0].Id, MovieId = movies[0].Id},
+				new ActorMovie() {Id = -2, ActorId = actors[1].Id, MovieId = movies[0].Id},
+				new ActorMovie() {Id = -3, ActorId = actors[2].Id, MovieId = movies[1].Id},
+				new ActorMovie() {Id = -4, ActorId = actors[3].Id, MovieId = movies[1].Id},
+				new ActorMovie() {Id = -5, ActorId = actors[4].Id, MovieId = movies[2].Id},
+				new ActorMovie() {Id = -6, ActorId = actors[5].Id, MovieId = movies[2].Id},
+				new ActorMovie() {Id = -7, ActorId = actors[6].Id, MovieId = movies[3].Id},
+				new ActorMovie() {Id = -8, ActorId = actors[7].Id, MovieId = movies[3].Id},
+				new ActorMovie() {Id = -9, ActorId = actors[8].Id, MovieId = movies[4].Id},
+				new ActorMovie() {Id = -10, ActorId = actors[9].Id, MovieId = movies[4].Id},
+				new ActorMovie() {Id = -11, ActorId = actors[10].Id, MovieId = movies[5].Id},
+				new ActorMovie() {Id = -12, ActorId = actors[11].Id, MovieId = movies[5].Id},
+				new ActorMovie() {Id = -13, ActorId = actors[11].Id, MovieId = movies[6].Id},
+				new ActorMovie() {Id = -14, ActorId = actors[12].Id, MovieId = movies[6].Id},
+				new ActorMovie() {Id = -15, ActorId = actors[13].Id, MovieId = movies[7].Id},
+				new ActorMovie() {Id = -16, ActorId = actors[14].Id, MovieId = movies[7].Id},
+				new ActorMovie() {Id = -17, ActorId = actors[15].Id, MovieId = movies[8].Id},
+				new ActorMovie() {Id = -18, ActorId = actors[16].Id, MovieId = movies[8].Id},
+				new ActorMovie() {Id = -19, ActorId = actors[17].Id, MovieId = movies[9].Id},
+				new ActorMovie() {Id = -20, ActorId = actors[18].Id, MovieId = movies[9].Id},
+				new ActorMovie() {Id = -21, ActorId = actors[19].Id, MovieId = movies[10].Id},
+				new ActorMovie() {Id = -22, ActorId = actors[20].Id, MovieId = movies[10].Id},
+				new ActorMovie() {Id = -23, ActorId = actors[21].Id, MovieId = movies[11].Id},
+				new ActorMovie() {Id = -24, ActorId = actors[22].Id, MovieId = movies[11].Id},
+				new ActorMovie() {Id = -25, ActorId = actors[23].Id, MovieId = movies[12].Id},
+				new ActorMovie() {Id = -26, ActorId = actors[24].Id, MovieId = movies[12].Id}
+			};
+
+			modelBuilder.Entity<ActorMovie>().HasData(actorMovies);
 			
 			var dateDiscounts = new List<DateDiscount>() {
 				new DateDiscount() {

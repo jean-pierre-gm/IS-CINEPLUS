@@ -99,5 +99,89 @@ namespace Cineplus.Services
             var data = _movieRepository.Data().Select(g => g.Director).Distinct();
             return PaginationService.GetPagination(data, parameters);
         }
+
+        public Pagination<GroupByDate> GenreSeenDays(int id, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction).ThenInclude(reproduction =>  reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.Movie.GenreId == id)
+                .GroupBy(t => t.Reproduction.StartTime.Date)
+                .Select(g => new GroupByDate(){
+                    Key = g.Key,
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> GenreSeenMonths(int id, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction).ThenInclude(reproduction =>  reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.Movie.GenreId == id)
+                .GroupBy(t => new {t.Reproduction.StartTime.Date.Month, t.Reproduction.StartTime.Year})
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key.Year, g.Key.Month, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> GenreSeenYears(int id, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction).ThenInclude(reproduction =>  reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.Movie.GenreId == id)
+                .GroupBy(t => t.Reproduction.StartTime.Year)
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key, 1, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> ActorsSeenDays(int id, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction =>  reproduction.Movie)
+                .ThenInclude(movie => movie.Actors)
+                .Where(ticket => ticket.Reproduction.Movie.Actors.Any(actorMovie =>  actorMovie.ActorId == id))
+                .GroupBy(t => t.Reproduction.StartTime.Date)
+                .Select(g => new GroupByDate(){
+                    Key = g.Key,
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> ActorsSeenMonths(int id, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction =>  reproduction.Movie)
+                .ThenInclude(movie => movie.Actors)
+                .Where(ticket => ticket.Reproduction.Movie.Actors.Any(actorMovie =>  actorMovie.ActorId == id))
+                .GroupBy(t => new {t.Reproduction.StartTime.Date.Month, t.Reproduction.StartTime.Year})
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key.Year, g.Key.Month, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> ActorsSeenYears(int id, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction =>  reproduction.Movie)
+                .ThenInclude(movie => movie.Actors)
+                .Where(ticket => ticket.Reproduction.Movie.Actors.Any(actorMovie =>  actorMovie.ActorId == id))
+                .GroupBy(t => t.Reproduction.StartTime.Year)
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key, 1, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
     }
 }
