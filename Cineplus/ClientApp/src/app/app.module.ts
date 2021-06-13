@@ -57,6 +57,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purchase-history.component";
+import {CancelationFormComponent} from "./client-profile/purchase-history/cancelation-form/cancelation-form.component";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purcha
     CreatePersonalDiscountComponent,
     ManageCarouselComponent,
     ListMoviesComponent,
-    PurchaseHistoryComponent
+    PurchaseHistoryComponent,
+    CancelationFormComponent
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -164,6 +166,6 @@ import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purcha
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
-    CreatePersonalDiscountComponent, BecomeAssociateComponent]
+    CreatePersonalDiscountComponent, BecomeAssociateComponent, CancelationFormComponent]
 })
 export class AppModule { }

@@ -3,9 +3,10 @@ import {Reproduction} from "./reproduction";
 import {User} from "./user";
 
 export class Ticket {
+  orderId: string;
   seat: Seat;
-  pointsPrice: number;
   price: number;
+  pointsPrice: number;
   user: User;
   reproductionId: number;
   reproduction: Reproduction;

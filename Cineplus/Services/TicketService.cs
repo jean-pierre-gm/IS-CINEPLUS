@@ -57,7 +57,9 @@ namespace Cineplus.Services
         public Pagination<IGrouping<Guid, Ticket>> PaginatedOrders(Pagination<IGrouping<Guid, Ticket>> parameters,
             ApplicationUser user)
         {
-            var query = _ticketRepository.Data().Include(tick => tick.Reproduction).Include(tick => tick.Seat).Include(tick => tick.Reproduction.Movie)
+            var query = _ticketRepository.Data().Include(tick => tick.Reproduction)
+                .Include(tick => tick.Seat).Include(tick => tick.Reproduction.Movie)
+                .Include(tick => tick.Reproduction.Theater)
                 .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty).AsEnumerable()
                 .GroupBy(ticket => ticket.OrderId).AsQueryable();
             return PaginationService.GetPagination(query, parameters);
@@ -69,16 +71,13 @@ namespace Cineplus.Services
             if (user == null) return new BadRequestResult();
             var cancelable = _ticketRepository.Data().Include(ticket => ticket.Reproduction)
                 .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty && ticket.OrderId == orderid &&
-                                 ticket.Reproduction.StartTime < DateTime.Now.AddHours(-2));
-            if (cancelable.Any() && _billingService.RefundPurchase(orderid))
-            {
-                _ticketRepository.RemoveRange(cancelable);
-                return new OkResult();
-            }
-            else
-            {
+                                 ticket.Reproduction.StartTime > DateTime.Now.AddHours(2));
+            
+            if (!cancelable.Any() || !_billingService.RefundPurchase(orderid)) 
                 return new BadRequestResult();
-            }
+            
+            _ticketRepository.RemoveRange(cancelable);
+            return new OkResult();
         }
 
 

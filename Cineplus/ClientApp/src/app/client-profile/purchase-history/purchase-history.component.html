@@ -1,34 +1,29 @@
-﻿<button mat-raised-button (click)="log(orderDataSource.result)">
-  CACA
-</button>
-
-<div class="mat-elevation-z8" *ngIf="orderDataSource.result">
+﻿<div class="mat-elevation-z8" *ngIf="orderDataSource.result">
   <table mat-table [dataSource]="orderDataSource.result">
 
     <ng-container matColumnDef="Orders">
       <th mat-header-cell *matHeaderCellDef>Orders</th>
       <td mat-cell *matCellDef="let element; let i = index">
         <mat-expansion-panel (opened)="element.opened = true"
-                             (closed)="element.closed = false">
+                             (closed)="element.opened = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{calculatePrice(i)}}
             </mat-panel-title>
             <mat-panel-title>
-              {{element[0].reproduction.startTime}}
+              {{'Start Date: ' + formatDate(element[0].reproduction.startTime,
+              "dd/MM/yyyy hh:mm:ss", 'en_US')}}
             </mat-panel-title>
-            <ng-container *ngIf="canCancel(i) as state">
-              <button mat-raised-button *ngIf="state == 0; else label" (click)="log(element[0])">
+            <ng-container *ngIf="canCancel(i); then buttom; else label"></ng-container>
+            <ng-template #buttom>
+              <button mat-raised-button (click)="cancelOrder(i)">
                 Cancel
               </button>
-              <ng-template #label>
-                <mat-panel-title>{{state == -1 ? 'This film has already been shown' :
-                  'The time for cancelation expired'}}</mat-panel-title>
-              </ng-template>
-            </ng-container>
-            <mat-panel-description>
-              {{element.opened ? 'Hide all tickets.' : 'Show all tickets.'}}
-            </mat-panel-description>
+            </ng-template>
+            <ng-template #label>
+              <mat-panel-title>{{hasBeenShown(i) ? 'This film has already been shown' :
+                'The time for cancelation expired'}}</mat-panel-title>
+            </ng-template>
           </mat-expansion-panel-header>
           <div class="mat-elevation-z8" *ngIf="element">
             <table mat-table [dataSource]="element">
@@ -40,10 +35,11 @@
                 </td>
               </ng-container>
 
-              <ng-container matColumnDef="teather">
-                <th mat-header-cell *matHeaderCellDef>Teather</th>
+              <ng-container matColumnDef="theater">
+                <th mat-header-cell *matHeaderCellDef>Theater</th>
                 <td mat-cell *matCellDef="let i = index">
-                  {{element[i].reproduction.teather}}
+                  {{'Rows: ' + element[i].reproduction.theater.rows + ' Columns: ' +
+                  element[i].reproduction.theater.columns}}
                 </td>
               </ng-container>
 
