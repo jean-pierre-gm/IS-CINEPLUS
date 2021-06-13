@@ -17,6 +17,7 @@ namespace Cineplus.Models {
         [Sortable(OrderBy = "discount")]
         public double Discount { get; set; }
 
+        public virtual List<Ticket> Tickets { get; set; }
         public bool Enable { get; set; } = true;
     }
 }

@@ -1,7 +1,5 @@
-﻿export class DateDiscount {
-  id : number = 0;
-  description: string;
-  discount: number;
+﻿import {Discount} from "./discount";
+
+export class DateDiscount extends Discount {
   date: Date;
-  enable: boolean;
 }
