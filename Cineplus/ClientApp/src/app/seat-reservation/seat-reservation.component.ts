@@ -1,5 +1,5 @@
 import {AfterViewChecked, AfterViewInit, Component, Inject, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {Reproduction} from "../../models/reproduction";
 import {Theater} from "../../models/theater";
@@ -120,8 +120,7 @@ export class SeatReservationComponent {
   unpaidColumnsToDisplay: string[] = ['seat', 'price'];
 
   time: number
-  price: number
-  order: string
+
 
   @ViewChild('cd', {static: false}) cd: CdTimerComponent;
   ticketsFormControl = new FormControl('', [
@@ -143,7 +142,7 @@ export class SeatReservationComponent {
         this.http.get<Theater>(baseUrl + 'api/theater/' + this.reproduction.theaterId).subscribe(
           result => {
             this.theater = result
-            this.updateSeats()
+            this.updateSeatsAndReserves()
             this.fetchDiscounts()
 
           })
@@ -186,22 +185,22 @@ export class SeatReservationComponent {
 
 
   calcTotalReservePrice() {
-    this.price = 0
+    let price = 0
     if (this.unpaidDatasource)
       for (let row of this.unpaidDatasource.data) {
-        if (row.price) this.price += row.price;
+        if (row.price) price += row.price;
       }
-    return this.price;
+    return price;
   }
 
   expire() {
     this.dialog.closeAll()
-    this.updateSeats()
+    this.updateSeatsAndReserves()
   }
 
 
   async fetchNotAvailableSeatsAndUpdate() {
-    let result =await this.http.get<Seat[]>(this.baseUrl + 'api/seat/reserved/' + this.reproduction.id).toPromise()
+    let result = await this.http.get<Seat[]>(this.baseUrl + 'api/seat/reserved/' + this.reproduction.id).toPromise()
     this.soldSeats = result === undefined ? [] : result
 
     this.ticketsFormControl.setValidators(Validators.compose([this.ticketsFormControl.validator, Validators.max(this.theater.columns * this.theater.rows - this.soldSeats.length)]))
@@ -219,11 +218,10 @@ export class SeatReservationComponent {
   }
 
   async fetchReservations() {
-    let result =await this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/reserved/' + this.reproduction.id).toPromise()
+    let result = await this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/reserved/' + this.reproduction.id).toPromise()
     this.unpaidDatasource.data = result === undefined ? [] : result
     if (this.unpaidDatasource.data.length > 0) {
       let tick = this.unpaidDatasource.data[0]
-      this.order = tick.orderId
       let reserveTimeout = 1
       this.time = Math.round(new Date(tick.reserveTime).getTime() / 1000) + reserveTimeout * 60 - Math.round(Date.now() / 1000)
       if (this.cd) {
@@ -251,31 +249,31 @@ export class SeatReservationComponent {
   }
 
 
-
-
-  async updateSeats(){
+  async updateSeatsAndReserves() {
     await this.fetchNotAvailableSeatsAndUpdate()
     await this.fetchReservations()
     for (const ticketReserve of this.unpaidDatasource.data) {
       let seat: HTMLInputElement = document.getElementById(`${ticketReserve.seat.row}:${ticketReserve.seat.column}:sd`) as HTMLInputElement;
       seat.parentElement.classList.add("reservedSeat")
     }
-
-
+this.unpaidDatasource.data.length
+  this.reproduction.startTime
   }
 
   async reserve() {
+    let headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
     await this.http.post<Ticket[]>(this.baseUrl + 'api/ticket/', this.selectedDataSource.data.map((ticketReserve) => {
       return ticketReserve.getAsTicket()
-    })).toPromise().catch()
-   this.updateSeats()
+    }), {headers}).toPromise().catch()
+    this.updateSeatsAndReserves()
     this.selectedDataSource.data = []
     this.ticketsFormControl.reset()
   }
 
   async cancelReserve(id: string) {
     await this.http.delete(this.baseUrl + 'api/ticket/' + id).toPromise().catch()
-    this.updateSeats()
+    this.updateSeatsAndReserves()
   }
 
 
@@ -310,10 +308,10 @@ export class SeatReservationComponent {
     })
     if (offset > 0) {
       for (let j = 0; j < offset; j++) {
-        let elem:HTMLInputElement = undefined;
+        let elem: HTMLInputElement = undefined;
         if (this.selectedDataSource.data.length > 0) {
           let ticketReserve = this.selectedDataSource.data[0]
-          let lastij = [ticketReserve.seat.row,ticketReserve.seat.column]
+          let lastij = [ticketReserve.seat.row, ticketReserve.seat.column]
           elem = validSeats.reduce((acc, curr) => {
             if (acc == undefined) return curr
             let accij = acc.id.split(":").map(Number)
@@ -344,11 +342,10 @@ export class SeatReservationComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(BillingDialogComponent, {
       disableClose: true,
-      data: {name: "this.name", animal: "this.animal"}
+      data: {that: this,order:this.unpaidDatasource.data[0].orderId,seatCount:this.unpaidDatasource.data.length,price:this.calcTotalReservePrice()},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -364,12 +361,17 @@ export class BillingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<BillingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
-
-
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  purchaseCompleted: boolean = false
+
+  async makeOrder(type: string = "user") {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    let result = await this.data.that.http.post(this.data.that.baseUrl + `api/ticket/order/${type}/`, "\"" + this.data.order + "\"", {headers}).toPromise().catch()
+    this.purchaseCompleted = true
+    this.data.that.updateSeatsAndReserves()
   }
+
 
 }

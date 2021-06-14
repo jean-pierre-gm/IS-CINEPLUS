@@ -8,7 +8,7 @@ namespace Cineplus.Services
 {
     public interface ITicketService
     {
-        ActionResult MakeOrder(Guid order, ApplicationUser user,bool assoc);
+        ActionResult MakeOrder(Guid order, ApplicationUser user,string type);
         Pagination<IGrouping<Guid, Ticket>> PaginatedOrders(Pagination<IGrouping<Guid, Ticket>> parameters,
             ApplicationUser user);
         ActionResult CancelOrder(Guid orderid, ApplicationUser user);

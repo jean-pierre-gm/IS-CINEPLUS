@@ -37,7 +37,7 @@ namespace Cineplus.Services
         }
 
 
-        public ActionResult MakeOrder(Guid order, ApplicationUser user,bool assoc)
+        public ActionResult MakeOrder(Guid order, ApplicationUser user,string type)
         {
             if (user == null)//check if associate
             {

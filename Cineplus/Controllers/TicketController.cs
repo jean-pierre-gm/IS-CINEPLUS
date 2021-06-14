@@ -23,12 +23,12 @@ namespace Cineplus.Controllers
 
          
       
-        [HttpPost("order")]
-        public ActionResult MakeOrder([FromBody] Guid order,[FromBody]bool asoc)
+        [HttpPost("order/{type}/")]
+        public ActionResult MakeOrder([FromBody]Guid order,string type)
         {
             var user = _userService.GetCurrentUser();
             user.Wait();
-            return _ticketService.MakeOrder(order, user.Result,asoc);
+            return _ticketService.MakeOrder(order, user.Result,type);
         }
         
         
