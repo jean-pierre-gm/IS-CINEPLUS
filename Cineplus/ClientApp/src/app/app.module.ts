@@ -1,18 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppComponent} from './app.component';
+import {NavMenuComponent} from './nav-menu/nav-menu.component';
+import {HomeComponent} from './home/home.component';
+import {CounterComponent} from './counter/counter.component';
+import {FetchDataComponent} from './fetch-data/fetch-data.component';
+import {ApiAuthorizationModule} from 'src/api-authorization/api-authorization.module';
+import {AuthorizeGuard} from 'src/api-authorization/authorize.guard';
+import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -39,7 +39,7 @@ import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.compon
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 import {ClientProfileComponent} from "./client-profile/client-profile.component";
 import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
-import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
+import {BillingDialogComponent, SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
@@ -53,6 +53,10 @@ import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage
 import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
 import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscounts/manage-personalDiscounts.component";
 import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
+import { CdTimerModule } from 'angular-cd-timer';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -65,6 +69,7 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
     ForbiddenComponent,
     RoleListComponent,
     RoleUsersComponent,
+    BillingDialogComponent,
     SeatReservationComponent,
     MovieReproductionComponent,
     ManageComponent,
@@ -78,10 +83,11 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
     CreateDateDiscountComponent,
     ManagePersonalDiscountsComponent,
     CreatePersonalDiscountComponent,
-    ManageCarouselComponent
+    ManageCarouselComponent,
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        CdTimerModule,
         HttpClientModule,
         FormsModule,
         ApiAuthorizationModule,
@@ -150,12 +156,16 @@ import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts
         MatRadioModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatSlideToggleModule,
+        MatChipsModule,
+        MatTooltipModule,
     ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    {provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
-    CreatePersonalDiscountComponent, BecomeAssociateComponent]
+    CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

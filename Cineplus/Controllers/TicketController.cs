@@ -24,11 +24,11 @@ namespace Cineplus.Controllers
          
       
         [HttpPost("order")]
-        public ActionResult MakeOrder([FromBody] Guid order)
+        public ActionResult MakeOrder([FromBody] Guid order,[FromBody]bool asoc)
         {
             var user = _userService.GetCurrentUser();
             user.Wait();
-            return _ticketService.MakeOrder(order, user.Result);
+            return _ticketService.MakeOrder(order, user.Result,asoc);
         }
         
         
@@ -53,31 +53,30 @@ namespace Cineplus.Controllers
 
 
         [HttpPost]
-        public ActionResult<IEnumerable<Ticket>> MakeReserve([FromBody] List<Ticket> partialTickets)
+        public ActionResult MakeReserve([FromBody] List<Ticket> partialTickets)
+        {
+            var user = _userService.GetCurrentUser();
+            user.Wait();
+            return _ticketService.MakeReserveForUser(partialTickets, user.Result);
+        }
+
+
+        [HttpGet("reserved/{reprodId:int}")]
+        public ActionResult<IEnumerable<Ticket>> GetUserReservedTicketsForReproduction(int reprodId)
         {
             var user = _userService.GetCurrentUser();
             user.Wait();
             return new ActionResult<IEnumerable<Ticket>>(
-                _ticketService.MakeReserveForUser(partialTickets, user.Result));
+                _ticketService.GetAllTicketsForUserAtReproduction(user.Result, reprodId));
         }
 
 
-        [HttpGet("reserved/{id:int}")]
-        public ActionResult<IEnumerable<Ticket>> GetUserReservedTicketsForReproduction(int id)
+        [HttpDelete("{ticketId:int}")]
+        public ActionResult CancelReserve(int ticketId)
         {
             var user = _userService.GetCurrentUser();
             user.Wait();
-            return new ActionResult<IEnumerable<Ticket>>(
-                _ticketService.GetAllTicketsForUserAtReproduction(user.Result, id));
-        }
-
-
-        [HttpDelete("{id:int}")]
-        public ActionResult CancelReserve(int ticketid)
-        {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
-            return _ticketService.CancelReserve(ticketid, user.Result);
+            return _ticketService.CancelReserve(ticketId, user.Result);
         }
     }
 }

@@ -2,29 +2,21 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px;
-}
-
 .plane {
   margin: 20px auto;
   max-width: 900px;
 }
-
-
 ol {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .seats {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
 }
-
 .seat {
   display: flex;
   flex: 0 0 14.28571428571429%;
@@ -91,9 +83,21 @@ ol {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 3px;
 }
+
 .seat label:hover {
   cursor: pointer;
-  box-shadow: 0 0 0 2px #5C6AFF;
+  box-shadow: 0 0 0 2px #000000;
+}
+
+.hoverSeat label {
+  box-shadow: 0 0 0 2px #000000;
+}
+
+.reservedSeat input[type=checkbox]:disabled + label {
+  background: #ff9e47;
+}
+.reservedSeat input[type=checkbox]:disabled + label::after {
+  content: "R";
 }
 
 @-webkit-keyframes rubberBand {
@@ -161,19 +165,6 @@ ol {
   animation-name: rubberBand;
 }
 
-mat-slider {
-  width: 500px;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
 
 table {
   width: 100%;
@@ -181,28 +172,20 @@ table {
 }
 
 
-.example-element-description {
-  padding: 10px;
-}
-
-tr.example-detail-row {
+tr.detail-row {
   height: 0;
   background: white;
 }
 
-.example-element-detail {
+.elemnt-detail {
   overflow: hidden;
-  display: flex;
-  background-color: white;
 }
 
-.example-element-row td {
+.elemnt-row td {
   position: relative;
 }
 
-
-
-.example-element-row td::before {
+.elemnt-row td::before {
   content: '';
   width: 100%;
   position: absolute;
@@ -215,9 +198,32 @@ tr.example-detail-row {
   border-bottom: 1px solid lightgray;
 }
 
-.example-element-row:hover td::before {
+.elemnt-row:hover td::before {
   cursor: pointer;
-  border-color: gray;
+  border-top:2px solid gray;
+  border-bottom:2px solid gray;
+}
+
+.elemnt-row-delete:hover td::before {
+  cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>') 16 16, auto;
 }
 
 
+
+.hoverRow td::before{
+  border-top:2px solid gray;
+  border-bottom:2px solid gray;
+}
+
+
+tr.mat-footer-row {
+  font-weight: bold;
+  color: #1b6ec2;
+}
+
+.bootstrap-timer {
+  color: #303030;
+  background-color: #eee;
+  border: 1px solid #c9c9c9;
+  border-radius: 8px;
+}
