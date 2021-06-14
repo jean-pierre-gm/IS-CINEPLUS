@@ -18,3 +18,7 @@
 mat-card-subtitle {
   margin-bottom: 5px;
 }
+
+mat-expansion-panel {
+  margin-top: 2rem;
+}

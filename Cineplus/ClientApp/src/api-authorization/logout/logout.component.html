@@ -1,1 +1,4 @@
-<p>{{ message | async }}</p>
+<p *ngIf="message | async as messageLoaded; else loading">{{ messageLoaded }}</p>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

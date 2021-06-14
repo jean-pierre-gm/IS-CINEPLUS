@@ -12,8 +12,12 @@
               {{ movie.director }} <fa-icon [icon]="faStar"></fa-icon> {{movie.score}}
             </mat-card-subtitle>
           </mat-card-header>
-          <img class="mb-3 movie-borders" src="{{ picsFromMovie(movie) }}" alt="No image available">
-          <mat-card-content>{{ movie.genre.genreName }} - {{parseDuration(movie.duration)}}</mat-card-content>
+          <img [src]="movie.imageUrl" (load)="movie['loaded'] = true" [hidden]="!movie['loaded']"  alt=""/>
+          <img src="assets/placeholder.png" [hidden]="movie['loaded']" alt="">
+          <mat-card-content>
+            {{ movie.genre.genreName }} - {{parseDuration(movie.duration)}}
+            <p class="mt-1">{{ movie.description | slice : 0 : 100}}{{ movie.description.length > 100 ? '...':''}}</p>
+          </mat-card-content>
           <mat-divider></mat-divider>
           <mat-card-actions>
             <button mat-button [routerLink]="['/reproduction']" [queryParams]="{movie: movie.id}" >TICKET</button>
@@ -24,3 +28,16 @@
   </ng-container>
 
 </owl-carousel-o>
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      All movies
+    </mat-panel-title>
+    <mat-panel-description>
+      {{panelOpenState ? 'Hide all movies.' : 'Show all movies.'}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-list-movies></app-list-movies>
+</mat-expansion-panel>

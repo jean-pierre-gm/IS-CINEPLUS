@@ -40,6 +40,7 @@ export class ManageCarouselComponent implements OnInit {
     this.http.get<Pagination<Movie>>(baseUrl + "api/movie/display/Manual?pageSize=10")
       .subscribe(response => {
         this.manual = new MatTableDataSource<Movie>(response.result)
+        console.log('manual', this.manual)
       })
 
     let allMovieSourceConf: DataSourceConf = new DataSourceConf();
@@ -114,6 +115,7 @@ export class ManageCarouselComponent implements OnInit {
   }
 
   isActive(element){
+    if (this.manual == null) return false;
     for(let i = 0; i < this.manual.data.length; i++)
       if(element['id'] == this.manual.data[i].id) {
         return true

@@ -28,6 +28,10 @@ export class CreateMovieComponent implements OnInit {
     [Validators.required, Validators.min(1)])
   public scoreControl: FormControl = new FormControl('',
     [Validators.required, Validators.min(0), Validators.max(10)])
+  public imageControl: FormControl = new FormControl('',
+    [Validators.required])
+  public descriptionControl: FormControl = new FormControl('',
+    [Validators.required])
   private controls: FormGroup = new FormGroup({
     "name": this.nameControl,
     "director": this.directorControl,

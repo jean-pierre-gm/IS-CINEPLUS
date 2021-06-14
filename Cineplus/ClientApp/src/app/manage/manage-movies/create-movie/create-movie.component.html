@@ -27,6 +27,16 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Image Url</mat-label>
+    <input [formControl]="imageControl" matInput [(ngModel)]="data.movie.imageUrl">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-label>Description</mat-label>
+    <textarea [formControl]="descriptionControl" matInput type="text" [(ngModel)]="data.movie.description"
+              cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="7">
+    </textarea>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
