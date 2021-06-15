@@ -17,5 +17,8 @@ namespace Cineplus.Services
         Pagination<GroupByDate> ActorsSeenDays(int id, Pagination<GroupByDate> parameters);
         Pagination<GroupByDate> ActorsSeenMonths(int id, Pagination<GroupByDate> parameters);
         Pagination<GroupByDate> ActorsSeenYears(int id, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> CountrySeenDays(string country, bool exclude, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> CountrySeenMonths(string country, bool exclude, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> CountrySeenYears(string country, bool exclude, Pagination<GroupByDate> parameters);
     }
 }

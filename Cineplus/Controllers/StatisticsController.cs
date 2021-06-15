@@ -104,5 +104,47 @@ namespace Cineplus.Controllers
         {
             return new ActionResult<Pagination<GroupByDate>>(_statisticsService.ActorsSeenYears(id, parameters));
         }
+        
+        [HttpGet]
+        [Route("cuban/day")]
+        public ActionResult<Pagination<GroupByDate>> CubanSeenDays(Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.CountrySeenDays("CU", false, parameters));
+        }
+
+        [HttpGet]
+        [Route("cuban/month")]
+        public ActionResult<Pagination<GroupByDate>> CubanSeenMonths(Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.CountrySeenMonths("CU", false, parameters));
+        }
+
+        [HttpGet]
+        [Route("cuban/year")]
+        public ActionResult<Pagination<GroupByDate>> CubanSeenYears(Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.CountrySeenYears("CU", false, parameters));
+        }
+        
+        [HttpGet]
+        [Route("foreigner/day")]
+        public ActionResult<Pagination<GroupByDate>> ForeignerSeenDays(Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.CountrySeenDays("CU", true, parameters));
+        }
+
+        [HttpGet]
+        [Route("foreigner/month")]
+        public ActionResult<Pagination<GroupByDate>> ForeignerSeenMonths(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.CountrySeenMonths("CU", true, parameters));
+        }
+
+        [HttpGet]
+        [Route("foreigner/year")]
+        public ActionResult<Pagination<GroupByDate>> ForeignerSeenYears(int id, Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(_statisticsService.CountrySeenYears("CU", true, parameters));
+        }
     }
 }

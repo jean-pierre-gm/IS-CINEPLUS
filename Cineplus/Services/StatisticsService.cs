@@ -183,5 +183,61 @@ namespace Cineplus.Services
                 });
             return PaginationService.GetPagination(data, parameters);
         }
+
+        public Pagination<GroupByDate> CountrySeenDays(string country, bool exclude, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction => reproduction.Movie);
+            IQueryable<Ticket> conditionData;
+            if (!exclude)
+                conditionData = data.Where(ticket => ticket.Reproduction.Movie.Country == country);
+            else 
+                conditionData = data.Where(ticket => ticket.Reproduction.Movie.Country != country);
+            var finalData = conditionData
+                .GroupBy(t => t.Reproduction.StartTime.Date)
+                .Select(g => new GroupByDate(){
+                    Key = g.Key,
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(finalData, parameters);
+        }
+
+        public Pagination<GroupByDate> CountrySeenMonths(string country, bool exclude, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction => reproduction.Movie);
+            IQueryable<Ticket> conditionData;
+            if (!exclude)
+                conditionData = data.Where(ticket => ticket.Reproduction.Movie.Country == country);
+            else 
+                conditionData = data.Where(ticket => ticket.Reproduction.Movie.Country != country);
+            var finalData = conditionData
+                .GroupBy(t => new {t.Reproduction.StartTime.Date.Month, t.Reproduction.StartTime.Year})
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key.Year, g.Key.Month, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(finalData, parameters);
+        }
+
+        public Pagination<GroupByDate> CountrySeenYears(string country, bool exclude,Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction => reproduction.Movie);
+            IQueryable<Ticket> conditionData;
+            if (!exclude)
+                conditionData = data.Where(ticket => ticket.Reproduction.Movie.Country == country);
+            else 
+                conditionData = data.Where(ticket => ticket.Reproduction.Movie.Country != country);
+            var finalData = conditionData.GroupBy(t => t.Reproduction.StartTime.Year)
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key, 1, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(finalData, parameters);
+        }
     }
 }

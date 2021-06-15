@@ -64,6 +64,7 @@ import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
+import {ManageStatisticsCountriesComponent} from "./manage/manage-statistics/manage-statistics-countries/manage-statistics-countries.component";
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import {MatIconModule} from "@angular/material/icon";
     ManageStatisticsGeneralComponent,
     ManageActorsComponent,
     CreateActorComponent,
-    ListMoviesComponent
+    ListMoviesComponent,
+    ManageStatisticsCountriesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

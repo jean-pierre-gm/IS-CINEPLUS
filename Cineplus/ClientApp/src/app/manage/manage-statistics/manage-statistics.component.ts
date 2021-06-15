@@ -19,7 +19,7 @@ export class ManageStatisticsComponent implements OnInit {
   currentMovie: Movie
   displayedColumns = ["Name"]
 
-  filterByOptions = ["Movie", "Director", "Genre", "Actor"]
+  filterByOptions = ["Movie", "Director", "Genre", "Actor", "Country"]
   activeOption: string
 
   filterTimeOptions = ["Last 30 days", "Last 12 months", "Last 5 years"]

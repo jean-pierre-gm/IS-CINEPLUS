@@ -69,14 +69,14 @@ export class ManageStatisticsGeneralComponent implements OnInit {
 
   buildGraph(current: any){
     this.current = current
+    this.lineChartLabels = []
+    let array = Array<number>()
     if(this.activeTimeOption == this.filterTimeOptions[0]) {
       this.http.get<Pagination<GroupByDate>>(this.baseUrl + this.getCountEndpoint + "/day/" + this.getCurrentId() + "?PageSize=30").subscribe(
         response => {
           console.log(response)
           this.data = response.result
-          this.lineChartLabels = []
           let date = moment().subtract(29, 'days')
-          let array = Array<number>()
           for (let i = 0; i < 30; i++) {
             this.lineChartLabels.push(this.formatNumber(date.date()) + "-" + this.formatNumber(date.month() + 1) + "-" + date.year().toString())
             let found = false
@@ -94,10 +94,6 @@ export class ManageStatisticsGeneralComponent implements OnInit {
             }
             date = date.add(1, 'days')
           }
-          if(this.lineChartData.length == 0)
-            this.lineChartData.push({data: array, label: this.getName(this.current)})
-          else
-            this.lineChartData[0] = {data: array, label: this.getName(this.current)}
         }
       )
     }
@@ -105,10 +101,7 @@ export class ManageStatisticsGeneralComponent implements OnInit {
       this.http.get<Pagination<GroupByDate>>(this.baseUrl + this.getCountEndpoint + "/month/" + this.getCurrentId() + "?PageSize=12").subscribe(
         response => {
           this.data = response.result
-          this.lineChartData.pop()
-          this.lineChartLabels = []
           let date = moment().subtract(11, 'months')
-          let array = Array<number>()
           for (let i = 0; i < 12; i++) {
             this.lineChartLabels.push(this.formatNumber(date.month() + 1) + "-" + date.year().toString())
             let found = false
@@ -125,7 +118,6 @@ export class ManageStatisticsGeneralComponent implements OnInit {
             }
             date = date.add(1, 'months')
           }
-          this.lineChartData.push({data: array, label: this.getName(this.current)})
         }
       )
     }
@@ -133,10 +125,7 @@ export class ManageStatisticsGeneralComponent implements OnInit {
       this.http.get<Pagination<GroupByDate>>(this.baseUrl + this.getCountEndpoint + "/year/" + this.getCurrentId() + "?PageSize=5").subscribe(
         response => {
           this.data = response.result
-          this.lineChartData = []
-          this.lineChartLabels = []
           let date = moment().subtract(4, 'years')
-          let array = Array<number>()
           for (let i = 0; i < 5; i++) {
             this.lineChartLabels.push(date.year().toString())
             let found = false
@@ -152,9 +141,15 @@ export class ManageStatisticsGeneralComponent implements OnInit {
             }
             date = date.add(1, 'years')
           }
-          this.lineChartData.push({data: array, label: this.getName(this.current)})
         }
       )
+    }
+
+    if(this.lineChartData.length == 0)
+      this.lineChartData.push({data: array, label: this.getName(this.current)})
+    else {
+      this.lineChartData[0].data = array
+      this.lineChartData[0].label = this.getName(this.current)
     }
   }
 
