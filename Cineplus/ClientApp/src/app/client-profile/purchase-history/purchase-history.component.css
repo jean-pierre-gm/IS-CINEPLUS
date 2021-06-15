@@ -7,6 +7,12 @@ td, th
   width: 25%;
 }
 
+.outer-td
+{
+  padding: unset !important;
+  border-radius: unset !important;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -14,7 +20,7 @@ td, th
 
 .mat-raised-button {
   width: 22%;
-  margin: 8px 95px 8px 8px;
+  margin: 8px 112px 8px 8px;
   background-color: #9c1400;
   color: white;
 }

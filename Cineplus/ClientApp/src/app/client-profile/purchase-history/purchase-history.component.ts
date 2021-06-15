@@ -15,7 +15,7 @@ import {CancelationFormComponent} from "./cancelation-form/cancelation-form.comp
 export class PurchaseHistoryComponent implements OnInit {
 
   orderDataSource: CineplusDataSource<Ticket[]>;
-  propColumns: string[] = ['movie', 'theater', 'seat']
+  propColumns: string[] = ['theater', 'seat', 'discounts']
   allColumns: string[] = this.propColumns.concat('price')
 
   formatDate = formatDate
@@ -70,6 +70,17 @@ export class PurchaseHistoryComponent implements OnInit {
       sum += this.orderDataSource.result[i][j][prop];
 
     return (prop == 'price' ? "Price: $" : "Points: ") + sum;
+  }
+
+  calculateDiscounts(i: number, j: number)
+  {
+    let ticket = this.orderDataSource.result[i][j]
+    let sum = ticket.dateDiscount.discount;
+
+    for(let k = 0; k < ticket.personalDiscounts.length; k++)
+      sum += ticket.personalDiscounts[k].discount;
+
+    return sum;
   }
 
   hasBeenShown(i: number)
