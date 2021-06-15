@@ -34,6 +34,9 @@
         <None Include="ClientApp\src\app\discounts\date-discount\date-discount.component.ts" />
         <None Include="ClientApp\src\app\discounts\date-discount\discounts.component.ts" />
         <None Include="ClientApp\src\app\discounts\discounts.component.ts" />
+        <None Include="ClientApp\src\app\notification-service.service.spec.ts" />
+        <None Include="ClientApp\src\app\notification-service.service.ts" />
+        <None Include="ClientApp\src\app\notification.service.ts" />
         <None Include="ClientApp\src\app\role\role.module.ts" />
         <None Include="ClientApp\src\models\associate.ts" />
         <None Include="ClientApp\src\models\cineplusDataSource.ts" />
