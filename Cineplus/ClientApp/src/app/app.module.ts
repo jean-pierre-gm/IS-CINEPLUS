@@ -62,6 +62,8 @@ import {NgxPrintModule} from "ngx-print";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purchase-history.component";
+import {CancelationFormComponent} from "./client-profile/purchase-history/cancelation-form/cancelation-form.component";
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ManageCarouselComponent,
     ListMoviesComponent,
     ManageCarouselComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    PurchaseHistoryComponent,
+    CancelationFormComponent
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -173,11 +177,10 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         NgxPrintModule,
     ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
-    CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent, SnackBarComponent]
+    CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent, CancelationFormComponent, SnackBarComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

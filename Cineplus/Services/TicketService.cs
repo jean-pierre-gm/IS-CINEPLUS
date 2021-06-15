@@ -63,10 +63,13 @@ namespace Cineplus.Services
         public Pagination<IGrouping<Guid, Ticket>> PaginatedOrders(Pagination<IGrouping<Guid, Ticket>> parameters,
             ApplicationUser user)
         {
-            var query = _ticketRepository.Data().Include(tick => tick.Reproduction).Include(tick => tick.Seat)
-                .Include(tick => tick.Reproduction.Movie).Include(tick => tick.Seat.Theater)
+            var query = _ticketRepository.Data().Include(tick => tick.Reproduction)
+                .Include(tick => tick.Seat).Include(tick => tick.Reproduction.Movie)
+                .Include(tick => tick.Reproduction.Theater)
                 .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty).AsEnumerable()
-                .GroupBy(ticket => ticket.OrderId).AsQueryable();
+                .GroupBy(ticket => ticket.OrderId)
+                .OrderByDescending(order => order.First().Reproduction.StartTime)
+                .AsQueryable();
             return PaginationService.GetPagination(query, parameters);
         }
 
@@ -75,18 +78,14 @@ namespace Cineplus.Services
         {
             if (user == null) return new BadRequestResult();
             var cancelable = _ticketRepository.Data().Include(ticket => ticket.Reproduction)
-                .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty &&
-                                 ticket.OrderId == orderid &&
-                                 ticket.Reproduction.StartTime < DateTime.Now.AddHours(-2));
-            if (cancelable.Any() && _billingService.RefundPurchase(orderid))
-            {
-                _ticketRepository.RemoveRange(cancelable);
-                return new OkResult();
-            }
-            else
-            {
+                .Where(ticket => ticket.User == user && ticket.Confirmation != Guid.Empty && ticket.OrderId == orderid &&
+                                 ticket.Reproduction.StartTime > DateTime.Now.AddHours(2));
+            
+            if (!cancelable.Any() || !_billingService.RefundPurchase(orderid)) 
                 return new BadRequestResult();
-            }
+            
+            _ticketRepository.RemoveRange(cancelable);
+            return new OkResult();
         }
 
 
@@ -100,7 +99,8 @@ namespace Cineplus.Services
                 _ticketRepository.Remove(cancelable.Id);
                 return new OkResult();
             }
-                return new BadRequestResult();
+            
+            return new BadRequestResult();
         }
 
         public ActionResult MakeReserveForUser(List<Ticket> toReserve, ApplicationUser user)
@@ -115,20 +115,20 @@ namespace Cineplus.Services
             Reproduction existentReproduction = null;
             foreach (var ticket in toReserve)
             {
-                if (ticket.Seat == null)return new BadRequestResult();;
+                if (ticket.Seat == null)return new BadRequestResult();
                 var existentSeat = _seatRepository.Data().FirstOrDefault(s =>
                     s.TheaterId == ticket.Seat.TheaterId && s.Row == ticket.Seat.Row &&
                     s.Column == ticket.Seat.Column);
-                if (existentSeat == null)return new BadRequestResult();;
+                if (existentSeat == null)return new BadRequestResult();
 
                 var sameReserve = _ticketRepository.Data()
                     .FirstOrDefault(t => t.ReproductionId == ticket.ReproductionId && t.Seat == existentSeat);
-                if (sameReserve != null)return new BadRequestResult();;
+                if (sameReserve != null)return new BadRequestResult();
 
                 existentReproduction ??= _reprodRepository.Data()
                     .FirstOrDefault(r => r.Id == ticket.ReproductionId && r.TheaterId == existentSeat.TheaterId);
                 
-                if (existentReproduction == null || ticket.ReproductionId != existentReproduction.Id )return new BadRequestResult();;
+                if (existentReproduction == null || ticket.ReproductionId != existentReproduction.Id )return new BadRequestResult();
 
                 double totalDiscount = 0;
                 DateDiscount existentDateDiscount = null;
@@ -138,7 +138,7 @@ namespace Cineplus.Services
                 {
                     existentDateDiscount = _dateDiscountRepository
                         .Data().FirstOrDefault(discount => discount.Enable && discount.Id == ticket.DateDiscount.Id);
-                    if (existentDateDiscount == null)return new BadRequestResult();;
+                    if (existentDateDiscount == null)return new BadRequestResult();
                     totalDiscount += existentDateDiscount.Discount;
                 }
 
@@ -149,7 +149,7 @@ namespace Cineplus.Services
                         var existentPersonalDiscount = _personalDiscountRepository
                             .Data().FirstOrDefault(discount =>
                                 discount.Enable && discount.Id == disc.Id);
-                        if (existentPersonalDiscount == null)return new BadRequestResult();;
+                        if (existentPersonalDiscount == null)return new BadRequestResult();
                         existentpersonalDiscounts.Add(existentPersonalDiscount);
                         totalDiscount += existentPersonalDiscount.Discount;
                     }
