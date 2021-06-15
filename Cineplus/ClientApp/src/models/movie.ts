@@ -1,4 +1,5 @@
 import {Genre} from "./genre";
+import {Actor} from "./actor";
 
 export class Movie {
   id : number = 0;
@@ -9,4 +10,5 @@ export class Movie {
   genre: Genre;
   description: string;
   imageUrl: string;
+  actors: Actor[];
 }

@@ -38,11 +38,7 @@
     "rxjs": "^6.5.3",
     "zone.js": "0.9.1",
     "chart.js": "2.9.3",
-    "ng2-charts": "2.4.2",
-    "ng-country-flags": "1.0.7",
-    "country-list": "2.2.0",
-    "flag-icon-css": "3.5.0",
-    "ngx-mat-drm-countries-flags": "3.0.0"
+    "ng2-charts": "2.4.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.26",

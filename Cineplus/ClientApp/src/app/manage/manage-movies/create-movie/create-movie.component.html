@@ -37,6 +37,33 @@
               cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="7">
     </textarea>
   </mat-form-field>
+
+  <mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Cast selection">
+      <mat-chip
+        *ngFor="let actor of this.movie.actors"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(actor)">
+        {{actor.actorName}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Add cast member..."
+        #actorInput
+        [formControl]="actorFormControl"
+        [matAutocomplete]="autoActor"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur">
+    </mat-chip-list>
+    <mat-autocomplete *ngIf="actorDataSource" #autoActor="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let actor of actorDataSource.result" [value]="actor">
+        {{actor.actorName}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

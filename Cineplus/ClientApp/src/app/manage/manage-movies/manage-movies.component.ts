@@ -2,13 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {CineplusDataSource} from "../../../models/cineplusDataSource";
 import {Movie} from "../../../models/movie";
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
 import {DataSourceConf} from "../../../models/dataSourceConf";
 import {faEdit, faPlus, faPlusCircle, faPlusSquare} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateMovieComponent} from "./create-movie/create-movie.component";
-import {Pagination} from "../../../models/pagination";
-import {Genre} from "../../../models/genre";
 import {Sort} from "@angular/material/sort";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
@@ -87,13 +84,16 @@ export class ManageMoviesComponent implements OnInit {
       } else {
         console.log('The dialog was closed with ok button');
         this.movie = result;
+        let cast = this.movie.actors
         if (edit) {
-          this.http.put('api/movie/' + this.movie.id, this.movie).subscribe(movie => {
+          this.http.put<Movie>('api/movie/' + this.movie.id, this.movie).subscribe(movie => {
             this.movieDataSource.refresh();
+            this.http.put('api/actor/cast/' + movie.id, cast).subscribe()
           });
         } else {
-          this.http.post('api/movie', this.movie).subscribe(movie => {
+          this.http.post<Movie>('api/movie', this.movie).subscribe(movie => {
             this.movieDataSource.refresh();
+            this.http.post('api/actor/cast/' + movie.id, cast).subscribe()
           });
         }
       }

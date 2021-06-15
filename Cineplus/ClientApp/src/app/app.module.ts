@@ -62,6 +62,8 @@ import {CreateActorComponent} from "./manage/manage-actors/create-actor/create-a
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -94,81 +96,83 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     CreateActorComponent,
     ListMoviesComponent
   ],
-    imports: [
-        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-        HttpClientModule,
-        FormsModule,
-        ApiAuthorizationModule,
-        MatSnackBarModule,
-        RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'},
-            {path: 'counter', component: CounterComponent},
-            {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
-            {
-                path: 'api-test', component: ApiTestComponent,
-                canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
-            },
-            {path: 'forbidden', component: ForbiddenComponent},
-            {
-                path: 'role-list',
-                component: RoleListComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Admin"]}
-            },
-            {
-                path: 'role-users',
-                component: RoleUsersComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Admin"]}
-            },
-            {
-                path: 'reproduction',
-                component: MovieReproductionComponent
-            },
-            {
-                path: 'reserve',
-                component: SeatReservationComponent
-            },
-            {
-                path: 'manage',
-                component: ManageComponent,
-                canActivate: [AuthorizeGuard],
-                data: {permittedRoles: ["Manager", "Admin"]}
-            },
-            {
-                path: 'client-profile',
-                component: ClientProfileComponent,
-                canActivate: [AuthorizeGuard]
-            },
-        ]),
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatSelectModule,
-        MatTableModule,
-        FontAwesomeModule,
-        MatListModule,
-        MatPaginatorModule,
-        MatCheckboxModule,
-        MatTabsModule,
-        MatDialogModule,
-        MatToolbarModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        MatSortModule,
-        CarouselModule,
-        MatGridListModule,
-        MatSliderModule,
-        MatRadioModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ChartsModule,
-        MatButtonToggleModule,
-        MatExpansionModule,
-        MatProgressBarModule,
-    ],
+  imports: [
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    HttpClientModule,
+    FormsModule,
+    ApiAuthorizationModule,
+    MatSnackBarModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'counter', component: CounterComponent},
+      {path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard]},
+      {
+        path: 'api-test', component: ApiTestComponent,
+        canActivate: [AuthorizeGuard], data: {permittedRoles: ["Manager", "Admin"]}
+      },
+      {path: 'forbidden', component: ForbiddenComponent},
+      {
+        path: 'role-list',
+        component: RoleListComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'role-users',
+        component: RoleUsersComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Admin"]}
+      },
+      {
+        path: 'reproduction',
+        component: MovieReproductionComponent
+      },
+      {
+        path: 'reserve',
+        component: SeatReservationComponent
+      },
+      {
+        path: 'manage',
+        component: ManageComponent,
+        canActivate: [AuthorizeGuard],
+        data: {permittedRoles: ["Manager", "Admin"]}
+      },
+      {
+        path: 'client-profile',
+        component: ClientProfileComponent,
+        canActivate: [AuthorizeGuard]
+      },
+    ]),
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatTableModule,
+    FontAwesomeModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatSortModule,
+    CarouselModule,
+    MatGridListModule,
+    MatSliderModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ChartsModule,
+    MatButtonToggleModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatChipsModule,
+    MatIconModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     ThemeService
