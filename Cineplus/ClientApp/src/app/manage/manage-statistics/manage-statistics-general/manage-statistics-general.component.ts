@@ -74,7 +74,6 @@ export class ManageStatisticsGeneralComponent implements OnInit {
         response => {
           console.log(response)
           this.data = response.result
-          this.lineChartData.pop()
           this.lineChartLabels = []
           let date = moment().subtract(29, 'days')
           let array = Array<number>()
@@ -95,7 +94,10 @@ export class ManageStatisticsGeneralComponent implements OnInit {
             }
             date = date.add(1, 'days')
           }
-          this.lineChartData.push({data: array, label: this.getName(this.current)})
+          if(this.lineChartData.length == 0)
+            this.lineChartData.push({data: array, label: this.getName(this.current)})
+          else
+            this.lineChartData[0] = {data: array, label: this.getName(this.current)}
         }
       )
     }

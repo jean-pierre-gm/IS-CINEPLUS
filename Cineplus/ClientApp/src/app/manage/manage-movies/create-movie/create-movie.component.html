@@ -46,7 +46,7 @@
         [removable]="removable"
         (removed)="remove(actor)">
         {{actor.actorName}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        <i class="fa fa-remove" matChipRemove></i>
       </mat-chip>
       <input
         placeholder="Add cast member..."
