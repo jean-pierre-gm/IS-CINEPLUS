@@ -3,14 +3,16 @@ using System;
 using Cineplus.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cineplus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210611090200_ticketmod")]
+    partial class ticketmod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -430,7 +432,12 @@ namespace Cineplus.Data.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("TicketId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
 
                     b.ToTable("PersonalDiscount");
 
@@ -6051,21 +6058,6 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PersonalDiscountTicket", b =>
-                {
-                    b.Property<int>("PersonalDiscountsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TicketsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("PersonalDiscountsId", "TicketsId");
-
-                    b.HasIndex("TicketsId");
-
-                    b.ToTable("PersonalDiscountTicket");
-                });
-
             modelBuilder.Entity("Cineplus.Models.Associate", b =>
                 {
                     b.HasOne("Cineplus.Models.ApplicationUser", "User")
@@ -6086,6 +6078,13 @@ namespace Cineplus.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("Cineplus.Models.PersonalDiscount", b =>
+                {
+                    b.HasOne("Cineplus.Models.Ticket", null)
+                        .WithMany("PersonalDiscount")
+                        .HasForeignKey("TicketId");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Reproduction", b =>
@@ -6200,21 +6199,6 @@ namespace Cineplus.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PersonalDiscountTicket", b =>
-                {
-                    b.HasOne("Cineplus.Models.PersonalDiscount", null)
-                        .WithMany()
-                        .HasForeignKey("PersonalDiscountsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cineplus.Models.Ticket", null)
-                        .WithMany()
-                        .HasForeignKey("TicketsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Associate");
@@ -6240,6 +6224,11 @@ namespace Cineplus.Data.Migrations
                     b.Navigation("Reproductions");
 
                     b.Navigation("Seats");
+                });
+
+            modelBuilder.Entity("Cineplus.Models.Ticket", b =>
+                {
+                    b.Navigation("PersonalDiscount");
                 });
 #pragma warning restore 612, 618
         }
