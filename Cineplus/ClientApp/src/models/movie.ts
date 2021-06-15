@@ -11,4 +11,5 @@ export class Movie {
   description: string;
   imageUrl: string;
   actors: Actor[];
+  country: string;
 }

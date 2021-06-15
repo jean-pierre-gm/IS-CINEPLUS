@@ -36,12 +36,14 @@ export class CreateMovieComponent implements OnInit {
     [Validators.required])
   public descriptionControl: FormControl = new FormControl('',
     [Validators.required])
+  public countryControl: FormControl = new FormControl('', [Validators.required])
   private controls: FormGroup = new FormGroup({
     "name": this.nameControl,
     "director": this.directorControl,
     "duration": this.durationControl,
     "score": this.scoreControl,
-    "autocomplete": this.autocompleteControl
+    "autocomplete": this.autocompleteControl,
+    "country": this.countryControl
   })
 
   visible = true;
@@ -81,6 +83,9 @@ export class CreateMovieComponent implements OnInit {
     this.movie.actors = []
     if (this.movie.genre) {
       this.autocompleteControl.setValue(this.movie.genre.genreName)
+    }
+    if(this.movie.country){
+      this.countryControl.setValue(this.movie.country)
     }
 
     if(this.edit){
