@@ -168,7 +168,7 @@ ol {
 
 table {
   width: 100%;
-  background: #f6f4f4;
+  /*background: #f6f4f4;*/
 }
 
 
@@ -222,8 +222,7 @@ tr.mat-footer-row {
 }
 
 .bootstrap-timer {
-  color: #303030;
-  background-color: #eee;
+  /*background-color: #f6f4f4;*/
   border: 1px solid #c9c9c9;
   border-radius: 8px;
 }
