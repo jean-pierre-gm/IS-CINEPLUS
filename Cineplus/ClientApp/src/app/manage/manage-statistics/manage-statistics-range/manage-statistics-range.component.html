@@ -1,0 +1,20 @@
+<div class="container">
+<input [formControl]="startTimeFormControl" [errorStateMatcher]="matcher" type="datetime-local" matInput placeholder="Start"/>
+<br><br>
+<input [formControl]="endTimeFormControl" [errorStateMatcher]="matcher" type="datetime-local" matInput placeholder="End"/>
+</div>
+<br>
+
+<button class="float-left" (click)="search()" mat-stroked-button color="primary">Submit</button>
+
+<br><br>
+
+<p *ngIf="show">
+  <b>Most popular movie:</b> {{movie.movieName}} <b>by</b> {{movie.director}}
+  <br>
+  <b>Most popular director:</b> {{director}}
+  <br>
+  <b>Most popular genre:</b> {{genre.genreName}}
+  <br>
+  <b>Most popular actor:</b> {{actor.actorName}}
+</p>

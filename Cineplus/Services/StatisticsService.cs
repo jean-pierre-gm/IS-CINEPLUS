@@ -9,11 +9,19 @@ namespace Cineplus.Services
     {
         private IRepository<Ticket> _ticketRepository;
         private IRepository<Movie> _movieRepository;
+        private IRepository<ActorMovie> _actorMovieRepository;
+        private IRepository<Genre> _genreRepository;
+        private IRepository<Actor> _actorRepository;
+        
 
-        public StatisticsService(IRepository<Ticket> ticketRepository, IRepository<Movie> movieRepository)
+        public StatisticsService(IRepository<Ticket> ticketRepository, IRepository<Movie> movieRepository, 
+            IRepository<ActorMovie> actorMovieRepository, IRepository<Genre> genreRepository, IRepository<Actor> actorRepository)
         {
             _ticketRepository = ticketRepository;
             _movieRepository = movieRepository;
+            _actorMovieRepository = actorMovieRepository;
+            _genreRepository = genreRepository;
+            _actorRepository = actorRepository;
         }
         
         public Pagination<GroupByDate> MovieSeenDays(int id, Pagination<GroupByDate> parameters)
@@ -238,6 +246,68 @@ namespace Cineplus.Services
                     Count = g.Count()
                 });
             return PaginationService.GetPagination(finalData, parameters);
+        }
+
+        public Movie TopSeenMovie(DateTime start, DateTime end)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .Where(ticket => ticket.Reproduction.StartTime > start && ticket.Reproduction.StartTime < end)
+                .GroupBy(t => t.Reproduction.MovieId)
+                .Select(arg => new GroupByCount() {Key = arg.Key, Count = arg.Count()})
+                .OrderByDescending(arg => arg.Count).FirstOrDefault()?.Key;
+                
+            if (data is null)
+                return null;
+
+            return _movieRepository.Data().FirstOrDefault(movie => movie.Id == data);
+        }
+
+        public string TopSeenDirector(DateTime start, DateTime end)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction => reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.StartTime > start && ticket.Reproduction.StartTime < end)
+                .GroupBy(t => t.Reproduction.Movie.Director)
+                .Select(arg => new {Key = arg.Key, Count = arg.Count()})
+                .OrderByDescending(arg => arg.Count).FirstOrDefault()?.Key;
+            
+            return data;
+        }
+
+        public Genre TopSeenGenre(DateTime start, DateTime end)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction => reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.StartTime > start && ticket.Reproduction.StartTime < end)
+                .GroupBy(t => t.Reproduction.Movie.GenreId)
+                .Select(arg => new {Key = arg.Key, Count = arg.Count()})
+                .OrderByDescending(arg => arg.Count).FirstOrDefault()?.Key;
+
+            if (data is null)
+                return null;
+            return _genreRepository.Data().FirstOrDefault(genre => genre.Id == data);
+        }
+
+        public Actor TopSeenActor(DateTime start, DateTime end)
+        {
+            var actorMovies = _actorMovieRepository.Data();
+            
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .Where(ticket => ticket.Reproduction.StartTime > start && ticket.Reproduction.StartTime < end)
+                .Join(actorMovies, ticket => ticket.Reproduction.MovieId, actorMovie => actorMovie.MovieId,
+                    (ticket, actorMovie) => new {Id = ticket.Id, ActorId=actorMovie.ActorId})
+                .GroupBy(t => t.ActorId)
+                .Select(arg => new {Key = arg.Key, Count = arg.Count()})
+                .OrderByDescending(arg => arg.Count).FirstOrDefault()?.Key;
+            
+            if (data is null)
+                return null;
+            
+            return _actorRepository.Data().FirstOrDefault(actor => actor.Id == data);
         }
     }
 }
