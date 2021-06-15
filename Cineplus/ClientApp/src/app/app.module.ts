@@ -39,7 +39,7 @@ import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.compon
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 import {ClientProfileComponent} from "./client-profile/client-profile.component";
 import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
-import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
+import {BillingDialogComponent, SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
@@ -53,6 +53,12 @@ import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage
 import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
 import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscounts/manage-personalDiscounts.component";
 import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
+import { CdTimerModule } from 'angular-cd-timer';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {QRCodeModule} from "angularx-qrcode";
+import {NgxPrintModule} from "ngx-print";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
@@ -70,6 +76,7 @@ import {CancelationFormComponent} from "./client-profile/purchase-history/cancel
     ForbiddenComponent,
     RoleListComponent,
     RoleUsersComponent,
+    BillingDialogComponent,
     SeatReservationComponent,
     MovieReproductionComponent,
     ManageComponent,
@@ -90,6 +97,7 @@ import {CancelationFormComponent} from "./client-profile/purchase-history/cancel
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        CdTimerModule,
         HttpClientModule,
         FormsModule,
         ApiAuthorizationModule,
@@ -160,12 +168,17 @@ import {CancelationFormComponent} from "./client-profile/purchase-history/cancel
         MatNativeDateModule,
         MatExpansionModule,
         MatProgressBarModule,
+        MatSlideToggleModule,
+        MatChipsModule,
+        MatTooltipModule,
+        QRCodeModule,
+        NgxPrintModule,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
-    CreatePersonalDiscountComponent, BecomeAssociateComponent, CancelationFormComponent]
+    CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent, CancelationFormComponent]
 })
 export class AppModule { }

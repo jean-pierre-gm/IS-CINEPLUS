@@ -22,20 +22,32 @@ namespace Cineplus.Models {
 				}
 			}
 
-			var username = configuration["AdminUser:UserName"];
-			var email = configuration["AdminUser:Email"];
-			var password = configuration["AdminUser:Password"];
+			var users = new (string, string)[] {
+				("AdminUser", "Admin"),
+				("CustomerUser", "Customer"),
+				("TicketAgentUser", "TicketAgent"),
+				("ManagerUser", "Manager")
+			};
+			
+			foreach (var userString in users) {
+				
+				var username = configuration[$"{userString.Item1}:UserName"];
+				var email = configuration[$"{userString.Item1}:Email"];
+				var password = configuration[$"{userString.Item1}:Password"];
+				
 
-			var dbUser = await userManager.FindByEmailAsync(email);
+				var dbUser = await userManager.FindByEmailAsync(email);
+				
+				if (dbUser != null) {
+					continue;
+				}
+				
+				
+				var user = new ApplicationUser {UserName = username, Email = email, EmailConfirmed = true};
+				await userManager.CreateAsync(user, password);
 			
-			if (dbUser != null) {
-				return;
+				await userManager.AddToRoleAsync(user, userString.Item2);
 			}
-			
-			var user = new ApplicationUser {UserName = username, Email = email, EmailConfirmed = true};
-			await userManager.CreateAsync(user, password);
-			
-			await userManager.AddToRoleAsync(user, "Admin");
 		}
 	}
 }

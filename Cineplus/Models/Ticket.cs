@@ -16,7 +16,7 @@ namespace Cineplus.Models
 
         public DateDiscount DateDiscount { get; set; }
 
-        public ICollection<PersonalDiscount> PersonalDiscount { get; set; }
+        public virtual List<PersonalDiscount> PersonalDiscounts { get; set; }
 
         public double PointsPrice { get; set; }
 

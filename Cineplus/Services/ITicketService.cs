@@ -8,12 +8,12 @@ namespace Cineplus.Services
 {
     public interface ITicketService
     {
-        ActionResult MakeOrder(Guid order, ApplicationUser user);
+        ActionResult MakeOrder(Guid order, ApplicationUser user,string type);
         Pagination<IGrouping<Guid, Ticket>> PaginatedOrders(Pagination<IGrouping<Guid, Ticket>> parameters,
             ApplicationUser user);
         ActionResult CancelOrder(Guid orderid, ApplicationUser user);
      
-        IEnumerable<Ticket> MakeReserveForUser(List<Ticket> toReserve, ApplicationUser user);
+        ActionResult MakeReserveForUser(List<Ticket> toReserve, ApplicationUser user);
         ActionResult CancelReserve(int ticketId,ApplicationUser user);
         
         IEnumerable<Seat> GetAllReservedSeatsForReproduction(int reproductionId);
