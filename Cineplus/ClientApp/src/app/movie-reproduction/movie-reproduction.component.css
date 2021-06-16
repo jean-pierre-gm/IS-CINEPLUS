@@ -8,6 +8,10 @@ mat-grid-tile {
   background: lightblue;
 }
 
+td, th {
+  width: 30%;
+}
+
 .mat-header-row{
   /*background: #f6f4f4;*/
 }

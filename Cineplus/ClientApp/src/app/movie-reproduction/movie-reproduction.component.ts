@@ -46,6 +46,7 @@ export class MovieReproductionComponent implements OnInit {
       let reproductionPagination: Pagination<Reproduction> = new Pagination()
       this.reproductionData = new CineplusDataSource<Reproduction>(http, reproductionSourceConf,
         reproductionPagination, (new HttpParams()).set("movieId", id))
+      this.reproductionData.refresh().add(() => this.updateCapacities());
       this.http.get<Movie>(baseUrl + 'api/movie/'  + id).subscribe(t => this.movie = t)
       this.http.get<Theater[]>(this.baseUrl + 'api/theater').subscribe(theaters => this.theaters = theaters)
     })
@@ -58,7 +59,26 @@ export class MovieReproductionComponent implements OnInit {
   editPagination($event) {
     console.log($event)
     this.reproductionData.currentPagination.pageSize = $event.pageSize;
-    this.reproductionData.setPage($event.pageIndex + 1);
+    this.reproductionData.setPage($event.pageIndex + 1).add(() => {
+      this.updateCapacities();
+    });
+  }
+
+  updateCapacities() {
+    let httpParams: HttpParams = new HttpParams();
+    this.reproductionData.result.forEach(reproduction => {
+      httpParams = httpParams.append("ids", reproduction.id.toString())
+    })
+    this.http.get<any[]>(this.baseUrl + 'api/reproduction/capacity?' + httpParams.toString()).subscribe(result => {
+      console.log(result)
+      this.reproductionData.result.forEach(reproduction => {
+        result.forEach((r) => {
+          if (reproduction.id == r['item1']) {
+            reproduction['capacity'] = r['item2'];
+          }
+        });
+      })
+    })
   }
 
   AddReproduction() {

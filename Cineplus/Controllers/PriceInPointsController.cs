@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.Xml;
 using Cineplus.Models;
 using Cineplus.Services;
@@ -19,8 +20,8 @@ namespace Cineplus.Controllers {
 		}
 
 		[HttpPut]
-		public ActionResult<List<int>> Put([FromQuery] int newPrice) {
-			return new List<int>() {_pointsService.SetPriceInPoints(newPrice)};
+		public ActionResult<List<int>> Put([FromBody] List<int> newPrice) {
+			return new List<int>() {_pointsService.SetPriceInPoints(newPrice.FirstOrDefault())};
 		}
 
 	}
