@@ -69,13 +69,13 @@ export class PurchaseHistoryComponent implements OnInit {
     for(let j = 0; j < this.orderDataSource.result[i].length; j++)
       sum += this.orderDataSource.result[i][j][prop];
 
-    return (prop == 'price' ? "Price: $" : "Points: ") + sum;
+    return sum;
   }
 
   calculateDiscounts(i: number, j: number)
   {
     let ticket = this.orderDataSource.result[i][j]
-    let sum = ticket.dateDiscount.discount;
+    let sum = ticket.dateDiscount ? ticket.dateDiscount.discount : 0;
 
     for(let k = 0; k < ticket.personalDiscounts.length; k++)
       sum += ticket.personalDiscounts[k].discount;
@@ -97,11 +97,5 @@ export class PurchaseHistoryComponent implements OnInit {
     let startDate = new Date(this.orderDataSource.result[i][0].reproduction.startTime);
 
     return 7200000 < startDate.valueOf() - actualDate.valueOf();
-  }
-
-  log(element)
-  {
-    console.log("LOG")
-    console.log(element)
   }
 }

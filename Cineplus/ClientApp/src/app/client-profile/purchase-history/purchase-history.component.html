@@ -10,7 +10,8 @@
               {{element[0].reproduction.movie.movieName}}
             </mat-panel-title>
             <mat-panel-title>
-              {{calculatePrice(i)}}
+              {{(element[0].price == 0 ? "Points: " : "Price: $") +
+            (calculatePrice(i) | number: '1.2')}}
             </mat-panel-title>
             <mat-panel-title>
               {{'Start Date: ' + formatDate(element[0].reproduction.startTime,
@@ -57,7 +58,7 @@
                   {{element[0].price == 0 ? 'Points' : 'Price'}}
                 </th>
                 <td mat-cell *matCellDef="let j = index">
-                  {{element[j].price == 0 ? element[j].points : element[j].price}}
+                  {{element[j].price == 0 ? element[j].points : '$' + (element[j].price | number: '1.2')}}
                 </td>
               </ng-container>
 

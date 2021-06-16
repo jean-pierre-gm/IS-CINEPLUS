@@ -1,4 +1,5 @@
-﻿namespace Cineplus.Models
+﻿
+namespace Cineplus.Models
 {
     public class PersonalDiscountsTickets
     {
