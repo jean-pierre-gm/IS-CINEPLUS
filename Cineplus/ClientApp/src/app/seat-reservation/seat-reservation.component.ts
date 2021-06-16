@@ -115,7 +115,6 @@ export class SeatReservationComponent {
   theater: Theater;
   seats: string[][];
   soldSeats: Seat[];
-  associate:Associate;
   selectedDataSource = new MatTableDataSource<TicketReserve>([]);
   selectedColumnsToDisplay: string[] = ['seat', 'originalPrice', 'discount', 'finalPrice'];
   selectedExpandedElement: TicketReserve | null;
@@ -146,18 +145,12 @@ export class SeatReservationComponent {
         this.http.get<Theater>(baseUrl + 'api/theater/' + this.reproduction.theaterId).subscribe(
           result => {
             this.theater = result
-
-            this.http.get<Associate>(baseUrl + 'api/associate/').subscribe(
-              result => {
-                this.associate = result
-                this.updateSeatsAndReserves()
-                this.fetchDiscounts()
-              })
+            this.updateSeatsAndReserves()
+            this.fetchDiscounts()
           })
       }
       , error => this.notificationService.error$.next("Error o init: " + error))
   }
-
 
 
   onHoverSeat(event) {
@@ -370,12 +363,14 @@ export class SeatReservationComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(BillingDialogComponent, {
       disableClose: true,
-      minWidth:"30%",
+      minWidth: "30%",
+      maxHeight:"100%",
       data: {
         that: this,
         order: this.unpaidDatasource.data[0].orderId,
         seatCount: this.unpaidDatasource.data.length,
-        price: this.calcTotalReservePrice()
+        price: this.calcTotalReservePrice(),
+        pointsPrice: this.unpaidDatasource.data.reduce((acc,t)=>{return acc+t.pointsPrice},0)
       },
     });
 

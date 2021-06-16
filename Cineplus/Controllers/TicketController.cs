@@ -15,12 +15,10 @@ namespace Cineplus.Controllers
     public class TicketController : Controller
     {
         private ITicketService _ticketService;
-        private readonly IUserService _userService;
 
-        public TicketController(ITicketService ticketService, IUserService userService)
+        public TicketController(ITicketService ticketService)
         {
             _ticketService = ticketService;
-            _userService = userService;
         }
 
          
@@ -28,9 +26,7 @@ namespace Cineplus.Controllers
         [HttpPost("order/{type}/")]
         public ActionResult MakeOrder([FromBody]Guid order,string type)
         {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
-            return _ticketService.MakeOrder(order, user.Result,type);
+           return _ticketService.MakeOrder(order,type);
         }
         
         
@@ -38,47 +34,37 @@ namespace Cineplus.Controllers
         public ActionResult<Pagination<IGrouping<Guid, Ticket>>> GetOrders(
             [FromQuery] Pagination<IGrouping<Guid, Ticket>> parameters)
         {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
             return new ActionResult<Pagination<IGrouping<Guid, Ticket>>>(
-                _ticketService.PaginatedOrders(parameters, user.Result));
+                _ticketService.PaginatedOrders(parameters));
         }
         
 
         [HttpDelete("order/{order:guid}")]
         public ActionResult CancelOrder(Guid order)
         {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
-            return _ticketService.CancelOrder(order, user.Result);
+            return _ticketService.CancelOrder(order);
         }
 
 
         [HttpPost]
         public ActionResult MakeReserve([FromBody] List<Ticket> partialTickets)
         {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
-            return _ticketService.MakeReserveForUser(partialTickets, user.Result);
+            return _ticketService.MakeReserveForUser(partialTickets);
         }
 
 
         [HttpGet("reserved/{reprodId:int}")]
         public ActionResult<IEnumerable<Ticket>> GetUserReservedTicketsForReproduction(int reprodId)
         {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
             return new ActionResult<IEnumerable<Ticket>>(
-                _ticketService.GetAllTicketsForUserAtReproduction(user.Result, reprodId));
+                _ticketService.GetAllTicketsForUserAtReproduction(reprodId));
         }
 
 
         [HttpDelete("{ticketId:int}")]
         public ActionResult CancelReserve(int ticketId)
         {
-            var user = _userService.GetCurrentUser();
-            user.Wait();
-            return _ticketService.CancelReserve(ticketId, user.Result);
+            return _ticketService.CancelReserve(ticketId);
         }
     }
 }
