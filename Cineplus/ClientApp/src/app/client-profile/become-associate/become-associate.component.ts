@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Genre} from "../../../models/genre";
 import {Associate} from "../../../models/associate";
+import {NotificationService} from "../../notification.service";
 
 @Component({
   selector: 'app-become-associate',
@@ -19,7 +20,7 @@ export class BecomeAssociateComponent implements OnInit {
   public lastNameControl: FormControl = new FormControl('',
     [Validators.required])
   public phoneControl: FormControl = new FormControl('',
-    [Validators.required])
+    [Validators.required,Validators.pattern(/([\d]+-?)+/)])
   public addressControl: FormControl = new FormControl('',
     [Validators.required])
   private controls: FormGroup = new FormGroup({
@@ -30,6 +31,7 @@ export class BecomeAssociateComponent implements OnInit {
   })
 
   constructor(
+    private notificationService: NotificationService,
     private httpClient: HttpClient,
     public dialogRef: MatDialogRef<BecomeAssociateComponent>) {
   }

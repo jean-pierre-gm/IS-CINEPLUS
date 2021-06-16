@@ -27,7 +27,7 @@
       position: absolute;
       height: 150%;
       border-left: 5px dashed #f5f1ed;
-      animation: roll 60ms infinite;
+      animation: roll 100ms infinite;
     }
 
     .loader__filmstrip:before {
@@ -80,8 +80,9 @@
 </head>
 <body>
 <app-root>
-  <div class="loader centered">
+  <div class="loader centered" style="width: 100%">
     <div class="loader__filmstrip"></div>
+    <img src="favicon.ico" style="position: absolute; padding-top: 25px;filter: invert(1);width: 20px;"  >
     <p class="loader__text">
       loading
     </p>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthorizeService, IUser} from "../../api-authorization/authorize.service";
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,7 +10,7 @@ import {AuthorizeService, IUser} from "../../api-authorization/authorize.service
 export class NavMenuComponent {
   public user: IUser;
 
-  constructor(public authorizeService: AuthorizeService) {
+  constructor(public router: Router,public authorizeService: AuthorizeService) {
     authorizeService.getUser().subscribe(user => this.user = user);
   }
 

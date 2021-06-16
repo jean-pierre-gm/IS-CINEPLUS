@@ -2,10 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthorizeService} from "../../api-authorization/authorize.service";
 import {Associate} from "../../models/associate";
-import {Genre} from "../../models/genre";
-import {CreateGenreComponent} from "../manage/manage-genres/create-genre/create-genre.component";
 import {MatDialog} from "@angular/material/dialog";
 import {BecomeAssociateComponent} from "./become-associate/become-associate.component";
+import {MatTabChangeEvent} from "@angular/material/tabs";
 
 @Component({
   selector: 'app-client-profile',
@@ -28,6 +27,14 @@ export class ClientProfileComponent implements OnInit {
       console.log(result)
     });
   }
+
+  tabChange(event: MatTabChangeEvent){
+    const tab = event.tab.textLabel;
+    if(tab==="Associate") {
+      this.ngOnInit()
+    }
+  }
+
 
   openDialog(): void {
 

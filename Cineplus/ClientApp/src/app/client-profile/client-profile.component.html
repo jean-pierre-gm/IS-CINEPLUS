@@ -1,4 +1,4 @@
-<mat-tab-group mat-align-tabs="start" dynamicHeight>
+<mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabChange($event)" dynamicHeight>
   <mat-tab label="Purchase History">
     <app-purchase-history></app-purchase-history>
   </mat-tab>

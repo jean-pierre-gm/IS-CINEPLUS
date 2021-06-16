@@ -17,7 +17,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {CdTimerComponent, CdTimerModule} from 'angular-cd-timer';
 import {BillingDialogComponent} from "./billing-dialog.component";
 import {NotificationService} from "../notification.service";
-import {Associate} from "../../models/associate";
 
 
 class TicketReserve {
