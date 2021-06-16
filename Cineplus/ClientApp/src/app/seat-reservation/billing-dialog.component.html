@@ -20,8 +20,14 @@
             </div>
             <mat-card>
               <mat-card-content>
-                <h6>Number of Seats: {{data.seatCount}}</h6>
-                <h6>Final Price: {{data.price | number : '1.2'}}</h6>
+                <mat-form-field appearance="standard" style="display: block" >
+                  <mat-label>Number of Seats:</mat-label>
+                  <input  matInput [value]="data.seatCount" disabled>
+                </mat-form-field>
+                <mat-form-field appearance="standard" style="display: block">
+                  <mat-label>Final Price:</mat-label>
+                  <input  matInput [value]="data.price | number : '1.2'" disabled>
+                </mat-form-field>
               </mat-card-content>
             </mat-card>
         </mat-card-content>
@@ -44,9 +50,18 @@
         <mat-card-content>
          <mat-card>
             <mat-card-content>
-              <h6>Number of Seats: {{data.seatCount}}</h6>
-              <h6>Available Points: {{data.that.associate.points}}</h6>
-              <h6>Points Price: pontsprice</h6>
+              <mat-form-field appearance="standard" style="display: block" >
+                <mat-label>Number of Seats:</mat-label>
+                <input  matInput [value]="data.seatCount" disabled>
+              </mat-form-field>
+              <mat-form-field appearance="standard" style="display: block">
+                <mat-label>Available Points:</mat-label>
+                <input  matInput [value]="data.that.associate.points" disabled>
+              </mat-form-field>
+              <mat-form-field appearance="standard" style="display: block">
+                <mat-label>Points Price:</mat-label>
+                <input  matInput [value]="data.price | number : '1.2'" disabled>
+              </mat-form-field>
             </mat-card-content>
           </mat-card>
         </mat-card-content>
@@ -68,8 +83,14 @@
         <mat-card-content>
           <mat-card>
             <mat-card-content>
-              <h6>Number of Seats: {{data.seatCount}}</h6>
-              <h6>Final Price: {{data.price | number : '1.2'}}</h6>
+              <mat-form-field appearance="standard" style="display: block" >
+                <mat-label>Number of Seats:</mat-label>
+                <input  matInput [value]="data.seatCount" disabled>
+              </mat-form-field>
+              <mat-form-field appearance="standard" style="display: block">
+                <mat-label>Final Price:</mat-label>
+                <input  matInput [value]="data.price | number : '1.2'" disabled>
+              </mat-form-field>
             </mat-card-content>
           </mat-card>
         </mat-card-content>
