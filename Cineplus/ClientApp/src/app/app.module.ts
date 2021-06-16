@@ -66,6 +66,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
 import {ManageStatisticsCountriesComponent} from "./manage/manage-statistics/manage-statistics-countries/manage-statistics-countries.component";
 import {ManageStatisticsRangeComponent} from "./manage/manage-statistics/manage-statistics-range/manage-statistics-range.component";
+import {ManageStatisticsScoreComponent} from "./manage/manage-statistics/manage-statistics-score/manage-statistics-score.component";
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import {ManageStatisticsRangeComponent} from "./manage/manage-statistics/manage-
     CreateActorComponent,
     ListMoviesComponent,
     ManageStatisticsCountriesComponent,
-    ManageStatisticsRangeComponent
+    ManageStatisticsRangeComponent,
+    ManageStatisticsScoreComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

@@ -309,5 +309,47 @@ namespace Cineplus.Services
             
             return _actorRepository.Data().FirstOrDefault(actor => actor.Id == data);
         }
+
+        public Pagination<GroupByDate> ScoreSeenDays(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction =>  reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.Movie.Score >= scoreMin && ticket.Reproduction.Movie.Score <= scoreMax)
+                .GroupBy(t => t.Reproduction.StartTime.Date)
+                .Select(g => new GroupByDate(){
+                    Key = g.Key,
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> ScoreSeenMonths(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction =>  reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.Movie.Score >= scoreMin && ticket.Reproduction.Movie.Score <= scoreMax)
+                .GroupBy(t => new {t.Reproduction.StartTime.Date.Month, t.Reproduction.StartTime.Year})
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key.Year, g.Key.Month, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
+
+        public Pagination<GroupByDate> ScoreSeenYears(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters)
+        {
+            var data = _ticketRepository.Data()
+                .Include(ticket => ticket.Reproduction)
+                .ThenInclude(reproduction =>  reproduction.Movie)
+                .Where(ticket => ticket.Reproduction.Movie.Score >= scoreMin && ticket.Reproduction.Movie.Score <= scoreMax)
+                .GroupBy(t => t.Reproduction.StartTime.Year)
+                .Select(g => new GroupByDate(){
+                    Key = new DateTime(g.Key, 1, 1),
+                    Count = g.Count()
+                });
+            return PaginationService.GetPagination(data, parameters);
+        }
     }
 }

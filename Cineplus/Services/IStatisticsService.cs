@@ -25,5 +25,8 @@ namespace Cineplus.Services
         string TopSeenDirector(DateTime start, DateTime end);
         Genre TopSeenGenre(DateTime start, DateTime end);
         Actor TopSeenActor(DateTime start, DateTime end);
+        Pagination<GroupByDate> ScoreSeenDays(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> ScoreSeenMonths(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters);
+        Pagination<GroupByDate> ScoreSeenYears(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters);
     }
 }

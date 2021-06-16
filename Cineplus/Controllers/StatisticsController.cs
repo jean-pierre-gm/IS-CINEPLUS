@@ -175,5 +175,32 @@ namespace Cineplus.Controllers
         {
             return new ActionResult<Actor>(_statisticsService.TopSeenActor(start, end));
         }
+
+        [HttpGet]
+        [Route("score/day")]
+        public ActionResult<Pagination<GroupByDate>> ScoreSeenDays([FromQuery] float minScore,
+            [FromQuery] float maxScore, [FromQuery] Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(
+                _statisticsService.ScoreSeenDays(minScore, maxScore, parameters));
+        }
+        
+        [HttpGet]
+        [Route("score/month")]
+        public ActionResult<Pagination<GroupByDate>> ScoreSeenMonths([FromQuery] float minScore,
+            [FromQuery] float maxScore, [FromQuery] Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(
+                _statisticsService.ScoreSeenMonths(minScore, maxScore, parameters));
+        }
+        
+        [HttpGet]
+        [Route("score/year")]
+        public ActionResult<Pagination<GroupByDate>> ScoreSeenYears([FromQuery] float minScore,
+            [FromQuery] float maxScore, [FromQuery] Pagination<GroupByDate> parameters)
+        {
+            return new ActionResult<Pagination<GroupByDate>>(
+                _statisticsService.ScoreSeenYears(minScore, maxScore, parameters));
+        }
     }
 }
