@@ -11,7 +11,7 @@
         </mat-card-header>
 
           <mat-card-content>
-            <div class="skeleton-wrapper" style="height:15rem;">
+            <div class="skeleton-wrapper" style="height:12em;">
               <div class="skeleton-wrapper-inner">
                 <div class="skeleton-wrapper-body">
                   <div></div>
@@ -39,7 +39,7 @@
       </mat-card>
     </mat-tab>
 
-    <mat-tab  *ngIf="data.that.associate" label="Asociate Points">
+    <mat-tab  *ngIf="associate" label="Asociate Points">
 
       <mat-card>
 
@@ -56,18 +56,19 @@
               </mat-form-field>
               <mat-form-field appearance="standard" style="display: block">
                 <mat-label>Available Points:</mat-label>
-                <input  matInput [value]="data.that.associate.points" disabled>
+                <input  matInput [value]="associate.points" disabled>
               </mat-form-field>
               <mat-form-field appearance="standard" style="display: block">
                 <mat-label>Points Price:</mat-label>
-                <input  matInput [value]="data.price | number : '1.2'" disabled>
+                <input  matInput [value]="data.pointsPrice" disabled>
               </mat-form-field>
             </mat-card-content>
           </mat-card>
         </mat-card-content>
-          <mat-card-actions class="row">
+          <mat-card-actions class="row" >
             <div class="col text-center">
-              <button mat-stroked-button color="accent" (click)="makeOrder('assoc')">Purchase</button>
+              <button mat-stroked-button  *ngIf="data.pointsPrice <= associate.points" color="accent"  (click)="makeOrder('associate')">Purchase</button>
+              <h6 *ngIf="data.pointsPrice > associate.points">Not Enough Points</h6>
             </div>
           </mat-card-actions>
       </mat-card>
@@ -159,7 +160,7 @@
     </button>
   </mat-dialog-content>
 
-<mat-dialog-actions style="padding-top: 10px" align="end">
+<mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close] [hidden]="purchaseCompleted && !printed">Close</button>
 </mat-dialog-actions >
 
