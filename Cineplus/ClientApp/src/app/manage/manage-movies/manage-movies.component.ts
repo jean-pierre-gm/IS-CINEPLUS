@@ -11,6 +11,7 @@ import {Pagination} from "../../../models/pagination";
 import {Genre} from "../../../models/genre";
 import {Sort} from "@angular/material/sort";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {NotificationService} from "../../notification.service";
 
 @Component({
   selector: 'app-manage-movies',
@@ -40,7 +41,8 @@ export class ManageMoviesComponent implements OnInit {
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private notificationService: NotificationService
   ) {
 
     let dsConf = new DataSourceConf();
@@ -90,10 +92,16 @@ export class ManageMoviesComponent implements OnInit {
         if (edit) {
           this.http.put('api/movie/' + this.movie.id, this.movie).subscribe(movie => {
             this.movieDataSource.refresh();
+            this.notificationService.success$.next("Movie successfully updated.");
+          }, error => {
+            this.notificationService.error$.next("Error creating movie.");
           });
         } else {
           this.http.post('api/movie', this.movie).subscribe(movie => {
             this.movieDataSource.refresh();
+            this.notificationService.success$.next("Movie successfully created.");
+          }, error => {
+            this.notificationService.error$.next("Error updating movie.");
           });
         }
       }

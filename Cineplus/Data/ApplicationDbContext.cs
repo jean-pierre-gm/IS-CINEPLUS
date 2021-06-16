@@ -59,6 +59,10 @@ namespace Cineplus.Data {
 				.Property(personaldiscount => personaldiscount.Enable)
 				.HasConversion<bool>();
 
+			modelBuilder.Entity<PriceInPoints>()
+				.Property(points => points.Value)
+				.IsRequired();
+
 			modelBuilder.Seed();
 		}
 	}

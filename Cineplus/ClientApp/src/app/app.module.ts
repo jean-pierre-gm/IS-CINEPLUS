@@ -1,18 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppComponent, SnackBarComponent} from './app.component';
+import {NavMenuComponent} from './nav-menu/nav-menu.component';
+import {HomeComponent} from './home/home.component';
+import {CounterComponent} from './counter/counter.component';
+import {FetchDataComponent} from './fetch-data/fetch-data.component';
+import {ApiAuthorizationModule} from 'src/api-authorization/api-authorization.module';
+import {AuthorizeGuard} from 'src/api-authorization/authorize.guard';
+import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -92,6 +92,8 @@ import {CancelationFormComponent} from "./client-profile/purchase-history/cancel
     CreatePersonalDiscountComponent,
     ManageCarouselComponent,
     ListMoviesComponent,
+    ManageCarouselComponent,
+    SnackBarComponent,
     PurchaseHistoryComponent,
     CancelationFormComponent
   ],
@@ -179,6 +181,6 @@ import {CancelationFormComponent} from "./client-profile/purchase-history/cancel
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
-    CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent, CancelationFormComponent]
+    CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent, CancelationFormComponent, SnackBarComponent]
 })
 export class AppModule { }
