@@ -1,15 +1,17 @@
-﻿<h1 mat-dialog-title>{{!purchaseCompleted ? "Payment" : "Your Ticket"}}</h1>
-  <mat-tab-group dynamicHeight color="accent" *ngIf="!purchaseCompleted">
+﻿
+<h1 mat-dialog-title>{{!purchaseCompleted ? "Payment" : "Your Ticket"}}</h1>
+<mat-dialog-content  *ngIf="!purchaseCompleted">
+  <mat-tab-group dynamicHeight color="accent">
 
     <mat-tab label="Payment Service">
-      <mat-card style="height:30rem; width: 30rem;">
+      <mat-card>
 
         <mat-card-header>
           <mat-card-title>Billing Service Here</mat-card-title>
         </mat-card-header>
 
-          <mat-card-content style="height: 80%;width: 100%">
-            <div class="skeleton-wrapper">
+          <mat-card-content>
+            <div class="skeleton-wrapper" style="height:15rem;">
               <div class="skeleton-wrapper-inner">
                 <div class="skeleton-wrapper-body">
                   <div></div>
@@ -19,69 +21,71 @@
             <mat-card>
               <mat-card-content>
                 <h6>Number of Seats: {{data.seatCount}}</h6>
-                <h6>Final Price: {{data.price}}</h6>
+                <h6>Final Price: {{data.price | number : '1.2'}}</h6>
               </mat-card-content>
             </mat-card>
-            <mat-card-actions class="row">
-              <div class="col text-center">
-                <button mat-stroked-button color="accent" (click)="makeOrder()">Purchase</button>
-              </div>
-            </mat-card-actions>
         </mat-card-content>
+        <mat-card-actions class="row">
+          <div class="col text-center">
+            <button mat-stroked-button color="accent" (click)="makeOrder()">Purchase</button>
+          </div>
+        </mat-card-actions>
       </mat-card>
     </mat-tab>
 
-    <mat-tab label="Asociate Points">
+    <mat-tab  *ngIf="data.that.associate" label="Asociate Points">
 
-      <mat-card style="height:20rem; width: 30rem;">
+      <mat-card>
 
         <mat-card-header>
           <mat-card-title>Pay With Associate Points</mat-card-title>
         </mat-card-header>
 
-        <mat-card-content style="height: 80%;width: 100%">
+        <mat-card-content>
          <mat-card>
             <mat-card-content>
               <h6>Number of Seats: {{data.seatCount}}</h6>
-              <h6>Available Points: Your Points</h6>
-              <h6>Points Price: Pointss</h6>
+              <h6>Available Points: {{data.that.associate.points}}</h6>
+              <h6>Points Price: pontsprice</h6>
             </mat-card-content>
           </mat-card>
+        </mat-card-content>
           <mat-card-actions class="row">
             <div class="col text-center">
               <button mat-stroked-button color="accent" (click)="makeOrder('assoc')">Purchase</button>
             </div>
           </mat-card-actions>
-        </mat-card-content>
       </mat-card>
     </mat-tab>
 
-    <mat-tab label="Ticket Agent Pourpose">
-      <mat-card style="height:20rem; width: 30rem;">
+    <mat-tab   *ngIf="user && authorizeService.userInRoles(user,['TicketAgent'])" label="Ticket Agent Pourpose">
+      <mat-card>
 
         <mat-card-header>
           <mat-card-title>Confirm borrowed tickets order</mat-card-title>
         </mat-card-header>
 
-        <mat-card-content style="height: 80%;width: 100%">
+        <mat-card-content>
           <mat-card>
             <mat-card-content>
               <h6>Number of Seats: {{data.seatCount}}</h6>
-              <h6>Final Price: {{data.price}}</h6>
+              <h6>Final Price: {{data.price | number : '1.2'}}</h6>
             </mat-card-content>
           </mat-card>
+        </mat-card-content>
           <mat-card-actions class="row">
             <div class="col text-center">
               <button mat-stroked-button color="accent" (click)="makeOrder('agent')">Borrow</button>
             </div>
           </mat-card-actions>
-        </mat-card-content>
       </mat-card>
     </mat-tab>
 
   </mat-tab-group>
+<br>
+</mat-dialog-content>
 
-  <div *ngIf="purchaseCompleted">
+  <mat-dialog-content *ngIf="purchaseCompleted">
     <div id="ticket" class="ticket">
       <div class="stub" style="float: left">
         <div class="top">
@@ -123,15 +127,19 @@
         </div>
       </div>
     </div>
+    <h6 style="padding-left: 2rem">You may close the form after printing the ticket.</h6>
     <button mat-button color="accent"
+            style="margin-left: 2rem"
             printSectionId="ticket"
             [useExistingCss]="true"
+            (click)="printed=true"
             matTooltip="Make sure to enable images in print options"
             ngxPrint>PRINT
     </button>
-  </div>
+  </mat-dialog-content>
 
-<div mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]>Close</button>
-</div>
+<mat-dialog-actions style="padding-top: 10px" align="end">
+  <button mat-button [mat-dialog-close] [hidden]="purchaseCompleted && !printed">Close</button>
+</mat-dialog-actions >
+
 

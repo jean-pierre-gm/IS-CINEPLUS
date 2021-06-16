@@ -15,6 +15,9 @@ import {Pagination} from "../../models/pagination";
 import {Discount} from "../../models/discount";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CdTimerComponent, CdTimerModule} from 'angular-cd-timer';
+import {BillingDialogComponent} from "./billing-dialog.component";
+import {NotificationService} from "../notification.service";
+import {Associate} from "../../models/associate";
 
 
 class TicketReserve {
@@ -112,6 +115,7 @@ export class SeatReservationComponent {
   theater: Theater;
   seats: string[][];
   soldSeats: Seat[];
+  associate:Associate;
   selectedDataSource = new MatTableDataSource<TicketReserve>([]);
   selectedColumnsToDisplay: string[] = ['seat', 'originalPrice', 'discount', 'finalPrice'];
   selectedExpandedElement: TicketReserve | null;
@@ -129,7 +133,7 @@ export class SeatReservationComponent {
   ]);
   matcher = new MyErrorStateMatcher();
 
-  constructor(public dialog: MatDialog, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
+  constructor(private notificationService: NotificationService, public dialog: MatDialog, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
     let id: string = ""
     this.route.queryParams.subscribe(params => {
       id = params.reproduction
@@ -142,13 +146,18 @@ export class SeatReservationComponent {
         this.http.get<Theater>(baseUrl + 'api/theater/' + this.reproduction.theaterId).subscribe(
           result => {
             this.theater = result
-            this.updateSeatsAndReserves()
-            this.fetchDiscounts()
 
+            this.http.get<Associate>(baseUrl + 'api/associate/').subscribe(
+              result => {
+                this.associate = result
+                this.updateSeatsAndReserves()
+                this.fetchDiscounts()
+              })
           })
       }
-      , error => console.log(error))
+      , error => this.notificationService.error$.next("Error o init: " + error))
   }
+
 
 
   onHoverSeat(event) {
@@ -193,15 +202,20 @@ export class SeatReservationComponent {
     return price;
   }
 
-  expire() {
+  async expire() {
     this.dialog.closeAll()
-    this.updateSeatsAndReserves()
+    await this.updateSeatsAndReserves()
   }
 
 
   async fetchNotAvailableSeatsAndUpdate() {
-    let result = await this.http.get<Seat[]>(this.baseUrl + 'api/seat/reserved/' + this.reproduction.id).toPromise()
-    this.soldSeats = result === undefined ? [] : result
+    let result: Seat[] = []
+    try {
+      result = await this.http.get<Seat[]>(this.baseUrl + 'api/seat/reserved/' + this.reproduction.id).toPromise()
+    } catch {
+      this.notificationService.error$.next("Error Fetching the seats: RelogIn and refresh page")
+    }
+    this.soldSeats = result
 
     this.ticketsFormControl.setValidators(Validators.compose([this.ticketsFormControl.validator, Validators.max(this.theater.columns * this.theater.rows - this.soldSeats.length)]))
     this.ticketsFormControl.updateValueAndValidity();
@@ -218,8 +232,13 @@ export class SeatReservationComponent {
   }
 
   async fetchReservations() {
-    let result = await this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/reserved/' + this.reproduction.id).toPromise()
-    this.unpaidDatasource.data = result === undefined ? [] : result
+    let tickets: Ticket[] = []
+    try {
+      tickets = await this.http.get<Ticket[]>(this.baseUrl + 'api/ticket/reserved/' + this.reproduction.id).toPromise()
+    } catch {
+      this.notificationService.error$.next("Error Fetching Current Reserve: RelogIn and refresh page")
+    }
+    this.unpaidDatasource.data = tickets
     if (this.unpaidDatasource.data.length > 0) {
       let tick = this.unpaidDatasource.data[0]
       let reserveTimeout = 1
@@ -232,20 +251,24 @@ export class SeatReservationComponent {
     }
   }
 
-  fetchDiscounts() {
-    TicketReserve.staticdateDiscount = undefined
-    let reprDate: Date = new Date(this.reproduction.startTime)
-    this.http.get<DateDiscount>(this.baseUrl + 'api/datediscount/' + `${reprDate.getDate()}-${reprDate.getMonth()}-${reprDate.getFullYear()}`).subscribe(result => {
-      TicketReserve.staticdateDiscount = result
-    }, error => console.log(error))
-
-    TicketReserve.staticpersonalDiscounts = []
-    this.http.get<Pagination<PersonalDiscount>>(this.baseUrl + 'api/personaldiscount' + "?pageSize=50&currentPage=1").subscribe(result => {
-      if (result.result) {
-        TicketReserve.staticpersonalDiscounts = result.result
+  async fetchDiscounts() {
+    let dateDiscount: DateDiscount = undefined
+    try {
+      let reprDate: Date = new Date(this.reproduction.startTime)
+      dateDiscount = await this.http.get<DateDiscount>(this.baseUrl + 'api/datediscount/' + `${reprDate.getDate()}-${reprDate.getMonth()}-${reprDate.getFullYear()}`).toPromise()
+    } catch (err) {
+      if (err.status != 404) {
+        this.notificationService.error$.next("Error Fetching Today Discounts: RelogIn and refresh page")
       }
-    }, error => console.log(error));
-
+    }
+    TicketReserve.staticdateDiscount = dateDiscount
+    let personalDiscounts: PersonalDiscount[] = []
+    try {
+      personalDiscounts = (await this.http.get<Pagination<PersonalDiscount>>(this.baseUrl + 'api/personaldiscount' + "?pageSize=50&currentPage=1").toPromise()).result
+    } catch {
+      this.notificationService.error$.next("Error Fetching Personal Discounts: RelogIn and refresh page")
+    }
+    TicketReserve.staticpersonalDiscounts = personalDiscounts
   }
 
 
@@ -256,24 +279,29 @@ export class SeatReservationComponent {
       let seat: HTMLInputElement = document.getElementById(`${ticketReserve.seat.row}:${ticketReserve.seat.column}:sd`) as HTMLInputElement;
       seat.parentElement.classList.add("reservedSeat")
     }
-this.unpaidDatasource.data.length
-  this.reproduction.startTime
   }
 
   async reserve() {
-    let headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-    await this.http.post<Ticket[]>(this.baseUrl + 'api/ticket/', this.selectedDataSource.data.map((ticketReserve) => {
-      return ticketReserve.getAsTicket()
-    }), {headers}).toPromise().catch()
-    this.updateSeatsAndReserves()
+    try {
+      let headers = new HttpHeaders().set('Content-Type', 'application/json')
+      let resp = await this.http.post<Ticket[]>(this.baseUrl + 'api/ticket/', this.selectedDataSource.data.map((ticketReserve) => {
+        return ticketReserve.getAsTicket()
+      }), {headers}).toPromise()
+    } catch {
+      this.notificationService.error$.next("Error Reserving tickets: RelogIn or refresh page, some other user may got one of your seat")
+    }
+    await this.updateSeatsAndReserves()
     this.selectedDataSource.data = []
     this.ticketsFormControl.reset()
   }
 
   async cancelReserve(id: string) {
-    await this.http.delete(this.baseUrl + 'api/ticket/' + id).toPromise().catch()
-    this.updateSeatsAndReserves()
+    try {
+      let resp = await this.http.delete(this.baseUrl + 'api/ticket/' + id).toPromise()
+    } catch {
+      this.notificationService.error$.next("Error Reserving tickets: RelogIn or refresh page")
+    }
+    await this.updateSeatsAndReserves()
   }
 
 
@@ -342,7 +370,13 @@ this.unpaidDatasource.data.length
   openDialog(): void {
     const dialogRef = this.dialog.open(BillingDialogComponent, {
       disableClose: true,
-      data: {that: this,order:this.unpaidDatasource.data[0].orderId,seatCount:this.unpaidDatasource.data.length,price:this.calcTotalReservePrice()},
+      minWidth:"30%",
+      data: {
+        that: this,
+        order: this.unpaidDatasource.data[0].orderId,
+        seatCount: this.unpaidDatasource.data.length,
+        price: this.calcTotalReservePrice()
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -351,27 +385,4 @@ this.unpaidDatasource.data.length
 
 }
 
-@Component({
-  selector: 'billing-dialog',
-  templateUrl: './billing-dialog.component.html',
-  styleUrls: ['./billing-dialog.component.css'],
-})
-export class BillingDialogComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<BillingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
-  }
-
-  purchaseCompleted: boolean = false
-
-  async makeOrder(type: string = "user") {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-    let result = await this.data.that.http.post(this.data.that.baseUrl + `api/ticket/order/${type}/`, "\"" + this.data.order + "\"", {headers}).toPromise().catch()
-    this.purchaseCompleted = true
-    this.data.that.updateSeatsAndReserves()
-  }
-
-
-}

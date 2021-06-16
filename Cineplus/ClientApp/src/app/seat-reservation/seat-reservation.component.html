@@ -9,7 +9,7 @@
 <div class="d-flex">
   <div class="p-5">
     <form>
-      <mat-form-field color="accent" style="width: 100%;" matTooltip="Will place your seats as close as possible">
+      <mat-form-field color="accent" style="width: 100%;" matTooltip="Will place your seats as close as possible. Can use Up and Down Keys">
         <mat-label>Tickets</mat-label>
         <input type="number" matInput [formControl]="ticketsFormControl" [errorStateMatcher]="matcher"
                (input)="sliderChange()"

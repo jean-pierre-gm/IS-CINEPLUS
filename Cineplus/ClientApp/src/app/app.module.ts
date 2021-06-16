@@ -39,7 +39,7 @@ import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.compon
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 import {ClientProfileComponent} from "./client-profile/client-profile.component";
 import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
-import {BillingDialogComponent, SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
+import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
@@ -64,6 +64,7 @@ import {ListMoviesComponent} from "./home/list-movies/list-movies.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purchase-history.component";
 import {CancelationFormComponent} from "./client-profile/purchase-history/cancelation-form/cancelation-form.component";
+import {BillingDialogComponent} from "./seat-reservation/billing-dialog.component";
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import {CancelationFormComponent} from "./client-profile/purchase-history/cancel
             },
             {
                 path: 'reserve',
-                component: SeatReservationComponent
+                component: SeatReservationComponent,
+                canActivate: [AuthorizeGuard],
             },
             {
                 path: 'manage',
