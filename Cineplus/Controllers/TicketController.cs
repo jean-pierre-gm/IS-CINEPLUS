@@ -4,12 +4,13 @@ using System.Linq;
 using Cineplus.Models;
 using Cineplus.Services;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cineplus.Controllers
 {
     // missing auth atribute decorator for all class
-    
+    [Authorize]
     [Route("/api/[controller]")]
     public class TicketController : Controller
     {

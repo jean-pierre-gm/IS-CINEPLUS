@@ -211,3 +211,11 @@
   font-size: 10px;
   text-transform: uppercase;
 }
+
+.mat-dialog-content {
+  padding: 0 0;
+}
+
+.mat-card {
+  margin: 10px;
+}
