@@ -2,6 +2,7 @@
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpHeaders} from "@angular/common/http";
 import {AuthorizeService, IUser} from "../../api-authorization/authorize.service";
+import {NotificationService} from "../notification.service";
 
 @Component({
   selector: 'billing-dialog',
@@ -11,7 +12,8 @@ import {AuthorizeService, IUser} from "../../api-authorization/authorize.service
 export class BillingDialogComponent {
   public user: IUser;
 
-  constructor(public authorizeService: AuthorizeService,
+  constructor(private notificationService: NotificationService,
+              public authorizeService: AuthorizeService,
               public dialogRef: MatDialogRef<BillingDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
     authorizeService.getUser().subscribe(user => this.user = user);
@@ -26,7 +28,7 @@ export class BillingDialogComponent {
     try {
       let result = await this.data.that.http.post(this.data.that.baseUrl + `api/ticket/order/${type}/`, "\"" + this.data.order + "\"", {headers}).toPromise()
     } catch {
-      this.data.that.notificationService.error$.next("Error in purchase")
+      this.notificationService.error$.next("Error in purchase")
       this.dialogRef.close()
     }
     this.purchaseCompleted = true
