@@ -10,5 +10,9 @@ namespace Cineplus.Services {
 		Associate Update(Associate entity);
 		Associate Remove(int id);
 		Task<Associate> GetCurrentUserAssociate();
+
+		Associate AddPoints(Associate associate, int points);
+
+		Associate RemovePoints(Associate associate, int points);
 	}
 }
