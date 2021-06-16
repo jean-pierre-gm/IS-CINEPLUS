@@ -4,11 +4,13 @@ import {MyErrorStateMatcher} from "../../../seat-reservation/seat-reservation.co
 import {Movie} from "../../../../models/movie";
 import {Actor} from "../../../../models/actor";
 import {Genre} from "../../../../models/genre";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Label} from "ng2-charts";
-import * as moment from "moment";
+import {DataSourceConf} from "../../../../models/dataSourceConf";
+import {Pagination} from "../../../../models/pagination";
+import {CineplusDataSource} from "../../../../models/cineplusDataSource";
 
 @Component({
   selector: 'app-manage-statistics-range',
@@ -31,14 +33,12 @@ export class ManageStatisticsRangeComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
 
@@ -65,31 +65,33 @@ export class ManageStatisticsRangeComponent implements OnInit {
     let endDate = new Date(this.endTimeFormControl.value)
     let start = this.formatNumber(startDate.getMonth() + 1) + "-" + this.formatNumber(startDate.getDate()) + "-" + startDate.getFullYear()
     let end = this.formatNumber(endDate.getMonth() + 1) + "-" + this.formatNumber(endDate.getDate()) + "-" + endDate.getFullYear()
-    let params = "?start=" + start + "&end=" + end
-    this.http.get<Movie>(this.baseUrl + "api/statistics/top/movie" + params).subscribe(
-      movie => {
-        if(movie == null){
-          this._snackBar.open("No reproductions in this time", '', {'duration': 2000})
-          return
-        }
-        this.movie = movie
-        this.http.get<string[]>(this.baseUrl + "api/statistics/top/director" + params, ).subscribe(
-          director => {
-            this.director = director[0]
-            this.http.get<Actor>(this.baseUrl + "api/statistics/top/actor" + params).subscribe(
-              actor => {
-                this.actor = actor
-                this.http.get<Genre>(this.baseUrl + "api/statistics/top/genre" + params).subscribe(
-                  genre => {
-                    this.genre = genre
-                    this.show = true
-                  }
-                )
-              }
-            )
-          }
-        )
+
+    let dataSourceConf: DataSourceConf = new DataSourceConf();
+    dataSourceConf.endPoint = this.baseUrl + "api/statistics/top/movie"
+    let dataPagination: Pagination<any> = new Pagination();
+    dataPagination.pageSize = 5;
+    let dataSource = new CineplusDataSource<any>(this.http, dataSourceConf,
+      dataPagination, new HttpParams().set("start", start).set("end", end));
+    dataSource.refresh().add(()=>{
+      if(dataSource.result == null || dataSource.result.length == 0) {
+        this._snackBar.open("No movies seen in that period", "", {"duration": 2000})
+        return
       }
-    )
+      let data = Array<number>()
+      let labels = Array<string>()
+      for (let i = 0; i < dataSource.result.length; i++) {
+        data.push(dataSource.result[i]["count"])
+        labels.push(dataSource.result[i]["key"])
+      }
+
+      if(this.barChartData.length == 0){
+        this.barChartData.push({data:data, label: "Seen"})
+        this.barChartLabels.push(labels)
+      }
+      else{
+        this.barChartData[0].data = data
+        this.barChartLabels[0] = labels
+      }
+    })
   }
 }

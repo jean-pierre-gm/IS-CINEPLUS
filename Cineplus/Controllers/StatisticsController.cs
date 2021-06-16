@@ -150,30 +150,9 @@ namespace Cineplus.Controllers
 
         [HttpGet]
         [Route("top/movie")]
-        public ActionResult<Movie> TopSeenMovie([FromQuery] DateTime start, [FromQuery] DateTime end)
+        public ActionResult<Pagination<GroupByName>> TopSeenMovie([FromQuery] DateTime start, [FromQuery] DateTime end, [FromQuery]Pagination<GroupByName> parameters)
         {
-            return new ActionResult<Movie>(_statisticsService.TopSeenMovie(start, end));
-        }
-        
-        [HttpGet]
-        [Route("top/director")]
-        public ActionResult<string[]> TopSeenDirector([FromQuery] DateTime start, [FromQuery] DateTime end)
-        {
-            return new ActionResult<string[]>(new []{_statisticsService.TopSeenDirector(start, end)});
-        }
-        
-        [HttpGet]
-        [Route("top/genre")]
-        public ActionResult<Genre> TopSeenGenre([FromQuery] DateTime start, [FromQuery] DateTime end)
-        {
-            return new ActionResult<Genre>(_statisticsService.TopSeenGenre(start, end));
-        }
-        
-        [HttpGet]
-        [Route("top/actor")]
-        public ActionResult<Actor> TopSeenActor([FromQuery] DateTime start, [FromQuery] DateTime end)
-        {
-            return new ActionResult<Actor>(_statisticsService.TopSeenActor(start, end));
+            return new ActionResult<Pagination<GroupByName>>(_statisticsService.TopSeenMovies(start, end, parameters));
         }
 
         [HttpGet]

@@ -16,18 +16,7 @@
 
 <br><br>
 
-<p *ngIf="show">
-  <b>Most popular movie:</b> {{movie.movieName}} <b>by</b> {{movie.director}}
-  <br>
-  <b>Most popular director:</b> {{director}}
-  <br>
-  <b>Most popular genre:</b> {{genre.genreName}}
-  <br>
-  <b>Most popular actor:</b> {{actor.actorName}}
-</p>
-
-
-<div style="display: block;">
+<div style="display: block;" *ngIf="barChartData.length > 0">
   <canvas baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"

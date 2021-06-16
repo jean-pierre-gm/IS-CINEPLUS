@@ -21,10 +21,7 @@ namespace Cineplus.Services
         Pagination<GroupByDate> CountrySeenDays(string country, bool exclude, Pagination<GroupByDate> parameters);
         Pagination<GroupByDate> CountrySeenMonths(string country, bool exclude, Pagination<GroupByDate> parameters);
         Pagination<GroupByDate> CountrySeenYears(string country, bool exclude, Pagination<GroupByDate> parameters);
-        Movie TopSeenMovie(DateTime start, DateTime end);
-        string TopSeenDirector(DateTime start, DateTime end);
-        Genre TopSeenGenre(DateTime start, DateTime end);
-        Actor TopSeenActor(DateTime start, DateTime end);
+        Pagination<GroupByName> TopSeenMovies(DateTime start, DateTime end, Pagination<GroupByName> parameters);
         Pagination<GroupByDate> ScoreSeenDays(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters);
         Pagination<GroupByDate> ScoreSeenMonths(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters);
         Pagination<GroupByDate> ScoreSeenYears(float scoreMin, float scoreMax, Pagination<GroupByDate> parameters);
