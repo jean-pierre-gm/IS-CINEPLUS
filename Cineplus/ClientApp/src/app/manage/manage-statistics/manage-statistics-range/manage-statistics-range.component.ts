@@ -6,6 +6,9 @@ import {Actor} from "../../../../models/actor";
 import {Genre} from "../../../../models/genre";
 import {HttpClient} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
+import {Label} from "ng2-charts";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-manage-statistics-range',
@@ -25,6 +28,19 @@ export class ManageStatisticsRangeComponent implements OnInit {
   actor: Actor
   genre: Genre
 
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
+
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar, @Inject('BASE_URL') private baseUrl: string) { }
 
@@ -33,13 +49,23 @@ export class ManageStatisticsRangeComponent implements OnInit {
     this.endTimeFormControl.reset()
   }
 
+  formatNumber(num: number){
+    if(num < 10)
+      return "0" + num.toString()
+    else
+      return num.toString()
+  }
+
   search() {
     if (!this.startTimeFormControl.valid)
       return
     if (!this.endTimeFormControl.valid)
       return
-    let params = "?start=" + this.startTimeFormControl.value.toString() + "&end=" + this.endTimeFormControl.value
-    console.log(this.baseUrl + "api/statistics/top/movie" + params)
+    let startDate = new Date(this.startTimeFormControl.value)
+    let endDate = new Date(this.endTimeFormControl.value)
+    let start = this.formatNumber(startDate.getMonth() + 1) + "-" + this.formatNumber(startDate.getDate()) + "-" + startDate.getFullYear()
+    let end = this.formatNumber(endDate.getMonth() + 1) + "-" + this.formatNumber(endDate.getDate()) + "-" + endDate.getFullYear()
+    let params = "?start=" + start + "&end=" + end
     this.http.get<Movie>(this.baseUrl + "api/statistics/top/movie" + params).subscribe(
       movie => {
         if(movie == null){

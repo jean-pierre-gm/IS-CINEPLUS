@@ -1,8 +1,15 @@
-<div class="container">
-<input [formControl]="startTimeFormControl" [errorStateMatcher]="matcher" type="datetime-local" matInput placeholder="Start"/>
-<br><br>
-<input [formControl]="endTimeFormControl" [errorStateMatcher]="matcher" type="datetime-local" matInput placeholder="End"/>
-</div>
+<mat-form-field>
+  <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="startTimeFormControl">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="picker2" placeholder="End Date" [formControl]="endTimeFormControl">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+
 <br>
 
 <button class="float-left" (click)="search()" mat-stroked-button color="primary">Submit</button>
@@ -18,3 +25,15 @@
   <br>
   <b>Most popular actor:</b> {{actor.actorName}}
 </p>
+
+
+<div style="display: block;">
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>
