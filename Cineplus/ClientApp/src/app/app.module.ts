@@ -39,7 +39,7 @@ import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.compon
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 import {ClientProfileComponent} from "./client-profile/client-profile.component";
 import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
-import {BillingDialogComponent, SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
+import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
