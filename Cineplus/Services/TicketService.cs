@@ -63,7 +63,7 @@ namespace Cineplus.Services
 
             var tickets = _ticketRepository.Data().Where(ticket =>
                 ticket.User == user && ticket.Confirmation == Guid.Empty && ticket.OrderId == order).ToArray();
-            if (tickets.Any() && _billingService.VerifyPurchase(order, purchaseType, out var confirmation))
+            if (tickets.Any() && _billingService.VerifyPurchase(order, purchaseType,user, out var confirmation))
             {
                 foreach (var ticket in tickets)
                 {
@@ -145,7 +145,7 @@ namespace Cineplus.Services
                 }
             }
 
-            if (!toCancel.Any() || !_billingService.RefundPurchase(orderid))
+            if (!toCancel.Any() || !_billingService.RefundPurchase(orderid,user))
                 return new BadRequestResult();
 
             _ticketRepository.RemoveRange(toCancel);
