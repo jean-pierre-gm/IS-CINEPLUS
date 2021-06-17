@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Cineplus.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Cineplus.Services
 {
@@ -8,6 +9,7 @@ namespace Cineplus.Services
     {
         private readonly IRepository<Ticket> _ticketRepository;
         private readonly IAssociateService _associateService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public enum PurchaseType
         {
@@ -16,13 +18,14 @@ namespace Cineplus.Services
             Agent,
         }
 
-        public BillingService(IRepository<Ticket> ticketRepository, IAssociateService associateService)
+        public BillingService(IRepository<Ticket> ticketRepository, IAssociateService associateService,UserManager<ApplicationUser> userManager)
         {
             _ticketRepository = ticketRepository;
             _associateService = associateService;
+            _userManager = userManager;
         }
 
-        public bool VerifyPurchase(Guid order, Enum type, out Guid confirmation)
+        public bool VerifyPurchase(Guid order, Enum type, ApplicationUser user,out Guid confirmation)
         {
             if (type is not PurchaseType purchaseType)
             {
@@ -61,6 +64,14 @@ namespace Cineplus.Services
                     confirmation = Guid.NewGuid();
                     return true;
                 case PurchaseType.Agent:
+                    var isAgentTask = _userManager.IsInRoleAsync(user, "TicketAgent");
+                    isAgentTask.Wait();
+                    var isAgent = isAgentTask.Result;
+                    if (!isAgent)
+                    {
+                        confirmation = Guid.Empty;
+                        return false;
+                    }
                     confirmation = Guid.NewGuid();
                     return true;
                 default:
@@ -68,7 +79,7 @@ namespace Cineplus.Services
             }
         }
 
-        public bool RefundPurchase(Guid order)
+        public bool RefundPurchase(Guid order,ApplicationUser user)
         {
             var tickets = _ticketRepository.Data().Where(ticket => ticket.OrderId == order);
             var pointsEarned = tickets.Sum((ticket => ticket.PointsPrice));
