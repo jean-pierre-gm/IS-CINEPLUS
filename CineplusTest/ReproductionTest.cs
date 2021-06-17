@@ -88,7 +88,8 @@ namespace CineplusTest
                 new ApplicationDbContext(options,
                     Options.Create(new OperationalStoreOptions()))) {
                 var reproductionRepo = new SqlRepository<Reproduction>(context);
-                var reproductionService = new ReproductionService(reproductionRepo);
+                var ticketRepo = new SqlRepository<Ticket>(context);
+                var reproductionService = new ReproductionService(reproductionRepo, ticketRepo);
 
                 reproductionService.Add(_reproduction1);
                 reproductionService.Add(_reproduction2);
@@ -121,7 +122,8 @@ namespace CineplusTest
                 new ApplicationDbContext(options,
                     Options.Create(new OperationalStoreOptions()))) {
                 var reproductionRepo = new SqlRepository<Reproduction>(context);
-                var reproductionService = new ReproductionService(reproductionRepo);
+                var ticketRepo = new SqlRepository<Ticket>(context);
+                var reproductionService = new ReproductionService(reproductionRepo, ticketRepo);
 
                 reproductionService.Add(_reproduction1);
                 reproductionService.Add(_reproduction2);
@@ -154,7 +156,8 @@ namespace CineplusTest
                 new ApplicationDbContext(options,
                     Options.Create(new OperationalStoreOptions()))) {
                 var reproductionRepo = new SqlRepository<Reproduction>(context);
-                var reproductionService = new ReproductionService(reproductionRepo);
+                var ticketRepo = new SqlRepository<Ticket>(context);
+                var reproductionService = new ReproductionService(reproductionRepo, ticketRepo);
 
                 reproductionService.Add(_reproduction1);
                 reproductionService.Add(_reproduction2);
@@ -188,7 +191,8 @@ namespace CineplusTest
                 new ApplicationDbContext(options,
                     Options.Create(new OperationalStoreOptions()))) {
                 var reproductionRepo = new SqlRepository<Reproduction>(context);
-                var reproductionService = new ReproductionService(reproductionRepo);
+                var ticketRepo = new SqlRepository<Ticket>(context);
+                var reproductionService = new ReproductionService(reproductionRepo, ticketRepo);
 
                 _reproduction1.Movie = _movie1;
                 _reproduction1.Theater = _theater1;
