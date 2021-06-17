@@ -856,7 +856,7 @@ namespace Cineplus.Data.Migrations
                             Id = -1,
                             MovieId = -1,
                             Price = 10.0,
-                            StartTime = new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 6, 10, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -1
                         },
                         new
@@ -864,7 +864,7 @@ namespace Cineplus.Data.Migrations
                             Id = -2,
                             MovieId = -1,
                             Price = 12.0,
-                            StartTime = new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 6, 15, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -1
                         },
                         new
@@ -872,7 +872,7 @@ namespace Cineplus.Data.Migrations
                             Id = -3,
                             MovieId = -1,
                             Price = 9.0,
-                            StartTime = new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 6, 22, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -2
                         },
                         new
@@ -880,7 +880,7 @@ namespace Cineplus.Data.Migrations
                             Id = -4,
                             MovieId = -1,
                             Price = 8.0,
-                            StartTime = new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 6, 21, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -3
                         },
                         new
@@ -888,7 +888,7 @@ namespace Cineplus.Data.Migrations
                             Id = -5,
                             MovieId = -1,
                             Price = 14.0,
-                            StartTime = new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 6, 23, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             TheaterId = -3
                         });
                 });

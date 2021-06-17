@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cineplus.Data.Migrations
 {
-    public partial class MergedStatistics : Migration
+    public partial class ChangedReproductionTime : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -492,27 +492,27 @@ namespace Cineplus.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -4, -1, 8.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -3 });
+                values: new object[] { -4, -1, 8.0, new DateTime(2021, 6, 21, 18, 0, 0, 0, DateTimeKind.Unspecified), -3 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -3, -1, 9.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -2 });
+                values: new object[] { -3, -1, 9.0, new DateTime(2021, 6, 22, 18, 0, 0, 0, DateTimeKind.Unspecified), -2 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -5, -1, 14.0, new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified), -3 });
+                values: new object[] { -5, -1, 14.0, new DateTime(2021, 6, 23, 22, 0, 0, 0, DateTimeKind.Unspecified), -3 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -1, -1, 10.0, new DateTime(2021, 6, 6, 18, 0, 0, 0, DateTimeKind.Unspecified), -1 });
+                values: new object[] { -1, -1, 10.0, new DateTime(2021, 6, 10, 18, 0, 0, 0, DateTimeKind.Unspecified), -1 });
 
             migrationBuilder.InsertData(
                 table: "Reproduction",
                 columns: new[] { "Id", "MovieId", "Price", "StartTime", "TheaterId" },
-                values: new object[] { -2, -1, 12.0, new DateTime(2021, 6, 6, 22, 0, 0, 0, DateTimeKind.Unspecified), -1 });
+                values: new object[] { -2, -1, 12.0, new DateTime(2021, 6, 15, 22, 0, 0, 0, DateTimeKind.Unspecified), -1 });
 
             migrationBuilder.InsertData(
                 table: "Seat",
