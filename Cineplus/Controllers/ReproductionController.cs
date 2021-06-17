@@ -18,7 +18,7 @@ namespace Cineplus.Controllers {
 			if (movieId == null) {
 				return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAll(parameters));
 			}
-			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllOfMovie(movieId.Value, parameters));
+			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllOfMovieFromNow(movieId.Value, parameters));
 		}
 
 		[HttpGet]

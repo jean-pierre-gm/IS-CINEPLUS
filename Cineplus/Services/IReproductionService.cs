@@ -7,6 +7,7 @@ namespace Cineplus.Services {
 		Reproduction Get(int id);
 		Pagination<Reproduction> GetAllAtDay(DateTime dateTime, Pagination<Reproduction> parameters);
 		Pagination<Reproduction> GetAllOfMovie(int movieId, Pagination<Reproduction> parameters);
+		Pagination<Reproduction> GetAllOfMovieFromNow(int movieId, Pagination<Reproduction> parameters);
 		Reproduction Add(Reproduction entity);
 		Reproduction Update(Reproduction entity);
 		Reproduction Remove(int id);

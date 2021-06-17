@@ -33,6 +33,15 @@ namespace Cineplus.Services {
 						.Where(reproduction => reproduction.MovieId == movieId), parameters);
 		}
 
+		public Pagination<Reproduction> GetAllOfMovieFromNow(int movieId, Pagination<Reproduction> parameters)
+		{
+			return PaginationService.GetPagination(
+					_repository.Data().Include(reproduction => reproduction.Movie)
+						.Where(reproduction => reproduction.MovieId == movieId && reproduction.StartTime >= DateTime.Now)
+						.OrderBy(reproduction => reproduction.StartTime)
+					, parameters);
+		}
+
 		public List<Tuple<int, int>> GetReproductionCapacity(List<int> ids) {
 			var intermediate = _ticketRepo.Data()
 				.GroupBy(t => t.ReproductionId)
