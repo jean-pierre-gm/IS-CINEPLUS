@@ -20,7 +20,7 @@ namespace Cineplus.Controllers
         [Route("display")]
         public ActionResult<IEnumerable<Settings>> Index()
         {
-            return new ActionResult<IEnumerable<Settings>>(_settingsService.GetAll());
+            return new ActionResult<IEnumerable<Settings>>(_settingsService.GetAllDisplay());
         }
 
         [HttpPut]
