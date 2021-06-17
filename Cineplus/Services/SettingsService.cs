@@ -13,14 +13,14 @@ namespace Cineplus.Services
         }
 
         
-        public IEnumerable<Settings> GetAll()
+        public IEnumerable<Settings> GetAllDisplay()
         {
-            return _repository.Data().AsEnumerable();
+            return _repository.Data().Where(setting => setting.Type == "Display").AsEnumerable();
         }
 
         public Settings SetActiveDisplay(Settings setting)
         {
-            var settings = new List<Settings>(GetAll());
+            var settings = new List<Settings>(GetAllDisplay());
             for (var i = 0; i < settings.Count; i++)
                 settings[i].Active = settings[i].Id == setting.Id;
             _repository.UpdateAll(settings);

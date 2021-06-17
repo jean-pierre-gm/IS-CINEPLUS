@@ -5,7 +5,7 @@ namespace Cineplus.Services
 {
     public interface ISettingsService
     {
-        public IEnumerable<Settings> GetAll();
+        public IEnumerable<Settings> GetAllDisplay();
 
         public Settings SetActiveDisplay(Settings setting);
 
