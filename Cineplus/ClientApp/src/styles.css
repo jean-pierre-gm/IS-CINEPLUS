@@ -19,5 +19,17 @@ button:focus {
   outline: none;
 }
 
+.success-snackbar {
+  background: mediumseagreen;
+}
+
+.error-snackbar {
+  background: red;
+}
+
+.warning-snackbar {
+  background: orange;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

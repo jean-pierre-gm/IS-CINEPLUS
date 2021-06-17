@@ -1,7 +1,5 @@
-﻿export class PersonalDiscount {
-  id : number = 0;
+﻿import {Discount} from "./discount";
+
+export class PersonalDiscount extends  Discount{
   personalName: string;
-  description: string;
-  discount: number;
-  enable: boolean;
 }

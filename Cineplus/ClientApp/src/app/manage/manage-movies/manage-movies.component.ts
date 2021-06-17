@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateMovieComponent} from "./create-movie/create-movie.component";
 import {Sort} from "@angular/material/sort";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {NotificationService} from "../../notification.service";
 
 @Component({
   selector: 'app-manage-movies',
@@ -37,7 +38,8 @@ export class ManageMoviesComponent implements OnInit {
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') private baseUrl: string,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private notificationService: NotificationService
   ) {
 
     let dsConf = new DataSourceConf();
@@ -89,11 +91,17 @@ export class ManageMoviesComponent implements OnInit {
           this.http.put<Movie>('api/movie/' + this.movie.id, this.movie).subscribe(movie => {
             this.movieDataSource.refresh();
             this.http.put('api/actor/cast/' + movie.id, cast).subscribe()
+            this.notificationService.success$.next("Movie successfully updated.");
+          }, error => {
+            this.notificationService.error$.next("Error creating movie.");
           });
         } else {
           this.http.post<Movie>('api/movie', this.movie).subscribe(movie => {
             this.movieDataSource.refresh();
             this.http.post('api/actor/cast/' + movie.id, cast).subscribe()
+            this.notificationService.success$.next("Movie successfully created.");
+          }, error => {
+            this.notificationService.error$.next("Error updating movie.");
           });
         }
       }

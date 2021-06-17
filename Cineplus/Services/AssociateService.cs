@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Cineplus.Models;
@@ -75,6 +76,17 @@ namespace Cineplus.Services {
 			var user = await _userService.GetCurrentUser();
 
 			return user?.Associate;
+		}
+
+		public Associate AddPoints(Associate associate, int points) {
+			associate.Points += points;
+			return Update(associate);
+		}
+
+		public Associate RemovePoints(Associate associate, int points) {
+			associate.Points -= points;
+			associate.Points = Math.Max(associate.Points, 0);
+			return Update(associate);
 		}
 	}
 }

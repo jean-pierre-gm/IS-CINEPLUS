@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cineplus.Models;
 using Cineplus.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +19,12 @@ namespace Cineplus.Controllers {
 				return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAll(parameters));
 			}
 			return new ActionResult<Pagination<Reproduction>>(_reproductionService.GetAllOfMovie(movieId.Value, parameters));
+		}
+
+		[HttpGet]
+		[Route("capacity")]
+		public ActionResult<List<Tuple<int, int>>> GetCapacity([FromQuery] List<int> ids) {
+			return _reproductionService.GetReproductionCapacity(ids);
 		}
 
 		[HttpGet("{id:int}")]

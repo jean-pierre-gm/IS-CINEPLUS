@@ -34,7 +34,7 @@ namespace Cineplus {
 
 			services.AddDatabaseDeveloperPageExceptionFilter();
 
-			services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+			services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
 				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -68,6 +68,8 @@ namespace Cineplus {
 			services.AddScoped<IPersonalDiscountService, PersonalDiscountService>();
 			services.AddScoped<IAssociateService, AssociateService>();
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IBillingService, BillingService>();
+			services.AddScoped<IPointsService, PointsService>();
 			services.AddScoped<IStatisticsService, StatisticsService>();
 			services.AddScoped<IActorService, ActorService>();
 		}
@@ -116,11 +118,17 @@ namespace Cineplus {
 				// To learn more about options for serving an Angular SPA from ASP.NET Core,
 				// see https://go.microsoft.com/fwlink/?linkid=864501
 
-				spa.Options.SourcePath = "ClientApp";
 
 				if (env.IsDevelopment()) {
+				
+					spa.Options.SourcePath = "ClientApp";
+				
 					spa.UseAngularCliServer(npmScript: "start");
+					
+				} else {
+					spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
 				}
+				
 			});
 			
 			IdentityExtensions.SeedIdentity(userManager, roleManager, Configuration);

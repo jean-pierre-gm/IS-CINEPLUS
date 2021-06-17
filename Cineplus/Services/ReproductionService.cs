@@ -2,14 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using Cineplus.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Cineplus.Services {
 	public class ReproductionService: IReproductionService {
 		private IRepository<Reproduction> _repository;
-		public ReproductionService(IRepository<Reproduction> repository) {
+		private IRepository<Ticket> _ticketRepo;
+		public ReproductionService(IRepository<Reproduction> repository, IRepository<Ticket> ticketRepo) {
 			_repository = repository;
+			_ticketRepo = ticketRepo;
 		}
 
 		public Reproduction Get(int id) {
@@ -20,21 +24,33 @@ namespace Cineplus.Services {
 		public Pagination<Reproduction> GetAllAtDay(DateTime dateTime, Pagination<Reproduction> parameters) {
 			return PaginationService.GetPagination(
 				_repository.Data().Include(reproduction => reproduction.Movie)
-					.Where(reproduction => reproduction.StartTime.Date == dateTime.Date),
-				parameters.CurrentPage,
-				parameters.OrderBy,
-				parameters.OrderByDesc,
-				parameters.PageSize);
+					.Where(reproduction => reproduction.StartTime.Date == dateTime.Date), parameters);
 		}
 
 		public Pagination<Reproduction> GetAllOfMovie(int movieId, Pagination<Reproduction> parameters) {
 			return PaginationService.GetPagination(
 					_repository.Data().Include(reproduction => reproduction.Movie)
-						.Where(reproduction => reproduction.MovieId == movieId),
-				parameters.CurrentPage,
-				parameters.OrderBy,
-				parameters.OrderByDesc,
-				parameters.PageSize);
+						.Where(reproduction => reproduction.MovieId == movieId), parameters);
+		}
+
+		public List<Tuple<int, int>> GetReproductionCapacity(List<int> ids) {
+			var intermediate = _ticketRepo.Data()
+				.GroupBy(t => t.ReproductionId)
+				.Select(g => new {Key = g.Key, Count = g.Count()});
+
+
+			var query = _repository.Data()
+				.Where(r => ids.Contains(r.Id))
+				.Include(r => r.Theater)
+				.Join(intermediate, 
+					reproduction => reproduction.Id, 
+					arg => arg.Key, 
+					(rep, arg) => new Tuple<Reproduction, int>(rep, arg.Count));
+
+			return query
+				.ToList()
+				.Select(t => new Tuple<int, int>(t.Item1.Id, t.Item1.Theater.Capacity - t.Item2))
+				.ToList();
 		}
 
 		public Reproduction Add(Reproduction entity) {

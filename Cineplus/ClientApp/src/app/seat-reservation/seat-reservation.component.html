@@ -1,14 +1,19 @@
-<div class="container-md">
-  <h2>Reserve Your Tickets</h2>
+<div class="container-md ">
+  <h2>Reserve Your Tickets:</h2>
+  <div *ngIf="reproduction">
+    <h6>{{reproduction.movie.movieName}}</h6>
+    <h6>Directed by: {{reproduction.movie.director}}</h6>
+  </div>
 </div>
 
 <div class="d-flex">
-  <div class="p-4">
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
+  <div class="p-5">
+    <form>
+      <mat-form-field color="accent" style="width: 100%;" matTooltip="Will place your seats as close as possible">
         <mat-label>Tickets</mat-label>
         <input type="number" matInput [formControl]="ticketsFormControl" [errorStateMatcher]="matcher"
-               (input)="onChange()">
+               (input)="sliderChange()"
+        >
         <mat-hint></mat-hint>
         <mat-error *ngIf="ticketsFormControl.hasError('required')">
           Number of tickets is <strong>required</strong>
@@ -19,56 +24,79 @@
         <mat-error *ngIf="ticketsFormControl.hasError('max')">
           More tickets than seats available
         </mat-error>
-
       </mat-form-field>
     </form>
 
     <div class="plane" id="seats">
       <ol class="cabin" *ngFor="let row of seats let i = index">
-        <li class="row row--{{i}}">
+        <li class="row row--{{i}} flex-nowrap">
           <ol class="seats" type="A" *ngFor="let seat of row let j = index">
-            <li class="seat">
-              <input type="checkbox" [id]="seat" [disabled]="seat == '0'" (click)="seatClick($event)"/>
+            <li class="seat"
+                (mouseenter)="onHoverSeat($event)"
+                (mouseleave)="onHoverSeat($event)"
+            >
+              <input type="checkbox" [id]="seat" [disabled]="seat.endsWith('d')" (click)="seatClick($event)"/>
               <label [for]="seat"></label>
             </li>
           </ol>
         </li>
       </ol>
     </div>
-
-    <button *ngIf="selected.length > 0" mat-stroked-button color="accent" (click)="submit()">Reserve Now!</button>
+    <div style="height: 40px">
+      <button *ngIf="selectedDataSource.data.length > 0" mat-stroked-button color="accent" style="width: 100%"
+              (click)="reserve()">
+        Reserve Now!
+      </button>
+    </div>
   </div>
 
-  <div class="p-5 flex-fill">
-    <table *ngIf="selected.length > 0" mat-table
+  <div class="p-4" *ngIf="selectedDataSource.data.length > 0">
+    <h4>Selected Seats</h4>
+    <br>
+    <table mat-table
            [dataSource]="selectedDataSource" multiTemplateDataRows
            class="mat-elevation-z8">
       <ng-container matColumnDef="seat">
         <th mat-header-cell *matHeaderCellDef>Seat</th>
         <td mat-cell *matCellDef="let element">
-          <span>{{'Seat number ' + element.seat.column + ' in row ' + element.seat.row + "."}}</span></td>
+          <span>{{'Seat number ' + (element.seat.column + 1) + ' in row ' + (element.seat.row + 1) + "."}}</span></td>
+        <td mat-footer-cell *matFooterCellDef> Number of Seats: {{selectedDataSource.data.length}} </td>
       </ng-container>
 
       <ng-container matColumnDef="originalPrice">
         <th mat-header-cell *matHeaderCellDef>Original Price</th>
         <td mat-cell *matCellDef="let element"><span>{{element.originalPrice}} </span></td>
+        <td mat-footer-cell *matFooterCellDef [attr.colspan]="3"> Total
+          Price: {{calcTotalSelectionPrice()| number : '1.2'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="discount">
         <th mat-header-cell *matHeaderCellDef>Discount</th>
-        <td mat-cell *matCellDef="let element"><span>{{element.discount}} </span></td>
+        <td mat-cell *matCellDef="let element"><span [innerText]="element.discount"></span></td>
+        <td mat-footer-cell *matFooterCellDef [ngStyle]="{'display': 'none'}"></td>
       </ng-container>
 
       <ng-container matColumnDef="finalPrice">
         <th mat-header-cell *matHeaderCellDef>Final Price</th>
-        <td mat-cell *matCellDef="let element"><span>{{element.finalPrice}}</span></td>
+        <td mat-cell *matCellDef="let element"><span [innerText]="element.finalPrice"></span></td>
+        <td mat-footer-cell *matFooterCellDef [ngStyle]="{'display': 'none'}"></td>
       </ng-container>
 
-      <ng-container matColumnDef="expandedDetail">
+      <ng-container *ngIf="selectedDataSource.data.length>0 && selectedDataSource.data[0].discounts.length>0"
+                    matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="selectedColumnsToDisplay.length">
-          <div class="example-element-detail"
+          <div class="elemnt-detail"
                [@detailExpand]="element == selectedExpandedElement ? 'expanded' : 'collapsed'">
-              <div class="example-element-description"> All discount checkboxes here </div>
+            <div class="row card-body">
+              <mat-chip-list>
+                <div *ngFor="let choice of element.discounts; let i=index" class="col-md-auto">
+                  <mat-chip>
+                    <mat-slide-toggle [(ngModel)]="choice.enable"
+                                      (change)="element.updatePrice()">{{choice.description}}</mat-slide-toggle>
+                  </mat-chip>
+                </div>
+              </mat-chip-list>
+            </div>
           </div>
         </td>
       </ng-container>
@@ -76,51 +104,67 @@
 
       <tr mat-header-row *matHeaderRowDef="selectedColumnsToDisplay"></tr>
       <tr mat-row *matRowDef="let element; columns: selectedColumnsToDisplay;"
-          class="example-element-row"
+          class="elemnt-row"
+          (mouseenter)="onHoverRow($event)"
+          (mouseleave)="onHoverRow($event)"
+          [id]="element.seat.row +':'+ element.seat.column+':ss'"
           [class.example-expanded-row]="selectedExpandedElement === element"
-          (click)="selectedExpandedElement = selectedExpandedElement === element ? null : element">
+          (click)="selectedExpandedElement = selectedExpandedElement === element ? null : element"
+          matTooltip="Click To Toggle Discounts"
+      >
       </tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+      <tr mat-footer-row *matFooterRowDef="selectedColumnsToDisplay; sticky: true"></tr>
     </table>
   </div>
 </div>
 
-<div *ngIf="unpaid.data.length > 0">
-  <div>
-    <mat-label>Unpaid Tickets</mat-label>
-    <br><br>
-  </div>
 
-<table  mat-table
-       [dataSource]="unpaid" multiTemplateDataRows
-       class="mat-elevation-z8">
-  <ng-container matColumnDef="seat">
-    <th mat-header-cell *matHeaderCellDef>Seat</th>
-    <td mat-cell *matCellDef="let element">
-      <span>{{'Seat number ' + element.seat.column + ' in row ' + element.seat.row + "."}}</span></td>
+<div *ngIf="unpaidDatasource.data.length > 0">
+  <h4>Unpaid Tickets</h4>
+  <br>
+  <ng-container>
+    <mat-chip-list>
+      <mat-chip class="bootstrap-timer">
+        <cd-timer #cd countdown="true" format="user" [startTime]="time"
+                  (onComplete)="expire()">Expires in [minutes] min
+          [seconds]sec
+        </cd-timer>
+      </mat-chip>
+    </mat-chip-list>
+    <br>
   </ng-container>
+  <table mat-table
+         [dataSource]="unpaidDatasource" multiTemplateDataRows
+         class="mat-elevation-z8">
+    <ng-container matColumnDef="seat">
+      <th mat-header-cell *matHeaderCellDef>Seat</th>
+      <td mat-cell *matCellDef="let element">
+        <span>{{'Seat number ' + element.seat.column + ' in row ' + element.seat.row + "."}}</span></td>
+      <td mat-footer-cell *matFooterCellDef> Number of Seats: {{unpaidDatasource.data.length}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="originalPrice">
-    <th mat-header-cell *matHeaderCellDef>Original Price</th>
-    <td mat-cell *matCellDef="let element"><span>{{element.originalPrice}} </span></td>
-  </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element"><span>{{element.price | number : '1.2'}} </span></td>
+      <td mat-footer-cell *matFooterCellDef> Total Price: {{calcTotalReservePrice()| number : '1.2'}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="discount">
-    <th mat-header-cell *matHeaderCellDef>Discount</th>
-    <td mat-cell *matCellDef="let element"><span>{{element.discount}} </span></td>
-  </ng-container>
-
-  <ng-container matColumnDef="finalPrice">
-    <th mat-header-cell *matHeaderCellDef>Final Price</th>
-    <td mat-cell *matCellDef="let element"><span>{{element.finalPrice}}</span></td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="selectedColumnsToDisplay; sticky: true"></tr>
-  <tr mat-row routerLink="/reserve" [queryParams]="{reproduction: row['id']}" *matRowDef="let row; columns: selectedColumnsToDisplay;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="unpaidColumnsToDisplay; sticky: true"></tr>
+    <tr mat-row
+        *matRowDef="let element; columns: unpaidColumnsToDisplay;"
+        class="elemnt-row elemnt-row-delete"
+        [id]="element.seat.row +':'+ element.seat.column+':sdr'"
+        (mouseenter)="onHoverRow($event)"
+        (mouseleave)="onHoverRow($event)"
+        (click)="cancelReserve(element.id)"
+        matTooltip="Click To Delete This Ticket"
+    ></tr>
+    <tr mat-footer-row *matFooterRowDef="unpaidColumnsToDisplay; sticky: true"></tr>
+  </table>
 
   <ng-container>
     <br><br>
-  <button *ngIf="unpaid.data.length > 0" mat-stroked-button color="primary"  style="width: 20%" (click)="submit()">Pay</button>
+    <button mat-stroked-button color="accent" style="width: 20%" (click)="openDialog()">Pay</button>
   </ng-container>
 </div>

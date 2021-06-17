@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Cineplus.Models {
@@ -15,6 +16,8 @@ namespace Cineplus.Models {
 		
 		[JsonIgnore]
 		public virtual ICollection<Reproduction> Reproductions { get; set; }
+
+		[NotMapped] public int Capacity => this.Rows * this.Columns;
 		
 		public Theater() {
 			this.Seats = new HashSet<Seat>();

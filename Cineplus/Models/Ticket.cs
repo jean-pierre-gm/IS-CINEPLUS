@@ -1,33 +1,30 @@
 using System;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace Cineplus.Models {
-	public class Ticket: DbEntity {
+namespace Cineplus.Models
+{
+    public class Ticket : DbEntity
+    {
+        public int SeatId { get; set; }
+        public virtual Seat Seat { get; set; }
 
-		[JsonIgnore]
-		public int SeatId { get; set; }
-		public virtual Seat Seat { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-		[JsonIgnore]
-		public string UserId { get; set; }
-		[JsonIgnore]
-		public virtual ApplicationUser User { get; set; }
-		
-		[JsonIgnore]
-		public double Price { get; set; }
-		
-		
-		[JsonIgnore]
-		public double PointsPrice { get; set; }
-		
-		[JsonIgnore]
-		public bool Confirmed { get; set; }
+        public double Price { get; set; }
 
-		[JsonIgnore]
-		public DateTime ReserveTime { get; set; }
-		public int ReproductionId { get; set; }
-		
-		[JsonIgnore]
-		public virtual Reproduction Reproduction { get; set; }
-	}
+        public virtual DateDiscount DateDiscount { get; set; }
+
+        public virtual List<PersonalDiscount> PersonalDiscounts { get; set; }
+
+        public double PointsPrice { get; set; }
+
+        public Guid OrderId { get; set; }
+        [JsonIgnore] public Guid Confirmation { get; set; }
+        public DateTime ReserveTime { get; set; }
+        public int ReproductionId { get; set; }
+
+        public virtual Reproduction Reproduction { get; set; }
+    }
 }

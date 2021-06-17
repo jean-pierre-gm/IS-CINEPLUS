@@ -488,7 +488,8 @@ namespace Cineplus.Models {
 							ReproductionId = reproduction.Id,
 							SeatId = theaterSeat.Id,
 							Price = reproduction.Price,
-							Confirmed = true
+							OrderId = new Guid(),
+							Confirmation = new Guid()
 						});
 					}
 				}

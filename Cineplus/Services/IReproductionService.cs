@@ -11,5 +11,6 @@ namespace Cineplus.Services {
 		Reproduction Update(Reproduction entity);
 		Reproduction Remove(int id);
 		Pagination<Reproduction> GetAll(Pagination<Reproduction> parameters);
+		List<Tuple<int, int>> GetReproductionCapacity(List<int> ids);
 	}
 }

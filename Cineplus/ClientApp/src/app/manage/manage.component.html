@@ -20,4 +20,11 @@
   <mat-tab label="Statistics">
     <app-manage-statistics></app-manage-statistics>
   </mat-tab>
+  <mat-tab label="Points">
+    <mat-form-field>
+      <mat-label>Price in Points</mat-label>
+      <input [formControl]="priceValidator" type="number" matInput [(ngModel)]="priceInPoints">
+    </mat-form-field>
+    <button class="ml-3" mat-raised-button color="primary" (click)="submit()">Submit</button>
+  </mat-tab>
 </mat-tab-group>

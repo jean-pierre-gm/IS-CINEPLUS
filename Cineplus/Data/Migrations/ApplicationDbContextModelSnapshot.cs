@@ -16,327 +16,6 @@ namespace Cineplus.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("Cineplus.Models.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ActorName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actor");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -1,
-                            ActorName = "Tom Hanks"
-                        },
-                        new
-                        {
-                            Id = -2,
-                            ActorName = "Robin Wright"
-                        },
-                        new
-                        {
-                            Id = -3,
-                            ActorName = "Harrison Ford"
-                        },
-                        new
-                        {
-                            Id = -4,
-                            ActorName = "Sean Connery"
-                        },
-                        new
-                        {
-                            Id = -5,
-                            ActorName = "Robert Downey Jr."
-                        },
-                        new
-                        {
-                            Id = -6,
-                            ActorName = "Chris Evans"
-                        },
-                        new
-                        {
-                            Id = -7,
-                            ActorName = "Jack Nicholson"
-                        },
-                        new
-                        {
-                            Id = -8,
-                            ActorName = "Leonardo DiCaprio"
-                        },
-                        new
-                        {
-                            Id = -9,
-                            ActorName = "Jennifer Lawrence"
-                        },
-                        new
-                        {
-                            Id = -10,
-                            ActorName = "Josh Hutcherson"
-                        },
-                        new
-                        {
-                            Id = -11,
-                            ActorName = "Ryan Gosling"
-                        },
-                        new
-                        {
-                            Id = -12,
-                            ActorName = "Emma Stone"
-                        },
-                        new
-                        {
-                            Id = -13,
-                            ActorName = "Emma Thompson"
-                        },
-                        new
-                        {
-                            Id = -14,
-                            ActorName = "Tim Robbins"
-                        },
-                        new
-                        {
-                            Id = -15,
-                            ActorName = "Morgan Freeman"
-                        },
-                        new
-                        {
-                            Id = -16,
-                            ActorName = "Al Pacino"
-                        },
-                        new
-                        {
-                            Id = -17,
-                            ActorName = "Marlon Brando"
-                        },
-                        new
-                        {
-                            Id = -18,
-                            ActorName = "Ryunosuke Kamiki"
-                        },
-                        new
-                        {
-                            Id = -19,
-                            ActorName = "Mone Kamishiraishi"
-                        },
-                        new
-                        {
-                            Id = -20,
-                            ActorName = "John Travolta"
-                        },
-                        new
-                        {
-                            Id = -21,
-                            ActorName = "Samuel L. Jackson"
-                        },
-                        new
-                        {
-                            Id = -22,
-                            ActorName = "Keanu Reeves"
-                        },
-                        new
-                        {
-                            Id = -23,
-                            ActorName = "Michael Nyqvist"
-                        },
-                        new
-                        {
-                            Id = -24,
-                            ActorName = "Jorge Perugorría"
-                        },
-                        new
-                        {
-                            Id = -25,
-                            ActorName = "Vladimir Cruz"
-                        });
-                });
-
-            modelBuilder.Entity("Cineplus.Models.ActorMovie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ActorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActorId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("ActorMovie");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -1,
-                            ActorId = -1,
-                            MovieId = -1
-                        },
-                        new
-                        {
-                            Id = -2,
-                            ActorId = -2,
-                            MovieId = -1
-                        },
-                        new
-                        {
-                            Id = -3,
-                            ActorId = -3,
-                            MovieId = -2
-                        },
-                        new
-                        {
-                            Id = -4,
-                            ActorId = -4,
-                            MovieId = -2
-                        },
-                        new
-                        {
-                            Id = -5,
-                            ActorId = -5,
-                            MovieId = -3
-                        },
-                        new
-                        {
-                            Id = -6,
-                            ActorId = -6,
-                            MovieId = -3
-                        },
-                        new
-                        {
-                            Id = -7,
-                            ActorId = -7,
-                            MovieId = -4
-                        },
-                        new
-                        {
-                            Id = -8,
-                            ActorId = -8,
-                            MovieId = -4
-                        },
-                        new
-                        {
-                            Id = -9,
-                            ActorId = -9,
-                            MovieId = -5
-                        },
-                        new
-                        {
-                            Id = -10,
-                            ActorId = -10,
-                            MovieId = -5
-                        },
-                        new
-                        {
-                            Id = -11,
-                            ActorId = -11,
-                            MovieId = -6
-                        },
-                        new
-                        {
-                            Id = -12,
-                            ActorId = -12,
-                            MovieId = -6
-                        },
-                        new
-                        {
-                            Id = -13,
-                            ActorId = -12,
-                            MovieId = -7
-                        },
-                        new
-                        {
-                            Id = -14,
-                            ActorId = -13,
-                            MovieId = -7
-                        },
-                        new
-                        {
-                            Id = -15,
-                            ActorId = -14,
-                            MovieId = -8
-                        },
-                        new
-                        {
-                            Id = -16,
-                            ActorId = -15,
-                            MovieId = -8
-                        },
-                        new
-                        {
-                            Id = -17,
-                            ActorId = -16,
-                            MovieId = -9
-                        },
-                        new
-                        {
-                            Id = -18,
-                            ActorId = -17,
-                            MovieId = -9
-                        },
-                        new
-                        {
-                            Id = -19,
-                            ActorId = -18,
-                            MovieId = -10
-                        },
-                        new
-                        {
-                            Id = -20,
-                            ActorId = -19,
-                            MovieId = -10
-                        },
-                        new
-                        {
-                            Id = -21,
-                            ActorId = -20,
-                            MovieId = -11
-                        },
-                        new
-                        {
-                            Id = -22,
-                            ActorId = -21,
-                            MovieId = -11
-                        },
-                        new
-                        {
-                            Id = -23,
-                            ActorId = -22,
-                            MovieId = -12
-                        },
-                        new
-                        {
-                            Id = -24,
-                            ActorId = -23,
-                            MovieId = -12
-                        },
-                        new
-                        {
-                            Id = -25,
-                            ActorId = -24,
-                            MovieId = -13
-                        },
-                        new
-                        {
-                            Id = -26,
-                            ActorId = -25,
-                            MovieId = -13
-                        });
-                });
-
             modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -552,9 +231,6 @@ namespace Cineplus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -591,7 +267,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -1,
-                            Country = "US",
                             Description = "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
                             Director = "Robert Zemeckis",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -604,7 +279,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -2,
-                            Country = "US",
                             Description = "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.",
                             Director = "Steven Spielberg",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -617,7 +291,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -3,
-                            Country = "US",
                             Description = "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
                             Director = "Joss Whedon",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -630,7 +303,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -4,
-                            Country = "US",
                             Description = "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.",
                             Director = "Martin Scorsese",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -643,20 +315,18 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -5,
-                            Country = "US",
                             Description = "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.",
                             Director = "Francis Lawrence",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = 123,
                             GenreId = -4,
                             ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
-                            MovieName = "The Hunger Games: Mockingjay - Part 1",
+                            MovieName = "The Hunger Games: Mockingjay - Part 1 ",
                             Score = 6.8000001907348633
                         },
                         new
                         {
                             Id = -6,
-                            Country = "US",
                             Description = "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
                             Director = "Damien Chazelle",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -669,7 +339,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -7,
-                            Country = "US",
                             Description = "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.",
                             Director = "Craig Gillespie",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -682,7 +351,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -8,
-                            Country = "US",
                             Description = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
                             Director = "Frank Darabont",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -695,7 +363,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -9,
-                            Country = "US",
                             Description = "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
                             Director = "Francis Ford Coppola",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -708,7 +375,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -10,
-                            Country = "JP",
                             Description = "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.",
                             Director = "Makoto Shinkai",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -721,7 +387,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -11,
-                            Country = "US",
                             Description = "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.",
                             Director = "Makoto Shinkai",
                             Display = new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -734,7 +399,6 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -12,
-                            Country = "US",
                             Description = "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.",
                             Director = "Chad Stahelski",
                             Display = new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -742,19 +406,6 @@ namespace Cineplus.Data.Migrations
                             GenreId = -2,
                             ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
                             MovieName = "John Wick",
-                            Score = 7.3000001907348633
-                        },
-                        new
-                        {
-                            Id = -13,
-                            Country = "CU",
-                            Description = "Havana, Cuba, 1979. Flamboyantly gay artist Diego (Jorge Perugorría) attempts to seduce the straight and strait-laced David, an idealistic young communist, and fails dismally. But David conspires to become friends with Diego so he can monitor the artist's subversive life for the state. As Diego and David discuss politics, individuality and personal expression in Castro's Cuba, a genuine friendship develops between the two. But can it last? Strawberry and Chocolate became an instant hit when it was released, and has become a classic of Cuban cinema due to its charming and authentic exploration of a connection between two people under historical circumstances that seem levelled against them.",
-                            Director = "Tomás Gutiérrez Alea",
-                            Display = new DateTime(2021, 5, 4, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            Duration = 108,
-                            GenreId = -1,
-                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tMwUsu080E4kS4rkHPffy1ugvaJ.jpg",
-                            MovieName = "Strawberry and Chocolate",
                             Score = 7.3000001907348633
                         });
                 });
@@ -808,6 +459,20 @@ namespace Cineplus.Data.Migrations
                             Enable = true,
                             PersonalName = "Personal"
                         });
+                });
+
+            modelBuilder.Entity("Cineplus.Models.PriceInPoints", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PriceInPoints");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Reproduction", b =>
@@ -2922,8 +2587,14 @@ namespace Cineplus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Confirmed")
+                    b.Property<Guid>("Confirmation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("DateDiscountId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("PointsPrice")
                         .HasColumnType("REAL");
@@ -2945,6 +2616,8 @@ namespace Cineplus.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DateDiscountId");
+
                     b.HasIndex("ReproductionId");
 
                     b.HasIndex("SeatId");
@@ -2957,7 +2630,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -1,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -2967,7 +2641,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -2,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -2977,7 +2652,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -3,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -2987,7 +2663,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -4,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -2997,7 +2674,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -5,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3007,7 +2685,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -6,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3017,7 +2696,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -7,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3027,7 +2707,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -8,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3037,7 +2718,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -9,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3047,7 +2729,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -10,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3057,7 +2740,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -11,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3067,7 +2751,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -12,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3077,7 +2762,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -13,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3087,7 +2773,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -14,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3097,7 +2784,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -15,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3107,7 +2795,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -16,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3117,7 +2806,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -17,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3127,7 +2817,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -18,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3137,7 +2828,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -19,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3147,7 +2839,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -20,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3157,7 +2850,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -21,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3167,7 +2861,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -22,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3177,7 +2872,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -23,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3187,7 +2883,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -24,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3197,7 +2894,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -25,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3207,7 +2905,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -26,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3217,7 +2916,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -27,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3227,7 +2927,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -28,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3237,7 +2938,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -29,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3247,7 +2949,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -30,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3257,7 +2960,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -31,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3267,7 +2971,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -32,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3277,7 +2982,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -33,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3287,7 +2993,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -34,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3297,7 +3004,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -35,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3307,7 +3015,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -36,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3317,7 +3026,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -37,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3327,7 +3037,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -38,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3337,7 +3048,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -39,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3347,7 +3059,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -40,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3357,7 +3070,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -41,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3367,7 +3081,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -42,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3377,7 +3092,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -43,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3387,7 +3103,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -44,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3397,7 +3114,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -45,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3407,7 +3125,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -46,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3417,7 +3136,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -47,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3427,7 +3147,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -48,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3437,7 +3158,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -49,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3447,7 +3169,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -50,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3457,7 +3180,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -51,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3467,7 +3191,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -52,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3477,7 +3202,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -53,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3487,7 +3213,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -54,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3497,7 +3224,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -55,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3507,7 +3235,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -56,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3517,7 +3246,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -57,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3527,7 +3257,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -58,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3537,7 +3268,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -59,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3547,7 +3279,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -60,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3557,7 +3290,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -61,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3567,7 +3301,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -62,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3577,7 +3312,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -63,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3587,7 +3323,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -64,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3597,7 +3334,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -65,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3607,7 +3345,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -66,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3617,7 +3356,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -67,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3627,7 +3367,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -68,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3637,7 +3378,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -69,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3647,7 +3389,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -70,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3657,7 +3400,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -71,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3667,7 +3411,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -72,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3677,7 +3422,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -73,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3687,7 +3433,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -74,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3697,7 +3444,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -75,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3707,7 +3455,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -76,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3717,7 +3466,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -77,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3727,7 +3477,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -78,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3737,7 +3488,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -79,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3747,7 +3499,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -80,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3757,7 +3510,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -81,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3767,7 +3521,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -82,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3777,7 +3532,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -83,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3787,7 +3543,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -84,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3797,7 +3554,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -85,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3807,7 +3565,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -86,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3817,7 +3576,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -87,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3827,7 +3587,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -88,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3837,7 +3598,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -89,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3847,7 +3609,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -90,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3857,7 +3620,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -91,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3867,7 +3631,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -92,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3877,7 +3642,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -93,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3887,7 +3653,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -94,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3897,7 +3664,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -95,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3907,7 +3675,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -96,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3917,7 +3686,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -97,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3927,7 +3697,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -98,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3937,7 +3708,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -99,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3947,7 +3719,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -100,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3957,7 +3730,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -101,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3967,7 +3741,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -102,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3977,7 +3752,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -103,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 10.0,
                             ReproductionId = -1,
@@ -3987,7 +3763,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -104,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -3997,7 +3774,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -105,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4007,7 +3785,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -106,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4017,7 +3796,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -107,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4027,7 +3807,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -108,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4037,7 +3818,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -109,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4047,7 +3829,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -110,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4057,7 +3840,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -111,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4067,7 +3851,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -112,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4077,7 +3862,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -113,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4087,7 +3873,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -114,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4097,7 +3884,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -115,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4107,7 +3895,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -116,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4117,7 +3906,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -117,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4127,7 +3917,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -118,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4137,7 +3928,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -119,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4147,7 +3939,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -120,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4157,7 +3950,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -121,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4167,7 +3961,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -122,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4177,7 +3972,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -123,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4187,7 +3983,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -124,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4197,7 +3994,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -125,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4207,7 +4005,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -126,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4217,7 +4016,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -127,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4227,7 +4027,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -128,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4237,7 +4038,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -129,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4247,7 +4049,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -130,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4257,7 +4060,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -131,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4267,7 +4071,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -132,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4277,7 +4082,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -133,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4287,7 +4093,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -134,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4297,7 +4104,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -135,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4307,7 +4115,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -136,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4317,7 +4126,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -137,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4327,7 +4137,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -138,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4337,7 +4148,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -139,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4347,7 +4159,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -140,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4357,7 +4170,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -141,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4367,7 +4181,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -142,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4377,7 +4192,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -143,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4387,7 +4203,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -144,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4397,7 +4214,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -145,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4407,7 +4225,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -146,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4417,7 +4236,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -147,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4427,7 +4247,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -148,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4437,7 +4258,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -149,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4447,7 +4269,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -150,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4457,7 +4280,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -151,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4467,7 +4291,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -152,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4477,7 +4302,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -153,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4487,7 +4313,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -154,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4497,7 +4324,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -155,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4507,7 +4335,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -156,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4517,7 +4346,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -157,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4527,7 +4357,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -158,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4537,7 +4368,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -159,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4547,7 +4379,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -160,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4557,7 +4390,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -161,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4567,7 +4401,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -162,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4577,7 +4412,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -163,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4587,7 +4423,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -164,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4597,7 +4434,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -165,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4607,7 +4445,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -166,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4617,7 +4456,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -167,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4627,7 +4467,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -168,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4637,7 +4478,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -169,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4647,7 +4489,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -170,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4657,7 +4500,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -171,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4667,7 +4511,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -172,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4677,7 +4522,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -173,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4687,7 +4533,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -174,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4697,7 +4544,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -175,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4707,7 +4555,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -176,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4717,7 +4566,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -177,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4727,7 +4577,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -178,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4737,7 +4588,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -179,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4747,7 +4599,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -180,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4757,7 +4610,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -181,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4767,7 +4621,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -182,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4777,7 +4632,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -183,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4787,7 +4643,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -184,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4797,7 +4654,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -185,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4807,7 +4665,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -186,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4817,7 +4676,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -187,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4827,7 +4687,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -188,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4837,7 +4698,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -189,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4847,7 +4709,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -190,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4857,7 +4720,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -191,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4867,7 +4731,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -192,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4877,7 +4742,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -193,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4887,7 +4753,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -194,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4897,7 +4764,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -195,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4907,7 +4775,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -196,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4917,7 +4786,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -197,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4927,7 +4797,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -198,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4937,7 +4808,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -199,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4947,7 +4819,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -200,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4957,7 +4830,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -201,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 12.0,
                             ReproductionId = -2,
@@ -4967,7 +4841,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -202,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -4977,7 +4852,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -203,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -4987,7 +4863,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -204,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -4997,7 +4874,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -205,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5007,7 +4885,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -206,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5017,7 +4896,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -207,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5027,7 +4907,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -208,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5037,7 +4918,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -209,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5047,7 +4929,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -210,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5057,7 +4940,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -211,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5067,7 +4951,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -212,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5077,7 +4962,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -213,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5087,7 +4973,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -214,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5097,7 +4984,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -215,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5107,7 +4995,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -216,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5117,7 +5006,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -217,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5127,7 +5017,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -218,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5137,7 +5028,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -219,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5147,7 +5039,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -220,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5157,7 +5050,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -221,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5167,7 +5061,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -222,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5177,7 +5072,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -223,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5187,7 +5083,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -224,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5197,7 +5094,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -225,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5207,7 +5105,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -226,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5217,7 +5116,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -227,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5227,7 +5127,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -228,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5237,7 +5138,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -229,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5247,7 +5149,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -230,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5257,7 +5160,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -231,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5267,7 +5171,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -232,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5277,7 +5182,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -233,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5287,7 +5193,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -234,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5297,7 +5204,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -235,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5307,7 +5215,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -236,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5317,7 +5226,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -237,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5327,7 +5237,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -238,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5337,7 +5248,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -239,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5347,7 +5259,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -240,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5357,7 +5270,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -241,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5367,7 +5281,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -242,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5377,7 +5292,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -243,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5387,7 +5303,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -244,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5397,7 +5314,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -245,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5407,7 +5325,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -246,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5417,7 +5336,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -247,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5427,7 +5347,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -248,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5437,7 +5358,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -249,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5447,7 +5369,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -250,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5457,7 +5380,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -251,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5467,7 +5391,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -252,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5477,7 +5402,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -253,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5487,7 +5413,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -254,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5497,7 +5424,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -255,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5507,7 +5435,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -256,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5517,7 +5446,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -257,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5527,7 +5457,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -258,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5537,7 +5468,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -259,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5547,7 +5479,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -260,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5557,7 +5490,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -261,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5567,7 +5501,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -262,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5577,7 +5512,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -263,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5587,7 +5523,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -264,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5597,7 +5534,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -265,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5607,7 +5545,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -266,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5617,7 +5556,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -267,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5627,7 +5567,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -268,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 9.0,
                             ReproductionId = -3,
@@ -5637,7 +5578,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -269,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5647,7 +5589,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -270,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5657,7 +5600,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -271,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5667,7 +5611,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -272,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5677,7 +5622,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -273,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5687,7 +5633,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -274,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5697,7 +5644,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -275,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5707,7 +5655,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -276,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5717,7 +5666,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -277,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5727,7 +5677,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -278,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 8.0,
                             ReproductionId = -4,
@@ -5737,7 +5688,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -279,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5747,7 +5699,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -280,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5757,7 +5710,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -281,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5767,7 +5721,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -282,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5777,7 +5732,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -283,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5787,7 +5743,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -284,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5797,7 +5754,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -285,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5807,7 +5765,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -286,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5817,7 +5776,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -287,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5827,7 +5787,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -288,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5837,7 +5798,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -289,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5847,7 +5809,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -290,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -5857,7 +5820,8 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -291,
-                            Confirmed = true,
+                            Confirmation = new Guid("00000000-0000-0000-0000-000000000000"),
+                            OrderId = new Guid("00000000-0000-0000-0000-000000000000"),
                             PointsPrice = 0.0,
                             Price = 14.0,
                             ReproductionId = -5,
@@ -6101,23 +6065,19 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Cineplus.Models.ActorMovie", b =>
+            modelBuilder.Entity("PersonalDiscountTicket", b =>
                 {
-                    b.HasOne("Cineplus.Models.Actor", "Actor")
-                        .WithMany("Movies")
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("PersonalDiscountsId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasOne("Cineplus.Models.Movie", "Movie")
-                        .WithMany("Actors")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("TicketsId")
+                        .HasColumnType("INTEGER");
 
-                    b.Navigation("Actor");
+                    b.HasKey("PersonalDiscountsId", "TicketsId");
 
-                    b.Navigation("Movie");
+                    b.HasIndex("TicketsId");
+
+                    b.ToTable("PersonalDiscountTicket");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Associate", b =>
@@ -6174,6 +6134,10 @@ namespace Cineplus.Data.Migrations
 
             modelBuilder.Entity("Cineplus.Models.Ticket", b =>
                 {
+                    b.HasOne("Cineplus.Models.DateDiscount", "DateDiscount")
+                        .WithMany()
+                        .HasForeignKey("DateDiscountId");
+
                     b.HasOne("Cineplus.Models.Reproduction", "Reproduction")
                         .WithMany("Tickets")
                         .HasForeignKey("ReproductionId")
@@ -6189,6 +6153,8 @@ namespace Cineplus.Data.Migrations
                     b.HasOne("Cineplus.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("DateDiscount");
 
                     b.Navigation("Reproduction");
 
@@ -6248,9 +6214,19 @@ namespace Cineplus.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Cineplus.Models.Actor", b =>
+            modelBuilder.Entity("PersonalDiscountTicket", b =>
                 {
-                    b.Navigation("Movies");
+                    b.HasOne("Cineplus.Models.PersonalDiscount", null)
+                        .WithMany()
+                        .HasForeignKey("PersonalDiscountsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cineplus.Models.Ticket", null)
+                        .WithMany()
+                        .HasForeignKey("TicketsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
@@ -6265,8 +6241,6 @@ namespace Cineplus.Data.Migrations
 
             modelBuilder.Entity("Cineplus.Models.Movie", b =>
                 {
-                    b.Navigation("Actors");
-
                     b.Navigation("Reproductions");
                 });
 

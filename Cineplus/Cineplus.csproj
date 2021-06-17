@@ -25,7 +25,6 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0" />
         <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
         <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.7" />
     </ItemGroup>
@@ -36,6 +35,9 @@
         <None Include="ClientApp\src\app\discounts\date-discount\date-discount.component.ts" />
         <None Include="ClientApp\src\app\discounts\date-discount\discounts.component.ts" />
         <None Include="ClientApp\src\app\discounts\discounts.component.ts" />
+        <None Include="ClientApp\src\app\notification-service.service.spec.ts" />
+        <None Include="ClientApp\src\app\notification-service.service.ts" />
+        <None Include="ClientApp\src\app\notification.service.ts" />
         <None Include="ClientApp\src\app\role\role.module.ts" />
         <None Include="ClientApp\src\models\associate.ts" />
         <None Include="ClientApp\src\models\cineplusDataSource.ts" />
@@ -100,6 +102,7 @@
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="ClientApp\src\app\discounts\**" />
+      <Compile Remove="Controllers\OrderController.cs" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="ClientApp\src\app\discounts\**" />
