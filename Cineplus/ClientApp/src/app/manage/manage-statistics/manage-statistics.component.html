@@ -1,0 +1,44 @@
+<mat-form-field class="w-100">
+  <mat-label>Select an option for filtering</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let option of filterByOptions" (onSelectionChange)="setSearch($event, option)" value="{{option}}">{{option}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+<app-manage-statistics-general *ngIf="activeOption=='Movie'"
+                               getAllEndpoint="api/movie"
+                               getCountEndpoint="api/statistics"
+                               name="movieName" text="Movies">
+</app-manage-statistics-general>
+
+<app-manage-statistics-general *ngIf="activeOption=='Director'"
+                               getAllEndpoint="api/statistics/directors"
+                               getCountEndpoint="api/statistics/directors"
+                               name="" text="Directors">
+</app-manage-statistics-general>
+
+<app-manage-statistics-general *ngIf="activeOption=='Genre'"
+                               getAllEndpoint="api/genre"
+                               getCountEndpoint="api/statistics/genres"
+                               name="genreName" text="Genres">
+</app-manage-statistics-general>
+
+<app-manage-statistics-general *ngIf="activeOption=='Actor'"
+                               getAllEndpoint="api/actor"
+                               getCountEndpoint="api/statistics/actors"
+                               name="actorName" text="Actors">
+</app-manage-statistics-general>
+
+<app-manage-statistics-countries *ngIf="activeOption=='Country'">
+
+</app-manage-statistics-countries>
+
+<app-manage-statistics-range *ngIf="activeOption=='Range'">
+
+</app-manage-statistics-range>
+
+<app-manage-statistics-score *ngIf="activeOption=='Score'">
+
+</app-manage-statistics-score>

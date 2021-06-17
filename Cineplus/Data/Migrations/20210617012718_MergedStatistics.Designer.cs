@@ -9,14 +9,335 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cineplus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210615041610_CancelationFinish")]
-    partial class CancelationFinish
+    [Migration("20210617012718_MergedStatistics")]
+    partial class MergedStatistics
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("Cineplus.Models.Actor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ActorName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Actor");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            ActorName = "Tom Hanks"
+                        },
+                        new
+                        {
+                            Id = -2,
+                            ActorName = "Robin Wright"
+                        },
+                        new
+                        {
+                            Id = -3,
+                            ActorName = "Harrison Ford"
+                        },
+                        new
+                        {
+                            Id = -4,
+                            ActorName = "Sean Connery"
+                        },
+                        new
+                        {
+                            Id = -5,
+                            ActorName = "Robert Downey Jr."
+                        },
+                        new
+                        {
+                            Id = -6,
+                            ActorName = "Chris Evans"
+                        },
+                        new
+                        {
+                            Id = -7,
+                            ActorName = "Jack Nicholson"
+                        },
+                        new
+                        {
+                            Id = -8,
+                            ActorName = "Leonardo DiCaprio"
+                        },
+                        new
+                        {
+                            Id = -9,
+                            ActorName = "Jennifer Lawrence"
+                        },
+                        new
+                        {
+                            Id = -10,
+                            ActorName = "Josh Hutcherson"
+                        },
+                        new
+                        {
+                            Id = -11,
+                            ActorName = "Ryan Gosling"
+                        },
+                        new
+                        {
+                            Id = -12,
+                            ActorName = "Emma Stone"
+                        },
+                        new
+                        {
+                            Id = -13,
+                            ActorName = "Emma Thompson"
+                        },
+                        new
+                        {
+                            Id = -14,
+                            ActorName = "Tim Robbins"
+                        },
+                        new
+                        {
+                            Id = -15,
+                            ActorName = "Morgan Freeman"
+                        },
+                        new
+                        {
+                            Id = -16,
+                            ActorName = "Al Pacino"
+                        },
+                        new
+                        {
+                            Id = -17,
+                            ActorName = "Marlon Brando"
+                        },
+                        new
+                        {
+                            Id = -18,
+                            ActorName = "Ryunosuke Kamiki"
+                        },
+                        new
+                        {
+                            Id = -19,
+                            ActorName = "Mone Kamishiraishi"
+                        },
+                        new
+                        {
+                            Id = -20,
+                            ActorName = "John Travolta"
+                        },
+                        new
+                        {
+                            Id = -21,
+                            ActorName = "Samuel L. Jackson"
+                        },
+                        new
+                        {
+                            Id = -22,
+                            ActorName = "Keanu Reeves"
+                        },
+                        new
+                        {
+                            Id = -23,
+                            ActorName = "Michael Nyqvist"
+                        },
+                        new
+                        {
+                            Id = -24,
+                            ActorName = "Jorge Perugorría"
+                        },
+                        new
+                        {
+                            Id = -25,
+                            ActorName = "Vladimir Cruz"
+                        });
+                });
+
+            modelBuilder.Entity("Cineplus.Models.ActorMovie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ActorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("ActorMovie");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            ActorId = -1,
+                            MovieId = -1
+                        },
+                        new
+                        {
+                            Id = -2,
+                            ActorId = -2,
+                            MovieId = -1
+                        },
+                        new
+                        {
+                            Id = -3,
+                            ActorId = -3,
+                            MovieId = -2
+                        },
+                        new
+                        {
+                            Id = -4,
+                            ActorId = -4,
+                            MovieId = -2
+                        },
+                        new
+                        {
+                            Id = -5,
+                            ActorId = -5,
+                            MovieId = -3
+                        },
+                        new
+                        {
+                            Id = -6,
+                            ActorId = -6,
+                            MovieId = -3
+                        },
+                        new
+                        {
+                            Id = -7,
+                            ActorId = -7,
+                            MovieId = -4
+                        },
+                        new
+                        {
+                            Id = -8,
+                            ActorId = -8,
+                            MovieId = -4
+                        },
+                        new
+                        {
+                            Id = -9,
+                            ActorId = -9,
+                            MovieId = -5
+                        },
+                        new
+                        {
+                            Id = -10,
+                            ActorId = -10,
+                            MovieId = -5
+                        },
+                        new
+                        {
+                            Id = -11,
+                            ActorId = -11,
+                            MovieId = -6
+                        },
+                        new
+                        {
+                            Id = -12,
+                            ActorId = -12,
+                            MovieId = -6
+                        },
+                        new
+                        {
+                            Id = -13,
+                            ActorId = -12,
+                            MovieId = -7
+                        },
+                        new
+                        {
+                            Id = -14,
+                            ActorId = -13,
+                            MovieId = -7
+                        },
+                        new
+                        {
+                            Id = -15,
+                            ActorId = -14,
+                            MovieId = -8
+                        },
+                        new
+                        {
+                            Id = -16,
+                            ActorId = -15,
+                            MovieId = -8
+                        },
+                        new
+                        {
+                            Id = -17,
+                            ActorId = -16,
+                            MovieId = -9
+                        },
+                        new
+                        {
+                            Id = -18,
+                            ActorId = -17,
+                            MovieId = -9
+                        },
+                        new
+                        {
+                            Id = -19,
+                            ActorId = -18,
+                            MovieId = -10
+                        },
+                        new
+                        {
+                            Id = -20,
+                            ActorId = -19,
+                            MovieId = -10
+                        },
+                        new
+                        {
+                            Id = -21,
+                            ActorId = -20,
+                            MovieId = -11
+                        },
+                        new
+                        {
+                            Id = -22,
+                            ActorId = -21,
+                            MovieId = -11
+                        },
+                        new
+                        {
+                            Id = -23,
+                            ActorId = -22,
+                            MovieId = -12
+                        },
+                        new
+                        {
+                            Id = -24,
+                            ActorId = -23,
+                            MovieId = -12
+                        },
+                        new
+                        {
+                            Id = -25,
+                            ActorId = -24,
+                            MovieId = -13
+                        },
+                        new
+                        {
+                            Id = -26,
+                            ActorId = -25,
+                            MovieId = -13
+                        });
+                });
 
             modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
                 {
@@ -233,6 +554,9 @@ namespace Cineplus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -269,6 +593,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -1,
+                            Country = "US",
                             Description = "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
                             Director = "Robert Zemeckis",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -281,6 +606,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -2,
+                            Country = "US",
                             Description = "When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana must team up with Marcus Brody, Sallah and Elsa Schneider to follow in his father's footsteps and stop the Nazis from recovering the power of eternal life.",
                             Director = "Steven Spielberg",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -293,6 +619,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -3,
+                            Country = "US",
                             Description = "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
                             Director = "Joss Whedon",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -305,6 +632,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -4,
+                            Country = "US",
                             Description = "To take down South Boston's Irish Mafia, the police send in one of their own to infiltrate the underworld, not realizing the syndicate has done likewise. While an undercover cop curries favor with the mob kingpin, a career criminal rises through the police ranks. But both sides soon discover there's a mole among them.",
                             Director = "Martin Scorsese",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -317,18 +645,20 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -5,
+                            Country = "US",
                             Description = "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol.",
                             Director = "Francis Lawrence",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = 123,
                             GenreId = -4,
                             ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg",
-                            MovieName = "The Hunger Games: Mockingjay - Part 1 ",
+                            MovieName = "The Hunger Games: Mockingjay - Part 1",
                             Score = 6.8000001907348633
                         },
                         new
                         {
                             Id = -6,
+                            Country = "US",
                             Description = "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
                             Director = "Damien Chazelle",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -341,6 +671,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -7,
+                            Country = "US",
                             Description = "In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.",
                             Director = "Craig Gillespie",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -353,6 +684,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -8,
+                            Country = "US",
                             Description = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
                             Director = "Frank Darabont",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -365,6 +697,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -9,
+                            Country = "US",
                             Description = "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
                             Director = "Francis Ford Coppola",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -377,6 +710,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -10,
+                            Country = "JP",
                             Description = "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.",
                             Director = "Makoto Shinkai",
                             Display = new DateTime(2021, 6, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -389,6 +723,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -11,
+                            Country = "US",
                             Description = "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.",
                             Director = "Makoto Shinkai",
                             Display = new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -401,6 +736,7 @@ namespace Cineplus.Data.Migrations
                         new
                         {
                             Id = -12,
+                            Country = "US",
                             Description = "Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.",
                             Director = "Chad Stahelski",
                             Display = new DateTime(2021, 6, 4, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -408,6 +744,19 @@ namespace Cineplus.Data.Migrations
                             GenreId = -2,
                             ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
                             MovieName = "John Wick",
+                            Score = 7.3000001907348633
+                        },
+                        new
+                        {
+                            Id = -13,
+                            Country = "CU",
+                            Description = "Havana, Cuba, 1979. Flamboyantly gay artist Diego (Jorge Perugorría) attempts to seduce the straight and strait-laced David, an idealistic young communist, and fails dismally. But David conspires to become friends with Diego so he can monitor the artist's subversive life for the state. As Diego and David discuss politics, individuality and personal expression in Castro's Cuba, a genuine friendship develops between the two. But can it last? Strawberry and Chocolate became an instant hit when it was released, and has become a classic of Cuban cinema due to its charming and authentic exploration of a connection between two people under historical circumstances that seem levelled against them.",
+                            Director = "Tomás Gutiérrez Alea",
+                            Display = new DateTime(2021, 5, 4, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 108,
+                            GenreId = -1,
+                            ImageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tMwUsu080E4kS4rkHPffy1ugvaJ.jpg",
+                            MovieName = "Strawberry and Chocolate",
                             Score = 7.3000001907348633
                         });
                 });
@@ -461,6 +810,20 @@ namespace Cineplus.Data.Migrations
                             Enable = true,
                             PersonalName = "Personal"
                         });
+                });
+
+            modelBuilder.Entity("Cineplus.Models.PriceInPoints", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PriceInPoints");
                 });
 
             modelBuilder.Entity("Cineplus.Models.Reproduction", b =>
@@ -6068,6 +6431,25 @@ namespace Cineplus.Data.Migrations
                     b.ToTable("PersonalDiscountTicket");
                 });
 
+            modelBuilder.Entity("Cineplus.Models.ActorMovie", b =>
+                {
+                    b.HasOne("Cineplus.Models.Actor", "Actor")
+                        .WithMany("Movies")
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cineplus.Models.Movie", "Movie")
+                        .WithMany("Actors")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("Cineplus.Models.Associate", b =>
                 {
                     b.HasOne("Cineplus.Models.ApplicationUser", "User")
@@ -6217,6 +6599,11 @@ namespace Cineplus.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Cineplus.Models.Actor", b =>
+                {
+                    b.Navigation("Movies");
+                });
+
             modelBuilder.Entity("Cineplus.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Associate");
@@ -6229,6 +6616,8 @@ namespace Cineplus.Data.Migrations
 
             modelBuilder.Entity("Cineplus.Models.Movie", b =>
                 {
+                    b.Navigation("Actors");
+
                     b.Navigation("Reproductions");
                 });
 

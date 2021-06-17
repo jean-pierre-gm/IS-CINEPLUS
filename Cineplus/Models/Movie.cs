@@ -31,11 +31,17 @@ namespace Cineplus.Models {
 		public int GenreId { get; set; }
 		public virtual Genre Genre { get; set; }
 
+		public string Country { get; set; }
+
 		[JsonIgnore]
 		public virtual ICollection<Reproduction> Reproductions { get; set; }
+		
+		[JsonIgnore]
+		public virtual ICollection<ActorMovie> Actors { get; set; }
 
 		public Movie() {
 			this.Reproductions = new HashSet<Reproduction>();
+			this.Actors = new HashSet<ActorMovie>();
 		}
 	}
 }

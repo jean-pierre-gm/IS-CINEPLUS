@@ -1,0 +1,28 @@
+<mat-form-field>
+  <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="startTimeFormControl">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="picker2" placeholder="End Date" [formControl]="endTimeFormControl">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+
+<br>
+
+<button class="float-left" (click)="search()" mat-stroked-button color="primary">Submit</button>
+
+<br><br>
+
+<div style="display: block;" *ngIf="barChartData.length > 0">
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>

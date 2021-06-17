@@ -70,6 +70,8 @@ namespace Cineplus {
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IBillingService, BillingService>();
 			services.AddScoped<IPointsService, PointsService>();
+			services.AddScoped<IStatisticsService, StatisticsService>();
+			services.AddScoped<IActorService, ActorService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

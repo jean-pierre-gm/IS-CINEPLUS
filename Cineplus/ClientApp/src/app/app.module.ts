@@ -39,7 +39,7 @@ import {ManageGenresComponent} from "./manage/manage-genres/manage-genres.compon
 import {CreateGenreComponent} from "./manage/manage-genres/create-genre/create-genre.component";
 import {ClientProfileComponent} from "./client-profile/client-profile.component";
 import {BecomeAssociateComponent} from "./client-profile/become-associate/become-associate.component";
-import {SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
+import {BillingDialogComponent, SeatReservationComponent} from "./seat-reservation/seat-reservation.component";
 import {MovieReproductionComponent} from "./movie-reproduction/movie-reproduction.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {CarouselModule} from "ngx-owl-carousel-o";
@@ -53,9 +53,14 @@ import {ManageDateDiscountsComponent} from "./manage/manage-dateDiscounts/manage
 import {CreateDateDiscountComponent} from "./manage/manage-dateDiscounts/create-dateDiscount/create-dateDiscount.component";
 import {ManagePersonalDiscountsComponent} from "./manage/manage-personalDiscounts/manage-personalDiscounts.component";
 import {CreatePersonalDiscountComponent} from "./manage/manage-personalDiscounts/create-personalDiscount/create-personalDiscount.component";
+import {ManageStatisticsComponent} from "./manage/manage-statistics/manage-statistics.component";
+import {ChartsModule, ThemeService} from "ng2-charts";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ManageStatisticsGeneralComponent} from "./manage/manage-statistics/manage-statistics-general/manage-statistics-general.component";
+import {ManageActorsComponent} from "./manage/manage-actors/manage-actors.component";
+import {CreateActorComponent} from "./manage/manage-actors/create-actor/create-actor.component";
 import { CdTimerModule } from 'angular-cd-timer';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatChipsModule} from "@angular/material/chips";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {QRCodeModule} from "angularx-qrcode";
 import {NgxPrintModule} from "ngx-print";
@@ -65,6 +70,11 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {PurchaseHistoryComponent} from "./client-profile/purchase-history/purchase-history.component";
 import {CancelationFormComponent} from "./client-profile/purchase-history/cancelation-form/cancelation-form.component";
 import {BillingDialogComponent} from "./seat-reservation/billing-dialog.component";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
+import {ManageStatisticsCountriesComponent} from "./manage/manage-statistics/manage-statistics-countries/manage-statistics-countries.component";
+import {ManageStatisticsRangeComponent} from "./manage/manage-statistics/manage-statistics-range/manage-statistics-range.component";
+import {ManageStatisticsScoreComponent} from "./manage/manage-statistics/manage-statistics-score/manage-statistics-score.component";
 
 @NgModule({
   declarations: [
@@ -92,8 +102,14 @@ import {BillingDialogComponent} from "./seat-reservation/billing-dialog.componen
     ManagePersonalDiscountsComponent,
     CreatePersonalDiscountComponent,
     ManageCarouselComponent,
+    ManageStatisticsComponent,
+    ManageStatisticsGeneralComponent,
+    ManageActorsComponent,
+    CreateActorComponent,
     ListMoviesComponent,
-    ManageCarouselComponent,
+    ManageStatisticsCountriesComponent,
+    ManageStatisticsRangeComponent,
+    ManageStatisticsScoreComponent,
     SnackBarComponent,
     PurchaseHistoryComponent,
     CancelationFormComponent
@@ -172,6 +188,9 @@ import {BillingDialogComponent} from "./seat-reservation/billing-dialog.componen
         MatNativeDateModule,
         MatExpansionModule,
         MatProgressBarModule,
+        ChartsModule,
+        MatButtonToggleModule,
+        MatIconModule,
         MatSlideToggleModule,
         MatChipsModule,
         MatTooltipModule,
@@ -179,10 +198,11 @@ import {BillingDialogComponent} from "./seat-reservation/billing-dialog.componen
         NgxPrintModule,
     ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    ThemeService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent,
+  entryComponents: [CreateMovieComponent, CreateGenreComponent, CreateDateDiscountComponent, CreateActorComponent,
     CreatePersonalDiscountComponent, BecomeAssociateComponent, BillingDialogComponent, CancelationFormComponent, SnackBarComponent]
 })
 export class AppModule { }

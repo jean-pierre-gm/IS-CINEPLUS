@@ -1,0 +1,47 @@
+<mat-form-field class="w-100">
+  <mat-label>Select a time frame</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let option of filterTimeOptions" (onSelectionChange)="setTimeSearch($event, option)" value="{{option}}">{{option}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+<div class="container" *ngIf="dataSource && dataSource.result && activeTimeOption">
+  <h4>{{text}}</h4>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource.result">
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element" (click)="buildGraph(element)">
+          {{getName(element)}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-toolbar-row>
+      <mat-paginator [pageSize]="dataSource.currentPagination.pageSize"
+                     [length]="dataSource.currentPagination.totalItems"
+                     [pageIndex]="dataSource.currentPagination.currentPage - 1"
+                     (page)="editPagination($event)">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </div>
+</div>
+
+<br><br>
+
+<div style="display: block" *ngIf="lineChartData.length > 0">
+  <canvas baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="'line'"
+          [plugins]="lineChartPlugins">
+  </canvas>
+</div>
